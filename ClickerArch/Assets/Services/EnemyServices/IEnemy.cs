@@ -6,4 +6,6 @@ public interface IEnemy
 {
     IEnemyView GetEnemyView();
     IEnemyModel GetEnemyModel();
+
+    void ConfigureForLevel(int level);
 }

@@ -6,6 +6,6 @@ public interface IDataService
 {
     AudioClip GetAudioClipForID(string id);
     Sprite GetSpriteForID(string id);
-    IEnemy GetEnemyForID(string id);
     List<string> GetEnemiesIdsForLevelId(string levelId);
+    EnemyData GetEnemyDataForIdAndLevel(string id, int level);
 }

@@ -6,7 +6,7 @@ public class Services
 {
     static IHero Hero;
     static ILevelService LevelService;
-    static IEnemyService EnemyService;
+    static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();
 
     private Services() { }
@@ -33,5 +33,23 @@ public class Services
             instance = new Services();
         }
         return instance;
+    }
+
+
+    public IHero GetHero()
+    {
+        return Hero;
+    }
+    public ILevelService GetLevelService()
+    {
+        return LevelService;
+    }
+    public IEnemyService GetEnemyService()
+    {
+        return EnemyService;
+    }
+    public IDataService GetDataService()
+    {
+        return DataService;
     }
 }

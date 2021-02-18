@@ -8,5 +8,5 @@ public interface IEnemyModel
     double GetDurationBetweenAttack();
     int GetDamage();
     int GetHealthPoint();
-    void ConfigureForLevel(int level);
+    void ConfigureForIdAndLevel(string id, int level);
 }

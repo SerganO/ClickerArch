@@ -13,6 +13,7 @@ public class ResourcesDataService : IDataService
     {
         var result = new List<string>();
 
+        result.Add("test_enemy");
         switch(levelId)
         {
 
@@ -21,9 +22,9 @@ public class ResourcesDataService : IDataService
         return result;
     }
 
-    public IEnemy GetEnemyForID(string id)
+    public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
-        return Resources.Load("Enemies/" + id) as IEnemy;
+        return new EnemyData(10, 1.0, 1);
     }
 
     public Sprite GetSpriteForID(string id)
