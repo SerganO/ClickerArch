@@ -24,7 +24,7 @@ public class ResourcesDataService : IDataService
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
-        return new EnemyData(10, 1.0, 1);
+        return new EnemyData(100, 1.0, 1);
     }
 
     public Sprite GetSpriteForID(string id)

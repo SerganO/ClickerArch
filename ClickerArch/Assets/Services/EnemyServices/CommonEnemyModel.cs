@@ -4,39 +4,21 @@ using UnityEngine;
 
 public class CommonEnemyModel : IEnemyModel
 {
-    public string id;
-    public int hp;
-    public int damage;
-    public double durationBetweenAttack;
+    public string Id { get; set; }
+    public double DurationBetweenAttack { get; set; }
+    public int Damage { get; set; }
+    public int MaximumHealthPoint { get; set; }
+    public int CurrentHealthPoint { get; set; }
 
     public void ConfigureForIdAndLevel(string id, int level)
     {
-        this.id = id;
+        Id = id;
         var data = Services.GetInstance().GetDataService().GetEnemyDataForIdAndLevel(id, level);
 
-        hp = data.HP;
-        durationBetweenAttack = data.DurationBetweenAttack;
-        damage = data.Damage;
-
+        MaximumHealthPoint = data.HP;
+        CurrentHealthPoint = data.HP;
+        DurationBetweenAttack = data.DurationBetweenAttack;
+        Damage = data.Damage;
     }
 
-    public int GetDamage()
-    {
-        return damage;
-    }
-
-    public double GetDurationBetweenAttack()
-    {
-        return durationBetweenAttack;
-    }
-
-    public int GetHealthPoint()
-    {
-        return hp;
-    }
-
-    public string GetId()
-    {
-        return id;
-    }
 }

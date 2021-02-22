@@ -7,7 +7,7 @@ public interface IEnemyView
     void Idle();
     void Attack();
     void Death();
-    void Hurt();
+    void Hurt(float ratio, int damage, bool showDamage);
 
     void ConfigureForId(string id);
 }

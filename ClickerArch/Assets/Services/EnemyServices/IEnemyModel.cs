@@ -4,9 +4,10 @@ using UnityEngine;
 
 public interface IEnemyModel
 {
-    string GetId();
-    double GetDurationBetweenAttack();
-    int GetDamage();
-    int GetHealthPoint();
+    string Id { get; set; }
+    double DurationBetweenAttack { get; set; }
+    int Damage { get; set; }
+    int MaximumHealthPoint { get; set; }
+    int CurrentHealthPoint { get; set; }
     void ConfigureForIdAndLevel(string id, int level);
 }

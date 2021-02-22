@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Services
 {
-    static IHero Hero;
+    static IHero Hero = new CommonHero();
     static ILevelService LevelService;
     static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();

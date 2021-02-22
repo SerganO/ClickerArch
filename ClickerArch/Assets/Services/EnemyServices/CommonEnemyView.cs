@@ -2,68 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(AudioSource))]
-//[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 
 public class CommonEnemyView : MonoBehaviour, IEnemyView
 {
 
     Animator animator;
-    AudioSource audioSource;
+    SpriteRenderer spriteRenderer;
 
-    static AudioClip idleClip;// = Services.GetInstance().GetDataService().GetAudioClipForID("idle");
-    static AudioClip hurtClip;// = Services.GetInstance().GetDataService().GetAudioClipForID("hurt");
-    static AudioClip attackClip;// = Services.GetInstance().GetDataService().GetAudioClipForID("attack");
-    static AudioClip deathClip;// = Services.GetInstance().GetDataService().GetAudioClipForID("death");
+    [Header("Hurt")]
+    public Color StartColor;
+    public Color FinishColor;
 
-    //AudioClip idleClip;
-    //AudioClip hurtClip;
-    //AudioClip attackClip;
-    //AudioClip deathClip;
+    public DamageTextGenerator DamageObject;
+
+    [Header("Death")]
+    public GameObject DeathObject;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        idleClip = Services.GetInstance().GetDataService().GetAudioClipForID("idle");
-        hurtClip = Services.GetInstance().GetDataService().GetAudioClipForID("hurt");
-        attackClip = Services.GetInstance().GetDataService().GetAudioClipForID("attack");
-        deathClip = Services.GetInstance().GetDataService().GetAudioClipForID("death");
-        audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        spriteRenderer.color = StartColor;
     }
 
     public void Attack()
     {
         animator.Play("attack");
-        StartCoroutine(Helper.Wait(0.1f, () => { Debug.Log("0-0"); Idle(); }));
     }
 
     public void ConfigureForId(string id)
     {
         Debug.Log("--=--");
-        //var dataServices = Services.GetInstance().GetDataService();
-        //idleClip = dataServices.GetAudioClipForID(id + "/idle");
-        //hurtClip = dataServices.GetAudioClipForID(id + "/hurt");
-        //attackClip = dataServices.GetAudioClipForID(id + "/attack");
-        //deathClip = dataServices.GetAudioClipForID(id + "/death");
     }
 
     public void Death()
     {
-        animator.Play("death");
-        //audioSource.clip = deathClip;
-        //audioSource.Play();
-    }
-
-    public void Hurt()
-    {
-        animator.Play("hurt");
-        StartCoroutine(Helper.Wait(0.1f, () => { Debug.Log("0-0"); Idle(); }));
-        //audioSource.clip = hurtClip;
-        //audioSource.Play();
+        Instantiate(DeathObject, gameObject.transform.parent);
+        spriteRenderer.color = new Color(0, 0, 0, 0);
     }
 
     public void Idle()
     {
         animator.Play("idle");
+    }
+
+    public void Hurt(float ratio, int damage, bool showDamage)
+    {
+        if(showDamage)
+        {
+            DamageObject.Generate(damage);
+        }
+        spriteRenderer.color = Color.Lerp(StartColor, FinishColor, 1 - ratio);
     }
 }
