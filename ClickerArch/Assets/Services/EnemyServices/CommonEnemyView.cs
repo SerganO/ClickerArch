@@ -31,6 +31,8 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
         spriteRenderer.color = StartColor;
         baseTr = spriteRenderer.transform.localScale;
+
+        DamageObject = GameObject.FindGameObjectWithTag("DamageTextGenerator").GetComponent<DamageTextGenerator>();
     }
 
     public void Attack()

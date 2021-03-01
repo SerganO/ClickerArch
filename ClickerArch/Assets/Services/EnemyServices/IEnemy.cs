@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class IEnemy: MonoBehaviour
 {
-    public event VoidFunc onDie;
+    public abstract event VoidFunc onDie;
+
     public abstract IEnemyView GetEnemyView();
     public abstract IEnemyModel GetEnemyModel();
 

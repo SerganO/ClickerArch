@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommonHero : IHero
 {
-    private int MockDPT = 1;
+    private int MockDPT = 9;
 
     public int DamageByTap { get; set; }
     public int DamagePerSecond { get; set; }

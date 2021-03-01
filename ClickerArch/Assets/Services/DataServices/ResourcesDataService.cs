@@ -16,11 +16,6 @@ public class ResourcesDataService : IDataService
         result.Add("test_enemy");
         result.Add("test_enemy");
         result.Add("test_enemy");
-        result.Add("test_enemy");
-        result.Add("test_enemy");
-        result.Add("test_enemy");
-        result.Add("test_enemy");
-        result.Add("test_enemy");
         switch (levelId)
         {
 
@@ -36,7 +31,6 @@ public class ResourcesDataService : IDataService
 
     public Sprite GetSpriteForID(string id)
     {
-        Debug.Log(Resources.Load("Sprites/" + id));
         return Resources.Load<Sprite>("Sprites/" + id);
     }
 }

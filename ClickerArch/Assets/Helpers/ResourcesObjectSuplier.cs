@@ -6,7 +6,7 @@ public class ResourcesObjectSuplier
 {
     public static IEnemy GetEnemyForID(string id)
     {
-        return Resources.Load("Enemies/" + id) as IEnemy;
+        return Resources.Load<IEnemy>("Enemies/" + id);
     }
 
 }

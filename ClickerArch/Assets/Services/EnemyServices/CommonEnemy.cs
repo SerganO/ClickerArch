@@ -16,7 +16,7 @@ public class CommonEnemy : IEnemy
 
     bool isDie = false;
 
-    public event VoidFunc onDie;
+    public override event VoidFunc onDie;
 
     private void Start()
     {
@@ -24,6 +24,8 @@ public class CommonEnemy : IEnemy
         view = GetComponent<IEnemyView>();
         view.ConfigureForId(ID);
         ConfigureForLevel(1);
+
+
     }
 
     private void Update()

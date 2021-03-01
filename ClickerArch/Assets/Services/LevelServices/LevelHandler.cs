@@ -7,49 +7,54 @@ public class LevelHandler : MonoBehaviour
 {
     public Transform SpawnPoint;
     public string StartLevelID;
+    public int StartLevel;
     public Image BackgroundImage;
-
+    public Text Level;
 
     string CurrentID;
+    int CurrentLevel;
     List<IEnemy> enemies = new List<IEnemy>();
     IEnemy CurrentEnemy;
 
     private void Start()
     {
         CurrentID = StartLevelID;
+        CurrentLevel = StartLevel;
         NextLevel();
     }
 
     int currentIndex = -1;
 
-    void SetupForId(string ID)
+    void SetupForIdAndLevel(string ID, int level)
     {
         var instance = Services.GetInstance();
         BackgroundImage.sprite = instance.GetLevelService().GetLevelViewForId(ID).GetBackgroundImage();
-        enemies = instance.GetLevelService().GetLevelModelForId(ID).GetEnemies();        
+        var model = instance.GetLevelService().GetLevelModelForId(ID);
+        model.ConfigureForLevel(level);
+        enemies = model.GetEnemies();
     }
 
     public void NextEnemy()
     {
         currentIndex++;
-        if (currentIndex >= enemies.Count) {
+        if (currentIndex >= enemies.Count)
+        {
             NextLevel();
             return;
         }
-
-        CurrentEnemy = enemies[currentIndex];
+        CurrentEnemy = Instantiate(enemies[currentIndex], SpawnPoint);
         CurrentEnemy.onDie += NextEnemy;
-        Instantiate(CurrentEnemy, SpawnPoint);
 
     }
 
     public void NextLevel()
     {
         currentIndex = -1;
-        
-        //Magic change CurrntID
+        //Magic change CurrentID
 
-        SetupForId(CurrentID);
+        CurrentLevel++;
+        Level.text = CurrentLevel.ToString();
+        SetupForIdAndLevel(CurrentID, CurrentLevel);
         NextEnemy();
     }
 
