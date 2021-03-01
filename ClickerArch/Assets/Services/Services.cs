@@ -5,7 +5,7 @@ using UnityEngine;
 public class Services
 {
     static IHero Hero = new CommonHero();
-    static ILevelService LevelService;
+    static ILevelService LevelService = new CommonLevelService();
     static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();
 

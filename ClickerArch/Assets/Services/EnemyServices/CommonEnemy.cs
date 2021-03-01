@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommonEnemy : MonoBehaviour, IEnemy
+
+public class CommonEnemy : IEnemy
 {
+    
     public string ID;
     IEnemyModel model;
     IEnemyView view;
 
 
     double timer = 0;
-    double mockTimer = 0;
+    //double mockTimer = 0;
 
     bool isDie = false;
+
+    public event VoidFunc onDie;
 
     private void Start()
     {
@@ -25,13 +29,13 @@ public class CommonEnemy : MonoBehaviour, IEnemy
     private void Update()
     {
         timer += Time.deltaTime;
-        mockTimer += Time.deltaTime;
+        //mockTimer += Time.deltaTime;
 
-        if(mockTimer >= 0.1)
-        {
-            mockTimer -= 0.1;
-            Hurt(3);
-        }
+        //if(mockTimer >= 0.1)
+        //{
+        //    mockTimer -= 0.1;
+        //    Hurt(3);
+        //}
 
         if(timer >= model.DurationBetweenAttack)
         {
@@ -42,42 +46,45 @@ public class CommonEnemy : MonoBehaviour, IEnemy
     }
 
 
-    public IEnemyModel GetEnemyModel()
+    public override IEnemyModel GetEnemyModel()
     {
         return model;
     }
 
-    public IEnemyView GetEnemyView()
+    public override IEnemyView GetEnemyView()
     {
         return view;
     }
 
-    public void ConfigureForLevel(int level)
+    public override void ConfigureForLevel(int level)
     {
         model.ConfigureForIdAndLevel(ID, level);
     }
 
-    public void Idle()
+    public override void Idle()
     {
 
     }
 
-    public void Attack()
+    public override void Attack()
     {
         if (isDie) return;
         Services.GetInstance().GetHero().Hurt(model.Damage);
         view.Attack();
     }
 
-    public void Death()
+    public override void Death()
     {
         if (isDie) return;
         isDie = true;
         view.Death();
-        StartCoroutine(Helper.Wait(0.67f, () => { Destroy(gameObject); }));
+        StartCoroutine(Helper.Wait(0.67f, () => {
+            onDie();
+            Destroy(gameObject);
+        }));
     }
 
-    public void Hurt(int damage, bool isManualDamage = true)
+    public override void Hurt(int damage, bool isManualDamage = true)
     {
         if (isDie) return;
         model.CurrentHealthPoint -= damage;

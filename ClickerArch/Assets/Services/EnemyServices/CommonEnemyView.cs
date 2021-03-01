@@ -19,6 +19,10 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
     [Header("Death")]
     public GameObject DeathObject;
+   
+    public float coef = 0.85f;
+
+    Vector3 baseTr;
 
     private void Start()
     {
@@ -26,6 +30,7 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.color = StartColor;
+        baseTr = spriteRenderer.transform.localScale;
     }
 
     public void Attack()
@@ -35,7 +40,7 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
     public void ConfigureForId(string id)
     {
-        Debug.Log("--=--");
+        //Debug.Log("--=--");
     }
 
     public void Death()
@@ -56,5 +61,8 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
             DamageObject.Generate(damage);
         }
         spriteRenderer.color = Color.Lerp(StartColor, FinishColor, 1 - ratio);
+
+        spriteRenderer.transform.localScale = baseTr * coef;
+        StartCoroutine(Helper.Wait(0.1f,() => { spriteRenderer.transform.localScale = baseTr; }));
     }
 }

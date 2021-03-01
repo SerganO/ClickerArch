@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemy
+public abstract class IEnemy: MonoBehaviour
 {
-    IEnemyView GetEnemyView();
-    IEnemyModel GetEnemyModel();
+    public event VoidFunc onDie;
+    public abstract IEnemyView GetEnemyView();
+    public abstract IEnemyModel GetEnemyModel();
 
-    void Idle();
-    void Attack();
-    void Death();
-    void Hurt(int damage, bool isManualDamage = true);
+    public abstract void Idle();
+    public abstract void Attack();
+    public abstract void Death();
+    public abstract void Hurt(int damage, bool isManualDamage = true);
 
-    void ConfigureForLevel(int level);
+    public abstract void ConfigureForLevel(int level);
 }

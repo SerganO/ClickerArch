@@ -14,7 +14,14 @@ public class ResourcesDataService : IDataService
         var result = new List<string>();
 
         result.Add("test_enemy");
-        switch(levelId)
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        result.Add("test_enemy");
+        switch (levelId)
         {
 
         }
@@ -29,6 +36,7 @@ public class ResourcesDataService : IDataService
 
     public Sprite GetSpriteForID(string id)
     {
-        return Resources.Load("Sprites/" + id) as Sprite;
+        Debug.Log(Resources.Load("Sprites/" + id));
+        return Resources.Load<Sprite>("Sprites/" + id);
     }
 }

@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommonHero : MonoBehaviour, IHero
+public class CommonHero : IHero
 {
+    private int MockDPT = 1;
+
     public int DamageByTap { get; set; }
     public int DamagePerSecond { get; set; }
     public int MaximumHealthPoint { get; set; }
     public int CurrentHealthPoint { get; set; }
     public List<Modificator> Modificators { get; set; }
+
+    public CommonHero()
+    {
+        DamageByTap = MockDPT;
+    }
 
     public void AddModificators(List<Modificator> modificators)
     {

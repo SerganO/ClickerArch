@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ILevelModel
 {
-    string GetId();
+    string ID { get; set; }
     List<IEnemy> GetEnemies();
     void ConfigureForLevel(int level);
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ILevelView
 {
+    string ID { get; set; }
     Sprite GetBackgroundImage();
     AudioClip GetBackgroundMusic();
 }
