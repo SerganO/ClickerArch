@@ -13,9 +13,10 @@ public class ResourcesDataService : IDataService
     {
         var result = new List<string>();
 
-        result.Add("test_enemy");
-        result.Add("test_enemy");
-        result.Add("test_enemy");
+        result.Add("inquisitor");
+        result.Add("darkDoctor");
+        result.Add("inquisitor");
+        result.Add("darkDoctor");
         switch (levelId)
         {
 
