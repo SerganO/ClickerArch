@@ -66,8 +66,4 @@ public class LevelHandler : MonoBehaviour
         CurrentEnemy.Hurt(damage);
     }
 
-
-
-
-
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathExplosion : MonoBehaviour
+public class OneShotObject : MonoBehaviour
 {
     public void End()
     {
