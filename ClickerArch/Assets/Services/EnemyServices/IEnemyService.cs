@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IEnemyService
 {
-    List<IEnemy> GetEnemiesForLevelId(string id);
+    IEnemy GetEnemyPreset();
+    void ConfigureEnemyForId(IEnemy enemy, string id);
+
 }

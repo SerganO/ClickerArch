@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6134465998339544107}
   - component: {fileID: 6134465998339544106}
   m_Layer: 0
-  m_Name: darkDoctor
+  m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c0626196ce218408dad9c56e271d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: darkDoctor
 --- !u!114 &6134465998339544107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +124,7 @@ Animator:
   m_GameObject: {fileID: 6134465998339544087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 3bb77057bb8bad34691477e1bc0cfb66, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

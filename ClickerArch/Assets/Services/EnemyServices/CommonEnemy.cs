@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class CommonEnemy : IEnemy
 {
-    
-    public string ID;
     IEnemyModel model;
     IEnemyView view;
 

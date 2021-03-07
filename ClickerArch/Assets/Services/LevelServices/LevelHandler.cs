@@ -13,8 +13,10 @@ public class LevelHandler : MonoBehaviour
 
     string CurrentID;
     int CurrentLevel;
-    List<IEnemy> enemies = new List<IEnemy>();
+    List<string> enemiesIDs = new List<string>();
     IEnemy CurrentEnemy;
+
+    IEnemy enemy;
 
     private void Start()
     {
@@ -31,18 +33,26 @@ public class LevelHandler : MonoBehaviour
         BackgroundImage.sprite = instance.GetLevelService().GetLevelViewForId(ID).GetBackgroundImage();
         var model = instance.GetLevelService().GetLevelModelForId(ID);
         model.ConfigureForLevel(level);
-        enemies = model.GetEnemies();
+        enemiesIDs = model.GetEnemiesIDs();
+
+        enemy = Services.GetInstance().GetEnemyService().GetEnemyPreset();
+        
     }
 
     public void NextEnemy()
     {
         currentIndex++;
-        if (currentIndex >= enemies.Count)
+        if (currentIndex >= enemiesIDs.Count)
         {
             NextLevel();
             return;
         }
-        CurrentEnemy = Instantiate(enemies[currentIndex], SpawnPoint);
+
+        CurrentEnemy = Instantiate(enemy, SpawnPoint);
+
+        var id = enemiesIDs[currentIndex];
+        Services.GetInstance().GetEnemyService().ConfigureEnemyForId(CurrentEnemy, id);
+
         CurrentEnemy.onDie += NextEnemy;
 
     }
@@ -50,6 +60,7 @@ public class LevelHandler : MonoBehaviour
     public void NextLevel()
     {
         currentIndex = -1;
+
         //Magic change CurrentID
 
         CurrentLevel++;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ResourcesObjectSuplier
 {
-    public static IEnemy GetEnemyForID(string id)
+    public static IEnemy GetEnemyPreset()
     {
-        return Resources.Load<IEnemy>("Enemies/" + id);
+        return Resources.Load<IEnemy>("Enemy/enemy");
     }
 
 }

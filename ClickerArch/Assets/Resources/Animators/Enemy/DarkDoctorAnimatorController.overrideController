@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DarkDoctorAnimatorController
+  m_Name: darkDoctorAnimatorController
   m_Controller: {fileID: 9100000, guid: f46bee4155536c244afb99e27355afca, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 8453e77750f94ba4e8c4024f5ff0ce55, type: 2}

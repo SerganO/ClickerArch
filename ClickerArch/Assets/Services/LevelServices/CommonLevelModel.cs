@@ -19,12 +19,8 @@ public class CommonLevelModel : ILevelModel
         enemiesIDs = Services.GetInstance().GetDataService().GetEnemiesIdsForLevelId(ID);
     }
 
-    public List<IEnemy> GetEnemies()
+    public List<string> GetEnemiesIDs()
     {
-        List<IEnemy> result = new List<IEnemy>();
-        enemiesIDs.ForEach((id) => {
-            result.Add(ResourcesObjectSuplier.GetEnemyForID(id));
-        });
-        return result;
+        return enemiesIDs;
     }
 }

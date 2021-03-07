@@ -5,6 +5,6 @@ using UnityEngine;
 public interface ILevelModel
 {
     string ID { get; set; }
-    List<IEnemy> GetEnemies();
+    List<string> GetEnemiesIDs();
     void ConfigureForLevel(int level);
 }
