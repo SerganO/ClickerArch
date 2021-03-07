@@ -27,5 +27,6 @@ public class DamageText : MonoBehaviour
     public void StopMove()
     {
         move = false;
+        transform.localPosition = Vector3.zero;
     }
 }

@@ -11,6 +11,11 @@ public class LevelHandler : MonoBehaviour
     public Image BackgroundImage;
     public Text Level;
 
+
+    public Image HPImage;
+
+    public GameObject DiePanel;
+
     string CurrentID;
     int CurrentLevel;
     List<string> enemiesIDs = new List<string>();
@@ -18,11 +23,42 @@ public class LevelHandler : MonoBehaviour
 
     IEnemy enemy;
 
+    IHero AssignedHero;
+
+    float HeroRatio
+    {
+        get
+        {
+            return (float)AssignedHero.CurrentHealthPoint / (float)AssignedHero.MaximumHealthPoint;
+        }
+    }
+
     private void Start()
     {
-        CurrentID = StartLevelID;
-        CurrentLevel = StartLevel;
-        NextLevel();
+        AssignedHero = Services.GetInstance().GetHeroService().Hero;
+        AssignedHero.OnDie += OnHeroDie;
+        AssignedHero.OnHurt += OnHeroHurt;
+
+        Restart();
+    }
+
+
+
+    private void OnHeroHurt()
+    {
+        HPImage.fillAmount = HeroRatio;
+    }
+
+    private void OnHeroDie()
+    {
+        Debug.Log("YouDie");
+
+        if (CurrentEnemy != null)
+        {
+            Destroy(CurrentEnemy.gameObject);
+        }
+
+        DiePanel.SetActive(true);
     }
 
     int currentIndex = -1;
@@ -72,6 +108,23 @@ public class LevelHandler : MonoBehaviour
     public void OnClick()
     {
         CurrentEnemy.Hurt(Services.GetInstance().GetHeroService().Hero.DamageByTap);
+    }
+
+    void DropLevelInfo()
+    {
+        CurrentID = StartLevelID;
+        CurrentLevel = StartLevel;
+        currentIndex = -1;
+
+        AssignedHero.CurrentHealthPoint = AssignedHero.MaximumHealthPoint;
+        HPImage.fillAmount = HeroRatio;
+    }
+
+    public void Restart()
+    {
+        DropLevelInfo();
+        DiePanel.SetActive(false);
+        NextLevel();
     }
 
 }

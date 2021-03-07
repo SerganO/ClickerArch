@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface IHero
 {
+    event VoidFunc OnHurt;
+    event VoidFunc OnDie;
+
     int DamageByTap { get; set; }
     int DamagePerSecond { get; set; }
     int MaximumHealthPoint { get; set; }
