@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3064068431439296096}
   - component: {fileID: 7016184287385176765}
-  - component: {fileID: 2653747724737232370}
-  - component: {fileID: 5352824568942933699}
+  - component: {fileID: -3908295509080607354}
+  - component: {fileID: -3323779835166136662}
   m_Layer: 0
   m_Name: Explosion_1
   m_TagString: Untagged
@@ -83,26 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2653747724737232370
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3996988295690730011}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b970a82d4af60de46973641e61bb7d64, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5352824568942933699
+--- !u!114 &-3908295509080607354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,3 +95,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da42d021cc251d4caf655bb855f7587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-3323779835166136662
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3996988295690730011}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: d76e62e000c7f3e4ca8a06f31f21ab39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Services
 {
-    static IHero Hero = new CommonHero();
+    static IHeroService HeroService = new CommonHeroService();
     static ILevelService LevelService = new CommonLevelService();
     static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();
@@ -12,8 +12,9 @@ public class Services
     private Services() { }
     private static Services instance;
 
-    public static void SetHero(IHero hero) {
-        Hero = hero;
+    public static void SetLevelService(IHeroService heroService)
+    {
+        HeroService = heroService;
     }
     public static void SetLevelService(ILevelService levelService) {
         LevelService = levelService;
@@ -36,9 +37,9 @@ public class Services
     }
 
 
-    public IHero GetHero()
+    public IHeroService GetHeroService()
     {
-        return Hero;
+        return HeroService;
     }
     public ILevelService GetLevelService()
     {

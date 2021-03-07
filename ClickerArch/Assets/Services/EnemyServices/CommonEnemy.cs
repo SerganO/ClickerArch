@@ -10,7 +10,6 @@ public class CommonEnemy : IEnemy
 
 
     double timer = 0;
-    //double mockTimer = 0;
 
     bool isDie = false;
 
@@ -29,13 +28,6 @@ public class CommonEnemy : IEnemy
     private void Update()
     {
         timer += Time.deltaTime;
-        //mockTimer += Time.deltaTime;
-
-        //if(mockTimer >= 0.1)
-        //{
-        //    mockTimer -= 0.1;
-        //    Hurt(3);
-        //}
 
         if(timer >= model.DurationBetweenAttack)
         {
@@ -69,7 +61,7 @@ public class CommonEnemy : IEnemy
     public override void Attack()
     {
         if (isDie) return;
-        Services.GetInstance().GetHero().Hurt(model.Damage);
+        Services.GetInstance().GetHeroService().Hero.Hurt(model.Damage);
         view.Attack();
     }
 

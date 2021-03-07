@@ -50,8 +50,7 @@ public class LevelHandler : MonoBehaviour
 
         CurrentEnemy = Instantiate(enemy, SpawnPoint);
 
-        var id = enemiesIDs[currentIndex];
-        Services.GetInstance().GetEnemyService().ConfigureEnemyForId(CurrentEnemy, id);
+        Services.GetInstance().GetEnemyService().ConfigureEnemyForId(CurrentEnemy, enemiesIDs[currentIndex]);
 
         CurrentEnemy.onDie += NextEnemy;
 
@@ -72,9 +71,7 @@ public class LevelHandler : MonoBehaviour
 
     public void OnClick()
     {
-        var damage = Services.GetInstance().GetHero().DamageByTap;
-
-        CurrentEnemy.Hurt(damage);
+        CurrentEnemy.Hurt(Services.GetInstance().GetHeroService().Hero.DamageByTap);
     }
 
 }
