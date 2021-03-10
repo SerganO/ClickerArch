@@ -13,6 +13,10 @@ public class ResourcesDataService : IDataService
     {
         var result = new List<string>();
 
+        result.Add("Angel");
+        result.Add("Archer");
+        result.Add("BaldPirate");
+        result.Add("BigGuy");
         result.Add("inquisitor");
         result.Add("darkDoctor");
         result.Add("inquisitor");
