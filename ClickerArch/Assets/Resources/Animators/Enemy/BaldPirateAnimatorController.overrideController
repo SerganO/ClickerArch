@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BaldPirateAnimatorController
+  m_Controller: {fileID: 9100000, guid: f46bee4155536c244afb99e27355afca, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 57956cdd69914554f8251e0f6175c026, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e516c6b7eb06f0f46886a596638330fc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8453e77750f94ba4e8c4024f5ff0ce55, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 54d68eb05cb0e8643b86922c3ee19cf1, type: 2}
