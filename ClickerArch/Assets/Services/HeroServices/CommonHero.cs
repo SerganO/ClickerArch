@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommonHero : IHero
 {
-    private int MockDPT = 9;
+    private int MockDPT = 100;
 
     public event VoidFunc OnHurt;
     public event VoidFunc OnDie;

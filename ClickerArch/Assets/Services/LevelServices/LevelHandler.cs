@@ -18,6 +18,9 @@ public class LevelHandler : MonoBehaviour
 
     string CurrentID;
     int CurrentLevel;
+
+
+
     List<string> enemiesIDs = new List<string>();
     IEnemy CurrentEnemy;
 
@@ -97,8 +100,10 @@ public class LevelHandler : MonoBehaviour
         currentIndex = -1;
 
         //Magic change CurrentID
+        ////
 
         CurrentLevel++;
+
         Level.text = CurrentLevel.ToString();
         SetupForIdAndLevel(CurrentID, CurrentLevel);
         NextEnemy();
