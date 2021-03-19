@@ -19,6 +19,24 @@ public class LevelHandler : MonoBehaviour
     string CurrentID;
     int CurrentLevel;
 
+    List<string> mockLevelIDs = new List<string>()
+    {
+        "Level1",
+        "Level2",
+        "Level3",
+        "Level4",
+        "Level5",
+        "Level6",
+        "Level7",
+        "Level8",
+        "Level9",
+        "Level10",
+        "Level11",
+        "Level12",
+        "Level13",
+        "Level14",
+        "Level15"
+    };
 
 
     List<string> enemiesIDs = new List<string>();
@@ -100,6 +118,20 @@ public class LevelHandler : MonoBehaviour
         currentIndex = -1;
 
         //Magic change CurrentID
+        bool change = false;
+
+        while(!change)
+        {
+            var tmpCurrentID = mockLevelIDs[Random.Range(0, mockLevelIDs.Count - 1)];
+
+            if(tmpCurrentID != CurrentID)
+            {
+                CurrentID = tmpCurrentID;
+                change = true;
+            }
+        }
+
+        
         ////
 
         CurrentLevel++;

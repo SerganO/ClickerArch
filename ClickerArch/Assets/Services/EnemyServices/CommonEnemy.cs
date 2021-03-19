@@ -80,14 +80,16 @@ public class CommonEnemy : IEnemy
     {
         if (isDie) return;
         model.CurrentHealthPoint -= damage;
+        float ratio = (float)model.CurrentHealthPoint / model.MaximumHealthPoint;
+        view.Hurt(ratio, damage, isManualDamage);
         if (model.CurrentHealthPoint <= 0)
         {
             Death();
         }
-        else
-        {
-            float ratio = (float)model.CurrentHealthPoint / model.MaximumHealthPoint;
-            view.Hurt(ratio, damage, isManualDamage);
-        }
+        //else
+        //{
+        //    float ratio = (float)model.CurrentHealthPoint / model.MaximumHealthPoint;
+        //    view.Hurt(ratio, damage, isManualDamage);
+        //}
     }
 }
