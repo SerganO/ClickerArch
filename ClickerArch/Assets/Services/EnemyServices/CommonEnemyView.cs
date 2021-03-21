@@ -56,11 +56,11 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
         animator.Play("idle");
     }
 
-    public void Hurt(float ratio, int damage, bool showDamage)
+    public void Hurt(float ratio, double damage, bool showDamage)
     {
         if(showDamage)
         {
-            DamageObject.Generate(damage);
+            DamageObject.Generate((int)damage);
         }
         spriteRenderer.color = Color.Lerp(StartColor, FinishColor, 1 - ratio);
 

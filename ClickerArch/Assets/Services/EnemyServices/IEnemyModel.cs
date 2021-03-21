@@ -6,8 +6,8 @@ public interface IEnemyModel
 {
     string Id { get; set; }
     double DurationBetweenAttack { get; set; }
-    int Damage { get; set; }
-    int MaximumHealthPoint { get; set; }
-    int CurrentHealthPoint { get; set; }
+    double Damage { get; set; }
+    double MaximumHealthPoint { get; set; }
+    double CurrentHealthPoint { get; set; }
     void ConfigureForIdAndLevel(string id, int level);
 }

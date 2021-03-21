@@ -16,8 +16,14 @@ public class LevelHandler : MonoBehaviour
 
     public GameObject DiePanel;
 
+    public SkillButton SkillButton;
+    public GameObject SkillButtonsList;
+
     string CurrentID;
     int CurrentLevel;
+
+    double SECOND = 1.0;
+    double secondTick = 0;
 
     List<string> mockLevelIDs = new List<string>()
     {
@@ -59,13 +65,121 @@ public class LevelHandler : MonoBehaviour
         AssignedHero = Services.GetInstance().GetHeroService().Hero;
         AssignedHero.OnDie += OnHeroDie;
         AssignedHero.OnHurt += OnHeroHurt;
-
+        AssignedHero.OnHeal += OnHeroHeal;
+        AssignedHero.AdditionalConstAttack += OnHeroAdditionalAttack;
+        AssignedHero.AdditionalCoefAttack += OnHeroCoefAdditionalCoefAttack;
         Restart();
+
+        //Mock
+        AssignedHero.AddModificators(new List<Modificator>
+        {
+            new Modificator
+            {
+                isPermanent = true,
+                type = ModificatorType.DamageCoefReflection,
+                activationType = ModificatorActivationType.Tick,
+                parametersId = "",
+                time = -1,
+                value = 2.0,
+            }
+        });
+
+        new List<HeroSkill>
+        {
+            new HeroSkill
+            {
+                ID="heal",
+                Countdown = 60,
+                Modificators = new List<Modificator>
+                {
+                   new Modificator {
+                isPermanent = false,
+                type = ModificatorType.HPCurrentChange,
+                activationType = ModificatorActivationType.OneShot,
+                parametersId = "",
+                time = -1,
+                value = 10.0
+                   }
+                }
+            },
+            new HeroSkill
+            {
+                ID="attack",
+                Countdown = 60,
+                Modificators = new List<Modificator>
+                {
+                   new Modificator {
+                isPermanent = false,
+                type = ModificatorType.AttackCoef,
+                activationType = ModificatorActivationType.OneShot,
+                parametersId = "",
+                time = -1,
+                value = 0.5
+                   }
+                }
+            }
+
+        }.ForEach(skill =>
+        {
+            AssignedHero.Skills.Add(skill);
+        });
+
+        SetupSkillPanel();
+    }
+
+    private void OnHeroCoefAdditionalCoefAttack(double value, bool mustBeShown)
+    {
+        CurrentEnemy.Hurt(CurrentEnemy.GetEnemyModel().MaximumHealthPoint * value, mustBeShown);
+    }
+
+    void SetupSkillPanel()
+    {
+        foreach (Transform child in SkillButtonsList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AssignedHero.Skills.ForEach(skill=>
+        {
+            SkillButton skillButton = Instantiate(SkillButton, SkillButtonsList.transform);
+            skillButton.ConfigureForID(skill.ID);
+
+            skillButton.GetComponent<Button>().onClick.AddListener(() => { UseSkill(skill, skillButton); }); 
+        });
+    }
+
+    private void UseSkill(HeroSkill skill, SkillButton button)
+    {
+        AssignedHero.AddModificators(skill.Modificators);
+        button.Countdown(skill.Countdown);
+
+    }
+
+    private void OnHeroAdditionalAttack(double value, bool mustBeShown)
+    {
+        CurrentEnemy.Hurt(value, mustBeShown);
+    }
+
+    private void Update()
+    {
+        secondTick += Time.deltaTime;
+        if (secondTick >= SECOND)
+        {
+            secondTick -= SECOND;
+
+            AssignedHero.PassiveAttack(CurrentEnemy);
+        }
+
+        AssignedHero.UpdateOnTick(Time.deltaTime);
     }
 
 
-
     private void OnHeroHurt()
+    {
+        HPImage.fillAmount = HeroRatio;
+    }
+
+    private void OnHeroHeal()
     {
         HPImage.fillAmount = HeroRatio;
     }
@@ -144,7 +258,12 @@ public class LevelHandler : MonoBehaviour
 
     public void OnClick()
     {
-        CurrentEnemy.Hurt(Services.GetInstance().GetHeroService().Hero.DamageByTap);
+        AssignedHero.Attack(CurrentEnemy);
+    }
+
+    public void OnSkillButton()
+    {
+
     }
 
     void DropLevelInfo()

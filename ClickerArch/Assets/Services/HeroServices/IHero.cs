@@ -5,19 +5,28 @@ using UnityEngine;
 public interface IHero
 {
     event VoidFunc OnHurt;
+    event VoidFunc OnHeal;
     event VoidFunc OnDie;
+    event AttackFunc AdditionalConstAttack;
+    event AttackFunc AdditionalCoefAttack;
 
-    int DamageByTap { get; set; }
-    int DamagePerSecond { get; set; }
-    int MaximumHealthPoint { get; set; }
-    int CurrentHealthPoint { get; set; }
+    double BaseDamagePerClick { get; set; }
+    double BaseDamagePerSecond { get; set; }
+    double BaseBlock { get; set; }
+    double MaximumHealthPoint { get; set; }
+    double CurrentHealthPoint { get; set; }
 
     List<Modificator> Modificators { get; set; }
+    List<HeroSkill> Skills { get; set; }
+
+    void UpdateOnTick(double time);
 
     void AddModificators(List<Modificator> modificators);
     void RemoveModificators(List<Modificator> modificators);
 
-    void Attack();
+    void Attack(IEnemy enemy);
+    void PassiveAttack(IEnemy enemy);
     void Death();
-    void Hurt(int damage);
+    void Hurt(double damage);
+    void Heal(double value);
 }

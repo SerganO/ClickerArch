@@ -13,7 +13,7 @@ public abstract class IEnemy: MonoBehaviour
     public abstract void Idle();
     public abstract void Attack();
     public abstract void Death();
-    public abstract void Hurt(int damage, bool isManualDamage = true);
+    public abstract void Hurt(double damage, bool isManualDamage = true);
 
     public abstract void ConfigureForLevel(int level);
 }

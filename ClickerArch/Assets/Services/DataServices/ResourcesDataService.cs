@@ -37,6 +37,8 @@ public class ResourcesDataService : IDataService
 
     public Sprite GetSpriteForID(string id)
     {
+        var  a = Resources.Load<Sprite>("Sprites/" + id);
+        Debug.Log(a);
         return Resources.Load<Sprite>("Sprites/" + id);
     }
 }

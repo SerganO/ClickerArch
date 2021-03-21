@@ -4,6 +4,9 @@ using UnityEngine;
 
 
 public delegate void VoidFunc();
+public delegate void DoubleFunc(double value);
+public delegate void StringFunc(string value);
+public delegate void AttackFunc(double value, bool mustBeShown);
 
 static class Helper
 {

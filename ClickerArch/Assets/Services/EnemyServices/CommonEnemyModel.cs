@@ -6,9 +6,9 @@ public class CommonEnemyModel : IEnemyModel
 {
     public string Id { get; set; }
     public double DurationBetweenAttack { get; set; }
-    public int Damage { get; set; }
-    public int MaximumHealthPoint { get; set; }
-    public int CurrentHealthPoint { get; set; }
+    public double Damage { get; set; }
+    public double MaximumHealthPoint { get; set; }
+    public double CurrentHealthPoint { get; set; }
 
     public void ConfigureForIdAndLevel(string id, int level)
     {

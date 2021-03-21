@@ -76,11 +76,11 @@ public class CommonEnemy : IEnemy
         }));
     }
 
-    public override void Hurt(int damage, bool isManualDamage = true)
+    public override void Hurt(double damage, bool isManualDamage = true)
     {
         if (isDie) return;
         model.CurrentHealthPoint -= damage;
-        float ratio = (float)model.CurrentHealthPoint / model.MaximumHealthPoint;
+        float ratio = (float)(model.CurrentHealthPoint / model.MaximumHealthPoint);
         view.Hurt(ratio, damage, isManualDamage);
         if (model.CurrentHealthPoint <= 0)
         {
