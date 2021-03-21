@@ -14,11 +14,12 @@ public class ResourcesDataService : IDataService
         var result = new List<string>();
 
         result.Add("Angel");
-        result.Add("Archer");
-        result.Add("BaldPirate");
-        result.Add("BigGuy");
-        result.Add("inquisitor");
-        result.Add("darkDoctor");
+        result.Add("Bot");
+        result.Add("Slug");
+        result.Add("Slug1");
+        result.Add("RedHood");
+        result.Add("Skeleton2");
+        result.Add("Deamon");
         result.Add("inquisitor");
         result.Add("darkDoctor");
         switch (levelId)
