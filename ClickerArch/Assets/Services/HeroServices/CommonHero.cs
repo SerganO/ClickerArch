@@ -7,8 +7,8 @@ public class CommonHero : IHero
     double TICK_TIME = 1.0;
     double tick = 0;
 
-    private int MockDPC = 100;
-    private int MockDPS = 10;
+    private int MockDPC = 9;
+    private int MockDPS = 5;
 
     public event VoidFunc OnHurt;
     public event VoidFunc OnDie;
@@ -40,7 +40,21 @@ public class CommonHero : IHero
         }
     }
 
+    public double CurrentDamagePerClick
+    {
+        get
+        {
+            return GetDPCDamage(BaseDamagePerClick, AttackModificators);
+        }
+    }
 
+    public double CurrentDamagePerSecond
+    {
+        get
+        {
+            return GetDPSDamage(BaseDamagePerSecond, AttackModificators);
+        }
+    }
 
     public CommonHero()
     {
@@ -48,6 +62,60 @@ public class CommonHero : IHero
         BaseDamagePerSecond = MockDPS;
         CurrentHealthPoint = 20;
         MaximumHealthPoint = 20;
+
+        //Mock
+        AddModificators(new List<Modificator>
+        {
+            new Modificator
+            {
+                isPermanent = true,
+                type = ModificatorType.DamageCoefReflection,
+                activationType = ModificatorActivationType.Tick,
+                parametersId = "",
+                time = -1,
+                value = 2.0,
+            }
+        });
+
+        new List<HeroSkill>
+        {
+            new HeroSkill
+            {
+                ID="heal",
+                Countdown = 60,
+                Modificators = new List<Modificator>
+                {
+                   new Modificator {
+                isPermanent = false,
+                type = ModificatorType.HPCurrentChange,
+                activationType = ModificatorActivationType.OneShot,
+                parametersId = "",
+                time = -1,
+                value = 10.0
+                   }
+                }
+            },
+            new HeroSkill
+            {
+                ID="attack",
+                Countdown = 60,
+                Modificators = new List<Modificator>
+                {
+                   new Modificator {
+                isPermanent = false,
+                type = ModificatorType.AttackCoef,
+                activationType = ModificatorActivationType.OneShot,
+                parametersId = "",
+                time = -1,
+                value = 0.5
+                   }
+                }
+            }
+
+        }.ForEach(skill =>
+        {
+            Skills.Add(skill);
+        });
     }
 
     public void AddModificators(List<Modificator> modificators)
@@ -162,8 +230,7 @@ public class CommonHero : IHero
             Death();
         }
         var reflection = GetReflectionDamage(gettedDamage, HurtModificators);
-
-        AdditionalConstAttack(reflection, true);
+        if(reflection != 0) AdditionalConstAttack?.Invoke(reflection, true);
     }
 
     public void Heal(double value)
@@ -243,10 +310,10 @@ public class CommonHero : IHero
                 }
                 break;
             case ModificatorType.AttackConst:
-                AdditionalConstAttack(modificator.value, true);
+                AdditionalConstAttack?.Invoke(modificator.value, true);
                 break;
             case ModificatorType.AttackCoef:
-                AdditionalCoefAttack(modificator.value, true);
+                AdditionalCoefAttack?.Invoke(modificator.value, true);
                 break;
         }
     }

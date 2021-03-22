@@ -11,7 +11,9 @@ public interface IHero
     event AttackFunc AdditionalCoefAttack;
 
     double BaseDamagePerClick { get; set; }
+    double CurrentDamagePerClick { get; }
     double BaseDamagePerSecond { get; set; }
+    double CurrentDamagePerSecond { get; }
     double BaseBlock { get; set; }
     double MaximumHealthPoint { get; set; }
     double CurrentHealthPoint { get; set; }

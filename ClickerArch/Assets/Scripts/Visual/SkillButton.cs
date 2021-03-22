@@ -26,8 +26,7 @@ public class SkillButton : Button
 
     public void Countdown(double time)
     {
-       
-
+        StopAllCoroutines();
         StartCoroutine(Countdown((float)time));
     }
 

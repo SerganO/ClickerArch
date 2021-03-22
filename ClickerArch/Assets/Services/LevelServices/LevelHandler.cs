@@ -12,6 +12,10 @@ public class LevelHandler : MonoBehaviour
     public Text Level;
 
 
+    public Text DPCText;
+    public Text DPSText;
+
+
     public Image HPImage;
 
     public GameObject DiePanel;
@@ -19,11 +23,17 @@ public class LevelHandler : MonoBehaviour
     public SkillButton SkillButton;
     public GameObject SkillButtonsList;
 
+    public SceneLoader Loader;
+
+    List<SkillButton> buttons = new List<SkillButton>();
+
     string CurrentID;
     int CurrentLevel;
 
     double SECOND = 1.0;
     double secondTick = 0;
+
+    bool gameContinued = true;
 
     List<string> mockLevelIDs = new List<string>()
     {
@@ -63,66 +73,8 @@ public class LevelHandler : MonoBehaviour
     private void Start()
     {
         AssignedHero = Services.GetInstance().GetHeroService().Hero;
-        AssignedHero.OnDie += OnHeroDie;
-        AssignedHero.OnHurt += OnHeroHurt;
-        AssignedHero.OnHeal += OnHeroHeal;
-        AssignedHero.AdditionalConstAttack += OnHeroAdditionalAttack;
-        AssignedHero.AdditionalCoefAttack += OnHeroCoefAdditionalCoefAttack;
+        Bind();
         Restart();
-
-        //Mock
-        AssignedHero.AddModificators(new List<Modificator>
-        {
-            new Modificator
-            {
-                isPermanent = true,
-                type = ModificatorType.DamageCoefReflection,
-                activationType = ModificatorActivationType.Tick,
-                parametersId = "",
-                time = -1,
-                value = 2.0,
-            }
-        });
-
-        new List<HeroSkill>
-        {
-            new HeroSkill
-            {
-                ID="heal",
-                Countdown = 60,
-                Modificators = new List<Modificator>
-                {
-                   new Modificator {
-                isPermanent = false,
-                type = ModificatorType.HPCurrentChange,
-                activationType = ModificatorActivationType.OneShot,
-                parametersId = "",
-                time = -1,
-                value = 10.0
-                   }
-                }
-            },
-            new HeroSkill
-            {
-                ID="attack",
-                Countdown = 60,
-                Modificators = new List<Modificator>
-                {
-                   new Modificator {
-                isPermanent = false,
-                type = ModificatorType.AttackCoef,
-                activationType = ModificatorActivationType.OneShot,
-                parametersId = "",
-                time = -1,
-                value = 0.5
-                   }
-                }
-            }
-
-        }.ForEach(skill =>
-        {
-            AssignedHero.Skills.Add(skill);
-        });
 
         SetupSkillPanel();
     }
@@ -144,7 +96,8 @@ public class LevelHandler : MonoBehaviour
             SkillButton skillButton = Instantiate(SkillButton, SkillButtonsList.transform);
             skillButton.ConfigureForID(skill.ID);
 
-            skillButton.GetComponent<Button>().onClick.AddListener(() => { UseSkill(skill, skillButton); }); 
+            skillButton.GetComponent<Button>().onClick.AddListener(() => { UseSkill(skill, skillButton); });
+            buttons.Add(skillButton);
         });
     }
 
@@ -162,6 +115,12 @@ public class LevelHandler : MonoBehaviour
 
     private void Update()
     {
+        if (!gameContinued) return;
+
+        DPCText.text = AssignedHero.CurrentDamagePerClick.ToString();
+        DPSText.text = AssignedHero.CurrentDamagePerSecond.ToString();
+
+
         secondTick += Time.deltaTime;
         if (secondTick >= SECOND)
         {
@@ -187,7 +146,7 @@ public class LevelHandler : MonoBehaviour
     private void OnHeroDie()
     {
         Debug.Log("YouDie");
-
+        gameContinued = false;
         if (CurrentEnemy != null)
         {
             Destroy(CurrentEnemy.gameObject);
@@ -281,6 +240,33 @@ public class LevelHandler : MonoBehaviour
         DropLevelInfo();
         DiePanel.SetActive(false);
         NextLevel();
+        gameContinued = true;
+
+        buttons.ForEach((button) => button.Countdown(0));
+    }
+
+    void Bind()
+    {
+        AssignedHero.OnDie += OnHeroDie;
+        AssignedHero.OnHurt += OnHeroHurt;
+        AssignedHero.OnHeal += OnHeroHeal;
+        AssignedHero.AdditionalConstAttack += OnHeroAdditionalAttack;
+        AssignedHero.AdditionalCoefAttack += OnHeroCoefAdditionalCoefAttack;
+    }
+
+    void Unbind()
+    {
+        AssignedHero.OnDie -= OnHeroDie;
+        AssignedHero.OnHurt -= OnHeroHurt;
+        AssignedHero.OnHeal -= OnHeroHeal;
+        AssignedHero.AdditionalConstAttack -= OnHeroAdditionalAttack;
+        AssignedHero.AdditionalCoefAttack -= OnHeroCoefAdditionalCoefAttack;
+    }
+
+    public void LoadMenu()
+    {
+        Unbind();
+        Loader.LoadWithTransparent(SceneLoader.Scene.Main);
     }
 
 }
