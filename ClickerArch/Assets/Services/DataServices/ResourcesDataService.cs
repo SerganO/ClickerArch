@@ -13,18 +13,20 @@ public class ResourcesDataService : IDataService
     {
         var result = new List<string>();
 
-        result.Add("Angel");
-        result.Add("Bot");
-        result.Add("Slug");
-        result.Add("Slug1");
-        result.Add("RedHood");
-        result.Add("Skeleton2");
-        result.Add("Deamon");
-        result.Add("inquisitor");
-        result.Add("darkDoctor");
+        
         switch (levelId)
         {
-
+            default:
+                result.Add("Angel");
+                result.Add("Bot");
+                result.Add("Slug");
+                result.Add("Slug1");
+                result.Add("RedHood");
+                result.Add("Skeleton2");
+                result.Add("Deamon");
+                result.Add("inquisitor");
+                result.Add("darkDoctor");
+                break;
         }
         
         return result;
@@ -37,8 +39,8 @@ public class ResourcesDataService : IDataService
 
     public Sprite GetSpriteForID(string id)
     {
-        var  a = Resources.Load<Sprite>("Sprites/" + id);
-        Debug.Log(a);
+        //var  a = Resources.Load<Sprite>("Sprites/" + id);
+        //Debug.Log(a);
         return Resources.Load<Sprite>("Sprites/" + id);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public delegate void VoidFunc();
 public delegate void DoubleFunc(double value);
+public delegate void BoolFunc(bool value);
 public delegate void StringFunc(string value);
 public delegate void AttackFunc(double value, bool mustBeShown);
 
@@ -15,5 +16,10 @@ static class Helper
     {
         yield return new WaitForSeconds(time);
         action();
+    }
+
+    public static string ColorText(string color, string text)
+    {
+        return "<color=" + color + ">" + text + "</color>";
     }
 }
