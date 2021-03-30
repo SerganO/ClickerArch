@@ -5,13 +5,33 @@ using UnityEngine;
 
 public class CommonEnemy : IEnemy
 {
+    double TICK_TIME = 1.0;
+    double tick = 0;
+
     IEnemyModel model;
     IEnemyView view;
+
+    List<Effect> TickEffects
+    {
+        get
+        {
+            return model.Effects.FindAll(efc => efc.activationType == EffectActivationType.Tick); ;
+        }
+    }
+
+    List<Effect> OneShotEffects
+    {
+        get
+        {
+            return model.Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot); ;
+        }
+    }
 
 
     double timer = 0;
 
     bool isDie = false;
+    bool isStun = false;
 
     public override event VoidFunc onDie;
 
@@ -27,6 +47,11 @@ public class CommonEnemy : IEnemy
 
     private void Update()
     {
+        if (isDie || isStun)
+        {
+            return;
+
+        }
         timer += Time.deltaTime;
 
         if(timer >= model.DurationBetweenAttack)
@@ -35,6 +60,25 @@ public class CommonEnemy : IEnemy
             Attack();
         }
 
+        UpdateOnTick(Time.deltaTime);
+
+    }
+
+    public void UpdateOnTick(double time)
+    {
+        Debug.LogWarning("ENEMYTICK: " + model.Id + " " + model.Effects.Count);
+        model.Effects.ForEach(efc => Debug.LogWarning(efc));
+        ReactOnEffects(OneShotEffects);
+
+
+        tick += time;
+        if (tick >= TICK_TIME)
+        {
+            tick -= TICK_TIME;
+            ReactOnEffects(TickEffects);
+        }
+
+        UpdateEffects(time);
     }
 
 
@@ -86,10 +130,79 @@ public class CommonEnemy : IEnemy
         {
             Death();
         }
-        //else
-        //{
-        //    float ratio = (float)model.CurrentHealthPoint / model.MaximumHealthPoint;
-        //    view.Hurt(ratio, damage, isManualDamage);
-        //}
     }
+
+    public override void Heal(double value)
+    {
+        if (isDie) return;
+        model.CurrentHealthPoint = Mathf.Min((float)model.MaximumHealthPoint, (float)(model.CurrentHealthPoint + value));
+        float ratio = (float)(model.CurrentHealthPoint / model.MaximumHealthPoint);
+        view.UpdateRatio(ratio);
+    }
+
+
+    public void ReactOnEffects(List<Effect> effects)
+    {
+        Debug.Log("Effects: " + effects.Count);
+        effects.ForEach(efc => Debug.Log(efc));
+        effects.ForEach(efc => ReactOnEffect(efc));
+    }
+
+    public void ReactOnEffect(Effect effect)
+    {
+        double constPart = 0;
+        double coefPart = 0;
+
+        switch (effect.changeType)
+        {
+            case EffectValueChangeType.Const:
+                constPart += effect.value;
+                break;
+            case EffectValueChangeType.Coef:
+                coefPart += effect.value;
+                break;
+            case EffectValueChangeType.AddConst:
+                break;
+            case EffectValueChangeType.AddCoef:
+                break;
+        }
+
+
+        switch (effect.parameter)
+        {
+            case EffectType.Damage:
+                Hurt(constPart + coefPart * model.MaximumHealthPoint);
+                break;
+            case EffectType.Heal:
+                Heal(constPart + coefPart * model.MaximumHealthPoint);
+                break;
+            case EffectType.Stun:
+                isStun = true;
+                StartCoroutine(Helper.Wait((float)effect.time, () => { isStun = false; }));
+                
+                break;
+        }
+
+        view.ReactOnEffect(effect);
+
+    }
+
+    public void UpdateEffects(double time)
+    {
+
+        var tempEfc = model.Effects.FindAll(efc => efc.endType != EffectEndType.Permanent);
+        tempEfc.ForEach(mod => mod.time -= time);
+
+
+        var efcsForRemove = model.Effects.FindAll(efc => efc.Check());
+        model.RemoveEffects(efcsForRemove);
+
+    }
+
+    private void OnDestroy()
+    {
+        model.OnDestroyClear();
+        StopAllCoroutines();
+    }
+
 }

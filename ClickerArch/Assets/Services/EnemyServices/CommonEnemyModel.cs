@@ -10,6 +10,8 @@ public class CommonEnemyModel : IEnemyModel
     public double MaximumHealthPoint { get; set; }
     public double CurrentHealthPoint { get; set; }
 
+    public List<Effect> Effects { get; set; } = new List<Effect>();
+
     public void ConfigureForIdAndLevel(string id, int level)
     {
         Id = id;
@@ -21,4 +23,20 @@ public class CommonEnemyModel : IEnemyModel
         Damage = data.Damage;
     }
 
+    public void AddEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => Effects.Add(efc));
+
+    }
+
+    public void RemoveEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => Effects.Remove(efc));
+
+    }
+
+    public void OnDestroyClear()
+    {
+        Effects = new List<Effect>();
+    }
 }

@@ -103,7 +103,13 @@ public class LevelHandler : MonoBehaviour
 
     private void UseSkill(HeroSkill skill, SkillButton button)
     {
-        AssignedHero.AddModificators(skill.Modificators);
+        Debug.LogWarning("Use Skill");
+        skill.EnemyEffects.ForEach(efc=> Debug.LogWarning("-=" + efc));
+        AssignedHero.AddModificators(skill.HeroModificators);
+        AssignedHero.AddEffects(skill.HeroEffects);
+        Debug.LogWarning("Enemy: " + CurrentEnemy.GetEnemyModel().Id);
+        CurrentEnemy.GetEnemyModel().AddEffects(skill.EnemyEffects);
+        Debug.LogWarning("Effecs: " + CurrentEnemy.GetEnemyModel().Effects.Count);
         button.Countdown(skill.Countdown);
 
     }

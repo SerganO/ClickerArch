@@ -23,6 +23,7 @@ public class CommonHero : IHero
     public double MaximumHealthPoint { get; set; }
     public double CurrentHealthPoint { get; set; }
     public List<Modificator> Modificators { get; set; } = new List<Modificator>();
+    public List<Effect> Effects { get; set; } = new List<Effect>();
     public List<HeroSkill> Skills { get; set; } = new List<HeroSkill>();
 
     List<Modificator> AttackModificators
@@ -65,6 +66,24 @@ public class CommonHero : IHero
         }
     }
 
+
+    List<Effect> TickEffects
+    {
+        get
+        {
+            return Effects.FindAll(efc => efc.activationType == EffectActivationType.Tick); ;
+        }
+    }
+
+    List<Effect> OneShotEffects
+    {
+        get
+        {
+            return Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot); ;
+        }
+    }
+
+
     public double CurrentDamagePerClick
     {
         get
@@ -100,19 +119,29 @@ public class CommonHero : IHero
             {
                 ID="heal",
                 Countdown = 60,
-                Modificators = new List<Modificator>
+                HeroEffects = new List<Effect>
                 {
-                    ModificatorFactory.ModificatorForString("HP=Current=OneShot=Const=10=1=1=1=OneShot|Reflect=Current=OnHurt=Coef=2=1=1=1=Permanent")
+                    EffectFactory.EffectForString("Heal=OneShot=Const=10=1=1=1=OneShot=")
                 }
+                //HeroModificators = new List<Modificator>
+                //{
+                //    ModificatorFactory.ModificatorForString("HP=Current=OneShot=Const=10=1=1=1=OneShot")
+                //}
             },
             new HeroSkill
             {
                 ID="attack",
-                Countdown = 60,
-                Modificators = new List<Modificator>
+                Countdown = 2,
+                HeroModificators = new List<Modificator>
                 {
-                     ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=0=1=10=1=Replacing|DPC=Current=OnAttack=AddConst=5=10=10=1=Replacing"),
+                     //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=0=1=10=1=Replacing|DPC=Current=OnAttack=AddConst=5=10=10=1=Replacing"),
                     //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=100=1=1=1=OneShot")
+                },
+
+                EnemyEffects = new List<Effect>
+                {
+                    //EffectFactory.EffectForString("Damage=Tick=Coef=2=10=5=1=Time=")
+                    EffectFactory.EffectForString("Stun=OneShot=Const=1=1=5=1=OneShot=color*#00FF00FF")
                 }
             }
 
@@ -125,6 +154,19 @@ public class CommonHero : IHero
     public void AddModificators(List<Modificator> modificators)
     {
         modificators.ForEach(mod => Modificators.Add(mod));
+
+    }
+
+
+    public void AddEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => Effects.Add(efc));
+
+    }
+
+    public void RemoveEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => Effects.Remove(efc));
 
     }
 
@@ -258,8 +300,11 @@ public class CommonHero : IHero
 
     public void UpdateOnTick(double time)
     {
-        var oneShotMods = Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot);
-        ReactOnModificators(oneShotMods);
+        //var oneShotMods = ;//Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot);
+        //var oneShotEff = Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot);
+
+        ReactOnModificators(OneShotModificators);
+        ReactOnEffects(OneShotEffects);
 
         Debug.Log(Modificators.Count);
         Modificators.ForEach(mod=>Debug.Log(mod));
@@ -269,9 +314,11 @@ public class CommonHero : IHero
             tick -= TICK_TIME;
             Debug.Log(TickModificators.Count);
             ReactOnModificators(TickModificators);
+            ReactOnEffects(TickEffects);
         }
 
         UpdateModificators(time);
+        UpdateEffects(time);
         Debug.Log(Modificators.Count);
     }
 
@@ -285,6 +332,25 @@ public class CommonHero : IHero
         var modsForRemove = Modificators.FindAll(mod => mod.Check());
         RemoveModificators(modsForRemove);
         
+    }
+
+    public void UpdateEffects(double time)
+    {
+
+        var tempEfc = Effects.FindAll(efc => efc.endType != EffectEndType.Permanent);
+        tempEfc.ForEach(mod => mod.time -= time);
+
+
+        var efcsForRemove = Effects.FindAll(efc => efc.Check());
+        RemoveEffects(efcsForRemove);
+
+    }
+
+
+
+    public void PassiveAttack(IEnemy enemy)
+    {
+        enemy.Hurt(GetDPSDamage(BaseDamagePerSecond, AttackModificators), false);
     }
 
     public void ReactOnModificators(List<Modificator> modificators)
@@ -362,8 +428,43 @@ public class CommonHero : IHero
         }
     }
 
-    public void PassiveAttack(IEnemy enemy)
+    public void ReactOnEffects(List<Effect> effects)
     {
-        enemy.Hurt(GetDPSDamage(BaseDamagePerSecond, AttackModificators), false);
+        effects.ForEach(efc => Debug.Log(efc));
+        effects.ForEach(efc => ReactOnEffect(efc));
+    }
+
+    public void ReactOnEffect(Effect effect)
+    {
+        double constPart = 0;
+        double coefPart = 0;
+
+        switch (effect.changeType)
+        {
+            case EffectValueChangeType.Const:
+                constPart += effect.value;
+                break;
+            case EffectValueChangeType.Coef:
+                coefPart += effect.value;
+                break;
+            case EffectValueChangeType.AddConst:
+                break;
+            case EffectValueChangeType.AddCoef:
+                break;
+        }
+
+
+        switch (effect.parameter)
+        {
+            case EffectType.Damage:
+                Hurt(constPart + coefPart * MaximumHealthPoint);
+                break;
+            case EffectType.Heal:
+                Heal(constPart + coefPart * MaximumHealthPoint);
+                break;
+            case EffectType.Stun:
+                break;
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 
@@ -15,11 +16,13 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
     public Color StartColor;
     public Color FinishColor;
 
+    Color CurrentEndColor;
+
     public DamageTextGenerator DamageObject;
 
     [Header("Death")]
     public GameObject DeathObject;
-   
+
     public float coef = 0.85f;
 
     Vector3 baseTr;
@@ -33,6 +36,8 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
         baseTr = spriteRenderer.transform.localScale;
 
         DamageObject = GameObject.FindGameObjectWithTag("DamageTextGenerator").GetComponent<DamageTextGenerator>();
+
+        CurrentEndColor = FinishColor;
     }
 
     public void Attack()
@@ -58,13 +63,61 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
     public void Hurt(float ratio, double damage, bool showDamage)
     {
-        if(showDamage)
+        if (showDamage)
         {
             DamageObject.Generate((int)damage);
         }
-        spriteRenderer.color = Color.Lerp(StartColor, FinishColor, 1 - ratio);
+        UpdateRatio(ratio);
+    }
+
+    public void UpdateRatio(float ratio)
+    {
+        Debug.LogWarning("-=+++" + CurrentEndColor);
+        spriteRenderer.color = Color.Lerp(StartColor, CurrentEndColor, 1 - ratio);
 
         spriteRenderer.transform.localScale = baseTr * coef;
-        StartCoroutine(Helper.Wait(0.1f,() => { spriteRenderer.transform.localScale = baseTr; }));
+        StartCoroutine(Helper.Wait(0.1f, () => { spriteRenderer.transform.localScale = baseTr; }));
+    }
+
+    IEnumerator colorEnumerator = null;
+    IEnumerator stunEnumerator = null;
+
+    public void ReactOnEffect(Effect effect)
+    {
+        if (effect.additionalParametrs.ContainsKey("color"))
+        {
+            Debug.LogWarning("-=COLOR");
+            Color color;
+            if (ColorUtility.TryParseHtmlString(effect.additionalParametrs["color"], out color))
+                CurrentEndColor = color;
+
+            Debug.LogWarning("-=" + color);
+
+            if (colorEnumerator != null) StopCoroutine(colorEnumerator);
+            colorEnumerator = Helper.Wait((float)effect.time, () => { CurrentEndColor = FinishColor; });
+            StartCoroutine(colorEnumerator);            
+        }
+
+        switch (effect.parameter)
+        {
+            case EffectType.Damage:
+                break;
+            case EffectType.Heal:
+                break;
+            case EffectType.Stun:
+                if (stunEnumerator != null) StopCoroutine(stunEnumerator);
+                GetComponent<Animator>().speed = 0;
+                stunEnumerator = Helper.Wait((float)effect.time, () => { GetComponent<Animator>().speed = 1;  });
+                StartCoroutine(stunEnumerator);
+                break;
+        }
+
+    }
+
+
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

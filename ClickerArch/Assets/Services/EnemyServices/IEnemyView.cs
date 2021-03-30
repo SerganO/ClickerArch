@@ -8,6 +8,9 @@ public interface IEnemyView
     void Attack();
     void Death();
     void Hurt(float ratio, double damage, bool showDamage);
+    void UpdateRatio(float ratio);
+
+    void ReactOnEffect(Effect effect);
 
     void ConfigureForId(string id);
 }

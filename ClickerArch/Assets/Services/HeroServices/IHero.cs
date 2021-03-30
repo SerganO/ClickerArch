@@ -19,6 +19,7 @@ public interface IHero
     double CurrentHealthPoint { get; set; }
 
     List<Modificator> Modificators { get; set; }
+    List<Effect> Effects { get; set; }
     List<HeroSkill> Skills { get; set; }
 
     void UpdateOnTick(double time);
@@ -26,9 +27,14 @@ public interface IHero
     void AddModificators(List<Modificator> modificators);
     void RemoveModificators(List<Modificator> modificators);
 
+    void AddEffects(List<Effect> effects);
+    void RemoveEffects(List<Effect> effects);
+
     void Attack(IEnemy enemy);
     void PassiveAttack(IEnemy enemy);
     void Death();
     void Hurt(double damage);
     void Heal(double value);
+
+
 }

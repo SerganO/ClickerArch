@@ -10,4 +10,12 @@ public interface IEnemyModel
     double MaximumHealthPoint { get; set; }
     double CurrentHealthPoint { get; set; }
     void ConfigureForIdAndLevel(string id, int level);
+
+    List<Effect> Effects { get; set; }
+
+    void AddEffects(List<Effect> effects);
+    void RemoveEffects(List<Effect> effects);
+
+
+    void OnDestroyClear();
 }

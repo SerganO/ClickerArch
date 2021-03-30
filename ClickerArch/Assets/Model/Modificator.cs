@@ -1,44 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum EffectActivationType
+﻿public enum ModificatorValueType
 {
-    OneShot, Tick
+    Base,
+    Current
 }
 
-public enum EffectType
+public enum ModificatorParameter
 {
-    Damage,
-    Heal,
-    Stun,
+    HP,
+    DPC,
+    DPS,
+    Reflect,
+    Block,
 
 }
 
-public enum EffectValueChangeType
+public enum ModificatorActivationType
+{
+    OnStart, Tick, OnAttack, OnHurt, OneShot
+}
+
+public enum ModificatorValueChangeType
 {
     Const, Coef, AddConst, AddCoef
 }
 
-public enum EffectEndType
+public enum ModificatorEndType
 {
     OneShot, Permanent, Time, Replacing
 }
 
-public struct Effect
+public struct Modificator
 {
-    //EFFECT_TYPE===ACTIVATION_TYPE===CHANGE_TYPE===VALUE_MAIN_PART===VALUE_SIZE_PART===TIME_MAIN_PART===TIME_SIZE_PART===END_TYPE||REPLACE
-
-    public EffectType parameter;
-    public EffectActivationType activationType;
-    public EffectValueChangeType changeType;
+    public ModificatorParameter parameter;
+    public ModificatorActivationType activationType;
+    public ModificatorValueChangeType changeType;
+    public ModificatorValueType valueType;
     public double value;
     public double time;
-    public EffectEndType endType;
+    public ModificatorEndType endType;
     public string replaceString;
-
-    public Dictionary<string, string> additionalParametrs;
-
 
     public bool Check()
     {
@@ -56,13 +56,13 @@ public struct Effect
     {
         switch (endType)
         {
-            case EffectEndType.OneShot:
+            case ModificatorEndType.OneShot:
                 return true;
-            case EffectEndType.Permanent:
+            case ModificatorEndType.Permanent:
                 return false;
-            case EffectEndType.Time:
+            case ModificatorEndType.Time:
                 return CheckTime();
-            case EffectEndType.Replacing:
+            case ModificatorEndType.Replacing:
                 return CheckTime();
         }
         return true;
@@ -75,7 +75,7 @@ public struct Effect
 
     public bool Replace()
     {
-        if (endType == EffectEndType.Replacing && CheckTime()) return true;
+        if (endType == ModificatorEndType.Replacing && CheckTime()) return true;
         if (replaceString == "")
         {
             return true;
@@ -83,19 +83,20 @@ public struct Effect
         else
         {
 
-            var temp = EffectFactory.EffectForString(replaceString);
+            var temp = ModificatorFactory.ModificatorForString(replaceString);
 
             parameter = temp.parameter;
+            valueType = temp.valueType;
             activationType = temp.activationType;
             endType = temp.endType;
 
 
             switch (temp.changeType)
             {
-                case EffectValueChangeType.AddConst:
+                case ModificatorValueChangeType.AddConst:
                     value += temp.value;
                     break;
-                case EffectValueChangeType.AddCoef:
+                case ModificatorValueChangeType.AddCoef:
                     value += value * temp.value;
                     break;
                 default:
@@ -103,7 +104,6 @@ public struct Effect
                     changeType = temp.changeType;
                     replaceString = temp.replaceString;
                     time = temp.time;
-                    additionalParametrs = temp.additionalParametrs;
                     break;
             }
 
@@ -113,6 +113,7 @@ public struct Effect
 
     public override string ToString()
     {
-        return base.ToString() + ": " + parameter + " " + activationType + " " + changeType + " " + " " + value + " " + time + " " + endType + " " + additionalParametrs;
+        return base.ToString() + ": " + parameter + " " + activationType + " " + changeType + " " + valueType + " " + value + " " + time + " " + endType;
     }
+
 }
