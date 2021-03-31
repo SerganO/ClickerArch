@@ -57,6 +57,7 @@ public class LevelHandler : MonoBehaviour
 
     List<string> enemiesIDs = new List<string>();
     IEnemy CurrentEnemy;
+    ILevelScene CurrentLevelScene = new CommonLevelScene();
 
     IEnemy enemy;
 
@@ -103,13 +104,20 @@ public class LevelHandler : MonoBehaviour
 
     private void UseSkill(HeroSkill skill, SkillButton button)
     {
-        Debug.LogWarning("Use Skill");
-        skill.EnemyEffects.ForEach(efc=> Debug.LogWarning("-=" + efc));
         AssignedHero.AddModificators(skill.HeroModificators);
         AssignedHero.AddEffects(skill.HeroEffects);
-        Debug.LogWarning("Enemy: " + CurrentEnemy.GetEnemyModel().Id);
+
+        CurrentLevelScene.AddTotalModificators(skill.SceneModificators);
+        CurrentLevelScene.AddTotalEffects(skill.SceneEffects);
+
+        CurrentEnemy.GetEnemyModel().AddModificators(skill.EnemyModificators);
+        CurrentEnemy.GetEnemyModel().AddModificators(skill.SceneModificators);
         CurrentEnemy.GetEnemyModel().AddEffects(skill.EnemyEffects);
-        Debug.LogWarning("Effecs: " + CurrentEnemy.GetEnemyModel().Effects.Count);
+        CurrentEnemy.GetEnemyModel().AddEffects(skill.SceneEffects);
+
+
+
+
         button.Countdown(skill.Countdown);
 
     }
@@ -136,6 +144,7 @@ public class LevelHandler : MonoBehaviour
         }
 
         AssignedHero.UpdateOnTick(Time.deltaTime);
+        CurrentLevelScene.UpdateOnTick(Time.deltaTime);
     }
 
 
@@ -187,6 +196,9 @@ public class LevelHandler : MonoBehaviour
         CurrentEnemy = Instantiate(enemy, SpawnPoint);
 
         Services.GetInstance().GetEnemyService().ConfigureEnemyForId(CurrentEnemy, enemiesIDs[currentIndex]);
+
+        CurrentEnemy.GetEnemyModel().AddModificators(CurrentLevelScene.SceneModificators);
+        CurrentEnemy.GetEnemyModel().AddEffects(CurrentLevelScene.SceneEffects);
 
         CurrentEnemy.onDie += NextEnemy;
 
@@ -275,4 +287,155 @@ public class LevelHandler : MonoBehaviour
         Loader.LoadWithTransparent(SceneLoader.Scene.Main);
     }
 
+}
+
+public interface ILevelScene
+{
+    List<Modificator> TotalModificators { get; set; }
+    List<Effect> TotalEffects { get; set; }
+
+    List<Modificator> SceneModificators { get;}
+    List<Effect> SceneEffects { get;}
+
+
+    void AddTotalModificators(List<Modificator> modificators);
+    void RemoveTotalModificators(List<Modificator> modificators);
+
+    void AddTotalEffects(List<Effect> effects);
+    void RemoveTotalEffects(List<Effect> effects);
+
+    void UpdateOnTick(double time);
+}
+
+public class CommonLevelScene : ILevelScene
+{
+    public static List<Modificator> StaticTotalModificators { get; set; } = new List<Modificator>();
+
+
+    public List<Modificator> TotalModificators
+    {
+        get
+        {
+            return StaticTotalModificators;
+        }
+        set
+        {
+            StaticTotalModificators = value;
+        }
+    }
+
+    public static List<Effect> StaticTotalEffects { get; set; } = new List<Effect>();
+
+    public List<Effect> TotalEffects
+    {
+        get
+        {
+            return StaticTotalEffects;
+        }
+        set
+        {
+            StaticTotalEffects = value;
+        }
+    }
+
+    public List<Modificator> SceneModificators
+    {
+        get
+        {
+            var temp = new List<Modificator>();
+
+            TotalModificators.ForEach(mod => temp.Add(mod.Clone()));
+
+            return temp;
+        }
+    }
+
+    public List<Effect> SceneEffects
+    {
+        get
+        {
+            var temp = new List<Effect>();
+
+            TotalEffects.ForEach(efc => temp.Add(efc.Clone()));
+
+            return temp;
+        }
+    }
+
+    public void AddTotalModificators(List<Modificator> modificators)
+    {
+        modificators.ForEach(mod => TotalModificators.Add(mod));
+
+    }
+
+    public void RemoveTotalModificators(List<Modificator> modificators)
+    {
+        modificators.ForEach(mod => TotalModificators.Remove(mod));
+
+    }
+
+
+    public void AddTotalEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => TotalEffects.Add(efc));
+
+    }
+
+    public void RemoveTotalEffects(List<Effect> effects)
+    {
+        effects.ForEach(efc => TotalEffects.Remove(efc));
+
+    }
+
+
+    List<Modificator> TickTotalModificators
+    {
+        get
+        {
+            return TotalModificators.FindAll(mod => mod.activationType == ModificatorActivationType.Tick); ;
+        }
+    }
+
+    List<Modificator> OneShotTotalModificators
+    {
+        get
+        {
+            return TotalModificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot); ;
+        }
+    }
+
+    public void UpdateOnTick(double time)
+    {
+
+        UpdateModificators(time);
+        UpdateEffects(time);
+    }
+
+    public void UpdateModificators(double time)
+    {
+
+        var tempMods = TotalModificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
+
+        tempMods.ForEach(mod =>
+        {
+            mod.time -= time;
+        });
+
+
+        var modsForRemove = TotalModificators.FindAll(mod => mod.Check());
+        RemoveTotalModificators(modsForRemove);
+
+    }
+
+    public void UpdateEffects(double time)
+    {
+
+        var tempEfc = TotalEffects.FindAll(efc => efc.endType != EffectEndType.Permanent);
+        tempEfc.ForEach(mod => mod.time -= time);
+
+
+        var efcsForRemove = TotalEffects.FindAll(efc => efc.Check());
+        RemoveTotalEffects(efcsForRemove);
+
+    }
 }

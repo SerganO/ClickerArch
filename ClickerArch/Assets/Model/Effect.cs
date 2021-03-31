@@ -12,7 +12,7 @@ public enum EffectType
     Damage,
     Heal,
     Stun,
-
+    Color
 }
 
 public enum EffectValueChangeType
@@ -25,7 +25,7 @@ public enum EffectEndType
     OneShot, Permanent, Time, Replacing
 }
 
-public struct Effect
+public class Effect
 {
     //EFFECT_TYPE===ACTIVATION_TYPE===CHANGE_TYPE===VALUE_MAIN_PART===VALUE_SIZE_PART===TIME_MAIN_PART===TIME_SIZE_PART===END_TYPE||REPLACE
 
@@ -109,6 +109,22 @@ public struct Effect
 
             return false;
         }
+    }
+
+    public Effect Clone()
+    {
+        return new Effect()
+        {
+            parameter = parameter,
+            activationType = activationType,
+            changeType = changeType,
+            value = value,
+            time = time,
+            endType = endType,
+            replaceString = replaceString,
+
+            additionalParametrs = additionalParametrs
+        };
     }
 
     public override string ToString()

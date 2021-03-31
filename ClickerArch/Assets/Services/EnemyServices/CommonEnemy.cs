@@ -28,6 +28,23 @@ public class CommonEnemy : IEnemy
     }
 
 
+    List<Modificator> TickModificators
+    {
+        get
+        {
+            return model.Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.Tick); ;
+        }
+    }
+
+    List<Modificator> OneShotModificators
+    {
+        get
+        {
+            return model.Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot); ;
+        }
+    }
+
+
     double timer = 0;
 
     bool isDie = false;
@@ -35,10 +52,15 @@ public class CommonEnemy : IEnemy
 
     public override event VoidFunc onDie;
 
-    private void Start()
+    private void Awake()
     {
         model = new CommonEnemyModel();
         view = GetComponent<IEnemyView>();
+    }
+
+    private void Start()
+    {
+        
         view.ConfigureForId(ID);
         ConfigureForLevel(1);
 
@@ -66,9 +88,8 @@ public class CommonEnemy : IEnemy
 
     public void UpdateOnTick(double time)
     {
-        Debug.LogWarning("ENEMYTICK: " + model.Id + " " + model.Effects.Count);
-        model.Effects.ForEach(efc => Debug.LogWarning(efc));
         ReactOnEffects(OneShotEffects);
+        ReactOnModificators(OneShotModificators);
 
 
         tick += time;
@@ -76,9 +97,11 @@ public class CommonEnemy : IEnemy
         {
             tick -= TICK_TIME;
             ReactOnEffects(TickEffects);
+            ReactOnModificators(TickModificators);
         }
 
         UpdateEffects(time);
+        UpdateModificators(time);
     }
 
 
@@ -105,7 +128,7 @@ public class CommonEnemy : IEnemy
     public override void Attack()
     {
         if (isDie) return;
-        Services.GetInstance().GetHeroService().Hero.Hurt(model.Damage);
+        Services.GetInstance().GetHeroService().Hero.Hurt(model.CurrentDamage);
         view.Attack();
     }
 
@@ -140,11 +163,81 @@ public class CommonEnemy : IEnemy
         view.UpdateRatio(ratio);
     }
 
+    public void ReactOnModificators(List<Modificator> modificators)
+    {
+        modificators.ForEach(mod => Debug.Log(mod));
+        modificators.ForEach(mod => ReactOnModificator(mod));
+    }
+
+    public void ReactOnModificator(Modificator modificator)
+    {
+        double constPart = 0;
+        double coefPart = 0;
+
+        switch (modificator.changeType)
+        {
+            case ModificatorValueChangeType.Const:
+                constPart += modificator.value;
+                break;
+            case ModificatorValueChangeType.Coef:
+                coefPart += modificator.value;
+                break;
+            case ModificatorValueChangeType.AddConst:
+                break;
+            case ModificatorValueChangeType.AddCoef:
+                break;
+        }
+
+        switch (modificator.valueType)
+        {
+            case ModificatorValueType.Base:
+                switch (modificator.parameter)
+                {
+                    case ModificatorParameter.HP:
+                        model.MaximumHealthPoint += constPart + model.MaximumHealthPoint * coefPart;
+                        break;
+                    case ModificatorParameter.DPC:
+                        model.BaseDamage += constPart + model.BaseDamage * coefPart;
+                        break;
+                    case ModificatorParameter.DPS:
+                        break;
+                    case ModificatorParameter.Reflect:
+                        break;
+                    case ModificatorParameter.Block:
+                        break;
+                }
+                break;
+            case ModificatorValueType.Current:
+                switch (modificator.parameter)
+                {
+                    case ModificatorParameter.HP:
+                        var change = constPart + model.CurrentHealthPoint * coefPart;
+                        Debug.Log("HP: " + change);
+                        if (change < 0)
+                        {
+                            Hurt(change);
+                        }
+                        else
+                        {
+                            Heal(change);
+                        }
+                        break;
+                    case ModificatorParameter.DPC:
+                        break;
+                    case ModificatorParameter.DPS:
+                        break;
+                    case ModificatorParameter.Reflect:
+                        break;
+                    case ModificatorParameter.Block:
+                        break;
+                }
+                break;
+        }
+    }
+
 
     public void ReactOnEffects(List<Effect> effects)
     {
-        Debug.Log("Effects: " + effects.Count);
-        effects.ForEach(efc => Debug.Log(efc));
         effects.ForEach(efc => ReactOnEffect(efc));
     }
 
@@ -179,7 +272,9 @@ public class CommonEnemy : IEnemy
             case EffectType.Stun:
                 isStun = true;
                 StartCoroutine(Helper.Wait((float)effect.time, () => { isStun = false; }));
-                
+
+                break;
+            case EffectType.Color:
                 break;
         }
 
@@ -196,6 +291,19 @@ public class CommonEnemy : IEnemy
 
         var efcsForRemove = model.Effects.FindAll(efc => efc.Check());
         model.RemoveEffects(efcsForRemove);
+
+    }
+
+    public void UpdateModificators(double time)
+    {
+
+        var tempMods = model.Modificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
+        tempMods.ForEach(mod => mod.time -= time);
+
+
+        var modsForRemove = model.Modificators.FindAll(mod => mod.Check());
+        model.RemoveModificators(modsForRemove);
+
 
     }
 

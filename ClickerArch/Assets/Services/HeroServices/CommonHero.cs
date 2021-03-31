@@ -122,7 +122,11 @@ public class CommonHero : IHero
                 HeroEffects = new List<Effect>
                 {
                     EffectFactory.EffectForString("Heal=OneShot=Const=10=1=1=1=OneShot=")
-                }
+                },
+                EnemyModificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=4=1=10=1=Time")
+                },
                 //HeroModificators = new List<Modificator>
                 //{
                 //    ModificatorFactory.ModificatorForString("HP=Current=OneShot=Const=10=1=1=1=OneShot")
@@ -134,14 +138,31 @@ public class CommonHero : IHero
                 Countdown = 2,
                 HeroModificators = new List<Modificator>
                 {
+                    ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=2=1=10=1=Time"),
+                    //ModificatorFactory.ModificatorForString("DPS=Current=OnAttack=Coef=2=1=10=1=Time"),
+                    //ModificatorFactory.ModificatorForString("DPC=Current=OneShot=Coef=10=1=1=1=OneShot"),
+                    //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=-25=100=10=1=Time"),
+                    //ModificatorFactory.ModificatorForString("Block=Current=OnHurt=Coef=75=100=10=1=Time"),
+
                      //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=0=1=10=1=Replacing|DPC=Current=OnAttack=AddConst=5=10=10=1=Replacing"),
                     //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=100=1=1=1=OneShot")
+                },
+
+                SceneModificators = new List<Modificator>
+                {
+                    //ModificatorFactory.ModificatorForString("DPS=Current=OnAttack=Coef=2=1=10=1=Time"),
+                    //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=-75=100=10=1=Time")
+                },
+
+                SceneEffects = new List<Effect>
+                {
+                   // EffectFactory.EffectForString("Color=OneShot=Const=0=1=10=1=Time=color*#00FF00FF")
                 },
 
                 EnemyEffects = new List<Effect>
                 {
                     //EffectFactory.EffectForString("Damage=Tick=Coef=2=10=5=1=Time=")
-                    EffectFactory.EffectForString("Stun=OneShot=Const=1=1=5=1=OneShot=color*#00FF00FF")
+                    //EffectFactory.EffectForString("Damage=OneShot=Const=0=1=10=1=OneShot=color*#00FF00FF")
                 }
             }
 
@@ -197,7 +218,7 @@ public class CommonHero : IHero
 
         return damage;
     }
-
+    
     public double GetDPSDamage(double baseDamage, List<Modificator> mods)
     {
         var damage = baseDamage;
@@ -206,6 +227,7 @@ public class CommonHero : IHero
 
         dpsMods.ForEach(mod =>
         {
+            
             switch (mod.changeType)
             {
                 case ModificatorValueChangeType.Const:
@@ -277,7 +299,9 @@ public class CommonHero : IHero
     public void Hurt(double damage)
     {
         var gettedDamage = GetAfterBlockDamage(damage, HurtModificators);
+
         CurrentHealthPoint -= gettedDamage;
+        Debug.Log("Getted damage: " + gettedDamage);
         OnHurt?.Invoke();
         if(CurrentHealthPoint <= 0)
         {
@@ -300,33 +324,29 @@ public class CommonHero : IHero
 
     public void UpdateOnTick(double time)
     {
-        //var oneShotMods = ;//Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot);
-        //var oneShotEff = Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot);
-
         ReactOnModificators(OneShotModificators);
         ReactOnEffects(OneShotEffects);
 
-        Debug.Log(Modificators.Count);
-        Modificators.ForEach(mod=>Debug.Log(mod));
         tick += time;
         if(tick >= TICK_TIME)
         {
             tick -= TICK_TIME;
-            Debug.Log(TickModificators.Count);
             ReactOnModificators(TickModificators);
             ReactOnEffects(TickEffects);
         }
 
         UpdateModificators(time);
         UpdateEffects(time);
-        Debug.Log(Modificators.Count);
     }
 
     public void UpdateModificators(double time)
     {
         
         var tempMods = Modificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
-        tempMods.ForEach(mod => mod.time -= time);
+
+        tempMods.ForEach(mod => {
+            mod.time -= time;
+        });
 
 
         var modsForRemove = Modificators.FindAll(mod => mod.Check());
@@ -416,6 +436,8 @@ public class CommonHero : IHero
                         }
                         break;
                     case ModificatorParameter.DPC:
+                        var damage = GetDPCDamage(BaseDamagePerClick, AttackModificators);
+                        AdditionalConstAttack(constPart + damage * coefPart, true);
                         break;
                     case ModificatorParameter.DPS:
                         break;
@@ -463,6 +485,8 @@ public class CommonHero : IHero
                 Heal(constPart + coefPart * MaximumHealthPoint);
                 break;
             case EffectType.Stun:
+                break;
+            case EffectType.Color:
                 break;
         }
 

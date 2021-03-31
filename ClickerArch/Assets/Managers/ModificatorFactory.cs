@@ -10,7 +10,7 @@ public class ModificatorFactory
     {
         if(rawString == "")
         {
-            return new Modificator();
+            return null;
         }
 
 
@@ -27,9 +27,6 @@ public class ModificatorFactory
         {
             mainPart = rawString;
         }
-
-        Debug.Log(mainPart);
-        Debug.Log(replacePart);
 
         var parts = mainPart.Split('=');
 

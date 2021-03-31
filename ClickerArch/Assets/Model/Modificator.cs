@@ -29,7 +29,7 @@ public enum ModificatorEndType
     OneShot, Permanent, Time, Replacing
 }
 
-public struct Modificator
+public class Modificator
 {
     public ModificatorParameter parameter;
     public ModificatorActivationType activationType;
@@ -109,6 +109,22 @@ public struct Modificator
 
             return false;
         }
+    }
+
+    public Modificator Clone()
+    {
+        return new Modificator()
+        {
+            parameter = parameter,
+            activationType = activationType,
+            changeType = changeType,
+            valueType = valueType,
+            value = value,
+            time = time,
+            endType = endType,
+            replaceString = replaceString,
+
+        };
     }
 
     public override string ToString()

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class EffectFactory
 {
+
     //PARAMETER===ACTIVATION_TYPE===CHANGE_TYPE===VALUE_MAIN_PART===VALUE_SIZE_PART===TIME_MAIN_PART===TIME_SIZE_PART===END_TYPE=ATTR_KEY*ATTR_VALUE||REPLACE
 
     public static Effect EffectForString(string rawString)
     {
+
+
         if (rawString == "")
         {
-            return new Effect();
+            return null;
         }
 
 
@@ -28,9 +31,6 @@ public class EffectFactory
         {
             mainPart = rawString;
         }
-
-        Debug.Log(mainPart);
-        Debug.Log(replacePart);
 
         var parts = mainPart.Split('=');
 
