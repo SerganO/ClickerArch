@@ -16,6 +16,9 @@ public class CommonHero : IHero
     public event AttackFunc AdditionalCoefAttack;
     public event VoidFunc OnHeal;
 
+    public double AdditionalXP { get; set; }
+    public double AdditionalGold { get; set; }
+
     public double BaseDamagePerClick { get; set; }
     public double BaseDamagePerSecond { get; set; }
     public double BaseBlock { get; set; }
@@ -26,11 +29,50 @@ public class CommonHero : IHero
     public List<Effect> Effects { get; set; } = new List<Effect>();
     public List<HeroSkill> Skills { get; set; } = new List<HeroSkill>();
 
+
+    double GetValue(Modificator.Parameter parameter)
+    {
+        switch (parameter)
+        {
+            case Modificator.Parameter.NONE:
+                break;
+            case Modificator.Parameter.HP:
+                return MaximumHealthPoint;
+            case Modificator.Parameter.DPC:
+                return BaseDamagePerClick;
+            case Modificator.Parameter.DPS:
+                return BaseDamagePerSecond;
+            case Modificator.Parameter.Reflect:
+                return Reflect;
+            case Modificator.Parameter.Block:
+                return BaseBlock;
+            case Modificator.Parameter.CurrentHP:
+                return CurrentHealthPoint;
+            case Modificator.Parameter.CurrentDPC:
+                return CurrentDamagePerClick;
+            case Modificator.Parameter.CurrentDPS:
+                return CurrentDamagePerSecond;
+            case Modificator.Parameter.CurrentReflect:
+                break;
+            case Modificator.Parameter.CurrentBlock:
+                break;
+            case Modificator.Parameter.AddXP:
+                break;
+            case Modificator.Parameter.AddGold:
+                break;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+
+
     List<Modificator> AttackModificators
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OnAttack); ;
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.OnAttack); ;
         }
     }
 
@@ -38,7 +80,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OnHurt); ;
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.OnHurt); ;
         }
     }
 
@@ -46,7 +88,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OnStart); ;
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.OnStart); ;
         }
     }
 
@@ -54,7 +96,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.Tick); ;
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Tick); ;
         }
     }
 
@@ -62,7 +104,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot); ;
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Immediately); ;
         }
     }
 
@@ -71,7 +113,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return Effects.FindAll(efc => efc.activationType == EffectActivationType.Tick); ;
+            return Effects.FindAll(efc => efc.activationType == Effect.ActivationType.Tick); ;
         }
     }
 
@@ -79,16 +121,31 @@ public class CommonHero : IHero
     {
         get
         {
-            return Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot); ;
+            return Effects.FindAll(efc => efc.activationType == Effect.ActivationType.Immediately); ;
         }
     }
 
+    List<Modificator> dpcMods
+    {
+        get
+        {
+            return Modificators.FindAll(mod => mod.parameter == Modificator.Parameter.CurrentDPC);
+        }
+    }
+
+    List<Modificator> dpsMods
+    {
+        get
+        {
+            return Modificators.FindAll(mod => mod.parameter == Modificator.Parameter.CurrentDPS);
+        }
+    }
 
     public double CurrentDamagePerClick
     {
         get
         {
-            return GetDPCDamage(BaseDamagePerClick, AttackModificators);
+            return GetDPCDamage(BaseDamagePerClick, dpcMods);
         }
     }
 
@@ -96,7 +153,7 @@ public class CommonHero : IHero
     {
         get
         {
-            return GetDPSDamage(BaseDamagePerSecond, AttackModificators);
+            return GetDPSDamage(BaseDamagePerSecond, dpsMods);
         }
     }
 
@@ -110,7 +167,8 @@ public class CommonHero : IHero
         //Mock
         AddModificators(new List<Modificator>
         {
-            ModificatorFactory.ModificatorForString("Reflect=Current=OnHurt=Coef=2=1=1=1=Permanent")
+            //ModificatorFactory.ModificatorForString("Reflect=Current=OnHurt=Coef=2=1=1=1=Permanent")
+            //ModificatorFactory.ModificatorForString("Reflect|OnHurt|NONE+Coef+2+1|Permanent|Remove")
         });
 
         new List<HeroSkill>
@@ -118,58 +176,88 @@ public class CommonHero : IHero
             new HeroSkill
             {
                 ID="heal",
-                Countdown = 60,
-                HeroEffects = new List<Effect>
-                {
-                    EffectFactory.EffectForString("Heal=OneShot=Const=10=1=1=1=OneShot=")
-                },
-                EnemyModificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=4=1=10=1=Time")
-                },
-                //HeroModificators = new List<Modificator>
-                //{
-                //    ModificatorFactory.ModificatorForString("HP=Current=OneShot=Const=10=1=1=1=OneShot")
-                //}
-            },
-            new HeroSkill
-            {
-                ID="attack",
-                Countdown = 2,
+                Countdown = 0,
                 HeroModificators = new List<Modificator>
                 {
-                    ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=2=1=10=1=Time"),
-                    //ModificatorFactory.ModificatorForString("DPS=Current=OnAttack=Coef=2=1=10=1=Time"),
-                    //ModificatorFactory.ModificatorForString("DPC=Current=OneShot=Coef=10=1=1=1=OneShot"),
-                    //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=-25=100=10=1=Time"),
-                    //ModificatorFactory.ModificatorForString("Block=Current=OnHurt=Coef=75=100=10=1=Time"),
+                    //ModificatorFactory.ModificatorForId("adventurer_adventurer"),
+                    
+                    //ModificatorFactory.ModificatorForId("arenaWarrior_cool_block"),
+                    //ModificatorFactory.ModificatorForId("arenaWarrior_cool_dpc"),
 
-                     //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=0=1=10=1=Replacing|DPC=Current=OnAttack=AddConst=5=10=10=1=Replacing"),
-                    //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Const=100=1=1=1=OneShot")
+                    ModificatorFactory.ModificatorForId("armorWarrior_block")
+                },
+
+                EnemyModificators = new List<Modificator>
+                {
+
                 },
 
                 SceneModificators = new List<Modificator>
                 {
-                    //ModificatorFactory.ModificatorForString("DPS=Current=OnAttack=Coef=2=1=10=1=Time"),
-                    //ModificatorFactory.ModificatorForString("DPC=Current=OnAttack=Coef=-75=100=10=1=Time")
+
                 },
 
-                SceneEffects = new List<Effect>
+                HeroEffects = new List<Effect>
                 {
-                   // EffectFactory.EffectForString("Color=OneShot=Const=0=1=10=1=Time=color*#00FF00FF")
+
                 },
 
                 EnemyEffects = new List<Effect>
                 {
-                    //EffectFactory.EffectForString("Damage=Tick=Coef=2=10=5=1=Time=")
-                    //EffectFactory.EffectForString("Damage=OneShot=Const=0=1=10=1=OneShot=color*#00FF00FF")
-                }
+                },
+
+                SceneEffects = new List<Effect>
+                {
+                },
+            },
+            new HeroSkill
+            {
+                ID="attack",
+                Countdown = 0,
+                HeroModificators = new List<Modificator>
+                {
+                    //ModificatorFactory.ModificatorForId("adventurer_zsb_dpc"),
+                    //ModificatorFactory.ModificatorForId("armorWarrior_attack"),
+
+                    ModificatorFactory.ModificatorForId("assasin_dps"),
+                },
+
+                EnemyModificators = new List<Modificator>
+                {
+
+                },
+
+                SceneModificators = new List<Modificator>
+                {
+                    //ModificatorFactory.ModificatorForId("adventurer_zsb_enemy_damage")
+                },
+
+                HeroEffects = new List<Effect>
+                {
+
+                },
+
+                EnemyEffects = new List<Effect>
+                {
+                    //EffectFactory.EffectForId("arenaWarrior_strong"),
+                   
+                },
+
+                SceneEffects = new List<Effect>
+                {
+                     EffectFactory.EffectForId("assasin_dps"),
+                },
+
+                
             }
 
         }.ForEach(skill =>
         {
             Skills.Add(skill);
         });
+
+
+
     }
 
     public void AddModificators(List<Modificator> modificators)
@@ -193,50 +281,53 @@ public class CommonHero : IHero
 
     public void Attack(IEnemy enemy)
     {
-        var damage = GetDPCDamage(BaseDamagePerClick, AttackModificators);
+        var damage = GetDPCDamage(BaseDamagePerClick, dpcMods);
         enemy.Hurt(damage);
-        AttackModificators.FindAll(mod => mod.endType == ModificatorEndType.Replacing).ForEach(mod => mod.Replace());
+        dpcMods.ForEach(mod=>mod.OnUseChange());
     }
 
-    public double GetDPCDamage(double baseDamage, List<Modificator> mods)
+    public double GetDPCDamage(double baseDamage, List<Modificator> dpcMods)
     {
         var damage = baseDamage;
-        var dpcMods = mods.FindAll(mod => mod.parameter== ModificatorParameter.DPC && mod.valueType == ModificatorValueType.Current);
+        
 
         dpcMods.ForEach(mod =>
         {
-            switch (mod.changeType)
+            mod.values.ForEach(value =>
             {
-                case ModificatorValueChangeType.Const:
-                    damage += mod.value;
-                    break;
-                case ModificatorValueChangeType.Coef:
-                    damage += baseDamage * mod.value;
-                    break;
-            }
+                switch (value.changeType)
+                {
+                    case Modificator.ChangeValue.ValueChangeType.Const:
+                        damage += value.value;
+                        break;
+                    case Modificator.ChangeValue.ValueChangeType.Coef:
+                        damage += GetValue(value.baseParameter) * value.value;
+                        break;
+                }
+            });
         });
 
         return damage;
     }
-    
-    public double GetDPSDamage(double baseDamage, List<Modificator> mods)
+
+    public double GetDPSDamage(double baseDamage, List<Modificator> dpsMods)
     {
         var damage = baseDamage;
 
-        var dpsMods = mods.FindAll(mod => mod.parameter == ModificatorParameter.DPS && mod.valueType == ModificatorValueType.Current);
-
         dpsMods.ForEach(mod =>
         {
-            
-            switch (mod.changeType)
+            mod.values.ForEach(value =>
             {
-                case ModificatorValueChangeType.Const:
-                    damage += mod.value;
-                    break;
-                case ModificatorValueChangeType.Coef:
-                    damage += baseDamage * mod.value;
-                    break;
-            }
+                switch (value.changeType)
+                {
+                    case Modificator.ChangeValue.ValueChangeType.Const:
+                        damage += value.value;
+                        break;
+                    case Modificator.ChangeValue.ValueChangeType.Coef:
+                        damage += GetValue(value.baseParameter) * value.value;
+                        break;
+                }
+            });
         });
 
         return damage;
@@ -248,22 +339,25 @@ public class CommonHero : IHero
         var block = BaseBlock;
 
 
-        var blockMods = mods.FindAll(mod => mod.parameter == ModificatorParameter.Block && mod.valueType == ModificatorValueType.Current);
+        var blockMods = mods.FindAll(mod => mod.parameter == Modificator.Parameter.CurrentBlock);
 
         blockMods.ForEach(mod =>
         {
-            switch (mod.changeType)
+            mod.values.ForEach(value =>
             {
-                case ModificatorValueChangeType.Const:
-                    block += mod.value;
-                    break;
-                case ModificatorValueChangeType.Coef:
-                    block += baseDamage * mod.value;
-                    break;
-            }
+                switch (value.changeType)
+                {
+                    case Modificator.ChangeValue.ValueChangeType.Const:
+                        block += value.value;
+                        break;
+                    case Modificator.ChangeValue.ValueChangeType.Coef:
+                        block += GetValue(value.baseParameter) * value.value;
+                        break;
+                }
+            });
         });
 
-        return damage;
+        return Mathf.Max(0, (float)(damage - damage * block));
     }
 
     public double GetReflectionDamage(double baseDamage, List<Modificator> mods)
@@ -271,19 +365,23 @@ public class CommonHero : IHero
         
         var damage = baseDamage * Reflect;
 
-        var reflectMods = mods.FindAll(mod => mod.parameter == ModificatorParameter.Reflect && mod.valueType == ModificatorValueType.Current);
+        var reflectMods = mods.FindAll(mod => mod.parameter == Modificator.Parameter.Reflect);
 
         reflectMods.ForEach(mod =>
         {
-            switch (mod.changeType)
+            mod.values.ForEach(value =>
             {
-                case ModificatorValueChangeType.Const:
-                    damage += mod.value;
-                    break;
-                case ModificatorValueChangeType.Coef:
-                    damage += baseDamage * mod.value;
-                    break;
-            }
+                Debug.Log(value.changeType + " " + value.value);
+                switch (value.changeType)
+                {
+                    case Modificator.ChangeValue.ValueChangeType.Const:
+                        damage += value.value;
+                        break;
+                    case Modificator.ChangeValue.ValueChangeType.Coef:
+                        damage += baseDamage * value.value;
+                        break;
+                }
+            });
         });
 
         return damage;
@@ -342,12 +440,11 @@ public class CommonHero : IHero
     public void UpdateModificators(double time)
     {
         
-        var tempMods = Modificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
+        var tempMods = Modificators.FindAll(mod => mod.checker.endCheckType != Modificator.CheckObject.EndCheckType.Permanent);
 
         tempMods.ForEach(mod => {
-            mod.time -= time;
+            mod.UpdateTime(time);
         });
-
 
         var modsForRemove = Modificators.FindAll(mod => mod.Check());
         RemoveModificators(modsForRemove);
@@ -357,8 +454,8 @@ public class CommonHero : IHero
     public void UpdateEffects(double time)
     {
 
-        var tempEfc = Effects.FindAll(efc => efc.endType != EffectEndType.Permanent);
-        tempEfc.ForEach(mod => mod.time -= time);
+        var tempEfc = Effects.FindAll(efc => efc.checker.endCheckType != Effect.CheckObject.EndCheckType.Permanent);
+        tempEfc.ForEach(mod => mod.UpdateTime(time));
 
 
         var efcsForRemove = Effects.FindAll(efc => efc.Check());
@@ -370,82 +467,77 @@ public class CommonHero : IHero
 
     public void PassiveAttack(IEnemy enemy)
     {
-        enemy.Hurt(GetDPSDamage(BaseDamagePerSecond, AttackModificators), false);
+        enemy.Hurt(GetDPSDamage(BaseDamagePerSecond, dpsMods), false);
+        dpsMods.ForEach(mod => mod.OnUseChange());
     }
 
     public void ReactOnModificators(List<Modificator> modificators)
     {
         modificators.ForEach(mod => Debug.Log(mod));
         modificators.ForEach(mod => ReactOnModificator(mod));
+        modificators.ForEach(mod => mod.OnUseChange());
     }
 
     public void ReactOnModificator(Modificator modificator)
     {
-        double constPart = 0;
-        double coefPart = 0;
+        double changeValue = 0;
 
-        switch (modificator.changeType)
+        modificator.values.ForEach(value =>
         {
-            case ModificatorValueChangeType.Const:
-                constPart += modificator.value;
-                break;
-            case ModificatorValueChangeType.Coef:
-                coefPart += modificator.value;
-                break;
-            case ModificatorValueChangeType.AddConst:
-                break;
-            case ModificatorValueChangeType.AddCoef:
-                break;
-        }
+            switch (value.changeType)
+            {
+                case Modificator.ChangeValue.ValueChangeType.Const:
+                    changeValue += value.value;
+                    break;
+                case Modificator.ChangeValue.ValueChangeType.Coef:
+                    changeValue += GetValue(value.baseParameter) * value.value;
+                    break;
+            }
+        });
 
-        switch (modificator.valueType)
+        switch (modificator.parameter)
         {
-            case ModificatorValueType.Base:
-                switch (modificator.parameter)
-                {
-                    case ModificatorParameter.HP:
-                        MaximumHealthPoint += constPart + MaximumHealthPoint * coefPart;
-                        break;
-                    case ModificatorParameter.DPC:
-                        BaseDamagePerClick += constPart + BaseDamagePerClick * coefPart;
-                        break;
-                    case ModificatorParameter.DPS:
-                        BaseDamagePerSecond += constPart + BaseDamagePerSecond * coefPart;
-                        break;
-                    case ModificatorParameter.Reflect:
-                        Reflect += constPart + Reflect * coefPart;
-                        break;
-                    case ModificatorParameter.Block:
-                        BaseBlock += constPart + BaseBlock * coefPart;
-                        break;
-                }
+            case Modificator.Parameter.NONE:
                 break;
-            case ModificatorValueType.Current:
-                switch (modificator.parameter)
-                {
-                    case ModificatorParameter.HP:
-                        var change = constPart + CurrentHealthPoint * coefPart;
-                        Debug.Log("HP: " + change);
-                        if (change < 0)
-                        {
-                            Hurt(change);
-                        }
-                        else
-                        {
-                            Heal(change);
-                        }
-                        break;
-                    case ModificatorParameter.DPC:
-                        var damage = GetDPCDamage(BaseDamagePerClick, AttackModificators);
-                        AdditionalConstAttack(constPart + damage * coefPart, true);
-                        break;
-                    case ModificatorParameter.DPS:
-                        break;
-                    case ModificatorParameter.Reflect:
-                        break;
-                    case ModificatorParameter.Block:
-                        break;
-                }
+            case Modificator.Parameter.HP:
+                MaximumHealthPoint += changeValue;
+                break;
+            case Modificator.Parameter.DPC:
+                BaseDamagePerClick += changeValue;
+                break;
+            case Modificator.Parameter.DPS:
+                BaseDamagePerSecond += changeValue;
+                break;
+            case Modificator.Parameter.Reflect:
+                Reflect += changeValue;
+                break;
+            case Modificator.Parameter.Block:
+                BaseBlock += changeValue;
+                break;
+            case Modificator.Parameter.CurrentHP:
+                CurrentHealthPoint += changeValue;
+                //if(changeValue < 0)
+                //{
+                //    Hurt(changeValue);
+                //} else
+                //{
+                //    Heal(changeValue);
+                //}
+                break;
+            case Modificator.Parameter.CurrentDPC:
+                AdditionalConstAttack(changeValue, true);
+                break;
+            case Modificator.Parameter.CurrentDPS:
+                break;
+            case Modificator.Parameter.CurrentReflect:
+                break;
+            case Modificator.Parameter.CurrentBlock:
+                break;
+            case Modificator.Parameter.AddXP:
+                AdditionalXP += changeValue;
+                break;
+            case Modificator.Parameter.AddGold:
+                AdditionalGold += changeValue;
                 break;
         }
     }
@@ -461,32 +553,31 @@ public class CommonHero : IHero
         double constPart = 0;
         double coefPart = 0;
 
-        switch (effect.changeType)
+        effect.values.ForEach(value=>
         {
-            case EffectValueChangeType.Const:
-                constPart += effect.value;
-                break;
-            case EffectValueChangeType.Coef:
-                coefPart += effect.value;
-                break;
-            case EffectValueChangeType.AddConst:
-                break;
-            case EffectValueChangeType.AddCoef:
-                break;
-        }
+            switch (value.changeType)
+            {
+                case Effect.ChangeValue.ValueChangeType.Const:
+                    constPart += value.value;
+                    break;
+                case Effect.ChangeValue.ValueChangeType.Coef:
+                    coefPart += value.value;
+                    break;
+            }
+        });
 
 
-        switch (effect.parameter)
+        switch (effect.type)
         {
-            case EffectType.Damage:
+            case Effect.Type.Damage:
                 Hurt(constPart + coefPart * MaximumHealthPoint);
                 break;
-            case EffectType.Heal:
+            case Effect.Type.Heal:
                 Heal(constPart + coefPart * MaximumHealthPoint);
                 break;
-            case EffectType.Stun:
+            case Effect.Type.Stun:
                 break;
-            case EffectType.Color:
+            case Effect.Type.Color:
                 break;
         }
 

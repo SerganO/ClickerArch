@@ -6,85 +6,37 @@ public class ModificatorFactory
 {
     //PARAMETER===VALUE_TYPE===ACTIVATION_TYPE===CHANGE_TYPE===VALUE_MAIN_PART===VALUE_SIZE_PART===TIME_MAIN_PART===TIME_SIZE_PART===END_TYPE||REPLACE
 
+    // CurrentDPC|OnAttack|NONE+Const+10+1+3+2|Time+10+1|Remove
     public static Modificator ModificatorForString(string rawString)
     {
-        if(rawString == "")
+        return new Modificator(rawString);
+
+    }
+
+    public static Modificator ModificatorForId(string Id)
+    {
+        switch(Id)
         {
-            return null;
+            case "adventurer_adventurer":
+                return ModificatorForString("AddXP|Immediately|NONE+Const+1+10|Permanent|Remove");
+            case "adventurer_zsb_dpc":
+                return ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Time+10+1|Remove");
+            case "adventurer_zsb_enemy_damage":
+                return ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+3+10|Time+10+1|Remove");
+            case "arenaWariror_cool_block":
+                return ModificatorForString("CurrentBlock|OnHurt|NONE+Const+3+4|Time+10+1|Remove");
+            case "arenaWarrior_cool_dpc":
+                return ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+-1+4|Time+10+1|Remove");
+            case "armorWarrior_block":
+                return ModificatorForString("Reflect|OnHurt|NONE+Coef+10+2|Permanent|Remove");
+            case "armorWarrior_attack":
+                return ModificatorForString("CurrentDPC|Immediately|DPC+Coef+10+1|OneShot|Remove");
+            case "assasin_dps":
+                return ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Time+30+1|Remove");
         }
 
-
-        string mainPart = "";
-        string replacePart = "";
-
-        int index = rawString.IndexOf('|');
-
-        if(index != - 1)
-        {
-            mainPart = rawString.Substring(0, index);
-            replacePart = rawString.Substring(index + 1);
-        } else
-        {
-            mainPart = rawString;
-        }
-
-        var parts = mainPart.Split('=');
-
-
-        ModificatorParameter parameter = ParametrForString(parts[0]);
-        ModificatorValueType valueType = ValueTypeForString(parts[1]);
-        ModificatorActivationType activationType = ActivationTypeForString(parts[2]);
-        ModificatorValueChangeType changeType = ChangeTypeForString(parts[3]);
-        int valueMainPart = 0;
-        int valueSizePart = 1;
-        int.TryParse(parts[4], out valueMainPart);
-        int.TryParse(parts[5], out valueSizePart);
-        double value = (double)valueMainPart / valueSizePart;
-        int timeMainPart = 0;
-        int timeSizePart = 1;
-        int.TryParse(parts[6], out timeMainPart);
-        int.TryParse(parts[7], out timeSizePart);
-        double time = (double)timeMainPart / timeSizePart;
-        ModificatorEndType endType = EndTypeForString(parts[8]);
-        Modificator result = new Modificator
-        {
-            parameter = parameter,
-            valueType = valueType,
-            activationType = activationType,
-            changeType = changeType,
-            value = value,
-            time = time,
-            endType = endType
-        };
-
-        result.replaceString = replacePart;
-
-        return result;
+        return null;
     }
 
-    static ModificatorParameter ParametrForString(string str)
-    {
-        return ((ModificatorParameter)System.Enum.Parse(typeof(ModificatorParameter), str));
-    }
-
-    static ModificatorActivationType ActivationTypeForString(string str)
-    {
-        return ((ModificatorActivationType)System.Enum.Parse(typeof(ModificatorActivationType), str));
-    }
-
-    static ModificatorValueChangeType ChangeTypeForString(string str)
-    {
-        return ((ModificatorValueChangeType) System.Enum.Parse(typeof(ModificatorValueChangeType), str));
-    }
-
-    static ModificatorValueType ValueTypeForString(string str)
-    {
-        return ((ModificatorValueType)System.Enum.Parse(typeof(ModificatorValueType), str));
-    }
-
-    static ModificatorEndType EndTypeForString(string str)
-    {
-        return ((ModificatorEndType)System.Enum.Parse(typeof(ModificatorEndType), str));
-    }
 
 }

@@ -10,6 +10,9 @@ public interface IHero
     event AttackFunc AdditionalConstAttack;
     event AttackFunc AdditionalCoefAttack;
 
+    double AdditionalXP { get; set; }
+    double AdditionalGold { get; set; }
+
     double BaseDamagePerClick { get; set; }
     double CurrentDamagePerClick { get; }
     double BaseDamagePerSecond { get; set; }

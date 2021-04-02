@@ -15,7 +15,7 @@ public class CommonEnemy : IEnemy
     {
         get
         {
-            return model.Effects.FindAll(efc => efc.activationType == EffectActivationType.Tick); ;
+            return model.Effects.FindAll(efc => efc.activationType == Effect.ActivationType.Tick); ;
         }
     }
 
@@ -23,7 +23,7 @@ public class CommonEnemy : IEnemy
     {
         get
         {
-            return model.Effects.FindAll(efc => efc.activationType == EffectActivationType.OneShot); ;
+            return model.Effects.FindAll(efc => efc.activationType == Effect.ActivationType.Immediately); ;
         }
     }
 
@@ -32,7 +32,7 @@ public class CommonEnemy : IEnemy
     {
         get
         {
-            return model.Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.Tick); ;
+            return model.Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Tick); ;
         }
     }
 
@@ -40,10 +40,40 @@ public class CommonEnemy : IEnemy
     {
         get
         {
-            return model.Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot); ;
+            return model.Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Immediately); ;
         }
     }
 
+    double GetValue(Modificator.Parameter parameter)
+    {
+        switch (parameter)
+        {
+            case Modificator.Parameter.NONE:
+                break;
+            case Modificator.Parameter.HP:
+                return model.MaximumHealthPoint;
+            case Modificator.Parameter.DPC:
+                return model.BaseDamage;
+            case Modificator.Parameter.DPS:
+                break;
+            case Modificator.Parameter.Reflect:
+                break;
+            case Modificator.Parameter.Block:
+                break;
+            case Modificator.Parameter.CurrentHP:
+                return model.CurrentHealthPoint;
+            case Modificator.Parameter.CurrentDPC:
+                return model.CurrentDamage;
+            case Modificator.Parameter.CurrentDPS:
+                break;
+            case Modificator.Parameter.CurrentReflect:
+                break;
+            case Modificator.Parameter.CurrentBlock:
+                break;
+        }
+
+        return 0;
+    }
 
     double timer = 0;
 
@@ -171,66 +201,54 @@ public class CommonEnemy : IEnemy
 
     public void ReactOnModificator(Modificator modificator)
     {
-        double constPart = 0;
-        double coefPart = 0;
+        double changeValue = 0;
 
-        switch (modificator.changeType)
+        modificator.values.ForEach(value =>
         {
-            case ModificatorValueChangeType.Const:
-                constPart += modificator.value;
-                break;
-            case ModificatorValueChangeType.Coef:
-                coefPart += modificator.value;
-                break;
-            case ModificatorValueChangeType.AddConst:
-                break;
-            case ModificatorValueChangeType.AddCoef:
-                break;
-        }
+            switch (value.changeType)
+            {
+                case Modificator.ChangeValue.ValueChangeType.Const:
+                    changeValue += value.value;
+                    break;
+                case Modificator.ChangeValue.ValueChangeType.Coef:
+                    changeValue += GetValue(value.baseParameter) * value.value;
+                    break;
+            }
+        });
 
-        switch (modificator.valueType)
+        switch (modificator.parameter)
         {
-            case ModificatorValueType.Base:
-                switch (modificator.parameter)
+            case Modificator.Parameter.NONE:
+                break;
+            case Modificator.Parameter.HP:
+                model.MaximumHealthPoint += changeValue;
+                break;
+            case Modificator.Parameter.DPC:
+                model.BaseDamage += changeValue;
+                break;
+            case Modificator.Parameter.DPS:
+                break;
+            case Modificator.Parameter.Reflect:
+                break;
+            case Modificator.Parameter.Block:
+                break;
+            case Modificator.Parameter.CurrentHP:
+                if (changeValue < 0)
                 {
-                    case ModificatorParameter.HP:
-                        model.MaximumHealthPoint += constPart + model.MaximumHealthPoint * coefPart;
-                        break;
-                    case ModificatorParameter.DPC:
-                        model.BaseDamage += constPart + model.BaseDamage * coefPart;
-                        break;
-                    case ModificatorParameter.DPS:
-                        break;
-                    case ModificatorParameter.Reflect:
-                        break;
-                    case ModificatorParameter.Block:
-                        break;
+                    Hurt(changeValue);
+                }
+                else
+                {
+                    Heal(changeValue);
                 }
                 break;
-            case ModificatorValueType.Current:
-                switch (modificator.parameter)
-                {
-                    case ModificatorParameter.HP:
-                        var change = constPart + model.CurrentHealthPoint * coefPart;
-                        Debug.Log("HP: " + change);
-                        if (change < 0)
-                        {
-                            Hurt(change);
-                        }
-                        else
-                        {
-                            Heal(change);
-                        }
-                        break;
-                    case ModificatorParameter.DPC:
-                        break;
-                    case ModificatorParameter.DPS:
-                        break;
-                    case ModificatorParameter.Reflect:
-                        break;
-                    case ModificatorParameter.Block:
-                        break;
-                }
+            case Modificator.Parameter.CurrentDPC:
+                break;
+            case Modificator.Parameter.CurrentDPS:
+                break;
+            case Modificator.Parameter.CurrentReflect:
+                break;
+            case Modificator.Parameter.CurrentBlock:
                 break;
         }
     }
@@ -246,35 +264,35 @@ public class CommonEnemy : IEnemy
         double constPart = 0;
         double coefPart = 0;
 
-        switch (effect.changeType)
+        effect.values.ForEach(value =>
         {
-            case EffectValueChangeType.Const:
-                constPart += effect.value;
-                break;
-            case EffectValueChangeType.Coef:
-                coefPart += effect.value;
-                break;
-            case EffectValueChangeType.AddConst:
-                break;
-            case EffectValueChangeType.AddCoef:
-                break;
-        }
+            switch (value.changeType)
+            {
+                case Effect.ChangeValue.ValueChangeType.Const:
+                    constPart += value.value;
+                    break;
+                case Effect.ChangeValue.ValueChangeType.Coef:
+                    coefPart += value.value;
+                    break;
+            }
+        });
 
 
-        switch (effect.parameter)
+
+        switch (effect.type)
         {
-            case EffectType.Damage:
+            case Effect.Type.Damage:
                 Hurt(constPart + coefPart * model.MaximumHealthPoint);
                 break;
-            case EffectType.Heal:
+            case Effect.Type.Heal:
                 Heal(constPart + coefPart * model.MaximumHealthPoint);
                 break;
-            case EffectType.Stun:
+            case Effect.Type.Stun:
                 isStun = true;
-                StartCoroutine(Helper.Wait((float)effect.time, () => { isStun = false; }));
+                StartCoroutine(Helper.Wait((float)effect.checker.time, () => { isStun = false; }));
 
                 break;
-            case EffectType.Color:
+            case Effect.Type.Color:
                 break;
         }
 
@@ -285,8 +303,8 @@ public class CommonEnemy : IEnemy
     public void UpdateEffects(double time)
     {
 
-        var tempEfc = model.Effects.FindAll(efc => efc.endType != EffectEndType.Permanent);
-        tempEfc.ForEach(mod => mod.time -= time);
+        var tempEfc = model.Effects.FindAll(efc => efc.checker.endCheckType != Effect.CheckObject.EndCheckType.Permanent);
+        tempEfc.ForEach(mod => mod.UpdateTime(time));
 
 
         var efcsForRemove = model.Effects.FindAll(efc => efc.Check());
@@ -297,13 +315,14 @@ public class CommonEnemy : IEnemy
     public void UpdateModificators(double time)
     {
 
-        var tempMods = model.Modificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
-        tempMods.ForEach(mod => mod.time -= time);
+        var tempMods = model.Modificators.FindAll(mod => mod.checker.endCheckType != Modificator.CheckObject.EndCheckType.Permanent);
 
+        tempMods.ForEach(mod => {
+            mod.UpdateTime(time);
+        });
 
         var modsForRemove = model.Modificators.FindAll(mod => mod.Check());
         model.RemoveModificators(modsForRemove);
-
 
     }
 

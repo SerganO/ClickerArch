@@ -85,28 +85,28 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
     {
         if (effect.additionalParametrs.ContainsKey("color"))
         {
-            Debug.LogWarning("-=COLOR");
+            //Debug.LogWarning("-=COLOR");
             Color color;
             if (ColorUtility.TryParseHtmlString(effect.additionalParametrs["color"], out color))
                 CurrentEndColor = color;
 
-            Debug.LogWarning("-=" + color);
+            //Debug.LogWarning("-=" + color);
 
             if (colorEnumerator != null) StopCoroutine(colorEnumerator);
-            colorEnumerator = Helper.Wait((float)effect.time, () => { CurrentEndColor = FinishColor; });
+            colorEnumerator = Helper.Wait((float)effect.checker.time, () => { CurrentEndColor = FinishColor; });
             StartCoroutine(colorEnumerator);            
         }
 
-        switch (effect.parameter)
+        switch (effect.type)
         {
-            case EffectType.Damage:
+            case Effect.Type.Damage:
                 break;
-            case EffectType.Heal:
+            case Effect.Type.Heal:
                 break;
-            case EffectType.Stun:
+            case Effect.Type.Stun:
                 if (stunEnumerator != null) StopCoroutine(stunEnumerator);
                 GetComponent<Animator>().speed = 0;
-                stunEnumerator = Helper.Wait((float)effect.time, () => { GetComponent<Animator>().speed = 1;  });
+                stunEnumerator = Helper.Wait((float)effect.checker.time, () => { GetComponent<Animator>().speed = 1;  });
                 StartCoroutine(stunEnumerator);
                 break;
         }

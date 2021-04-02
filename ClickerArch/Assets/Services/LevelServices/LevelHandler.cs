@@ -392,7 +392,7 @@ public class CommonLevelScene : ILevelScene
     {
         get
         {
-            return TotalModificators.FindAll(mod => mod.activationType == ModificatorActivationType.Tick); ;
+            return TotalModificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Tick); ;
         }
     }
 
@@ -400,7 +400,7 @@ public class CommonLevelScene : ILevelScene
     {
         get
         {
-            return TotalModificators.FindAll(mod => mod.activationType == ModificatorActivationType.OneShot); ;
+            return TotalModificators.FindAll(mod => mod.activationType == Modificator.ActivationType.Immediately); ;
         }
     }
 
@@ -414,11 +414,11 @@ public class CommonLevelScene : ILevelScene
     public void UpdateModificators(double time)
     {
 
-        var tempMods = TotalModificators.FindAll(mod => mod.endType != ModificatorEndType.Permanent);
+        var tempMods = TotalModificators.FindAll(mod => mod.checker.endCheckType != Modificator.CheckObject.EndCheckType.Permanent);
 
         tempMods.ForEach(mod =>
         {
-            mod.time -= time;
+            mod.UpdateTime(time);
         });
 
 
@@ -430,8 +430,8 @@ public class CommonLevelScene : ILevelScene
     public void UpdateEffects(double time)
     {
 
-        var tempEfc = TotalEffects.FindAll(efc => efc.endType != EffectEndType.Permanent);
-        tempEfc.ForEach(mod => mod.time -= time);
+        var tempEfc = TotalEffects.FindAll(efc => efc.checker.endCheckType != Effect.CheckObject.EndCheckType.Permanent);
+        tempEfc.ForEach(mod => mod.UpdateTime(time));
 
 
         var efcsForRemove = TotalEffects.FindAll(efc => efc.Check());

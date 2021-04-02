@@ -29,7 +29,7 @@ public class CommonEnemyModel : IEnemyModel
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OnAttack);
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.OnAttack);
         }
     }
 
@@ -37,7 +37,7 @@ public class CommonEnemyModel : IEnemyModel
     {
         get
         {
-            return Modificators.FindAll(mod => mod.activationType == ModificatorActivationType.OnHurt);
+            return Modificators.FindAll(mod => mod.activationType == Modificator.ActivationType.OnHurt);
         }
     }
 
@@ -81,22 +81,56 @@ public class CommonEnemyModel : IEnemyModel
         Effects = new List<Effect>();
     }
 
+    double GetValue(Modificator.Parameter parameter)
+    {
+        switch (parameter)
+        {
+            case Modificator.Parameter.NONE:
+                break;
+            case Modificator.Parameter.HP:
+                return MaximumHealthPoint;
+            case Modificator.Parameter.DPC:
+                return BaseDamage;
+            case Modificator.Parameter.DPS:
+                break;
+            case Modificator.Parameter.Reflect:
+                break;
+            case Modificator.Parameter.Block:
+                break;
+            case Modificator.Parameter.CurrentHP:
+                return CurrentHealthPoint;
+            case Modificator.Parameter.CurrentDPC:
+                return CurrentDamage;
+            case Modificator.Parameter.CurrentDPS:
+                break;
+            case Modificator.Parameter.CurrentReflect:
+                break;
+            case Modificator.Parameter.CurrentBlock:
+                break;
+        }
+
+        return 0;
+    }
+
     public double GetDamage(double baseDamage, List<Modificator> mods)
     {
         var damage = baseDamage;
-        var dpcMods = mods.FindAll(mod => mod.parameter == ModificatorParameter.DPC && mod.valueType == ModificatorValueType.Current);
+        var dpcMods = mods.FindAll(mod => mod.parameter == Modificator.Parameter.CurrentDPC);
 
         dpcMods.ForEach(mod =>
         {
-            switch (mod.changeType)
+            mod.values.ForEach(value =>
             {
-                case ModificatorValueChangeType.Const:
-                    damage += mod.value;
-                    break;
-                case ModificatorValueChangeType.Coef:
-                    damage += baseDamage * mod.value;
-                    break;
-            }
+                switch (value.changeType)
+                {
+                    case Modificator.ChangeValue.ValueChangeType.Const:
+                        damage += value.value;
+                        break;
+                    case Modificator.ChangeValue.ValueChangeType.Coef:
+                        damage += GetValue(value.baseParameter) * value.value;
+                        break;
+                }
+            });
         });
 
         return damage;
