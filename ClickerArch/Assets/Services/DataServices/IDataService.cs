@@ -8,4 +8,5 @@ public interface IDataService
     Sprite GetSpriteForID(string id);
     List<string> GetEnemiesIdsForLevelId(string levelId);
     EnemyData GetEnemyDataForIdAndLevel(string id, int level);
+    double GetXpForNextLevel(int currentLevel);
 }

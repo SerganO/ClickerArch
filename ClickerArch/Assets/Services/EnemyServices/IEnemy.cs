@@ -7,8 +7,11 @@ public abstract class IEnemy: MonoBehaviour
     public string ID { get; set; }
     public abstract event VoidFunc onDie;
 
+    public ILevelHandler handler;
+
     public abstract IEnemyView GetEnemyView();
     public abstract IEnemyModel GetEnemyModel();
+
 
     public abstract void Idle();
     public abstract void Attack();

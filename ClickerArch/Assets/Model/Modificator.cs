@@ -28,8 +28,15 @@ public class Modificator
         CurrentReflect,
         CurrentBlock,
 
-        AddXP,
-        AddGold,
+        AdditionalXP,
+        AdditionalGold,
+
+        EnemyHP,
+        HeroDPC,
+
+        Gold,
+        XP,
+
     }
 
     public enum ActivationType

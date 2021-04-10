@@ -19,11 +19,11 @@ public class CommonEnemyModel : IEnemyModel
     public double CurrentHealthPoint { get; set; }
 
     public List<Modificator> Modificators { get; set; } = new List<Modificator>();
-
-
     public List<Effect> Effects { get; set; } = new List<Effect>();
 
-   
+
+    public Drop drop { get; set; }
+
 
     List<Modificator> AttackModificators
     {
@@ -50,6 +50,7 @@ public class CommonEnemyModel : IEnemyModel
         CurrentHealthPoint = data.HP;
         DurationBetweenAttack = data.DurationBetweenAttack;
         BaseDamage = data.Damage;
+        drop = data.Drop;
     }
 
     public void AddEffects(List<Effect> effects)

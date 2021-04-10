@@ -8,10 +8,13 @@ public class EnemyData
     public double DurationBetweenAttack { get; set; }
     public int Damage { get; set; }
 
-    public EnemyData(int hp, double duration, int damage)
+    public Drop Drop { get; set; }
+
+    public EnemyData(int hp, double duration, int damage, Drop drop)
     {
         HP = hp;
         DurationBetweenAttack = duration;
         Damage = damage;
+        Drop = drop;
     }
 }

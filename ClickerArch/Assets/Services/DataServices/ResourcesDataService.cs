@@ -34,7 +34,7 @@ public class ResourcesDataService : IDataService
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
-        return new EnemyData(100, 1.0, 1);
+        return new EnemyData((int)((Random.value + 0.1) * 100), 1.0, 1, new Drop { xp = 100, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
     }
 
     public Sprite GetSpriteForID(string id)
@@ -42,5 +42,10 @@ public class ResourcesDataService : IDataService
         //var  a = Resources.Load<Sprite>("Sprites/" + id);
         //Debug.Log(a);
         return Resources.Load<Sprite>("Sprites/" + id);
+    }
+
+    public double GetXpForNextLevel(int currentLevel)
+    {
+        return 1000 + 100 * currentLevel;
     }
 }

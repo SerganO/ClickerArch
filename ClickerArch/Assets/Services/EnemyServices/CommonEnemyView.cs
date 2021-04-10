@@ -99,7 +99,7 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
         switch (effect.type)
         {
-            case Effect.Type.Damage:
+            case Effect.Type.ConstDamage:
                 break;
             case Effect.Type.Heal:
                 break;

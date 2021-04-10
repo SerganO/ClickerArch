@@ -11,6 +11,7 @@ public interface IEnemyModel
     double MaximumHealthPoint { get; set; }
     double CurrentHealthPoint { get; set; }
     void ConfigureForIdAndLevel(string id, int level);
+    Drop drop { get; set; }
 
     List<Modificator> Modificators { get; set; }
     List<Effect> Effects { get; set; }

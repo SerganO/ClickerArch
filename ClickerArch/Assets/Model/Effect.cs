@@ -205,10 +205,12 @@ public class Effect
     {
         NONE,
 
-        Damage,
+        ConstDamage,
         Heal,
         Stun,
-        Color
+        Color,
+
+        OponentDPCDamage,
     }
 
     public enum ActivationType

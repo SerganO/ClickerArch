@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelHandler : MonoBehaviour
+public class LevelHandler : MonoBehaviour, ILevelHandler
 {
     public Transform SpawnPoint;
     public string StartLevelID;
@@ -11,10 +11,8 @@ public class LevelHandler : MonoBehaviour
     public Image BackgroundImage;
     public Text Level;
 
-
     public Text DPCText;
     public Text DPSText;
-
 
     public Image HPImage;
 
@@ -26,6 +24,9 @@ public class LevelHandler : MonoBehaviour
     public SceneLoader Loader;
 
     List<SkillButton> buttons = new List<SkillButton>();
+
+    public Image XPImage;
+    public Text CoolLevelText;
 
     string CurrentID;
     int CurrentLevel;
@@ -62,6 +63,7 @@ public class LevelHandler : MonoBehaviour
     IEnemy enemy;
 
     IHero AssignedHero;
+    Player AssignedPlayer;
 
     float HeroRatio
     {
@@ -74,6 +76,7 @@ public class LevelHandler : MonoBehaviour
     private void Start()
     {
         AssignedHero = Services.GetInstance().GetHeroService().Hero;
+        AssignedPlayer = Services.GetInstance().GetPlayer();
         Bind();
         Restart();
 
@@ -92,7 +95,7 @@ public class LevelHandler : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        AssignedHero.Skills.ForEach(skill=>
+        AssignedHero.Skills.ForEach(skill =>
         {
             SkillButton skillButton = Instantiate(SkillButton, SkillButtonsList.transform);
             skillButton.ConfigureForID(skill.ID);
@@ -181,7 +184,30 @@ public class LevelHandler : MonoBehaviour
         enemiesIDs = model.GetEnemiesIDs();
 
         enemy = Services.GetInstance().GetEnemyService().GetEnemyPreset();
-        
+
+    }
+
+    public void GetDropFromCurrentEnemy()
+    {
+        Debug.Log("Get Drop");
+        var drop = CurrentEnemy.GetEnemyModel().drop;
+        Debug.Log("XP: " + drop.xp);
+        Debug.Log("Gold: " + drop.gold);
+
+        AssignedHero.AddXP(drop.xp);
+        AssignedHero.AddGold(drop.gold);
+        Debug.Log("Res:");
+        var res = drop.GetResourcesAfterProbability();
+        res.ForEach(r =>
+        {
+            Debug.Log("Concrete res: " + r.rarity + " " + r.count);
+        });
+
+
+        Services.GetInstance().GetPlayer().Inventory.AddResources(res);
+        Services.GetInstance().GetPlayer().Inventory.AddItems(drop.GetItemsAfterProbability());
+
+
     }
 
     public void NextEnemy()
@@ -200,7 +226,11 @@ public class LevelHandler : MonoBehaviour
         CurrentEnemy.GetEnemyModel().AddModificators(CurrentLevelScene.SceneModificators);
         CurrentEnemy.GetEnemyModel().AddEffects(CurrentLevelScene.SceneEffects);
 
-        CurrentEnemy.onDie += NextEnemy;
+        CurrentEnemy.onDie += () => {
+            GetDropFromCurrentEnemy();
+            NextEnemy();
+        };
+        CurrentEnemy.handler = this;
 
     }
 
@@ -211,18 +241,18 @@ public class LevelHandler : MonoBehaviour
         //Magic change CurrentID
         bool change = false;
 
-        while(!change)
+        while (!change)
         {
             var tmpCurrentID = mockLevelIDs[Random.Range(0, mockLevelIDs.Count - 1)];
 
-            if(tmpCurrentID != CurrentID)
+            if (tmpCurrentID != CurrentID)
             {
                 CurrentID = tmpCurrentID;
                 change = true;
             }
         }
 
-        
+
         ////
 
         CurrentLevel++;
@@ -255,6 +285,7 @@ public class LevelHandler : MonoBehaviour
 
     public void Restart()
     {
+        SetCoolLevelUI();
         DropLevelInfo();
         DiePanel.SetActive(false);
         NextLevel();
@@ -270,6 +301,22 @@ public class LevelHandler : MonoBehaviour
         AssignedHero.OnHeal += OnHeroHeal;
         AssignedHero.AdditionalConstAttack += OnHeroAdditionalAttack;
         AssignedHero.AdditionalCoefAttack += OnHeroCoefAdditionalCoefAttack;
+
+        AssignedHero.handler = this;
+
+        AssignedPlayer.OnXPRaise += AssignedPlayer_OnXPRaise;
+    }
+
+    void SetCoolLevelUI()
+    {
+        CoolLevelText.text = AssignedPlayer.CoolLevel.ToString();
+        XPImage.fillAmount = (float)(AssignedPlayer.XP / Services.GetInstance().GetDataService().GetXpForNextLevel(AssignedPlayer.CoolLevel));
+
+    }
+
+    private void AssignedPlayer_OnXPRaise()
+    {
+        SetCoolLevelUI();
     }
 
     void Unbind()
@@ -279,14 +326,32 @@ public class LevelHandler : MonoBehaviour
         AssignedHero.OnHeal -= OnHeroHeal;
         AssignedHero.AdditionalConstAttack -= OnHeroAdditionalAttack;
         AssignedHero.AdditionalCoefAttack -= OnHeroCoefAdditionalCoefAttack;
+
+        AssignedPlayer.OnXPRaise -= AssignedPlayer_OnXPRaise;
+    }
+
+    private void OnDestroy()
+    {
+        Unbind();
     }
 
     public void LoadMenu()
     {
-        Unbind();
         Loader.LoadWithTransparent(SceneLoader.Scene.Main);
     }
 
+    public double GetCommonParameters(Modificator.Parameter parameter)
+    {
+        switch (parameter)
+        {
+            case Modificator.Parameter.EnemyHP:
+                return CurrentEnemy.GetEnemyModel().MaximumHealthPoint;
+            case Modificator.Parameter.HeroDPC:
+                return AssignedHero.CurrentDamagePerClick;
+        }
+
+        return 0;
+    }
 }
 
 public interface ILevelScene
@@ -438,4 +503,9 @@ public class CommonLevelScene : ILevelScene
         RemoveTotalEffects(efcsForRemove);
 
     }
+}
+
+public interface ILevelHandler
+{
+    double GetCommonParameters(Modificator.Parameter parameter);
 }

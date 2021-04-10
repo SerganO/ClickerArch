@@ -70,6 +70,16 @@ public class CommonEnemy : IEnemy
                 break;
             case Modificator.Parameter.CurrentBlock:
                 break;
+            case Modificator.Parameter.AdditionalXP:
+                break;
+            case Modificator.Parameter.AdditionalGold:
+                break;
+            case Modificator.Parameter.EnemyHP:
+                break;
+            case Modificator.Parameter.HeroDPC:
+                return handler.GetCommonParameters(parameter);
+            case Modificator.Parameter.Gold:
+                break;
         }
 
         return 0;
@@ -281,7 +291,9 @@ public class CommonEnemy : IEnemy
 
         switch (effect.type)
         {
-            case Effect.Type.Damage:
+            case Effect.Type.NONE:
+                break;
+            case Effect.Type.ConstDamage:
                 Hurt(constPart + coefPart * model.MaximumHealthPoint);
                 break;
             case Effect.Type.Heal:
@@ -290,9 +302,11 @@ public class CommonEnemy : IEnemy
             case Effect.Type.Stun:
                 isStun = true;
                 StartCoroutine(Helper.Wait((float)effect.checker.time, () => { isStun = false; }));
-
                 break;
             case Effect.Type.Color:
+                break;
+            case Effect.Type.OponentDPCDamage:
+                Hurt(constPart + coefPart * GetValue(Modificator.Parameter.HeroDPC));
                 break;
         }
 

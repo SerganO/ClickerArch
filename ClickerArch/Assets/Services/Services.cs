@@ -9,6 +9,8 @@ public class Services
     static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();
 
+    static Player Player = new Player();
+
     private Services() { }
     private static Services instance;
 
@@ -36,7 +38,10 @@ public class Services
         return instance;
     }
 
-
+    public Player GetPlayer()
+    {
+        return Player;
+    }
     public IHeroService GetHeroService()
     {
         return HeroService;

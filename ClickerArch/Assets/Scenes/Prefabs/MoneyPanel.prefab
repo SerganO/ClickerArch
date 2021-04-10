@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 3916310065964484650}
   - component: {fileID: 3916310065964484660}
   - component: {fileID: 3916310065964484661}
+  - component: {fileID: 1535431990}
   m_Layer: 0
   m_Name: MoneyPanel
   m_TagString: Untagged
@@ -352,6 +353,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1535431990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916310065964484651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58ec217107ede741b1cc544b2b973f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoldLabel: {fileID: 3916310065807528874}
+  GoldIcon: {fileID: 2479840967951809431}
 --- !u!1 &6547137415009668468
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,9 +431,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 6088342627132289551, guid: 64cc4d7e31663e848bc23e91b4cfb636,
+    type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

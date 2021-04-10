@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public static string HomeScreenId = "HomeScreen";
-    public static string MainScreenId = "MainScreen";
-    public static string LevelScreenId = "LevelScreen";
+    public static readonly string HomeScreenId = "HomeScreen";
+    public static readonly string MainScreenId = "MainScreen";
+    public static readonly string LevelScreenId = "LevelScreen";
+    public static readonly string StoreScreenId = "GameStoreScreen";
+    public static readonly string InventoryScreenId = "InventoryScreen";
+    public static readonly string CraftScreenId = "CraftScreen";
 
     [System.Serializable]
     public enum Scene
     {
-        Home, Main, Level
+        Home, Main, Level, Store, Inventory, Craft
     }
 
     [System.Serializable]
@@ -127,6 +130,15 @@ public class SceneLoader : MonoBehaviour
                 break;
             case Scene.Level:
                 SceneId = LevelScreenId;
+                break;
+            case Scene.Store:
+                SceneId = StoreScreenId;
+                break;
+            case Scene.Inventory:
+                SceneId = InventoryScreenId;
+                break;
+            case Scene.Craft:
+                SceneId = CraftScreenId;
                 break;
         }
 

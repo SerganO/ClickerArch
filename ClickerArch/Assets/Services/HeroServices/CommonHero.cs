@@ -19,15 +19,19 @@ public class CommonHero : IHero
     public double AdditionalXP { get; set; }
     public double AdditionalGold { get; set; }
 
+    public double MaximumHealthPoint { get; set; }
     public double BaseDamagePerClick { get; set; }
     public double BaseDamagePerSecond { get; set; }
     public double BaseBlock { get; set; }
-    public double Reflect { get; set; }
-    public double MaximumHealthPoint { get; set; }
+    public double BaseReflect { get; set; }
+
     public double CurrentHealthPoint { get; set; }
+
     public List<Modificator> Modificators { get; set; } = new List<Modificator>();
     public List<Effect> Effects { get; set; } = new List<Effect>();
     public List<HeroSkill> Skills { get; set; } = new List<HeroSkill>();
+
+    public ILevelHandler handler { get; set; }
 
 
     double GetValue(Modificator.Parameter parameter)
@@ -43,7 +47,7 @@ public class CommonHero : IHero
             case Modificator.Parameter.DPS:
                 return BaseDamagePerSecond;
             case Modificator.Parameter.Reflect:
-                return Reflect;
+                return BaseReflect;
             case Modificator.Parameter.Block:
                 return BaseBlock;
             case Modificator.Parameter.CurrentHP:
@@ -56,10 +60,12 @@ public class CommonHero : IHero
                 break;
             case Modificator.Parameter.CurrentBlock:
                 break;
-            case Modificator.Parameter.AddXP:
+            case Modificator.Parameter.AdditionalXP:
                 break;
-            case Modificator.Parameter.AddGold:
+            case Modificator.Parameter.AdditionalGold:
                 break;
+            case Modificator.Parameter.EnemyHP:
+                return handler.GetCommonParameters(parameter);
             default:
                 break;
         }
@@ -176,15 +182,10 @@ public class CommonHero : IHero
             new HeroSkill
             {
                 ID="heal",
-                Countdown = 0,
+                Countdown = 30,
                 HeroModificators = new List<Modificator>
                 {
-                    //ModificatorFactory.ModificatorForId("adventurer_adventurer"),
-                    
-                    //ModificatorFactory.ModificatorForId("arenaWarrior_cool_block"),
-                    //ModificatorFactory.ModificatorForId("arenaWarrior_cool_dpc"),
 
-                    ModificatorFactory.ModificatorForId("armorWarrior_block")
                 },
 
                 EnemyModificators = new List<Modificator>
@@ -199,7 +200,7 @@ public class CommonHero : IHero
 
                 HeroEffects = new List<Effect>
                 {
-
+                    EffectFactory.EffectForString("Heal|Immediately|Coef+1+2|OneShot||Remove")
                 },
 
                 EnemyEffects = new List<Effect>
@@ -213,23 +214,20 @@ public class CommonHero : IHero
             new HeroSkill
             {
                 ID="attack",
-                Countdown = 0,
+                Countdown = 30,
                 HeroModificators = new List<Modificator>
                 {
-                    //ModificatorFactory.ModificatorForId("adventurer_zsb_dpc"),
-                    //ModificatorFactory.ModificatorForId("armorWarrior_attack"),
-
-                    ModificatorFactory.ModificatorForId("assasin_dps"),
+                    ModificatorFactory.ModificatorForId("adventurer_zsb_dpc"),
                 },
 
                 EnemyModificators = new List<Modificator>
                 {
-
+                    
                 },
 
                 SceneModificators = new List<Modificator>
                 {
-                    //ModificatorFactory.ModificatorForId("adventurer_zsb_enemy_damage")
+
                 },
 
                 HeroEffects = new List<Effect>
@@ -239,13 +237,12 @@ public class CommonHero : IHero
 
                 EnemyEffects = new List<Effect>
                 {
-                    //EffectFactory.EffectForId("arenaWarrior_strong"),
                    
                 },
 
                 SceneEffects = new List<Effect>
                 {
-                     EffectFactory.EffectForId("assasin_dps"),
+                     //EffectFactory.EffectForId("assasin_dps"),
                 },
 
                 
@@ -258,6 +255,12 @@ public class CommonHero : IHero
 
 
 
+    }
+
+    public void Start()
+    {
+        ReactOnModificators(StartModificators);
+        UpdateModificators(0);
     }
 
     public void AddModificators(List<Modificator> modificators)
@@ -363,7 +366,7 @@ public class CommonHero : IHero
     public double GetReflectionDamage(double baseDamage, List<Modificator> mods)
     {
         
-        var damage = baseDamage * Reflect;
+        var damage = baseDamage * BaseReflect;
 
         var reflectMods = mods.FindAll(mod => mod.parameter == Modificator.Parameter.Reflect);
 
@@ -509,7 +512,7 @@ public class CommonHero : IHero
                 BaseDamagePerSecond += changeValue;
                 break;
             case Modificator.Parameter.Reflect:
-                Reflect += changeValue;
+                BaseReflect += changeValue;
                 break;
             case Modificator.Parameter.Block:
                 BaseBlock += changeValue;
@@ -533,11 +536,17 @@ public class CommonHero : IHero
                 break;
             case Modificator.Parameter.CurrentBlock:
                 break;
-            case Modificator.Parameter.AddXP:
+            case Modificator.Parameter.AdditionalXP:
                 AdditionalXP += changeValue;
                 break;
-            case Modificator.Parameter.AddGold:
+            case Modificator.Parameter.AdditionalGold:
                 AdditionalGold += changeValue;
+                break;
+            case Modificator.Parameter.Gold:
+                AddGold(changeValue);
+                break;
+            case Modificator.Parameter.XP:
+                AddXP(changeValue);
                 break;
         }
     }
@@ -569,7 +578,9 @@ public class CommonHero : IHero
 
         switch (effect.type)
         {
-            case Effect.Type.Damage:
+            case Effect.Type.NONE:
+                break;
+            case Effect.Type.ConstDamage:
                 Hurt(constPart + coefPart * MaximumHealthPoint);
                 break;
             case Effect.Type.Heal:
@@ -581,5 +592,24 @@ public class CommonHero : IHero
                 break;
         }
 
+    }
+
+    public void AddGold(double count)
+    {
+        Debug.Log(count);
+        if(count >= 0)
+        {
+            Services.GetInstance().GetPlayer().AddGold((count + count * AdditionalGold));
+        } else
+        {
+            Services.GetInstance().GetPlayer().RemoveGold(-count);
+        }
+
+    }
+
+    public void AddXP(double count)
+    {
+        var xp = count + count * AdditionalXP;
+        Services.GetInstance().GetPlayer().AddXP(xp);
     }
 }

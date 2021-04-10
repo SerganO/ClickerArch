@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelScreen.unity
     guid: 3860255daf135d04a8e409cca6d1dcf4
+  - enabled: 1
+    path: Assets/Scenes/GameStoreScreen.unity
+    guid: 2327a820d5fee314987ca8bc9e6d0d7f
+  - enabled: 1
+    path: Assets/Scenes/InventoryScreen.unity
+    guid: 0c9d8588abab60a439a001be7c5df391
+  - enabled: 1
+    path: Assets/Scenes/CraftScreen.unity
+    guid: b6a2370924a5fb84eafaca316d91b610
   m_configObjects: {}

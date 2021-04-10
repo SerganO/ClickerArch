@@ -7,19 +7,24 @@ public interface IHero
     event VoidFunc OnHurt;
     event VoidFunc OnHeal;
     event VoidFunc OnDie;
+
     event AttackFunc AdditionalConstAttack;
     event AttackFunc AdditionalCoefAttack;
 
+    ILevelHandler handler { get; set; }
+
+    double MaximumHealthPoint { get; set; }
+    double BaseDamagePerClick { get; set; }
+    double BaseDamagePerSecond { get; set; }
+    double BaseBlock { get; set; }
+    double BaseReflect { get; set; }
+
+    double CurrentHealthPoint { get; set; }
+    double CurrentDamagePerClick { get; }
+    double CurrentDamagePerSecond { get; }
+
     double AdditionalXP { get; set; }
     double AdditionalGold { get; set; }
-
-    double BaseDamagePerClick { get; set; }
-    double CurrentDamagePerClick { get; }
-    double BaseDamagePerSecond { get; set; }
-    double CurrentDamagePerSecond { get; }
-    double BaseBlock { get; set; }
-    double MaximumHealthPoint { get; set; }
-    double CurrentHealthPoint { get; set; }
 
     List<Modificator> Modificators { get; set; }
     List<Effect> Effects { get; set; }
@@ -40,4 +45,6 @@ public interface IHero
     void Heal(double value);
 
 
+    void AddGold(double count);
+    void AddXP(double count);
 }
