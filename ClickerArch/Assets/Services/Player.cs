@@ -30,7 +30,7 @@ public class Player
     public event VoidFunc OnXPRaise;
     public event VoidFunc OnGoldChange;
 
-    double gold;
+    double gold = 1000;
 
     public double Gold
     {
@@ -50,7 +50,48 @@ public class Player
     double BaseBlock { get; set; }
     double BaseReflect { get; set; }
 
-    public Inventory Inventory { get; set; } = new Inventory();
+    public Inventory Inventory { get; set; } = new Inventory() {
+       
+
+        Recipes = new List<Recipe> {
+        new Recipe {
+            
+
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 4 },
+                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            RequiredGold = 678,
+
+            ResultItem = new Item
+            {
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+        },
+
+        new Recipe {
+
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 5 },
+            },
+
+            RequiredGold = 10,
+
+            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Rare },
+            IsPermanent = true
+
+        }
+
+
+    } };
 
     public List<string> availableHeroes = new List<string>() {
         "Adventurer",
@@ -86,7 +127,7 @@ public class Player
     {
         XP += count;
         CheckLevelUp();
-        OnXPRaise();
+        OnXPRaise?.Invoke();
     }
 
     public void CheckLevelUp()

@@ -22,5 +22,25 @@ public class ResourceItem : MonoBehaviour
         Setup(sprite, count.ToString());
     }
 
+    public void SetupForResource(Resource resource)
+    {
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Resource/" + resource.rarity);
+        var count = resource.count;
+        Setup(sprite, count.ToString());
+    }
+
+    public void SetupForGold(double gold)
+    {
+        Sprite sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
+        Setup(sprite, ((int)gold).ToString());
+    }
+
+    public void SetupForItem(Item item)
+    {
+        Sprite sprite = null;
+        var count = item.count;
+        Setup(sprite, count.ToString());
+    }
+
 
 }

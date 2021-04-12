@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Recipe
 {
+
     public string id = "";
+    public string name = "";
 
     public double RequiredGold = 0;
-    public double RequiredXP = 0;
+    public int RequiredLevel = 0;
     public List<Resource> RequiredResources = new List<Resource>();
     public List<Item> RequiredItems = new List<Item>();
 
     public double ResultGold = 0;
     public double ResultXP = 0;
-    public List<Resource> ResultResources = new List<Resource>();
-    public List<Item> ResultItems = new List<Item>();
+    public Resource ResultResource;
+    public Item ResultItem;
+
+    public bool IsPermanent = false;
 }

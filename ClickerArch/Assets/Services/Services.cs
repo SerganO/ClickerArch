@@ -14,6 +14,10 @@ public class Services
     private Services() { }
     private static Services instance;
 
+    public static void SetPlayer(Player player)
+    {
+        Player = player;
+    }
     public static void SetLevelService(IHeroService heroService)
     {
         HeroService = heroService;
@@ -27,7 +31,6 @@ public class Services
     public static void SetDataService(IDataService dataService) {
         DataService = dataService;
     }
-
 
     public static Services GetInstance()
     {
