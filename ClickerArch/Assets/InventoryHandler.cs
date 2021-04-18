@@ -17,8 +17,26 @@ public class InventoryHandler : MonoBehaviour
         Loader.Load(SceneLoader.Scene.Main);
     }
 
-    public void SwitchToClothes()
+    public void UpdateForClothes()
     {
-        UI.SwitchToClothes();
+        UI.UpdateForClothes();
     }
+    public void UpdateForThing()
+    {
+        UI.UpdateForThing();
+
+    }
+
+    public void UpdateForWeapon()
+    {
+        UI.UpdateForWeapon();
+
+    }
+
+    public void UpdateForTransport()
+    {
+        UI.UpdateForTransport();
+
+    }
+
 }

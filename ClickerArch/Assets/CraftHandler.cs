@@ -15,6 +15,8 @@ public class CraftHandler : MonoBehaviour
 
     public RecipeDetail DetailElement;
 
+    ItemCategory CurrentCategory = ItemCategory.Thing;
+
     private void Start()
     {
         ResourcesPanel.UpdateUI();
@@ -25,7 +27,7 @@ public class CraftHandler : MonoBehaviour
 
     void Bind()
     {
-        DetailElement.OnCraft += DetailElement_OnCraft;
+        DetailElement.OnAccept += DetailElement_OnCraft;
     }
 
     private void DetailElement_OnCraft()
@@ -36,7 +38,7 @@ public class CraftHandler : MonoBehaviour
 
     void Unbind()
     {
-        DetailElement.OnCraft -= DetailElement_OnCraft;
+        DetailElement.OnAccept -= DetailElement_OnCraft;
     }
 
     private void OnDestroy()
@@ -53,7 +55,7 @@ public class CraftHandler : MonoBehaviour
     {
         Helper.ClearTransform(CraftListTransform);
 
-        Services.GetInstance().GetPlayer().Inventory.Recipes.ForEach(recipe=>
+        Services.GetInstance().GetPlayer().Inventory.Recipes.FindAll(recipe=>recipe.Category == CurrentCategory).ForEach(recipe=>
         {
             var item = Instantiate(CraftItem, CraftListTransform);
             item.SetupForRecipe(recipe);
@@ -68,6 +70,46 @@ public class CraftHandler : MonoBehaviour
 
         });
     }
+    public void UpdateForThing()
+    {
+        if (CurrentCategory != ItemCategory.Thing)
+        {
+            CurrentCategory = ItemCategory.Thing;
+            UpdateRecipesList();
+        }
+
+    }
+
+    public void UpdateForClothes()
+    {
+        if (CurrentCategory != ItemCategory.Clothes)
+        {
+            CurrentCategory = ItemCategory.Clothes;
+            UpdateRecipesList();
+        }
+
+    }
+
+    public void UpdateForWeapon()
+    {
+        if (CurrentCategory != ItemCategory.Weapon)
+        {
+            CurrentCategory = ItemCategory.Weapon;
+            UpdateRecipesList();
+        }
+
+    }
+
+    public void UpdateForTransport()
+    {
+        if (CurrentCategory != ItemCategory.Transport)
+        {
+            CurrentCategory = ItemCategory.Transport;
+            UpdateRecipesList();
+        }
+
+    }
+
     public void AcceptCraft(Recipe recipe)
     {
         CraftMaster.Craft(recipe);

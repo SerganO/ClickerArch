@@ -34,7 +34,65 @@ public class ResourcesDataService : IDataService
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
-        return new EnemyData((int)((Random.value + 0.1) * 100), 1.0, 1, new Drop { xp = 100, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
+        return new EnemyData((int)(50* Mathf.Pow((float)1.07, level)), 1.0, (int)(1 + 1 * Mathf.Pow((float)1.1, level)), new Drop { xp = 100, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
+    }
+
+    public void GetGoodsList(ItemCategory Category, RecipeList completion)
+    {
+        var Recipes = new List<Recipe>();
+        switch (Category)
+        {
+            case ItemCategory.Thing:
+                Recipes.AddRange(new List<Recipe> {
+            new Recipe {
+                Category = ItemCategory.Thing,
+            RequiredGold = 10,
+
+            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Common },
+            IsPermanent = true
+
+        },
+
+        new Recipe {
+            Category = ItemCategory.Thing,
+            RequiredGold = 100,
+
+            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Rare },
+            IsPermanent = true
+
+        } });
+                break;
+            case ItemCategory.Clothes:
+                break;
+            case ItemCategory.Weapon:
+                Recipes.AddRange(new List<Recipe> {
+           new Recipe {
+
+               Category = ItemCategory.Weapon,
+
+            RequiredGold = 3000,
+
+            ResultItem = new Item
+            {
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+           }
+                }
+                );
+                break;
+            case ItemCategory.Transport:
+                break;
+            case ItemCategory.Skill:
+                break;
+        }
+
+
+        completion(Recipes);
     }
 
     public Sprite GetSpriteForID(string id)

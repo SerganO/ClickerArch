@@ -9,4 +9,6 @@ public interface IDataService
     List<string> GetEnemiesIdsForLevelId(string levelId);
     EnemyData GetEnemyDataForIdAndLevel(string id, int level);
     double GetXpForNextLevel(int currentLevel);
+
+    void GetGoodsList(ItemCategory Category, RecipeList completion);
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Recipe
 {
-
+    public ItemCategory Category = ItemCategory.Thing;
     public string id = "";
     public string name = "";
 

@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemCategory
+{
+    Thing,
+    Clothes,
+    Weapon,
+    Transport,
+    Skill
+}
+
 public class Item
 {
     public string id = "";
@@ -9,14 +18,7 @@ public class Item
     public int count = 0;
 
     public List<Modificator> modificators = new List<Modificator>();
-
-    public enum Type
-    {
-        Thing,
-        Clothes,
-        Weapon,
-        Transport,
-        Skill
-    }
+    public ItemCategory Category = ItemCategory.Thing;
+    
 
 }

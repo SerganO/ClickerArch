@@ -14,7 +14,7 @@ public class RecipeDetail : MonoBehaviour
 
     public Button AcceptButton;
 
-    public event VoidFunc OnCraft;
+    public event VoidFunc OnAccept;
 
     void Start()
     {
@@ -89,7 +89,7 @@ public class RecipeDetail : MonoBehaviour
     public void AcceptCraft()
     {
         CraftMaster.Craft(_recipe);
-        OnCraft?.Invoke();
+        OnAccept?.Invoke();
         Hide();
     }
 

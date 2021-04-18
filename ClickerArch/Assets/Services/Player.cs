@@ -67,8 +67,8 @@ public class Player
 
         Recipes = new List<Recipe> {
         new Recipe {
-            
 
+            Category = ItemCategory.Weapon,
             RequiredResources = new List<Resource>
             {
                 new Resource { rarity = Resource.Rarity.Common, count = 4 },
@@ -79,6 +79,7 @@ public class Player
 
             ResultItem = new Item
             {
+                Category = ItemCategory.Weapon,
                 name = "Sword",
                 modificators = new List<Modificator>
                 {
@@ -89,6 +90,7 @@ public class Player
         },
 
         new Recipe {
+            Category = ItemCategory.Thing,
 
             RequiredResources = new List<Resource>
             {

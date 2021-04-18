@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory
 {
     List<Resource> Resources = new List<Resource>() { };
-    List<Item> Items = new List<Item>();
+    public List<Item> Items = new List<Item>();
 
     public List<Recipe> Recipes = new List<Recipe>();
 

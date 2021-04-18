@@ -9,6 +9,8 @@ public delegate void BoolFunc(bool value);
 public delegate void StringFunc(string value);
 public delegate void AttackFunc(double value, bool mustBeShown);
 
+public delegate void RecipeList(List<Recipe> list);
+
 public static class Helper
 {
     
