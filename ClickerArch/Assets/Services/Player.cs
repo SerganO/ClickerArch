@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Player
 {
+    public string PlayerId = "";
+    public string Username = "";
+
+
+    public Player(string username)
+    {
+        PlayerId = System.Guid.NewGuid().ToString();
+        Username = username;
+    }
+
+
+
     string currentHeroID = "";
 
     public string CurrentHeroId {
@@ -30,7 +42,7 @@ public class Player
     public event VoidFunc OnXPRaise;
     public event VoidFunc OnGoldChange;
 
-    double gold = 1000;
+    double gold = 0;
 
     public double Gold
     {
@@ -94,31 +106,35 @@ public class Player
     } };
 
     public List<string> availableHeroes = new List<string>() {
+        //COMMON
         "Adventurer",
-        "Archer",
         "ArenaWarrior",
         "ArmorWarrior",
         "Assassin",
-        "Blacksmith",
-        "BlueKing",
+        "CityBouncer",
         "Cyberclockwerk",
-        "GothicHero",
         "Gunslinger",
         "Hastat",
-        "HeroKnight",
-        "Janissary",
         "LightBandit",
         "MedievalKing",
-        "MedievalWarrior",
-        "Monk",
         "Ninja",
-        "Ranger",
-        "Robot",
-        "RoyalKnight",
-        "Samurai",
         "Squire",
-        "Striker",
-        "Wizard",
+
+        //RARE
+
+        //"Archer",
+        //"HeroKnight",
+        //"Janissary",
+        //"GothicHero",
+        //"Blacksmith",
+        //"BlueKing",
+        //"Monk",
+        //"Ranger",
+        //"Robot",
+        //"RoyalKnight",
+        //"Samurai",
+        //"Striker",
+        //"Wizard",
 
 
     };

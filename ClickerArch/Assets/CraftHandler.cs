@@ -57,11 +57,23 @@ public class CraftHandler : MonoBehaviour
         {
             var item = Instantiate(CraftItem, CraftListTransform);
             item.SetupForRecipe(recipe);
-            item.ActionButton.onClick.AddListener(()=> {
+            item.InfoButton.onClick.AddListener(()=> {
                 ShowCraftDetail(recipe);
             });
+
+            item.ActionButton.onClick.AddListener(() => {
+                AcceptCraft(recipe);
+            });
+            item.ActionButton.interactable = CraftMaster.CanCraft(recipe);
+
         });
     }
+    public void AcceptCraft(Recipe recipe)
+    {
+        CraftMaster.Craft(recipe);
+        DetailElement_OnCraft();
+    }
+
 
     public void ShowCraftDetail(Recipe recipe)
     {

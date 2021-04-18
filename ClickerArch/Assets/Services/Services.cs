@@ -9,7 +9,7 @@ public class Services
     static IEnemyService EnemyService = new CommonEnemyService();
     static IDataService DataService = new ResourcesDataService();
 
-    static Player Player = new Player();
+    static Player Player = new Player("");
 
     private Services() { }
     private static Services instance;

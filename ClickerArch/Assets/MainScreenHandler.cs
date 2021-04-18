@@ -50,6 +50,7 @@ public class MainScreenHandler : MonoBehaviour
 
     public void LoadLevel()
     {
+        Services.GetInstance().GetHeroService().ConfigureForHeroId(Services.GetInstance().GetPlayer().CurrentHeroId);
         Loader.Load(SceneLoader.Scene.Level);
     }
 

@@ -29,7 +29,8 @@ public class CommonHero : IHero
 
     public List<Modificator> Modificators { get; set; } = new List<Modificator>();
     public List<Effect> Effects { get; set; } = new List<Effect>();
-    public List<HeroSkill> Skills { get; set; } = new List<HeroSkill>();
+    public List<HeroSkill> ActiveSkills { get; set; } = new List<HeroSkill>();
+    public List<HeroSkill> PassiveSkills { get; set; } = new List<HeroSkill>();
 
     public ILevelHandler handler { get; set; }
 
@@ -169,98 +170,23 @@ public class CommonHero : IHero
         BaseDamagePerSecond = MockDPS;
         CurrentHealthPoint = 20;
         MaximumHealthPoint = 20;
-
-        //Mock
-        AddModificators(new List<Modificator>
-        {
-            //ModificatorFactory.ModificatorForString("Reflect=Current=OnHurt=Coef=2=1=1=1=Permanent")
-            //ModificatorFactory.ModificatorForString("Reflect|OnHurt|NONE+Coef+2+1|Permanent|Remove")
-        });
-
-        new List<HeroSkill>
-        {
-            new HeroSkill
-            {
-                ID="heal",
-                Countdown = 30,
-                HeroModificators = new List<Modificator>
-                {
-
-                },
-
-                EnemyModificators = new List<Modificator>
-                {
-
-                },
-
-                SceneModificators = new List<Modificator>
-                {
-
-                },
-
-                HeroEffects = new List<Effect>
-                {
-                    EffectFactory.EffectForString("Heal|Immediately|Coef+1+2|OneShot||Remove")
-                },
-
-                EnemyEffects = new List<Effect>
-                {
-                },
-
-                SceneEffects = new List<Effect>
-                {
-                },
-            },
-            new HeroSkill
-            {
-                ID="attack",
-                Countdown = 30,
-                HeroModificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForId("adventurer_zsb_dpc"),
-                },
-
-                EnemyModificators = new List<Modificator>
-                {
-                    
-                },
-
-                SceneModificators = new List<Modificator>
-                {
-
-                },
-
-                HeroEffects = new List<Effect>
-                {
-
-                },
-
-                EnemyEffects = new List<Effect>
-                {
-                   
-                },
-
-                SceneEffects = new List<Effect>
-                {
-                     //EffectFactory.EffectForId("assasin_dps"),
-                },
-
-                
-            }
-
-        }.ForEach(skill =>
-        {
-            Skills.Add(skill);
-        });
-
-
-
+        
     }
 
     public void Start()
     {
         ReactOnModificators(StartModificators);
         UpdateModificators(0);
+
+        ActiveSkills.ForEach(skill =>
+        {
+            ActiveSkills.Add(skill);
+        });
+
+        PassiveSkills.ForEach(skill =>
+        {
+            ActiveSkills.Add(skill);
+        });
     }
 
     public void AddModificators(List<Modificator> modificators)

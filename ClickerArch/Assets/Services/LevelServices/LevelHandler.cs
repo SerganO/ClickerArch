@@ -95,7 +95,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
             Destroy(child.gameObject);
         }
 
-        AssignedHero.Skills.ForEach(skill =>
+        AssignedHero.ActiveSkills.ForEach(skill =>
         {
             SkillButton skillButton = Instantiate(SkillButton, SkillButtonsList.transform);
             skillButton.ConfigureForID(skill.ID);

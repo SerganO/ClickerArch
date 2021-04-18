@@ -28,7 +28,8 @@ public interface IHero
 
     List<Modificator> Modificators { get; set; }
     List<Effect> Effects { get; set; }
-    List<HeroSkill> Skills { get; set; }
+    List<HeroSkill> ActiveSkills { get; set; }
+    List<HeroSkill> PassiveSkills { get; set; }
 
     void UpdateOnTick(double time);
 

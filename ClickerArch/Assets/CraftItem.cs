@@ -8,6 +8,7 @@ public class CraftItem : MonoBehaviour
     public Transform ResourcesTransform;
     public ResourceItem ResourceItem;
     public Button ActionButton;
+    public Button InfoButton;
 
     public Image Icon;
     public Text Text;

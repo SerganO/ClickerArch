@@ -21,7 +21,11 @@ public class HeroSkill
         {
             var temp = new List<Modificator>();
 
-            heroModificators.ForEach(mod => temp.Add(mod.Clone()));
+            heroModificators.ForEach(mod => {
+                Debug.Log(mod.ToString());
+
+                temp.Add(mod.Clone());
+            });
 
             return temp;
         }
