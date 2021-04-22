@@ -34,7 +34,9 @@ public class ResourcesDataService : IDataService
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
-        return new EnemyData((int)(50* Mathf.Pow((float)1.07, level)), 1.0, (int)(1 + 1 * Mathf.Pow((float)1.1, level)), new Drop { xp = 100, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
+        
+        var hp = 1;// (int)(50 * Mathf.Pow((float)1.07, level));
+        return new EnemyData(hp, 1.0, (int)(1 + 1 * Mathf.Pow((float)1.1, level)), new Drop { xp = level, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
     }
 
     public void GetGoodsList(ItemCategory Category, RecipeList completion)
@@ -104,6 +106,6 @@ public class ResourcesDataService : IDataService
 
     public double GetXpForNextLevel(int currentLevel)
     {
-        return 1000 + 100 * currentLevel;
+        return 1000 + 500 * currentLevel;
     }
 }

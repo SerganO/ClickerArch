@@ -191,10 +191,14 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     {
         Debug.Log("Get Drop");
         var drop = CurrentEnemy.GetEnemyModel().drop;
-        Debug.Log("XP: " + drop.xp);
+
+        var xp = 100.0 * (10.0 + drop.xp - Services.GetInstance().GetPlayer().CoolLevel) / (10.0 + Services.GetInstance().GetPlayer().CoolLevel);
+        xp = Mathf.Max(1, (float)xp);
+
+        Debug.Log("XP: " + xp);
         Debug.Log("Gold: " + drop.gold);
 
-        AssignedHero.AddXP(drop.xp);
+        AssignedHero.AddXP(xp);
         AssignedHero.AddGold(drop.gold);
         Debug.Log("Res:");
         var res = drop.GetResourcesAfterProbability();
@@ -222,6 +226,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         CurrentEnemy = Instantiate(enemy, SpawnPoint);
 
         Services.GetInstance().GetEnemyService().ConfigureEnemyForId(CurrentEnemy, enemiesIDs[currentIndex]);
+        CurrentEnemy.ConfigureForLevel(CurrentLevel);
 
         CurrentEnemy.GetEnemyModel().AddModificators(CurrentLevelScene.SceneModificators);
         CurrentEnemy.GetEnemyModel().AddEffects(CurrentLevelScene.SceneEffects);

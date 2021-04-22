@@ -11,12 +11,22 @@ public class SkillFactory
         resultList.Add(new HeroSkill
         {
             ID = "heal",
-            Countdown = 30,
+            Countdown = 120,
 
             HeroEffects = new List<Effect>
                 {
                     EffectFactory.EffectForString("Heal|Immediately|Coef+1+2|OneShot||Remove")
                 },
+        });
+        resultList.Add(new HeroSkill
+        {
+            ID = "attack",
+            Countdown = 80,
+
+            EnemyEffects = new List<Effect>
+            {
+                EffectFactory.EffectForString("ConstDamage|Immediately|Coef+1+2|OneShot||Remove")
+            }
         });
         switch (heroID)
         {
@@ -25,7 +35,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "adventurer_2",
                         Countdown = 70,
                         HeroModificators = new List<Modificator>
                 {
@@ -43,7 +53,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "arenaWarrior_1",
                         Countdown = 70,
                         HeroModificators = new List<Modificator>
                 {
@@ -54,7 +64,7 @@ public class SkillFactory
 
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "arenaWarrior_2",
                         Countdown = 25,
                         EnemyEffects = new List<Effect>
                         {
@@ -67,7 +77,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "armorWarrior_2",
                         Countdown = 35,
                         HeroModificators = new List<Modificator>
                 {
@@ -81,7 +91,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "assassin_2",
                         Countdown = 45,
                         HeroModificators = new List<Modificator>
                 {
@@ -98,7 +108,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "cityBouncer_1",
                         Countdown = 40,
 
                         EnemyEffects = new List<Effect>
@@ -108,7 +118,7 @@ public class SkillFactory
                     },
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "cityBouncer_2",
                         Countdown = 35,
                         HeroModificators = new List<Modificator>
                 {
@@ -127,7 +137,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "cyberclockwerk_1",
                         Countdown = 45,
                         HeroModificators = new List<Modificator>
                 {
@@ -142,7 +152,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "gunslinger_1",
                         Countdown = 35,
 
                         EnemyEffects = new List<Effect>
@@ -152,7 +162,7 @@ public class SkillFactory
                     },
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "gunslinger_2",
                         Countdown = 70,
                         HeroModificators = new List<Modificator>
                 {
@@ -167,7 +177,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "hastat_1",
                         Countdown = 40,
 
                         EnemyEffects = new List<Effect>
@@ -181,7 +191,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "lightBandit_1",
                         Countdown = 60,
                         HeroModificators = new List<Modificator>
                 {
@@ -194,7 +204,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "medievalKing_1",
                         Countdown = 25,
                         HeroModificators = new List<Modificator>
                 {
@@ -211,7 +221,7 @@ public class SkillFactory
                 resultList.AddRange(new List<HeroSkill> {
                     new HeroSkill
                     {
-                        ID = "attack",
+                        ID = "ninja_1",
                         Countdown = 25,
                         HeroModificators = new List<Modificator>
                 {

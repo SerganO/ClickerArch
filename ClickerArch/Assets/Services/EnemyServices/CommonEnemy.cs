@@ -102,7 +102,6 @@ public class CommonEnemy : IEnemy
     {
         
         view.ConfigureForId(ID);
-        ConfigureForLevel(1);
 
 
     }
