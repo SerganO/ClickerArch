@@ -35,7 +35,7 @@ public class ResourcesDataService : IDataService
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
         
-        var hp = 1;// (int)(50 * Mathf.Pow((float)1.07, level));
+        var hp = (int)(50 * Mathf.Pow((float)1.07, level));
         return new EnemyData(hp, 1.0, (int)(1 + 1 * Mathf.Pow((float)1.1, level)), new Drop { xp = level, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
     }
 

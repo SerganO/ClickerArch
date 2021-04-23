@@ -81,6 +81,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         Restart();
 
         SetupSkillPanel();
+        LocalizateSet.SaveTemplate();
     }
 
     private void OnHeroCoefAdditionalCoefAttack(double value, bool mustBeShown)
