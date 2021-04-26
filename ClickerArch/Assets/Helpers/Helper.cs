@@ -25,6 +25,26 @@ public static class Helper
         return "<color=" + color + ">" + text + "</color>";
     }
 
+    public static string RedText(string text)
+    {
+        return ColorText("red", text);
+    }
+
+    public static string BlueText(string text)
+    {
+        return ColorText("blue", text);
+    }
+
+    public static string GreenText(string text)
+    {
+        return ColorText("green", text);
+    }
+
+    public static string YellowText(string text)
+    {
+        return ColorText("yellow", text);
+    }
+
     public static void ClearTransform(Transform transform)
     {
         foreach(Transform tr in transform)

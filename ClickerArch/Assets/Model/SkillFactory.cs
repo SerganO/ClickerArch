@@ -279,6 +279,7 @@ public class SkillFactory
                 {
                     new HeroSkill
                     {
+                        ID = "adventurer_1",
                         HeroModificators = new List<Modificator>
                         {
                             ModificatorFactory.ModificatorForId("adventurer_adventurer")
@@ -295,6 +296,7 @@ public class SkillFactory
                 {
                     new HeroSkill
                     {
+                        ID = "armorWarrior_1",
                         HeroModificators = new List<Modificator>
                         {
                             ModificatorFactory.ModificatorForId("armorWarrior_block")
@@ -309,12 +311,26 @@ public class SkillFactory
             case "BlueKing":
                 break;
             case "Cyberclockwerk":
+                resultList.AddRange(new List<HeroSkill>
+                {
+                    new HeroSkill
+                    {
+                        ID = "cyberclockwerk_2"
+                    }
+                });
                 break;
             case "GothicHero":
                 break;
             case "Gunslinger":
                 break;
             case "Hastat":
+                resultList.AddRange(new List<HeroSkill>
+                {
+                    new HeroSkill
+                    {
+                        ID = "hastat_2"
+                    }
+                });
                 break;
             case "HeroKnight":
                 break;
@@ -325,6 +341,7 @@ public class SkillFactory
                 {
                     new HeroSkill
                     {
+                        ID = "lightBandit_2",
                         HeroModificators = new List<Modificator>
                         {
                             ModificatorFactory.ModificatorForId("lightBandit_gold")
@@ -337,6 +354,7 @@ public class SkillFactory
                 {
                     new HeroSkill
                     {
+                        ID = "medievalKing_2",
                         HeroModificators = new List<Modificator>
                         {
                             ModificatorFactory.ModificatorForId("medievalKing_passive_debat_xp"),
@@ -351,6 +369,13 @@ public class SkillFactory
             case "Monk":
                 break;
             case "Ninja":
+                resultList.AddRange(new List<HeroSkill>
+                {
+                    new HeroSkill
+                    {
+                        ID = "ninja_2"
+                    }
+                });
                 break;
             case "Ranger":
                 break;

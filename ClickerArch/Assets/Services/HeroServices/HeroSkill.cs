@@ -123,3 +123,20 @@ public class HeroSkill
         }
     }
 }
+
+public class PassiveHeroSkill: HeroSkill
+{
+    enum Type
+    {
+        Base, Advanced
+    }
+
+    enum ChangeBase
+    {
+        CurrentDPC,
+        CurrentDPS,
+        OnHurt
+    }
+
+
+}

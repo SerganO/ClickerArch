@@ -46,7 +46,8 @@ public class DetailElement : MonoBehaviour
         }
 
         addPart = value >= 0 ? "+" : "";
-        Setup(null, addPart + ((int)value).ToString() + finalPart);
+        Sprite sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/"+Parameter.parameter);
+        Setup(sprite, addPart + ((int)value).ToString() + finalPart);
         
     }
 
@@ -58,6 +59,7 @@ public class DetailElement : MonoBehaviour
 
     public void SetupForXP(double XP)
     {
-        Setup(null, ((int)XP).ToString());
+        Sprite sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/xp");
+        Setup(sprite, ((int)XP).ToString());
     }
 }

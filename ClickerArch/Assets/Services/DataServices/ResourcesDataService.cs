@@ -130,22 +130,12 @@ id: 10.
             RequiredResources = new List<Resource>
             {
                 new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
             },
 
             RequiredGold = 500,
 
             ResultItem = new Item("hero_sword","HERO SWORD", 1,  new List<Modificator>
                 {
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
                     ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
                 }, ItemCategory.Weapon)
         }
@@ -307,7 +297,27 @@ id: 10.
             ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Rare },
             IsPermanent = true
 
-        } });
+        },
+                new Recipe {
+            id = "epic_resource",
+            name = "EPIC RESOURCE",
+            Category = ItemCategory.Thing,
+            RequiredGold = 1000,
+
+            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Epic },
+            IsPermanent = true
+
+        },
+                new Recipe {
+            id = "legendary_resource",
+            name = "LEGENDARY RESOURCE",
+            Category = ItemCategory.Thing,
+            RequiredGold = 10000,
+
+            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Legendary },
+            IsPermanent = true
+
+        }});
                 break;
             case ItemCategory.Clothes:
                 break;

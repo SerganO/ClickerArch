@@ -48,4 +48,6 @@ public interface IHero
 
     void AddGold(double count);
     void AddXP(double count);
+
+    void StartSetup();
 }

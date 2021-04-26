@@ -7,6 +7,7 @@ public class InventoryItemScript : MonoBehaviour
 {
     public Image Icon;
     public Text NameLabel;
+    public Button InfoButton;
 
     public Button ActionButton;
 

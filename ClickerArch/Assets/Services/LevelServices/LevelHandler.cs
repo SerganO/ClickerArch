@@ -19,6 +19,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     public GameObject DiePanel;
 
     public SkillButton SkillButton;
+    public SkillButton PassiveSkillButton;
     public GameObject SkillButtonsList;
 
     public SceneLoader Loader;
@@ -76,6 +77,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     private void Start()
     {
         AssignedHero = Services.GetInstance().GetHeroService().Hero;
+        AssignedHero.StartSetup();
         AssignedPlayer = Services.GetInstance().GetPlayer();
         Bind();
         Restart();
@@ -101,6 +103,15 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
             SkillButton skillButton = Instantiate(SkillButton, SkillButtonsList.transform);
             skillButton.ConfigureForID(skill.ID);
 
+            skillButton.GetComponent<Button>().onClick.AddListener(() => { UseSkill(skill, skillButton); });
+            buttons.Add(skillButton);
+        });
+
+        AssignedHero.PassiveSkills.ForEach(skill =>
+        {
+            SkillButton skillButton = Instantiate(PassiveSkillButton, SkillButtonsList.transform);
+            skillButton.ConfigureForID(skill.ID);
+            skillButton.interactable = false;
             skillButton.GetComponent<Button>().onClick.AddListener(() => { UseSkill(skill, skillButton); });
             buttons.Add(skillButton);
         });
@@ -196,7 +207,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         var xp = 100.0 * (10.0 + drop.xp - Services.GetInstance().GetPlayer().CoolLevel) / (10.0 + Services.GetInstance().GetPlayer().CoolLevel);
         xp = Mathf.Max(1, (float)xp);
 
-        Debug.Log("XP: " + xp);
+        
         Debug.Log("Gold: " + drop.gold);
 
         AssignedHero.AddXP(xp);
@@ -296,7 +307,6 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         DiePanel.SetActive(false);
         NextLevel();
         gameContinued = true;
-
         buttons.ForEach((button) => button.Countdown(0));
     }
 

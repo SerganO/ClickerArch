@@ -9,6 +9,10 @@ public class InventoryUI : MonoBehaviour
     public InventoryItemScript InventoryItem;
     public MoneyPanel MoneyPanel;
 
+    public RecipeDetail DetailElement;
+
+    InventoryHandler handler;
+
     ItemCategory CurrentCategory = ItemCategory.Thing;
 
     public void UpdateUI()
@@ -33,6 +37,10 @@ public class InventoryUI : MonoBehaviour
         {
             InventoryItemScript item = Instantiate(InventoryItem, ListContent);
             item.SetupAsClothes(id);
+            item.InfoButton.onClick.AddListener(()=> {
+                DetailElement.ShowDetailForHero(id);
+                DetailElement.gameObject.SetActive(true);
+            });
 
         });
 
@@ -44,7 +52,13 @@ public class InventoryUI : MonoBehaviour
 
         Services.GetInstance().GetPlayer().Inventory.Items.FindAll(item => item.Category == CurrentCategory).ForEach(item => {
             InventoryItemScript uiItem = Instantiate(InventoryItem, ListContent);
-            uiItem.Setup(null, item.name);
+            var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
+            uiItem.Setup(sprite, item.name);
+            uiItem.InfoButton.onClick.AddListener(() => {
+                DetailElement.ShowDetailForItem(item);
+                DetailElement.gameObject.SetActive(true);
+            });
+
         });
 
     }
@@ -89,6 +103,11 @@ public class InventoryUI : MonoBehaviour
             UpdateList();
         }
 
+    }
+
+    public void SetParentHandler(InventoryHandler handler)
+    {
+        this.handler = handler;
     }
 
 }

@@ -8,6 +8,7 @@ public class CommonHeroService : IHeroService
 
     public void ConfigureForHeroId(string heroID)
     {
+        Hero = new CommonHero();
         Hero.Modificators = new List<Modificator>();
         Hero.Effects = new List<Effect>();
 

@@ -173,20 +173,38 @@ public class CommonHero : IHero
         
     }
 
-    public void Start()
+
+    public void StartSetup()
     {
+        PassiveSkills.ForEach((skill) =>
+        {
+            Modificators.AddRange(skill.HeroModificators);
+
+
+
+        });
+
         ReactOnModificators(StartModificators);
         UpdateModificators(0);
 
-        ActiveSkills.ForEach(skill =>
-        {
-            ActiveSkills.Add(skill);
-        });
+    }
 
-        PassiveSkills.ForEach(skill =>
-        {
-            ActiveSkills.Add(skill);
-        });
+    public void Start()
+    {
+        
+       
+
+
+
+        //ActiveSkills.ForEach(skill =>
+        //{
+        //    ActiveSkills.Add(skill);
+        //});
+
+        //PassiveSkills.ForEach(skill =>
+        //{
+        //    PassiveSkills.Add(skill);
+        //});
     }
 
     public void AddModificators(List<Modificator> modificators)
@@ -402,7 +420,7 @@ public class CommonHero : IHero
 
     public void ReactOnModificators(List<Modificator> modificators)
     {
-        modificators.ForEach(mod => Debug.Log(mod));
+        modificators.ForEach(mod => Debug.Log("xp " + mod.parameter));
         modificators.ForEach(mod => ReactOnModificator(mod));
         modificators.ForEach(mod => mod.OnUseChange());
     }
@@ -536,6 +554,7 @@ public class CommonHero : IHero
     public void AddXP(double count)
     {
         var xp = count + count * AdditionalXP;
+        Debug.Log("XP: " + xp);
         Services.GetInstance().GetPlayer().AddXP(xp);
     }
 }

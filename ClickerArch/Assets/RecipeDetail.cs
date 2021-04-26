@@ -112,6 +112,10 @@ public class RecipeDetail : MonoBehaviour
 
         DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
         BackgroundPanel.SetLayoutVertical();
+
+        AcceptButton.onClick.RemoveAllListeners();
+        AcceptButton.onClick.AddListener(() => { Services.GetInstance().GetPlayer().CurrentHeroId = heroId; });
+
     }
 
     public void ShowDetailForItem(Item item)
@@ -125,7 +129,7 @@ public class RecipeDetail : MonoBehaviour
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
-        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(item.id);
+        DescriptionText.text = LocalizationManager.GetDescriptionForItemId(item.id);
 
         item.modificators.ForEach(mod =>
         {

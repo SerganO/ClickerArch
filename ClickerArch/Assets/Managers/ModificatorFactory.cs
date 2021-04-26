@@ -19,7 +19,7 @@ public class ModificatorFactory
         {
             //===========COMMON===========
             case "adventurer_adventurer":
-                return ModificatorForString("AdditionalXP|Immediately|NONE+Const+1+10|Permanent|Remove");
+                return ModificatorForString("AdditionalXP|OnStart|NONE+Const+1+10|Permanent|Remove");
             case "adventurer_zsb_dpc":
                 return ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Time+10+1|Remove");
             case "adventurer_zsb_enemy_damage":
@@ -31,7 +31,7 @@ public class ModificatorFactory
                 return ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+-1+4|Time+10+1|Remove");
 
             case "armorWarrior_block":
-                return ModificatorForString("Reflect|OnHurt|NONE+Coef+10+2|Permanent|Remove");
+                return ModificatorForString("Reflect|OnHurt|NONE+Coef+1+2|Permanent|Remove");
             case "armorWarrior_attack":
                 return ModificatorForString("CurrentDPC|Immediately|DPC+Coef+10+1|OneShot|Remove");
 

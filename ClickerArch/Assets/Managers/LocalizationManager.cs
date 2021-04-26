@@ -57,7 +57,46 @@ public static class LocalizationManager
         var description = "";
         switch(heroId)
         {
+            //COMMON
+            //Helper.ColorText("", "")
+            case "Adventurer":
+                return Helper.ColorText("blue","Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                "В своих странствиях Путешественник научился набираться опыта быстрее своих товарищей." + "\n" +
+                "Количество получаемого " + Helper.BlueText("EXP") + " при убийстве противника "+ Helper.BlueText(" + 10 %") + "." + "\n" +
 
+                Helper.BlueText("За-Ши-Бу") +"(active)" + "\n" +
+                "Во время своих странствий Путешественник изучил доселе невиданный стиль боя." + "\n" +
+                "Удары становатся сильнее и размашистее, но снижается защита." + "\n" +
+                Helper.RedText("DPC + 100 % ") + ","+  Helper.BlueText("входящий урон увеличивается на 30 %.") + "\n" +
+                Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
+                 Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+        case "ArenaWarrior": break;
+        case "ArmorWarrior": break;
+        case "Assassin": break;
+        case "CityBouncer": break;
+        case "Cyberclockwerk": break;
+        case "Gunslinger": break;
+        case "Hastat": break;
+        case "LightBandit": break;
+        case "MedievalKing": break;
+        case "Ninja": break;
+        case "Squire": break;
+         
+         //RARE
+         
+        case "Archer": break;
+        case "HeroKnight": break;
+        case "Janissary": break;
+        case "GothicHero": break;
+        case "Blacksmith": break;
+        case "BlueKing": break;
+        case "Monk": break;
+        case "Ranger": break;
+        case "Robot": break;
+        case "RoyalKnight": break;
+        case "Samurai": break;
+        case "Striker": break;
+        case "Wizard": break;
         }
         return description;
     }
@@ -67,7 +106,17 @@ public static class LocalizationManager
         var description = "";
         switch (itemId)
         {
+            case "common_resource":
+                return "Материалы обычного качества";
+            case "rare_resource":
+                return "Материалы редкого качества";
+            case "epic_resource":
+                return "Материалы епического качества";
+            case "legendary_resource":
+                return "Материалы легендарного качества";
 
+            case "hero_sword":
+                return "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
         }
         return description;
     }
