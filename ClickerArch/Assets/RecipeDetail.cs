@@ -16,6 +16,8 @@ public class RecipeDetail : MonoBehaviour
     public Button AcceptButton;
     public Button DisagreeButton;
 
+    public ContentSizeFitter BackgroundPanel;
+
     public event VoidFunc OnAccept;
 
     void Start()
@@ -86,8 +88,8 @@ public class RecipeDetail : MonoBehaviour
         }
 
         Text.text = recipe.name;
-        Debug.Log("TRUCK");
-        
+
+        BackgroundPanel.SetLayoutVertical();
 
     }
 
@@ -109,6 +111,7 @@ public class RecipeDetail : MonoBehaviour
         Helper.ClearTransform(Resources);
 
         DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
+        BackgroundPanel.SetLayoutVertical();
     }
 
     public void ShowDetailForItem(Item item)
@@ -133,6 +136,7 @@ public class RecipeDetail : MonoBehaviour
             });
 
         });
+        BackgroundPanel.SetLayoutVertical();
     }
 
     public void Hide()
@@ -147,5 +151,10 @@ public class RecipeDetail : MonoBehaviour
         Hide();
     }
 
+
+    private void Update()
+    {
+        
+    }
 
 }
