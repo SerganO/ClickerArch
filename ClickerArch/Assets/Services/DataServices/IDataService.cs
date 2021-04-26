@@ -11,4 +11,5 @@ public interface IDataService
     double GetXpForNextLevel(int currentLevel);
 
     void GetGoodsList(ItemCategory Category, RecipeList completion);
+    Recipe GetRecipeForId(string id);
 }

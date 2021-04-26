@@ -66,45 +66,10 @@ public class Player
        
 
         Recipes = new List<Recipe> {
-        new Recipe {
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        },
-
-        new Recipe {
-            Category = ItemCategory.Thing,
-
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 5 },
-            },
-
-            RequiredGold = 10,
-
-            ResultResource = new Resource { count = 1, rarity = Resource.Rarity.Rare },
-            IsPermanent = true
-
-        }
-
-
+            Services.GetInstance().GetDataService().GetRecipeForId("rare_resource"),
+            Services.GetInstance().GetDataService().GetRecipeForId("epic_resource"),
+            Services.GetInstance().GetDataService().GetRecipeForId("legendary_resource"),
+            Services.GetInstance().GetDataService().GetRecipeForId("hero_sword"),
     } };
 
     public List<string> availableHeroes = new List<string>() {

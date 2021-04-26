@@ -119,8 +119,11 @@ public class CraftHandler : MonoBehaviour
 
     public void ShowCraftDetail(Recipe recipe)
     {
-        DetailElement.ShowDetailForRecipe(recipe);
+        
         DetailElement.gameObject.SetActive(true);
+        DetailElement.ShowDetailForRecipe(recipe);
+        
+
     }
 
 

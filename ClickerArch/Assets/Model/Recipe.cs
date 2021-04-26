@@ -19,4 +19,20 @@ public class Recipe
     public Item ResultItem;
 
     public bool IsPermanent = false;
+
+    public string descriptionId
+    {
+        get
+        {
+            return "recipe_" + id;
+        }
+    }
+
+    public string Description
+    {
+        get
+        {
+            return LocalizationManager.GetDescriptionForRecipeId(descriptionId);
+        }
+    }
 }

@@ -38,19 +38,21 @@ public class CraftItem : MonoBehaviour
 
         if (recipe.ResultItem != null)
         {
-            Icon.sprite = null;
-            Text.text = recipe.ResultItem.name;
+            Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + recipe.ResultItem.id);
+            //Text.text = recipe.ResultItem.name;
 
         }
         else if (recipe.ResultResource != null)
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Resource/" + recipe.ResultResource.rarity);
-            Text.text = recipe.ResultResource.rarity.ToString();
+            //Text.text = recipe.ResultResource.rarity.ToString();
         }
         else
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
-            Text.text = ((int)recipe.ResultGold).ToString();
+            //Text.text = ((int)recipe.ResultGold).ToString();
         }
+
+        Text.text = recipe.name;
     }
 }

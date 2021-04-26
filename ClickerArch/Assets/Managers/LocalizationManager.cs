@@ -52,6 +52,49 @@ public static class LocalizationManager
 
     }
 
+    public static string GetDescriptionForHeroId(string heroId)
+    {
+        var description = "";
+        switch(heroId)
+        {
+
+        }
+        return description;
+    }
+
+    public static string GetDescriptionForItemId(string itemId)
+    {
+        var description = "";
+        switch (itemId)
+        {
+
+        }
+        return description;
+    }
+
+    public static string GetDescriptionForRecipeId(string recipeId)
+    {
+        var description = "";
+        switch (recipeId)
+        {
+            case "recipe_common_resource":
+                return "Материалы обычного качества";
+            case "recipe_rare_resource":
+                return "Материалы редкого качества";
+            case "recipe_epic_resource":
+                return "Материалы епического качества";
+            case "recipe_legendary_resource":
+                return "Материалы легендарного качества";
+
+            case "recipe_hero_sword":
+                return "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
+
+        }
+        return description;
+    }
+
+
+
     static List<LocalizateSet> languages = new List<LocalizateSet>()
     {
         new LocalizateSet()

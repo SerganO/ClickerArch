@@ -11,21 +11,26 @@ public class RecipeDetail : MonoBehaviour
 
     public Image Icon;
     public Text Text;
+    public Text DescriptionText;
 
     public Button AcceptButton;
+    public Button DisagreeButton;
 
     public event VoidFunc OnAccept;
 
     void Start()
     {
+        DisagreeButton.onClick.AddListener(()=>Hide());
     }
 
     Recipe _recipe;
 
     public void ShowDetailForRecipe(Recipe recipe)
     {
+        AcceptButton.onClick.RemoveAllListeners();
+        AcceptButton.onClick.AddListener(() => AcceptCraft());
         _recipe = recipe;
-
+        DescriptionText.text = recipe.Description;
         AcceptButton.interactable = CraftMaster.CanCraft(recipe);
 
         Helper.ClearTransform(Modificators);
@@ -66,19 +71,68 @@ public class RecipeDetail : MonoBehaviour
 
         if(recipe.ResultItem != null)
         {
-            Icon.sprite = null;
-            Text.text = recipe.ResultItem.name;
+
+            Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + recipe.ResultItem.id);
+            //Text.text = recipe.ResultItem.name;
 
         } else if(recipe.ResultResource != null)
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Resource/" + recipe.ResultResource.rarity);
-            Text.text = recipe.ResultResource.rarity.ToString();
+            //Text.text = recipe.ResultResource.rarity.ToString();
         } else
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
-            Text.text = ((int)recipe.ResultGold).ToString();
+            //Text.text = ((int)recipe.ResultGold).ToString();
         }
 
+        Text.text = recipe.name;
+        Debug.Log("TRUCK");
+        
+
+    }
+
+    public void Setup(Sprite sprite, string text)
+    {
+        Icon.sprite = sprite;
+        Text.text = text;
+    }
+
+    public void ShowDetailForHero(string heroId)
+    {
+        AcceptButton.onClick.RemoveAllListeners();
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
+        var name = heroId;
+
+        Setup(sprite, name);
+
+        Helper.ClearTransform(Modificators);
+        Helper.ClearTransform(Resources);
+
+        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
+    }
+
+    public void ShowDetailForItem(Item item)
+    {
+        AcceptButton.onClick.RemoveAllListeners();
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
+        var name = item.name;
+
+        Setup(sprite, name);
+
+        Helper.ClearTransform(Modificators);
+        Helper.ClearTransform(Resources);
+
+        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(item.id);
+
+        item.modificators.ForEach(mod =>
+        {
+            mod.values.ForEach(val =>
+            {
+                var el = Instantiate(Element, Modificators);
+                el.SetupForModificatorValue(mod, val);
+            });
+
+        });
     }
 
     public void Hide()
