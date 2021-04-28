@@ -39,4 +39,10 @@ public class InventoryHandler : MonoBehaviour
 
     }
 
+    public void UpdateForParameters()
+    {
+        UI.UpdateForParameters();
+
+    }
+
 }

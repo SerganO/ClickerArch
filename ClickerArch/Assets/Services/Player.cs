@@ -14,30 +14,107 @@ public class Player
         Username = username;
     }
 
+    public int MaxArtifactsCount = 3;
 
-
-    string currentHeroID = "";
-
-    public string CurrentHeroId {
-        get
-        {
-            if(currentHeroID == "")
-            {
-                if(availableHeroes.Count > 0)
+    public Item activeTransport = null;
+    public Item activeWeapon = new Item("hero_sword", "HERO SWORD", 1, new List<Modificator>
                 {
-                    currentHeroID = availableHeroes[0];
-                }
-            }
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
+                }, ItemCategory.Weapon);
+    public List<Item> activeArtifacts = new List<Item>()
+    {
 
-            return currentHeroID;
-        }
 
-        set
+    };
+
+    public Item ActiveTransport { get { return activeTransport; } }
+    public Item ActiveWeapon { get { return activeWeapon; } }
+    public List<Item> ActiveArtifacts { get { return activeArtifacts; } }
+
+
+    public void UnsetWeapon()
+    {
+        if (activeWeapon != null)
         {
-            currentHeroID = value;
+            Inventory.AddItem(activeWeapon);
+           
         }
+        activeWeapon = null;
+    }
+
+    public void UnsetTransport()
+    {
+        if (activeTransport != null)
+        {
+            Inventory.AddItem(activeTransport);
+            
+        }
+        activeTransport = null;
+    }
+
+    public void UnsetArtifacts(Item item)
+    {
+        Inventory.AddItem(item);
+        activeArtifacts.Remove(item);
+        
+    }
+
+    public void SetWeapon(Item item)
+    {
+        Inventory.RemoveItem(item);
+        if (activeWeapon != null)
+        {
+            Inventory.AddItem(activeWeapon);
+
+        }
+        activeWeapon = item;
 
     }
+
+    public void SetTransport(Item item)
+    {
+        Inventory.RemoveItem(item);
+        if (activeTransport != null)
+        {
+            Inventory.AddItem(activeTransport);
+        }
+        activeTransport = item;
+        
+    }
+
+    public void AddArtifacts(Item item)
+    {
+        if(activeArtifacts.Count >= MaxArtifactsCount)
+        {
+            UnsetArtifacts(activeArtifacts[0]);
+        }
+        activeArtifacts.Add(item);
+        Inventory.RemoveItem(item);
+    }
+
+
+    List<Item> AllActiveItems
+    {
+        get
+        {
+            var result = new List<Item>();
+            if(ActiveWeapon != null)
+            {
+                result.Add(ActiveWeapon);
+            }
+
+            if (ActiveTransport != null)
+            {
+                result.Add(ActiveTransport);
+            }
+
+            result.AddRange(ActiveArtifacts);
+
+
+            return result;
+        }
+    }
+
 
     public event VoidFunc OnXPRaise;
     public event VoidFunc OnGoldChange;
@@ -55,15 +132,64 @@ public class Player
     public double XP { get; set; }
     public int CoolLevel { get; set; }
 
+    public int MaximumHealthPointLevel { get; set; } = 0;
+    public int BaseDamagePerClickLevel { get; set; } = 0;
+    public int BaseDamagePerSecondLevel { get; set; } = 0;
+    public int BaseBlockLevel { get; set; } = 0;
+    public int BaseReflectLevel { get; set; } = 0;
+    public int AdditionalGoldLevel { get; set; } = 0;
+    public int AdditionalXPLevel { get; set; } = 0;
 
-    double MaximumHealthPoint { get; set; }
-    double BaseDamagePerClick { get; set; }
-    double BaseDamagePerSecond { get; set; }
-    double BaseBlock { get; set; }
-    double BaseReflect { get; set; }
+
+
+    IDataService dataService
+    {
+        get
+        {
+            return Services.GetInstance().GetDataService();
+        }
+    }
+
+    double maximumHealthPoint { get { return dataService.MaximumHealthPointForLevel(MaximumHealthPointLevel); } }
+    double baseDamagePerClick { get { return dataService.BaseDamagePerClickForLevel(BaseDamagePerClickLevel); } }
+    double baseDamagePerSecond { get { return dataService.BaseDamagePerSecondForLevel(BaseDamagePerSecondLevel); } }
+    double baseBlock { get { return dataService.BaseBlockForLevel(BaseBlockLevel); } }
+    double baseReflect { get { return dataService.BaseReflectForLevel(BaseReflectLevel); } }
+    double additionalGold { get { return dataService.AdditionalGoldForLevel(AdditionalGoldLevel); } }
+    double additionalXP { get { return dataService.AdditionalXPForLevel(AdditionalXPLevel); } }
+
+
+    public double MaximumHealthPoint { get{ return maximumHealthPoint + AdditionalMaximumHealthPoint(); }}
+    public double BaseDamagePerClick { get{ return baseDamagePerClick + AdditionalBaseDamagePerClick(); } }
+    public double BaseDamagePerSecond { get{ return baseDamagePerSecond + AdditionalBaseDamagePerSecond(); }}
+    public double BaseBlock { get{ return baseBlock + AdditionalBaseBlock(); }}
+    public double BaseReflect { get{ return baseReflect + AdditionalBaseReflect(); }}
+    public double AdditionalGold { get{ return additionalGold + AdditionalAdditionalGold(); }}
+    public double AdditionalXP { get{ return additionalXP + AdditionalAdditionalXP(); } }
 
     public Inventory Inventory { get; set; } = new Inventory() {
-       
+        Items = new List<Item>
+        {
+            new Item("item_id_3", "DAMAGE RING", 1, new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPC|OnAttack|NONE+Const+5+1|Permanent|Remove"),
+                }, ItemCategory.Thing),
+            new Item("item_id_4", "HP RING", 1, new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("HP|OnStart|NONE+Const+100+1|Permanent|Remove"),
+                }, ItemCategory.Thing),
+            new Item("item_id_5", "PASSIVE DAMAGE RING", 1, new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+5+1|Permanent|Remove"),
+                }, ItemCategory.Thing),
+            new Item("item_id_6", "XP RING", 1, new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("AdditionalXP|OnStart|NONE+Const+1+10|Permanent|Remove"),
+                }, ItemCategory.Thing)
+
+
+
+        },
 
         Recipes = new List<Recipe> {
             Services.GetInstance().GetDataService().GetRecipeForId("rare_resource"),
@@ -71,6 +197,117 @@ public class Player
             Services.GetInstance().GetDataService().GetRecipeForId("legendary_resource"),
             Services.GetInstance().GetDataService().GetRecipeForId("hero_sword"),
     } };
+
+
+
+
+    double ValuesFromItemsForParameter(Modificator.Parameter parameter)
+    {
+        double result = 0;
+        AllActiveItems.ForEach(item =>
+        {
+            item.modificators.FindAll(mod => mod.parameter == parameter).ForEach(modificator =>
+            {
+
+                modificator.values.ForEach(value =>
+                {
+                    switch (value.changeType)
+                    {
+                        case Modificator.ChangeValue.ValueChangeType.Const:
+                            result += value.value;
+                            break;
+                        case Modificator.ChangeValue.ValueChangeType.Coef:
+                            result += GetValue(value.baseParameter) * value.value;
+                            break;
+                    }
+                });
+
+            });
+        });
+        return result;
+    }
+
+    public double AdditionalMaximumHealthPoint() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.HP);
+    }
+    public double AdditionalBaseDamagePerClick() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.DPC);
+    }
+    public double AdditionalBaseDamagePerSecond() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.DPS);
+    }
+    public double AdditionalBaseBlock() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.Block);
+    }
+    public double AdditionalBaseReflect() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.Reflect);
+    }
+    public double AdditionalAdditionalGold() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.AdditionalGold);
+    }
+    public double AdditionalAdditionalXP() {
+        return ValuesFromItemsForParameter(Modificator.Parameter.AdditionalXP);
+    }
+
+    double GetValue(Modificator.Parameter parameter)
+    {
+        switch (parameter)
+        {
+            case Modificator.Parameter.NONE:
+                break;
+            case Modificator.Parameter.HP:
+                return maximumHealthPoint;
+            case Modificator.Parameter.DPC:
+                return baseDamagePerClick;
+            case Modificator.Parameter.DPS:
+                return baseDamagePerSecond;
+            case Modificator.Parameter.Reflect:
+                return baseReflect;
+            case Modificator.Parameter.Block:
+                return baseBlock;
+            case Modificator.Parameter.AdditionalXP:
+                return additionalXP;
+            case Modificator.Parameter.AdditionalGold:
+                return additionalGold;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+
+
+    public void SetHeroId(string heroId)
+    {
+        if (currentHeroID != "") AvailableHeroes.Add(currentHeroID);
+        currentHeroID = heroId;
+        AvailableHeroes.Remove(currentHeroID);
+    }
+
+    string currentHeroID = "Squire";
+
+    public string CurrentHeroId
+    {
+        get
+        {
+            if (currentHeroID == "")
+            {
+                if (AvailableHeroes.Count > 0)
+                {
+                    SetHeroId(availableHeroes[0]);
+                }
+            }
+
+            return currentHeroID;
+        }
+
+        set
+        {
+            currentHeroID = value;
+        }
+
+    }
+
 
     public List<string> availableHeroes = new List<string>() {
         //COMMON
@@ -85,7 +322,7 @@ public class Player
         "LightBandit",
         "MedievalKing",
         "Ninja",
-        "Squire",
+        
 
         //RARE
 
@@ -105,6 +342,15 @@ public class Player
 
 
     };
+
+    public List<string> AvailableHeroes
+    {
+        get
+        {
+            availableHeroes.Sort();
+            return availableHeroes;
+        }
+    }
 
     public void AddXP(double count)
     {

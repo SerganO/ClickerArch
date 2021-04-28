@@ -7,9 +7,6 @@ public class CommonHero : IHero
     double TICK_TIME = 1.0;
     double tick = 0;
 
-    private int MockDPC = 9;
-    private int MockDPS = 5;
-
     public event VoidFunc OnHurt;
     public event VoidFunc OnDie;
     public event AttackFunc AdditionalConstAttack;
@@ -166,10 +163,6 @@ public class CommonHero : IHero
 
     public CommonHero()
     {
-        BaseDamagePerClick = MockDPC;
-        BaseDamagePerSecond = MockDPS;
-        CurrentHealthPoint = 20;
-        MaximumHealthPoint = 20;
         
     }
 
@@ -189,23 +182,6 @@ public class CommonHero : IHero
 
     }
 
-    public void Start()
-    {
-        
-       
-
-
-
-        //ActiveSkills.ForEach(skill =>
-        //{
-        //    ActiveSkills.Add(skill);
-        //});
-
-        //PassiveSkills.ForEach(skill =>
-        //{
-        //    PassiveSkills.Add(skill);
-        //});
-    }
 
     public void AddModificators(List<Modificator> modificators)
     {
@@ -463,13 +439,6 @@ public class CommonHero : IHero
                 break;
             case Modificator.Parameter.CurrentHP:
                 CurrentHealthPoint += changeValue;
-                //if(changeValue < 0)
-                //{
-                //    Hurt(changeValue);
-                //} else
-                //{
-                //    Heal(changeValue);
-                //}
                 break;
             case Modificator.Parameter.CurrentDPC:
                 AdditionalConstAttack(changeValue, true);

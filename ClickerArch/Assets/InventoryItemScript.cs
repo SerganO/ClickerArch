@@ -17,7 +17,7 @@ public class InventoryItemScript : MonoBehaviour
         NameLabel.text = text;
     }
 
-    public void SetupAsClothes(string heroId)
+    public void SetupAsClothes(string heroId, VoidFunc completion)
     {
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
         var name = heroId;
@@ -25,6 +25,11 @@ public class InventoryItemScript : MonoBehaviour
         Setup(sprite, name);
 
         ActionButton.onClick.RemoveAllListeners();
-        ActionButton.onClick.AddListener(()=>{ Services.GetInstance().GetPlayer().CurrentHeroId = heroId; });
+        ActionButton.onClick.AddListener(()=>
+        {
+            Services.GetInstance().GetPlayer().SetHeroId(heroId);
+            completion();
+        });
+
     }
 }

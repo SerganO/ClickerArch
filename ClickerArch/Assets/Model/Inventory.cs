@@ -90,6 +90,7 @@ public class Inventory
     public bool CanRemoveItem(Item Item)
     {
         var item = FindItemForID(Item.id);
+
         return  item != null && item.count >= Item.count;
     }
 
@@ -102,7 +103,9 @@ public class Inventory
 
     void removeItem(Item Item)
     {
-        FindItemForID(Item.id).count -= Item.count;
+        var item = FindItemForID(Item.id);
+        item.count -= Item.count;
+        if (item.count <= 0) Items.Remove(item);
     }
 
     public bool RemoveItems(List<Item> Items)

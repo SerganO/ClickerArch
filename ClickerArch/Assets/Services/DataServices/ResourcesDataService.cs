@@ -136,7 +136,7 @@ id: 10.
 
             ResultItem = new Item("hero_sword","HERO SWORD", 1,  new List<Modificator>
                 {
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
                 }, ItemCategory.Weapon)
         }
 
@@ -367,5 +367,40 @@ id: 10.
     public Recipe GetRecipeForId(string id)
     {
         return AllRecipes.Find(recipe => recipe.id == id);
+    }
+
+    public double BaseDamagePerClickForLevel(int level)
+    {
+        return 5 + 1 * level;
+    }
+
+    public double BaseDamagePerSecondForLevel(int level)
+    {
+        return 1 + 0.25 * level;
+    }
+
+    public double BaseBlockForLevel(int level)
+    {
+        return 0 + 0.1 * level;
+    }
+
+    public double BaseReflectForLevel(int level)
+    {
+        return 0 + 0.1 * level;
+    }
+
+    public double AdditionalGoldForLevel(int level)
+    {
+        return 0 + 0.01 * level;
+    }
+
+    public double AdditionalXPForLevel(int level)
+    {
+        return 0 + 0.01 * level;
+    }
+
+    public double MaximumHealthPointForLevel(int level)
+    {
+        return 10 + 5 * level;
     }
 }

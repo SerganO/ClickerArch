@@ -55,51 +55,185 @@ public static class LocalizationManager
     public static string GetDescriptionForHeroId(string heroId)
     {
         var description = "";
-        switch(heroId)
+        switch (heroId)
         {
             //COMMON
             //Helper.ColorText("", "")
             case "Adventurer":
-                return Helper.ColorText("blue","Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                return Helper.ColorText("blue", "Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
                 "В своих странствиях Путешественник научился набираться опыта быстрее своих товарищей." + "\n" +
-                "Количество получаемого " + Helper.BlueText("EXP") + " при убийстве противника "+ Helper.BlueText(" + 10 %") + "." + "\n" +
+                "Количество получаемого " + Helper.BlueText("EXP") + " при убийстве противника " + Helper.BlueText(" + 10 %") + "." + "\n" +
 
-                Helper.BlueText("За-Ши-Бу") +"(active)" + "\n" +
+                Helper.BlueText("За-Ши-Бу") + "(active)" + "\n" +
                 "Во время своих странствий Путешественник изучил доселе невиданный стиль боя." + "\n" +
                 "Удары становатся сильнее и размашистее, но снижается защита." + "\n" +
-                Helper.RedText("DPC + 100 % ") + ","+  Helper.BlueText("входящий урон увеличивается на 30 %.") + "\n" +
+                Helper.RedText("DPC + 100 % ") + "," + Helper.BlueText("входящий урон увеличивается на 30 %.") + "\n" +
                 Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
-                 Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
-        case "ArenaWarrior": break;
-        case "ArmorWarrior": break;
-        case "Assassin": break;
-        case "CityBouncer": break;
-        case "Cyberclockwerk": break;
-        case "Gunslinger": break;
-        case "Hastat": break;
-        case "LightBandit": break;
-        case "MedievalKing": break;
-        case "Ninja": break;
-        case "Squire": break;
-         
-         //RARE
-         
-        case "Archer": break;
-        case "HeroKnight": break;
-        case "Janissary": break;
-        case "GothicHero": break;
-        case "Blacksmith": break;
-        case "BlueKing": break;
-        case "Monk": break;
-        case "Ranger": break;
-        case "Robot": break;
-        case "RoyalKnight": break;
-        case "Samurai": break;
-        case "Striker": break;
-        case "Wizard": break;
+                Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+
+            case "ArenaWarrior":
+                return Helper.ColorText("blue", "Охлаждающий пыл") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "На арене приходится заботиться не только об атаке, но и о защите." + "\n" +
+                "Воин Арены становится в стойку, в которой " + Helper.BlueText("входящий урон") + " уменьшается на " + Helper.BlueText(" 75 %") + "\n" +
+                "но вместе с тем и уменьшается на " + Helper.BlueText("25 %") + " его" + Helper.RedText(" DPC") + "." + "\n" +
+                Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n" +
+
+                Helper.BlueText("Руби с плеча") + "(active)" + "\n" +
+                "Воин Арены совершает сокрушительный рубящий удар мечём," + "\n" +
+                "нанося противнику разовый урон, равный " + Helper.BlueText("30 %") + "\n" +
+                " от максимального запаса здоровья врага." + "\n" +
+                Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n";
+
+            case "ArmorWarrior":
+                return Helper.ColorText("blue", "Лучшее нападение - защита") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                "У Бронированого Рыцаря своеобразная броня. Окованная мелкими шипами по всей площади," + "\n" +
+                "Атакуя Бронированого рыцаря враги получают " + Helper.BlueText("50 %") + "\n" +
+                "от нанесённого урона." + "\n" +
+
+                Helper.BlueText("Черепокол") + "(active)" + "\n" +
+                "Бронированый рыцарь наносит мощный вертикальный удар своим длинным мечём," + "\n" +
+                "нанося противнику" + "\n" + Helper.RedText("1000 %") + " урона от " + Helper.RedText("DPC") + ".\n" +
+                Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+
+            case "Assassin":
+                return Helper.ColorText("blue", "Брат Акры") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                "Проходя обучение в братстве Акры, ассасин научился быть неуловимым даже в пылу сражения." + "\n" +
+                "Каждая  " + Helper.BlueText("3") + "-я атака по ассасину " + Helper.BlueText(" промахивается") + ", не нанося ему повреждений." +"\n" +
+
+                Helper.BlueText("Скрытый клинок") + "(active)" + "\n" +
+                "Ассасин смазывет ядом свой клинок, отравляя противников." + "\n" +
+                "Противники получают повышенный переодический урон в размере " + Helper.RedText("300% DPS") + "\n" +
+                Helper.YellowText("Время действия:") + " 30 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n";
+
+            case "CityBouncer":
+                return Helper.ColorText("blue", "Наболдашник") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Городской Вышибала бьёт противника навершием своего меча по голове, " + Helper.BlueText("оглушая") + " его." + "\n" +
+                Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 40 секунд." + "\n" +
+
+                Helper.BlueText("Улица лучшая школа") + "(active)" + "\n" +
+                "Городской Вышибала наносит глубокий рубящий удар, заставляя противника истекать кровью." + "\n" +
+                "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
+                Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+
+            case "Cyberclockwerk":
+                return Helper.ColorText("blue", "Киберимплант") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Киберчасовой активирует свой киберимплант, увеличивая рефлексы," + "\n" +
+                "что позволяет ему эффективнее действовать в форс - мажорных ситуациях." + "\n" +
+                "Каждая атака становится критической, нанося " + Helper.RedText("200 % урона от DPC") + ".\n" +
+                Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n" +
+
+                Helper.BlueText("Аккомулятор") + "(passive)" + "\n" +
+                "Киберчасовой получает модификацию, которая позволяет ему добывать энергию поверженых врагов." + "\n" +
+                "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
+                "Каждый побеждённый противник" + Helper.BlueText("уменьшает время перезарядки умения \"Киберимплант\" на 1 секунду.") + "\n";
+
+            case "Gunslinger":
+                return Helper.ColorText("blue", "Ложись!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Стрелок бросает под ноги врагу свето-шумовую гранату, которая " + Helper.BlueText("оглушает") + " его." + "\n" +
+                Helper.YellowText("Время действия:") + " 7 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n" +
+
+                Helper.BlueText("Усмирительный огонь") + "(active)" + "\n" +
+                "Стрелок заряжает свою винтовку особыми разрывными снарядами, увеличивая пассивный урон" +"\n" +
+                "в размере " + Helper.RedText("(DPC+DPS)*1.2") + ".\n" +
+                Helper.YellowText("Время действия:") + " 15 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+
+            case "Hastat":
+                return Helper.ColorText("blue", "Выпад") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Гастат совершает мощный колющий удар своим гладиусом, нанося огромный урон защите противника." + "\n" +
+                "Противник получает разовый урон в размере " + Helper.BlueText("30%") + " от своего " + Helper.BlueText("максимального здоровья.") + "\n" +
+                "Если во время применения" + Helper.BlueText("здоровье") + "противника меньше или равно " + Helper.BlueText("30 %") + "-убивает его" + ".\n" +
+                Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 30 секунд." + "\n" +
+
+                Helper.BlueText("Строевая подготовка") + "(passive)" + "\n" +
+                "Научившись работать в плотном строю, Гастат в совершенстве овладел атакой-выпадом." + "\n" +
+                "Каждый раз, когда " + Helper.BlueText("\"Выпад\" добивает противника") + " - умение" + Helper.BlueText("не уходит на перезарядку") + ".\n";
+
+            case "LightBandit":
+                return Helper.ColorText("blue", "Навались!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Бандит свистом призывает свою банду из 5ти негодяев, и вместе с ней избивает недругов." + "\n" +
+                Helper.RedText("DPS") + " увеличивается в размере " + Helper.RedText("DPS+(DPC*5)") + "\n" +
+                Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 60 секунд." + "\n" +
+
+                Helper.BlueText("Карманник") + "(passive)" + "\n" +
+                "Убивая врага Бандит тщательнее осматривает жертву, вдруг что-то завалялось в паре сапог." + "\n" +
+                "Количество получаемого " + Helper.BlueText("GOLD") + " при убийстве противника увеличиваестя на " + Helper.BlueText("10%") + ".\n";
+
+            case "MedievalKing":
+                return Helper.ColorText("blue", "Королевский удар") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Меч Короля всегда должен соответствовать статусу, но его реставрация - дело не из дешёвых." + "\n" +
+                "Средневековый Король совершает удар с размахом, который наносит противнику " + Helper.RedText("50 % урона от максимального здоровья") + "," + "\n" +
+                "однако Средневековый Король теряет " + Helper.BlueText("GOLD") + " в размере 5 % от " + Helper.BlueText("максимального здоровья жертвы.") + "\n" +
+                Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n" +
+
+                Helper.BlueText("Агрессивные переговоры") + "(passive)" + "\n" +
+                "Хороший Король всегда должен уметь решить спор не только силой, но и словом." + "\n" +
+                "Получаемое с противников " + Helper.BlueText("EXP и GOLD") + " увеличивается на " + Helper.BlueText("7%,") + " но " + Helper.RedText("DPC") + " уменьшается на " + Helper.BlueText("13%") + ".\n";
+
+            case "Ninja":
+                return Helper.ColorText("blue", "Маска бога смерти") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Надевая маску, Ниндзя повергает врагов в ужас, а в его движениях чувствуется уверенность." + "\n" +
+                "Враги " + Helper.BlueText("оглушаются") + ", а " + Helper.RedText("DPC") + " Ниндзи увеличивается в размере " + Helper.RedText("DPC * 1.5") + ".\n" +
+                Helper.YellowText("Время действия:") + " 5 секунд." + "\n" +
+                Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n" +
+
+                Helper.BlueText("Мастерство У-Тан Шань") + "(passive)" + "\n" +
+                "Обучаясь боевому искусству в школе даосов, Ниндзя научился контролировать своё тело и душу." + "\n" +
+                Helper.RedText("DPC") + " и " + Helper.RedText("DPS") + " уравниваются по большему показателю" + ".\n";
+
+
+            case "Squire":
+                return "Базовый персонаж с умениями, которые есть у всех" + "\n" + Helper.ColorText("blue", "Лечение") + Helper.ColorText("#999999", "(active)") + "\n" +
+                "Востанавливает половину HP" + "\n" +
+                Helper.YellowText("Перезарядка:") + " 120 секунд." + "\n" +
+
+                Helper.BlueText("Фатальный удар") + "(active)" + "\n" +
+                "Наноситу урон равный половине HP врага" + "\n" +
+                Helper.YellowText("Перезарядка:") + " 80 секунд." + "\n";
+
+            //RARE
+
+            case "Archer": break;
+
+            case "HeroKnight": break;
+
+            case "Janissary": break;
+
+            case "GothicHero": break;
+
+            case "Blacksmith": break;
+
+            case "BlueKing": break;
+
+            case "Monk": break;
+
+            case "Ranger": break;
+
+            case "Robot": break;
+
+            case "RoyalKnight": break;
+
+            case "Samurai": break;
+
+            case "Striker": break;
+
+            case "Wizard": break;
+
         }
         return description;
     }
+
 
     public static string GetDescriptionForItemId(string itemId)
     {

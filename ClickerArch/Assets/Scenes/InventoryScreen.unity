@@ -4003,6 +4003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListContent: {fileID: 133246997}
+  ListContentObject: {fileID: 133246997}
   InventoryItem: {fileID: 2745901150934932139, guid: 83e66338e478b2544b8470abc59990a3,
     type: 3}
   MoneyPanel: {fileID: 1359980905}

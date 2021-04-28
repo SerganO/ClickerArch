@@ -99,7 +99,7 @@ public class RecipeDetail : MonoBehaviour
         Text.text = text;
     }
 
-    public void ShowDetailForHero(string heroId)
+    public void ShowDetailForHero(string heroId, VoidFunc completion)
     {
         AcceptButton.onClick.RemoveAllListeners();
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
@@ -114,11 +114,11 @@ public class RecipeDetail : MonoBehaviour
         BackgroundPanel.SetLayoutVertical();
 
         AcceptButton.onClick.RemoveAllListeners();
-        AcceptButton.onClick.AddListener(() => { Services.GetInstance().GetPlayer().CurrentHeroId = heroId; });
+        AcceptButton.onClick.AddListener(() => { Services.GetInstance().GetPlayer().SetHeroId(heroId);Hide();completion(); });
 
     }
 
-    public void ShowDetailForItem(Item item)
+    public void ShowDetailForItem(Item item, VoidFunc completion)
     {
         AcceptButton.onClick.RemoveAllListeners();
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
@@ -141,6 +141,10 @@ public class RecipeDetail : MonoBehaviour
 
         });
         BackgroundPanel.SetLayoutVertical();
+
+        AcceptButton.onClick.RemoveAllListeners();
+        AcceptButton.onClick.AddListener(() => {
+            Hide(); completion(); });
     }
 
     public void Hide()

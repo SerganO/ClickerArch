@@ -9,6 +9,7 @@ using static System.Enum;
 
 // CurrentDPC|OnAttack|NONE+Const+10+1+3+2|Time+10+1|Remove
 
+
 public class Modificator
 {
 
