@@ -10,11 +10,20 @@ public class MainScreenHandler : MonoBehaviour
     public Text CoolLevelText;
 
     public Animator HeroAnimator;
+    public Animator TransportAnimator;
 
     Player AssignedPlayer;
 
+    public string BackgroundClipName;
+    AudioClip BackgroundClip;
+
     private void Start()
     {
+        BackgroundClip = Services.GetInstance().GetDataService().GetAudioClipForID(BackgroundClipName);
+        MusicManager.instance.Play(BackgroundClipName, BackgroundClip);
+
+
+
         AssignedPlayer = Services.GetInstance().GetPlayer();
 
         AssignedPlayer.OnXPRaise += AssignedPlayer_OnXPRaise;
@@ -22,6 +31,22 @@ public class MainScreenHandler : MonoBehaviour
 
         var runtimeAnimator = Resources.Load<RuntimeAnimatorController>("Animators/Heroes/" + AssignedPlayer.CurrentHeroId + "AnimatorController");
         HeroAnimator.runtimeAnimatorController = runtimeAnimator;
+
+        if(AssignedPlayer.ActiveTransport != null)
+        {
+            var trRuntimeAnimator = Resources.Load<RuntimeAnimatorController>("Animators/Transport/" + AssignedPlayer.ActiveTransport.id + "AnimatorController");
+            if (trRuntimeAnimator != null)
+            {
+                TransportAnimator.runtimeAnimatorController = trRuntimeAnimator;
+            }
+            else
+            {
+                var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Transport/" + AssignedPlayer.ActiveTransport.id);
+                TransportAnimator.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+        }
+        
+
     }
 
 

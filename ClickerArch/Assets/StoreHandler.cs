@@ -121,4 +121,38 @@ public class StoreHandler : MonoBehaviour
         DetailElement.ShowDetailForRecipe(recipe);
         DetailElement.gameObject.SetActive(true);
     }
+
+    public void UpdateForSkills()
+    {
+        if (CurrentCategory != ItemCategory.Skill)
+        {
+            CurrentCategory = ItemCategory.Skill;
+
+            Helper.ClearTransform(GoodsListTransform);
+
+            List<HeroParameter> list = new List<HeroParameter>
+            {
+
+            };
+
+            list.ForEach(parameter =>
+            {
+                var item = Instantiate(Item, GoodsListTransform);
+                item.SetupForSkill(parameter);
+                item.InfoButton.onClick.AddListener(() => {
+                    //ShowCraftDetail(recipe);
+                });
+
+                item.ActionButton.onClick.AddListener(() => {
+                    //AcceptPurchase(recipe);
+                });
+                //item.ActionButton.interactable = CraftMaster.CanCraft(recipe);
+
+            });
+
+
+
+
+        }
+    }
 }

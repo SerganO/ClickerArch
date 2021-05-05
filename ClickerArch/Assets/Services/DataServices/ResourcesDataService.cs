@@ -403,4 +403,62 @@ id: 10.
     {
         return 10 + 5 * level;
     }
+
+    public int CostForBaseDamagePerClickForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForBaseDamagePerSecondForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForBaseBlockForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForBaseReflectForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForAdditionalGoldForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForAdditionalXPForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForMaximumHealthPointForLevel(int level)
+    {
+        return 100 * (level + 1);
+    }
+
+    public int CostForParameterForLevel(HeroParameter parameter, int level)
+    {
+        switch (parameter)
+        {
+            case HeroParameter.HP:
+                return CostForMaximumHealthPointForLevel(level);
+            case HeroParameter.DPC:
+                return CostForBaseDamagePerClickForLevel(level);
+            case HeroParameter.DPS:
+                return CostForBaseDamagePerSecondForLevel(level);
+            case HeroParameter.Block:
+                return CostForBaseBlockForLevel(level);
+            case HeroParameter.Reflect:
+                return CostForBaseReflectForLevel(level);
+            case HeroParameter.AdditionalGold:
+                return CostForAdditionalGoldForLevel(level);
+            case HeroParameter.AdditionalXP:
+                return CostForAdditionalXPForLevel(level);
+        }
+
+        return 0;
+    }
 }

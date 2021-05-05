@@ -49,11 +49,16 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void Play(AudioClip audioClip)
+    public void Play(string id, AudioClip audioClip)
     {
-        var audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        if(playingAudioID != id)
+        {
+            var audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.clip = audioClip;
+            audioSource.Play();
+            playingAudioID = id;
+        }
+        
     }
 
     public void Stop()

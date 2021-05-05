@@ -712,8 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3ad88d8d02ebe419cbdbc0eb7aea88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundOn: {fileID: 21300000, guid: 1de2e4d6bd4469343911c8c014db4a7e, type: 3}
-  soundOff: {fileID: 21300000, guid: 53700712da494bd41a54ebec6a27a896, type: 3}
+  soundOn: {fileID: 21300000, guid: 29fc29898626df44892855109b50f5bf, type: 3}
+  soundOff: {fileID: 21300000, guid: f8176bcc9d8c23948afe3e95d270eec7, type: 3}
   music: {fileID: 4971226860483758898}
   sound: {fileID: 4971226861597674589}
 --- !u!1 &4971226860430066485
@@ -874,9 +874,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1de2e4d6bd4469343911c8c014db4a7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29fc29898626df44892855109b50f5bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1096,9 +1096,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1de2e4d6bd4469343911c8c014db4a7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29fc29898626df44892855109b50f5bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

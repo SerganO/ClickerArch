@@ -55,4 +55,18 @@ public class CraftItem : MonoBehaviour
 
         Text.text = recipe.name;
     }
+
+    public void SetupForSkill(HeroParameter parameter)
+    {
+        Helper.ClearTransform(ResourcesTransform);
+
+
+        var goldEl = Instantiate(ResourceItem, ResourcesTransform);
+        goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1));
+
+        Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Parameter/" + parameter);
+        
+
+        Text.text = parameter.ToString();
+    }
 }

@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum HeroParameter {
+    HP,
+    DPC,
+    DPS,
+    Block,
+    Reflect,
+    AdditionalGold,
+    AdditionalXP
+}
+
+
 public interface IHero
 {
     event VoidFunc OnHurt;

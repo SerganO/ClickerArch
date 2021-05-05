@@ -18,6 +18,17 @@ public interface IDataService
     double AdditionalXPForLevel(int level);
     double MaximumHealthPointForLevel(int level);
 
+    int CostForBaseDamagePerClickForLevel(int level);
+    int CostForBaseDamagePerSecondForLevel(int level);
+    int CostForBaseBlockForLevel(int level);
+    int CostForBaseReflectForLevel(int level);
+    int CostForAdditionalGoldForLevel(int level);
+    int CostForAdditionalXPForLevel(int level);
+    int CostForMaximumHealthPointForLevel(int level);
+
+
+    int CostForParameterForLevel(HeroParameter parameter, int level);
+
     void GetGoodsList(ItemCategory Category, RecipeList completion);
     Recipe GetRecipeForId(string id);
 }

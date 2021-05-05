@@ -16,7 +16,7 @@ public class Player
 
     public int MaxArtifactsCount = 3;
 
-    public Item activeTransport = null;
+    public Item activeTransport = new Item("horse", "horse", 1, new List<Modificator>(), ItemCategory.Transport);
     public Item activeWeapon = new Item("hero_sword", "HERO SWORD", 1, new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
@@ -140,6 +140,28 @@ public class Player
     public int AdditionalGoldLevel { get; set; } = 0;
     public int AdditionalXPLevel { get; set; } = 0;
 
+    public int LevelForParameter(HeroParameter parameter)
+    {
+        switch (parameter)
+        {
+            case HeroParameter.HP:
+                return MaximumHealthPointLevel;
+            case HeroParameter.DPC:
+                return BaseDamagePerClickLevel;
+            case HeroParameter.DPS:
+                return BaseDamagePerSecondLevel;
+            case HeroParameter.Block:
+                return BaseBlockLevel;
+            case HeroParameter.Reflect:
+                return BaseReflectLevel;
+            case HeroParameter.AdditionalGold:
+                return AdditionalGoldLevel;
+            case HeroParameter.AdditionalXP:
+                return AdditionalXPLevel;
+        }
+
+        return 0;
+    }
 
 
     IDataService dataService
@@ -185,7 +207,14 @@ public class Player
             new Item("item_id_6", "XP RING", 1, new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("AdditionalXP|OnStart|NONE+Const+1+10|Permanent|Remove"),
-                }, ItemCategory.Thing)
+                }, ItemCategory.Thing),
+
+
+            new Item("Car1", "Car1", 1, new List<Modificator>(), ItemCategory.Transport),
+            new Item("Car2", "Car2", 1, new List<Modificator>(), ItemCategory.Transport),
+            new Item("Car3", "Car3", 1, new List<Modificator>(), ItemCategory.Transport),
+            new Item("Car4", "Car4", 1, new List<Modificator>(), ItemCategory.Transport),
+            new Item("Car5", "Car5", 1, new List<Modificator>(), ItemCategory.Transport),
 
 
 
