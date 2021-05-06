@@ -35,6 +35,13 @@ public class StoreHandler : MonoBehaviour
         UpdateGoodsList();
     }
 
+    private void DetailElement_OnUpgrade()
+    {
+        var y = GoodsListTransform.localPosition.y;
+        UpdateForSkills();
+        GoodsListTransform.localPosition = new Vector3(GoodsListTransform.localPosition.x, y, GoodsListTransform.localPosition.z);
+    }
+
     void Unbind()
     {
         DetailElement.OnAccept -= DetailElement_OnCraft;
@@ -47,6 +54,11 @@ public class StoreHandler : MonoBehaviour
 
     public void UpdateGoodsList()
     {
+        if(CurrentCategory == ItemCategory.Skill)
+        {
+            UpdateForSkills();
+            return;
+        }
         Helper.ClearTransform(GoodsListTransform);
 
         Services.GetInstance().GetDataService().GetGoodsList(CurrentCategory, (list) =>
@@ -115,10 +127,24 @@ public class StoreHandler : MonoBehaviour
         DetailElement_OnCraft();
     }
 
+    public void AcceptPurchase(HeroParameter parameter)
+    {
+        var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1;
+        Services.GetInstance().GetPlayer().Purchase(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
+        Services.GetInstance().GetPlayer().UpgradeParameter(parameter);
+        DetailElement_OnUpgrade();
+    }
+
 
     public void ShowCraftDetail(Recipe recipe)
     {
         DetailElement.ShowDetailForRecipe(recipe);
+        DetailElement.gameObject.SetActive(true);
+    }
+
+    public void ShowCraftDetail(HeroParameter parameter)
+    {
+        DetailElement.ShowDetailForParameter(parameter);
         DetailElement.gameObject.SetActive(true);
     }
 
@@ -128,11 +154,18 @@ public class StoreHandler : MonoBehaviour
         {
             CurrentCategory = ItemCategory.Skill;
 
+        }
             Helper.ClearTransform(GoodsListTransform);
 
             List<HeroParameter> list = new List<HeroParameter>
             {
-
+                HeroParameter.HP,
+                HeroParameter.DPC,
+                HeroParameter.DPS,
+                HeroParameter.Block,
+                HeroParameter.Reflect,
+                HeroParameter.AdditionalGold,
+                HeroParameter.AdditionalXP,
             };
 
             list.ForEach(parameter =>
@@ -140,19 +173,21 @@ public class StoreHandler : MonoBehaviour
                 var item = Instantiate(Item, GoodsListTransform);
                 item.SetupForSkill(parameter);
                 item.InfoButton.onClick.AddListener(() => {
-                    //ShowCraftDetail(recipe);
+                    ShowCraftDetail(parameter);
                 });
 
                 item.ActionButton.onClick.AddListener(() => {
-                    //AcceptPurchase(recipe);
+                    AcceptPurchase(parameter);
                 });
-                //item.ActionButton.interactable = CraftMaster.CanCraft(recipe);
+
+                var dataService = Services.GetInstance().GetDataService();
+                item.ActionButton.interactable = dataService.CanUpgradeParameter(parameter);
 
             });
 
 
 
 
-        }
+        
     }
 }

@@ -381,7 +381,7 @@ id: 10.
 
     public double BaseBlockForLevel(int level)
     {
-        return 0 + 0.1 * level;
+        return 0 + 0.01 * level;
     }
 
     public double BaseReflectForLevel(int level)
@@ -429,6 +429,7 @@ id: 10.
         return 100 * (level + 1);
     }
 
+
     public int CostForAdditionalXPForLevel(int level)
     {
         return 100 * (level + 1);
@@ -460,5 +461,14 @@ id: 10.
         }
 
         return 0;
+    }
+
+    public bool CanUpgradeParameter(HeroParameter parameter)
+    {
+        var player = Services.GetInstance().GetPlayer();
+
+        var level = player.LevelForParameter(parameter);
+
+        return player.Gold >= CostForParameterForLevel(parameter, level + 1) && level + 1 <= (player.CoolLevel + 1) * 5;
     }
 }

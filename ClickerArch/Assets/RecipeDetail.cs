@@ -26,8 +26,35 @@ public class RecipeDetail : MonoBehaviour
     }
 
     Recipe _recipe;
+    HeroParameter _parameter;
 
-    public void ShowDetailForRecipe(Recipe recipe)
+    public void ShowDetailForParameter(HeroParameter parameter)
+    {
+        _parameter = parameter;
+        AcceptButton.onClick.RemoveAllListeners();
+        AcceptButton.onClick.AddListener(() => AcceptUpgrade());
+        AcceptButton.interactable = Services.GetInstance().GetDataService().CanUpgradeParameter(parameter);
+
+        Helper.ClearTransform(Modificators);
+        Helper.ClearTransform(Resources);
+
+
+
+        var goldEl = Instantiate(Element, Resources);
+        var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1;
+        goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
+
+        Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
+
+        Text.text = parameter.ToString() + " " + newLevel;
+
+        DescriptionText.text = LocalizationManager.GetDescriptionForParameter(parameter);
+
+
+        BackgroundPanel.SetLayoutVertical();
+    }
+
+        public void ShowDetailForRecipe(Recipe recipe)
     {
         AcceptButton.onClick.RemoveAllListeners();
         AcceptButton.onClick.AddListener(() => AcceptCraft());
@@ -159,6 +186,15 @@ public class RecipeDetail : MonoBehaviour
         Hide();
     }
 
+    public void AcceptUpgrade()
+    {
+
+        var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(_parameter) + 1;
+        Services.GetInstance().GetPlayer().Purchase(Services.GetInstance().GetDataService().CostForParameterForLevel(_parameter, newLevel));
+        Services.GetInstance().GetPlayer().UpgradeParameter(_parameter);
+        OnAccept?.Invoke();
+        Hide();
+    }
 
     private void Update()
     {

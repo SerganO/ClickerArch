@@ -52,6 +52,50 @@ public static class LocalizationManager
 
     }
 
+    public static string GetDescriptionForParameter(HeroParameter parameter)
+    {
+        var player = Services.GetInstance().GetPlayer();
+        var dataService = Services.GetInstance().GetDataService();
+
+        var description = "+";
+
+        switch (parameter)
+        {
+            case HeroParameter.HP:
+                description += (dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel + 1) - dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel)).ToString();
+                break;
+            case HeroParameter.DPC:
+                description += (dataService.BaseDamagePerClickForLevel(player.MaximumHealthPointLevel + 1) - dataService.BaseDamagePerClickForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+            case HeroParameter.DPS:
+                description += (dataService.BaseDamagePerSecondForLevel(player.MaximumHealthPointLevel + 1) - dataService.BaseDamagePerSecondForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+            case HeroParameter.Block:
+                description += (dataService.BaseBlockForLevel(player.MaximumHealthPointLevel + 1) - dataService.BaseBlockForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+            case HeroParameter.Reflect:
+                description += (dataService.BaseReflectForLevel(player.MaximumHealthPointLevel + 1) - dataService.BaseReflectForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+            case HeroParameter.AdditionalGold:
+                description += (dataService.AdditionalGoldForLevel(player.MaximumHealthPointLevel + 1) - dataService.AdditionalGoldForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+            case HeroParameter.AdditionalXP:
+                description += (dataService.AdditionalXPForLevel(player.MaximumHealthPointLevel + 1) - dataService.AdditionalXPForLevel(player.MaximumHealthPointLevel)).ToString();
+
+                break;
+        }
+
+
+        return description;
+
+    }
+
+
     public static string GetDescriptionForHeroId(string heroId)
     {
         var description = "";

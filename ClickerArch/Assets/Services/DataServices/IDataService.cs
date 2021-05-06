@@ -28,6 +28,7 @@ public interface IDataService
 
 
     int CostForParameterForLevel(HeroParameter parameter, int level);
+    bool CanUpgradeParameter(HeroParameter parameter);
 
     void GetGoodsList(ItemCategory Category, RecipeList completion);
     Recipe GetRecipeForId(string id);

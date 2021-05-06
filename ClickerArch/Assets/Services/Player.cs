@@ -16,7 +16,7 @@ public class Player
 
     public int MaxArtifactsCount = 3;
 
-    public Item activeTransport = new Item("horse", "horse", 1, new List<Modificator>(), ItemCategory.Transport);
+    public Item activeTransport;
     public Item activeWeapon = new Item("hero_sword", "HERO SWORD", 1, new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
@@ -163,6 +163,33 @@ public class Player
         return 0;
     }
 
+    public void UpgradeParameter(HeroParameter parameter)
+    {
+        switch (parameter)
+        {
+            case HeroParameter.HP:
+                MaximumHealthPointLevel++;
+                break;
+            case HeroParameter.DPC:
+                BaseDamagePerClickLevel++;
+                break;
+            case HeroParameter.DPS:
+                BaseDamagePerSecondLevel++;
+                break;
+            case HeroParameter.Block:
+                BaseBlockLevel++;
+                break;
+            case HeroParameter.Reflect:
+                BaseReflectLevel++;
+                break;
+            case HeroParameter.AdditionalGold:
+                AdditionalGoldLevel++;
+                break;
+            case HeroParameter.AdditionalXP:
+                AdditionalXPLevel++;
+                break;
+        }
+    }
 
     IDataService dataService
     {
@@ -209,7 +236,7 @@ public class Player
                     ModificatorFactory.ModificatorForString("AdditionalXP|OnStart|NONE+Const+1+10|Permanent|Remove"),
                 }, ItemCategory.Thing),
 
-
+            new Item("horse", "horse", 1, new List<Modificator>(), ItemCategory.Transport),
             new Item("Car1", "Car1", 1, new List<Modificator>(), ItemCategory.Transport),
             new Item("Car2", "Car2", 1, new List<Modificator>(), ItemCategory.Transport),
             new Item("Car3", "Car3", 1, new List<Modificator>(), ItemCategory.Transport),
