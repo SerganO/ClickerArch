@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -224}
+  m_AnchoredPosition: {x: 10, y: -223.33333}
   m_SizeDelta: {x: 660, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1737670479579032844
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 30, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 6
 --- !u!114 &4949616079219597121
@@ -404,7 +404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -324}
+  m_AnchoredPosition: {x: 10, y: -323.3333}
   m_SizeDelta: {x: 660, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3035770421546807793
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 30, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 6
 --- !u!114 &1748944203838536257
@@ -729,7 +729,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: -766}
+  m_SizeDelta: {x: -40, y: -926.6667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3035770422403479141
 CanvasRenderer:
@@ -844,7 +844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -444}
+  m_AnchoredPosition: {x: 340, y: -443.3333}
   m_SizeDelta: {x: 660, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3035770422413772065
@@ -944,8 +944,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -157}
-  m_SizeDelta: {x: 660, y: 34}
+  m_AnchoredPosition: {x: 10, y: -156.66667}
+  m_SizeDelta: {x: 660, y: 33.333332}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &848815627083682380
 CanvasRenderer:
@@ -1072,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 2963402851322661111, guid: be0ff2bfa2723ef4a91eb52893cbfd9f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 380
+      value: 410
       objectReference: {fileID: 0}
     - target: {fileID: 2963402851322661111, guid: be0ff2bfa2723ef4a91eb52893cbfd9f,
         type: 3}
@@ -1203,7 +1203,7 @@ PrefabInstance:
     - target: {fileID: 2963402851322661111, guid: be0ff2bfa2723ef4a91eb52893cbfd9f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 180
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2963402851322661111, guid: be0ff2bfa2723ef4a91eb52893cbfd9f,
         type: 3}

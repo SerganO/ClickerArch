@@ -46,8 +46,9 @@ public class DetailElement : MonoBehaviour
         }
 
         addPart = value >= 0 ? "+" : "";
+        var valueString = string.Format("{0:0.###}", value);
         Sprite sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/"+Parameter.parameter);
-        Setup(sprite, addPart + ((int)value).ToString() + finalPart);
+        Setup(sprite, addPart + valueString + finalPart);
         
     }
 

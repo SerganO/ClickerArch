@@ -32,4 +32,15 @@ public class InventoryItemScript : MonoBehaviour
         });
 
     }
+
+    public void SetupForSkill(HeroParameter parameter)
+    {
+        var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter);
+
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
+
+        var text = parameter.ToString() + " " + newLevel;
+
+        Setup(sprite, text);
+    }
 }

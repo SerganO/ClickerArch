@@ -22,39 +22,64 @@ public class RecipeDetail : MonoBehaviour
 
     void Start()
     {
-        DisagreeButton.onClick.AddListener(()=>Hide());
+        DisagreeButton.onClick.AddListener(() => Hide());
     }
 
     Recipe _recipe;
     HeroParameter _parameter;
 
-    public void ShowDetailForParameter(HeroParameter parameter)
+    public void ShowDetailForParameter(HeroParameter parameter, bool isUpgrade = true)
     {
         _parameter = parameter;
-        AcceptButton.onClick.RemoveAllListeners();
-        AcceptButton.onClick.AddListener(() => AcceptUpgrade());
-        AcceptButton.interactable = Services.GetInstance().GetDataService().CanUpgradeParameter(parameter);
 
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
 
+        AcceptButton.onClick.RemoveAllListeners();
 
-        var goldEl = Instantiate(Element, Resources);
-        var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1;
-        goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
 
-        Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
+        if(isUpgrade)
+        {
+            AcceptButton.onClick.AddListener(() => AcceptUpgrade());
+            AcceptButton.interactable = Services.GetInstance().GetDataService().CanUpgradeParameter(parameter);
 
-        Text.text = parameter.ToString() + " " + newLevel;
 
-        DescriptionText.text = LocalizationManager.GetDescriptionForParameter(parameter);
+
+
+            var goldEl = Instantiate(Element, Resources);
+            var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1;
+            goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
+
+            Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
+
+            Text.text = parameter.ToString() + " " + newLevel;
+
+            DescriptionText.text = LocalizationManager.GetDescriptionForParameter(parameter);
+        } else
+        {
+            AcceptButton.onClick.AddListener(() => Hide());
+            AcceptButton.interactable = true;
+
+
+
+
+           
+            var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter);
+
+            Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
+
+            Text.text = parameter.ToString() + " " + newLevel;
+
+            DescriptionText.text = LocalizationManager.GetDescriptionForParameter(parameter, false);
+        }
+        
 
 
         BackgroundPanel.SetLayoutVertical();
     }
 
-        public void ShowDetailForRecipe(Recipe recipe)
+    public void ShowDetailForRecipe(Recipe recipe)
     {
         AcceptButton.onClick.RemoveAllListeners();
         AcceptButton.onClick.AddListener(() => AcceptCraft());
@@ -65,7 +90,7 @@ public class RecipeDetail : MonoBehaviour
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
-        if(recipe.ResultItem != null)
+        if (recipe.ResultItem != null)
         {
             recipe.ResultItem.modificators.ForEach(mod =>
             {
@@ -78,7 +103,7 @@ public class RecipeDetail : MonoBehaviour
             });
         }
 
-        
+
 
         recipe.RequiredItems.ForEach(i =>
         {
@@ -98,17 +123,19 @@ public class RecipeDetail : MonoBehaviour
             goldEl.SetupForGold(recipe.RequiredGold);
         }
 
-        if(recipe.ResultItem != null)
+        if (recipe.ResultItem != null)
         {
 
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + recipe.ResultItem.id);
             //Text.text = recipe.ResultItem.name;
 
-        } else if(recipe.ResultResource != null)
+        }
+        else if (recipe.ResultResource != null)
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Resource/" + recipe.ResultResource.rarity);
             //Text.text = recipe.ResultResource.rarity.ToString();
-        } else
+        }
+        else
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
             //Text.text = ((int)recipe.ResultGold).ToString();
@@ -141,7 +168,7 @@ public class RecipeDetail : MonoBehaviour
         BackgroundPanel.SetLayoutVertical();
 
         AcceptButton.onClick.RemoveAllListeners();
-        AcceptButton.onClick.AddListener(() => { Services.GetInstance().GetPlayer().SetHeroId(heroId);Hide();completion(); });
+        AcceptButton.onClick.AddListener(() => { Services.GetInstance().GetPlayer().SetHeroId(heroId); Hide(); completion(); });
 
     }
 
@@ -170,8 +197,10 @@ public class RecipeDetail : MonoBehaviour
         BackgroundPanel.SetLayoutVertical();
 
         AcceptButton.onClick.RemoveAllListeners();
-        AcceptButton.onClick.AddListener(() => {
-            Hide(); completion(); });
+        AcceptButton.onClick.AddListener(() =>
+        {
+            Hide(); completion();
+        });
     }
 
     public void Hide()
@@ -198,7 +227,7 @@ public class RecipeDetail : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
 }

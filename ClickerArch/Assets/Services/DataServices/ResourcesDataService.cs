@@ -323,6 +323,18 @@ id: 10.
                 break;
             case ItemCategory.Weapon:
                 Recipes.AddRange(new List<Recipe> {
+                     new Recipe {
+            id = "hero_sword",
+            name = "HERO SWORD",
+
+            Category = ItemCategory.Weapon,
+            RequiredGold = 7500,
+
+            ResultItem = new Item("hero_sword","HERO SWORD", 1,  new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
+                }, ItemCategory.Weapon)
+        },
            new Recipe {
                name = "SWORD",
                Category = ItemCategory.Weapon,
@@ -334,8 +346,8 @@ id: 10.
                 name = "Sword",
                 modificators = new List<Modificator>
                 {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("DPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
                 }
             }
            }

@@ -36,10 +36,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_SizeDelta: {x: 720, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &292037291284131378
 CanvasRenderer:
@@ -91,8 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourcesTransform: {fileID: 4056822405638585131}
-  ResourceItem: {fileID: 5864453906240012115, guid: db1f8fdedd1c5954ea0dcf8ca6eceb82,
-    type: 3}
+  Element: {fileID: 4248115715301552329, guid: be0ff2bfa2723ef4a91eb52893cbfd9f, type: 3}
   ActionButton: {fileID: 3731229702065350895}
   InfoButton: {fileID: 1917608551663961594}
   Icon: {fileID: 4767555621545783091}
@@ -320,7 +319,7 @@ RectTransform:
   m_GameObject: {fileID: 4056822405638585108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0003201, y: 1.0003201, z: 1.0003201}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5356837554077450345}
   m_RootOrder: 1
@@ -385,7 +384,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

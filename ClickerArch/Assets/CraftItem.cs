@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CraftItem : MonoBehaviour
 {
     public Transform ResourcesTransform;
-    public ResourceItem ResourceItem;
+    public DetailElement Element;
     public Button ActionButton;
     public Button InfoButton;
 
@@ -20,19 +20,19 @@ public class CraftItem : MonoBehaviour
 
         recipe.RequiredItems.ForEach(i =>
         {
-            var el = Instantiate(ResourceItem, ResourcesTransform);
+            var el = Instantiate(Element, ResourcesTransform);
             el.SetupForItem(i);
         });
 
         recipe.RequiredResources.ForEach(res =>
         {
-            var el = Instantiate(ResourceItem, ResourcesTransform);
+            var el = Instantiate(Element, ResourcesTransform);
             el.SetupForResource(res);
         });
 
         if (recipe.RequiredGold != 0)
         {
-            var goldEl = Instantiate(ResourceItem, ResourcesTransform);
+            var goldEl = Instantiate(Element, ResourcesTransform);
             goldEl.SetupForGold(recipe.RequiredGold);
         }
 
@@ -61,7 +61,7 @@ public class CraftItem : MonoBehaviour
         Helper.ClearTransform(ResourcesTransform);
 
 
-        var goldEl = Instantiate(ResourceItem, ResourcesTransform);
+        var goldEl = Instantiate(Element, ResourcesTransform);
         var newLevel = Services.GetInstance().GetPlayer().LevelForParameter(parameter) + 1;
         goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
 

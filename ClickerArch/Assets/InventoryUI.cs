@@ -257,14 +257,52 @@ public class InventoryUI : MonoBehaviour
         if (CurrentCategory != ItemCategory.Skill)
         {
             CurrentCategory = ItemCategory.Skill;
-            SwitchToParameters();
         }
+            SwitchToParameters();
+        
 
     }
 
     void SwitchToParameters()
     {
         var dataServices = Services.GetInstance().GetDataService();
+
+        Helper.ClearTransform(ListContent); 
+
+        List<HeroParameter> list = new List<HeroParameter>
+            {
+                HeroParameter.HP,
+                HeroParameter.DPC,
+                HeroParameter.DPS,
+                HeroParameter.Block,
+                HeroParameter.Reflect,
+                HeroParameter.AdditionalGold,
+                HeroParameter.AdditionalXP,
+            };
+
+        list.ForEach(parameter =>
+        {
+            var item = Instantiate(InventoryItem, ListContent);
+            item.SetupForSkill(parameter);
+            item.InfoButton.onClick.AddListener(() => {
+                ShowCraftDetail(parameter);
+            });
+
+            item.ActionButton.gameObject.SetActive(false);
+            //item.ActionButton.onClick.AddListener(() => {
+            //    AcceptPurchase(parameter);
+            //});
+
+        });
+
+
+
+    }
+
+    public void ShowCraftDetail(HeroParameter parameter)
+    {
+        DetailElement.ShowDetailForParameter(parameter, false);
+        DetailElement.gameObject.SetActive(true);
     }
 
     void UpdateListWithoutMove()
