@@ -18,7 +18,13 @@ public class DamageTextGenerator : MonoBehaviour
         }
     }
 
-    public void Generate(int value)
+    /*public void Generate(int value)
+    {
+        objectPool[currentIndex].StartMotion(value);
+        currentIndex = currentIndex + 1 < objectPool.Length ? currentIndex + 1 : 0;
+    }*/
+
+    public void Generate(string value)
     {
         objectPool[currentIndex].StartMotion(value);
         currentIndex = currentIndex + 1 < objectPool.Length ? currentIndex + 1 : 0;

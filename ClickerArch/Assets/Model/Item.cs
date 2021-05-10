@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum ItemCategory
 {
     Thing,
@@ -11,14 +12,16 @@ public enum ItemCategory
     Skill
 }
 
+
+[System.Serializable]
 public class Item
 {
     public string id;
     public string name;
     public int count;
 
-    public List<Modificator> modificators = new List<Modificator>();
-    public ItemCategory Category = ItemCategory.Thing;
+    public List<Modificator> modificators;// = new List<Modificator>();
+    public ItemCategory Category;// = ItemCategory.Thing;
 
     public Item()
     {
@@ -38,5 +41,21 @@ public class Item
         this.Category = Category;
     }
 
+    public bool IsEmpty()
+    {
+        return id == "" &&
+        name == "" &&
+        count == 0 &&
+        modificators.Count == 0 &&
+        Category == ItemCategory.Thing;
+    }
 
+    public override string ToString()
+    {
+        return id + " " +
+        name + " " +
+        count + " " +
+        modificators.Count + " " +
+        Category + " " + IsEmpty();
+    }
 }

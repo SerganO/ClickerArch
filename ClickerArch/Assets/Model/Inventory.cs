@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Inventory
 {
-    List<Resource> Resources = new List<Resource>() { };
+    public List<Resource> Resources = new List<Resource>() { };
     public List<Item> Items = new List<Item>();
 
     public List<Recipe> Recipes = new List<Recipe>();

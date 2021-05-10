@@ -62,6 +62,7 @@ public static class LocalizationManager
     public static string GetDescriptionForParameter(HeroParameter parameter, bool isUpgrade = true)
     {
         var player = Services.GetInstance().GetPlayer();
+        var level = player.LevelForParameter(parameter);
         var dataService = Services.GetInstance().GetDataService();
 
         var description = GetTextDescriptionForParameter(parameter) + Environment.NewLine;
@@ -70,69 +71,72 @@ public static class LocalizationManager
         if(isUpgrade)
         {
             description = "+";
-            switch (parameter)
-            {
-                case HeroParameter.HP:
-                    description += (dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel + 1) - dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel)).ToString();
-                    break;
-                case HeroParameter.DPC:
-                    description += (dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel + 1) - dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel)).ToString();
 
-                    break;
-                case HeroParameter.DPS:
-                    description += (dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel + 1) - dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel)).ToString();
 
-                    break;
-                case HeroParameter.Block:
-                    description += (dataService.BaseBlockForLevel(player.BaseBlockLevel + 1) - dataService.BaseBlockForLevel(player.BaseBlockLevel)).ToString();
+            description += dataService.ValueForParameterForLevel(parameter, level + 1) - dataService.ValueForParameterForLevel(parameter, level);
+            //switch (parameter)
+            //{
+            //    case HeroParameter.HP:
+            //        description += (dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel + 1) - dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel)).ToString();
+            //        break;
+            //    case HeroParameter.DPC:
+            //        description += (dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel + 1) - dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel)).ToString();
 
-                    break;
-                case HeroParameter.Reflect:
-                    description += (dataService.BaseReflectForLevel(player.BaseReflectLevel + 1) - dataService.BaseReflectForLevel(player.BaseReflectLevel)).ToString();
+            //        break;
+            //    case HeroParameter.DPS:
+            //        description += (dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel + 1) - dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel)).ToString();
 
-                    break;
-                case HeroParameter.AdditionalGold:
-                    description += (dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel + 1) - dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel)).ToString();
+            //        break;
+            //    case HeroParameter.Block:
+            //        description += (dataService.BaseBlockForLevel(player.BaseBlockLevel + 1) - dataService.BaseBlockForLevel(player.BaseBlockLevel)).ToString();
 
-                    break;
-                case HeroParameter.AdditionalXP:
-                    description += (dataService.AdditionalXPForLevel(player.AdditionalXPLevel + 1) - dataService.AdditionalXPForLevel(player.AdditionalXPLevel)).ToString();
+            //        break;
+            //    case HeroParameter.Reflect:
+            //        description += (dataService.BaseReflectForLevel(player.BaseReflectLevel + 1) - dataService.BaseReflectForLevel(player.BaseReflectLevel)).ToString();
 
-                    break;
-            }
+            //        break;
+            //    case HeroParameter.AdditionalGold:
+            //        description += (dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel + 1) - dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel)).ToString();
+
+            //        break;
+            //    case HeroParameter.AdditionalXP:
+            //        description += (dataService.AdditionalXPForLevel(player.AdditionalXPLevel + 1) - dataService.AdditionalXPForLevel(player.AdditionalXPLevel)).ToString();
+
+            //        break;
+            //}
         } else
         {
-            
-            switch (parameter)
-            {
-                case HeroParameter.HP:
-                    description += (dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel)).ToString();
-                    break;
-                case HeroParameter.DPC:
-                    description += (dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel)).ToString();
+            description += dataService.ValueForParameterForLevel(parameter, level);
+            //switch (parameter)
+            //{
+            //    case HeroParameter.HP:
+            //        description += (dataService.MaximumHealthPointForLevel(player.MaximumHealthPointLevel)).ToString();
+            //        break;
+            //    case HeroParameter.DPC:
+            //        description += (dataService.BaseDamagePerClickForLevel(player.BaseDamagePerClickLevel)).ToString();
 
-                    break;
-                case HeroParameter.DPS:
-                    description += (dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel)).ToString();
+            //        break;
+            //    case HeroParameter.DPS:
+            //        description += (dataService.BaseDamagePerSecondForLevel(player.BaseDamagePerSecondLevel)).ToString();
 
-                    break;
-                case HeroParameter.Block:
-                    description += (dataService.BaseBlockForLevel(player.BaseBlockLevel)).ToString();
+            //        break;
+            //    case HeroParameter.Block:
+            //        description += (dataService.BaseBlockForLevel(player.BaseBlockLevel)).ToString();
 
-                    break;
-                case HeroParameter.Reflect:
-                    description += (dataService.BaseReflectForLevel(player.BaseReflectLevel)).ToString();
+            //        break;
+            //    case HeroParameter.Reflect:
+            //        description += (dataService.BaseReflectForLevel(player.BaseReflectLevel)).ToString();
 
-                    break;
-                case HeroParameter.AdditionalGold:
-                    description += (dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel)).ToString();
+            //        break;
+            //    case HeroParameter.AdditionalGold:
+            //        description += (dataService.AdditionalGoldForLevel(player.AdditionalGoldLevel)).ToString();
 
-                    break;
-                case HeroParameter.AdditionalXP:
-                    description += (dataService.AdditionalXPForLevel(player.AdditionalXPLevel)).ToString();
+            //        break;
+            //    case HeroParameter.AdditionalXP:
+            //        description += (dataService.AdditionalXPForLevel(player.AdditionalXPLevel)).ToString();
 
-                    break;
-            }
+            //        break;
+            //}
         }
 
 

@@ -26,6 +26,7 @@ public interface IDataService
     int CostForAdditionalXPForLevel(int level);
     int CostForMaximumHealthPointForLevel(int level);
 
+    double ValueForParameterForLevel(HeroParameter parameter, int level);
 
     int CostForParameterForLevel(HeroParameter parameter, int level);
     bool CanUpgradeParameter(HeroParameter parameter);

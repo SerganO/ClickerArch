@@ -5,10 +5,11 @@ using UnityEngine;
 public class Drop
 {
     public double gold = 0;
-    public double xp = 0;
+    public double xpBaseLevel = 0;
 
     public List<DropResource> Resources = new List<DropResource>();
     public List<DropItem> Items = new List<DropItem>();
+    public List<DropRecipe> Recipes = new List<DropRecipe>();
 
     public List<Resource> GetResourcesAfterProbability()
     {
@@ -42,6 +43,12 @@ public class DropResource
 public class DropItem
 {
     public Item Item;
+    public double probability;
+}
+
+public class DropRecipe
+{
+    public Recipe Recipe;
     public double probability;
 }
 

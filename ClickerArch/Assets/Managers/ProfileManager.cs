@@ -143,7 +143,7 @@ public class ProfileManager : MonoBehaviour
 
     public static void LoadUserDataFromFile(string profileName)
     {
-        string path = PathCombine(profileName);
+        string path = PathCombine(profileName + ".json");
 
         if (File.Exists(path))
         {
@@ -207,6 +207,11 @@ public class ProfileManager : MonoBehaviour
         }
     }
 
+    public static void ForceSaveData()
+    {
+        SaveProfile(Services.GetInstance().GetPlayer().PlayerId, Services.GetInstance().GetPlayer());
+    }
+
     public void Delete()
     {
         //if (GlobalUserData.ActiveUser != null)
@@ -226,7 +231,13 @@ public class ProfileManager : MonoBehaviour
 
     public static void SaveProfile(string profileName, Player player)
     {
+        if(PlayerPrefs.GetString("PlayerID") == "") {
+            PlayerPrefs.SetString("PlayerID", profileName);
+        }
         string pathToSave = PathCombine(profileName) + ".json";
+
+
+
         try
         {
             if (!Directory.Exists(EnvDirectory))
@@ -252,6 +263,26 @@ public class ProfileManager : MonoBehaviour
         catch (Exception e)
         {
             Console.WriteLine("The process failed: {0}", e.ToString());
+        }
+    }
+
+    public static void TryLoadProfile()
+    {
+        /////
+        ///
+        //PlayerPrefs.DeleteAll();
+
+
+        /////
+        var playerID = PlayerPrefs.GetString("PlayerID");
+        Debug.Log("TRUCK PROFILE: " + playerID);
+        if (playerID != "")
+        {
+            LoadUserDataFromFile(playerID);
+
+        } else
+        {
+            SaveProfile(Services.GetInstance().GetPlayer());
         }
     }
 }

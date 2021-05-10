@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipe
+[System.Serializable]
+public class Recipe: System.ICloneable
 {
     public ItemCategory Category = ItemCategory.Thing;
     public string id = "";
@@ -34,5 +35,11 @@ public class Recipe
         {
             return LocalizationManager.GetDescriptionForRecipeId(descriptionId);
         }
+    }
+
+    public object Clone()
+    {
+        var value = JsonUtility.ToJson(this);
+        return (Recipe)JsonUtility.FromJson(value, typeof(Recipe));
     }
 }

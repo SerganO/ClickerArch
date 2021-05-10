@@ -45,8 +45,8 @@ public class MainScreenHandler : MonoBehaviour
                 TransportAnimator.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }
-        
 
+        ProfileManager.ForceSaveData();
     }
 
 

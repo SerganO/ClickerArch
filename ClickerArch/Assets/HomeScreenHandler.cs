@@ -13,6 +13,7 @@ public class HomeScreenHandler : MonoBehaviour
         BackgroundClip = Services.GetInstance().GetDataService().GetAudioClipForID(BackgroundClipName);
         MusicManager.instance.Play(BackgroundClipName, BackgroundClip);
 
+        ProfileManager.TryLoadProfile();
     }
 
     private void Update()

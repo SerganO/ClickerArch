@@ -39,7 +39,7 @@ public class InventoryItemScript : MonoBehaviour
 
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
 
-        var text = parameter.ToString() + " " + newLevel;
+        var text = parameter.ToString() + " " + newLevel + ": " + string.Format("{0:0.###}", Services.GetInstance().GetDataService().ValueForParameterForLevel(parameter, newLevel));
 
         Setup(sprite, text);
     }

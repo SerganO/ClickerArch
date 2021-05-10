@@ -134,10 +134,11 @@ id: 10.
 
             RequiredGold = 500,
 
-            ResultItem = new Item("hero_sword","HERO SWORD", 1,  new List<Modificator>
+            ResultItem = new Item() {id = "hero_sword", name = "HERO SWORD", count = 1, modificators = new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                }, ItemCategory.Weapon)
+               }, Category = ItemCategory.Weapon
+                }
         }
 
 
@@ -218,6 +219,7 @@ id: 10.
 
             ResultItem = new Item
             {
+                id = "mock_sword",
                 Category = ItemCategory.Weapon,
                 name = "Sword",
                 modificators = new List<Modificator>
@@ -244,9 +246,203 @@ id: 10.
     {
         var result = new List<string>();
 
-        
+
         switch (levelId)
         {
+            case "Level1":
+                result.Add("Archer");
+                result.Add("RedHood");
+                result.Add("inquisitor");
+                result.Add("darkDoctor");
+                result.Add("DarkWarrior");
+                result.Add("Vampire");
+                result.Add("Mimic");
+                result.Add("Knight");
+                result.Add("Deamon");
+                result.Add("DarkWizard2");
+                break;
+
+            case "Level2":
+                result.Add("Angel");
+                result.Add("CaveExplorer");
+                result.Add("HellBeast1");
+                result.Add("HellBeast2");
+                result.Add("DarkWizard2");
+                result.Add("DeamonRed");
+                result.Add("FireSkull");
+                result.Add("FlyingEye");
+                result.Add("Ghost");
+                result.Add("FireWizard");
+                break;
+
+            case "Level3":
+                result.Add("Archer2");
+                result.Add("HeavyBandit");
+                result.Add("Ronin");
+                result.Add("BaldPirate");
+                result.Add("BigGuy");
+                result.Add("BombGuy");
+                result.Add("Cucumber");
+                result.Add("Whale");
+                result.Add("Shadow");
+                result.Add("ShieldDroid");
+                break;
+
+            case "Level4":
+                result.Add("Slug");
+                result.Add("Slug1");
+                result.Add("Slug2");
+                result.Add("Worm");
+                result.Add("Worm1");
+                result.Add("Mushroom");
+                result.Add("Death");
+                result.Add("DeathTeeth");
+                result.Add("Goblin");
+                result.Add("Vampire");
+                break;
+
+            case "Level5":
+                result.Add("DarkWizard");
+                result.Add("DarkWizard3");
+                result.Add("CaveExplorer");
+                result.Add("Skeleton1");
+                result.Add("Skeleton2");
+                result.Add("Skeleton3");
+                result.Add("Skeleton4");
+                result.Add("Skeleton5");
+                result.Add("Skeleton6");
+                result.Add("Mimic");
+                break;
+
+            case "Level6":
+                result.Add("Dryad");
+                result.Add("DeathTeeth");
+                result.Add("Archer");
+                result.Add("Archer2");
+                result.Add("Shadow");
+                result.Add("Shadow2");
+                result.Add("Goblin");
+                result.Add("Death");
+                result.Add("Mushroom");
+                result.Add("FlyingEye");
+                break;
+
+            case "Level7":
+                result.Add("BaldPirate");
+                result.Add("BigGuy");
+                result.Add("BombGuy");
+                result.Add("Captain");
+                result.Add("Cucumber");
+                result.Add("Whale");
+                result.Add("DeathTeeth");
+                result.Add("Worm");
+                result.Add("Worm1");
+                result.Add("Warrior");
+                break;
+
+            case "Level8":
+                result.Add("Slug");
+                result.Add("Slug1");
+                result.Add("Slug2");
+                result.Add("Mushroom");
+                result.Add("Mimic");
+                result.Add("DeathTeeth");
+                result.Add("ShieldDroid");
+                result.Add("Bot");
+                result.Add("Whale");
+                result.Add("Cucumber");
+                break;
+
+            case "Level9":
+                result.Add("Skeleton1");
+                result.Add("Skeleton2");
+                result.Add("Skeleton3");
+                result.Add("Skeleton4");
+                result.Add("Skeleton5");
+                result.Add("Skeleton6");
+                result.Add("Death");
+                result.Add("FireSkull");
+                result.Add("Ghost");
+                result.Add("Shadow");
+                break;
+
+            case "Level10":
+                result.Add("Worm");
+                result.Add("Worm1");
+                result.Add("DeathTeeth");
+                result.Add("Mimic");
+                result.Add("BaldPirate");
+                result.Add("BigGuy");
+                result.Add("Cucumber");
+                result.Add("Captain");
+                result.Add("Whale");
+                result.Add("Shadow2");
+                break;
+
+            case "Level11":
+                result.Add("Archer");
+                result.Add("Archer2");
+                result.Add("CaveExplorer");
+                result.Add("Knight");
+                result.Add("HeavyBandit");
+                result.Add("Warrior");
+                result.Add("RedHood");
+                result.Add("Vampire");
+                result.Add("DarkDoctor");
+                result.Add("Inquisitor");
+                break;
+
+            case "Level12":
+                result.Add("Angel");
+                result.Add("Bot");
+                result.Add("Deamon");
+                result.Add("FlyingEye");
+                result.Add("FireSkull");
+                result.Add("FireWizard");
+                result.Add("DarkWizard3");
+                result.Add("Death");
+                result.Add("Shadow");
+                result.Add("Ronin");
+                break;
+
+            case "Level13":
+                result.Add("Archer");
+                result.Add("Archer2");
+                result.Add("DarkWizard2");
+                result.Add("DarkWarrior");
+                result.Add("DeathTeeth");
+                result.Add("RedHood");
+                result.Add("Mushroom");
+                result.Add("Shadow2");
+                result.Add("Dryad");
+                result.Add("Goblin");
+                break;
+
+            case "Level14":
+                result.Add("Angel");
+                result.Add("Archer2");
+                result.Add("BaldPirate");
+                result.Add("BigGuy");
+                result.Add("BombGuy");
+                result.Add("Captain");
+                result.Add("Cucumber");
+                result.Add("Whale");
+                result.Add("RedHood");
+                result.Add("Mushroom");
+                break;
+
+            case "Level15":
+                result.Add("Archer");
+                result.Add("Skeleton1");
+                result.Add("Skeleton3");
+                result.Add("Skeleton4");
+                result.Add("Skeleton5");
+                result.Add("Skeleton6");
+                result.Add("Shadow2");
+                result.Add("DarkWizard");
+                result.Add("Death");
+                result.Add("Dryad");
+                break;
             default:
                 result.Add("Angel");
                 result.Add("Bot");
@@ -259,15 +455,161 @@ id: 10.
                 result.Add("darkDoctor");
                 break;
         }
-        
+
         return result;
     }
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
+        double base_hp = 10;
+        double base_dmg = 1;
+
+        double actual_hp = 10;
+        double actual_dmg = 1;
+
+        for (int lvl = 1; lvl <= level; lvl++)
+        {
+            actual_hp = actual_hp * base_hp * 0.105 + 9;
+            actual_dmg = actual_dmg * 0.956 * (base_dmg * 1.1000000000000000000000001) + 1.1;
+        }
         
-        var hp = (int)(50 * Mathf.Pow((float)1.07, level));
-        return new EnemyData(hp, 1.0, (int)(1 + 1 * Mathf.Pow((float)1.1, level)), new Drop { xp = level, gold = 10, Resources = new List<DropResource> { new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common }, probability = 75 } } } );
+
+        var hp = (int)actual_hp;// (int)(50 * Mathf.Pow((float)1.07, level));
+        var dmg = (int)actual_dmg;//(1 + 1 * Mathf.Pow((float)1.1, level));
+        return new EnemyData(hp, 1.0, dmg, new Drop { xpBaseLevel = level, gold = 10 * level * Mathf.Pow((float)1.1, level - 1),
+            Resources = new List<DropResource> {
+            new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common },      probability = level <= 25 ? 17 : (level <= 50 ? 4 : ( level <= 75 ? 3 : 2)) },
+            new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Rare },        probability = level <= 25 ? 7 : (level <= 50 ? 14 : ( level <= 75 ? 6 : 4)) },
+            new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Epic },        probability = level <= 25 ? 4 : (level <= 50 ? 8 : ( level <= 75 ? 17 : 7)) },
+            new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Legendary },   probability = level <= 25 ? 2 : (level <= 50 ? 4 : ( level <= 75 ? 4 : 17)) },
+        },
+            Recipes = RecipesForLevel(level)
+        } );
+    }
+
+    List<Recipe> CommonRecipes = new List<Recipe> {new Recipe {
+            id = "mock_sword",
+            name = "SWORD",
+
+            Category = ItemCategory.Weapon,
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 4 },
+                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            RequiredGold = 678,
+
+            ResultItem = new Item
+            {
+                id = "mock_sword",
+                Category = ItemCategory.Weapon,
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+        } };
+    List<Recipe> RareRecipes = new List<Recipe> { new Recipe {
+            id = "mock_sword",
+            name = "SWORD",
+
+            Category = ItemCategory.Weapon,
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 4 },
+                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            RequiredGold = 678,
+
+            ResultItem = new Item
+            {
+                id = "mock_sword",
+                Category = ItemCategory.Weapon,
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+        }};
+    List<Recipe> EpicRecipes = new List<Recipe> {new Recipe {
+            id = "mock_sword",
+            name = "SWORD",
+
+            Category = ItemCategory.Weapon,
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 4 },
+                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            RequiredGold = 678,
+
+            ResultItem = new Item
+            {
+                id = "mock_sword",
+                Category = ItemCategory.Weapon,
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+        } };
+    List<Recipe> LegendaryRecipes = new List<Recipe> {new Recipe {
+            id = "mock_sword",
+            name = "SWORD",
+
+            Category = ItemCategory.Weapon,
+            RequiredResources = new List<Resource>
+            {
+                new Resource { rarity = Resource.Rarity.Common, count = 4 },
+                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            RequiredGold = 678,
+
+            ResultItem = new Item
+            {
+                id = "mock_sword",
+                Category = ItemCategory.Weapon,
+                name = "Sword",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
+                }
+            }
+        } };
+
+    public T RandomElement<T>(List<T> list)
+    {
+
+        var count = list.Count;
+        if (count <= 0) return default(T);
+        int index = Random.Range(0, count);
+        return list[index];
+
+
+    }
+
+    public List<DropRecipe> RecipesForLevel(int level)
+    {
+        var res = new List<DropRecipe> {
+            new DropRecipe { Recipe = (Recipe)RandomElement(CommonRecipes).Clone(),     probability = level <= 25 ? 17 / 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 3/ 2.0 : 2/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(RareRecipes).Clone(),       probability = level <= 25 ? 7/ 2.0 : (level <= 50 ? 14/ 2.0 : ( level <= 75 ? 6/ 2.0 : 4/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(EpicRecipes).Clone(),       probability = level <= 25 ? 4/ 2.0 : (level <= 50 ? 8/ 2.0 : ( level <= 75 ? 17/ 2.0 : 7/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(LegendaryRecipes).Clone(),  probability = level <= 25 ? 2/ 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 4/ 2.0 : 17/ 2.0)) },
+        };
+
+
+        return res;
     }
 
     public void GetGoodsList(ItemCategory Category, RecipeList completion)
@@ -330,10 +672,10 @@ id: 10.
             Category = ItemCategory.Weapon,
             RequiredGold = 7500,
 
-            ResultItem = new Item("hero_sword","HERO SWORD", 1,  new List<Modificator>
+            ResultItem = new Item(){id = "hero_sword", name = "HERO SWORD", count = 1,  modificators = new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                }, ItemCategory.Weapon)
+                }, Category=  ItemCategory.Weapon }
         },
            new Recipe {
                name = "SWORD",
@@ -381,24 +723,46 @@ id: 10.
         return AllRecipes.Find(recipe => recipe.id == id);
     }
 
+    List<int> a = new List<int>{ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557 };
+
     public double BaseDamagePerClickForLevel(int level)
     {
-        return 5 + 1 * level;
+        double res = 0;
+        for(int i=0;i<= level; i++)
+        {
+            res += (int)((a[i] * 4.8 - 4) / 2.1);
+        }
+        return res;
     }
 
     public double BaseDamagePerSecondForLevel(int level)
     {
-        return 1 + 0.25 * level;
+        double res = 0;
+        for (int i = 0; i <= level; i++)
+        {
+            res += (int)((a[i] * 4.8 - 5) / 2.2);
+        }
+        return res;
     }
 
     public double BaseBlockForLevel(int level)
     {
-        return 0 + 0.01 * level;
+        double res = 0;
+        for (int i = 0; i < level; i++)
+        {
+            res += (int)((a[i] * 1.01 + 1.9) / 3.9);
+        }
+        return res / 100;
     }
 
     public double BaseReflectForLevel(int level)
     {
-        return 0 + 0.1 * level;
+        double res = 0;
+        for (int i = 0; i < level; i++)
+        {
+            res += (int)((a[i] * 1.01 + 7.9) / 8.9);
+        }
+        return res / 100;
     }
 
     public double AdditionalGoldForLevel(int level)
@@ -413,43 +777,48 @@ id: 10.
 
     public double MaximumHealthPointForLevel(int level)
     {
-        return 10 + 5 * level;
+        double res = 0;
+        for (int i = 0; i <= level; i++)
+        {
+            res += (int)(a[i] * 4.8 - 4);
+        }
+        return res;
     }
 
     public int CostForBaseDamagePerClickForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 5.048 * (level * 3.0 * 0.699) + 10);
     }
 
     public int CostForBaseDamagePerSecondForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 5.049 * (level * 3.0 * 0.699) + 19);
     }
 
     public int CostForBaseBlockForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 268.049 * (level * 2.5 * 0.699) + 199);
     }
 
     public int CostForBaseReflectForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 218.049 * (level * 2.5 * 0.699) + 175);
     }
 
     public int CostForAdditionalGoldForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 44.049 * (level * 2.5 * 0.699) + 175);
     }
 
 
     public int CostForAdditionalXPForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 44.049 * (level * 2.5 * 0.699) + 175);
     }
 
     public int CostForMaximumHealthPointForLevel(int level)
     {
-        return 100 * (level + 1);
+        return (int)(a[level] * 5.048 * (level * 3.0 * 0.699) + 10);
     }
 
     public int CostForParameterForLevel(HeroParameter parameter, int level)
@@ -481,6 +850,30 @@ id: 10.
 
         var level = player.LevelForParameter(parameter);
 
-        return player.Gold >= CostForParameterForLevel(parameter, level + 1) && level + 1 <= (player.CoolLevel + 1) * 5;
+        bool bigParameter = parameter == HeroParameter.HP || parameter == HeroParameter.DPC || parameter == HeroParameter.DPS;
+
+        return player.Gold >= CostForParameterForLevel(parameter, level + 1) && level + 1 < (bigParameter ? 100: 10);
+    }
+
+    public double ValueForParameterForLevel(HeroParameter parameter, int level)
+    {
+        switch (parameter)
+        {
+            case HeroParameter.HP:
+                return MaximumHealthPointForLevel(level);
+            case HeroParameter.DPC:
+                return BaseDamagePerClickForLevel(level);
+            case HeroParameter.DPS:
+                return BaseDamagePerSecondForLevel(level);
+            case HeroParameter.Block:
+                return BaseBlockForLevel(level);
+            case HeroParameter.Reflect:
+                return BaseReflectForLevel(level);
+            case HeroParameter.AdditionalGold:
+                return AdditionalGoldForLevel(level);
+            case HeroParameter.AdditionalXP:
+                return AdditionalXPForLevel(level);
+        }
+        return 0;
     }
 }

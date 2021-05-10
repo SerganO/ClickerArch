@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Player
 {
     public string PlayerId = "";
     public string Username = "";
 
+    public Player()
+    {
+
+    }
 
     public Player(string username)
     {
@@ -16,19 +21,41 @@ public class Player
 
     public int MaxArtifactsCount = 3;
 
-    public Item activeTransport;
-    public Item activeWeapon = new Item("hero_sword", "HERO SWORD", 1, new List<Modificator>
+    public Item activeTransport = null;
+    public Item activeWeapon = null;
+    /* new Item("hero_sword", "HERO SWORD", 1, new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-                }, ItemCategory.Weapon);
+                }, ItemCategory.Weapon);*/
     public List<Item> activeArtifacts = new List<Item>()
     {
 
 
     };
 
-    public Item ActiveTransport { get { return activeTransport; } }
-    public Item ActiveWeapon { get { return activeWeapon; } }
+    public Item ActiveTransport
+    {
+        get
+        {
+            if (activeTransport != null && activeTransport.IsEmpty())
+            {
+                activeTransport = null;
+
+
+            }
+            return activeTransport;
+        }
+    }
+    public Item ActiveWeapon {
+        get
+        {
+            if (activeWeapon != null && activeWeapon.IsEmpty())
+            {
+                activeWeapon = null;
+            }
+            return activeWeapon;
+        }
+    }
     public List<Item> ActiveArtifacts { get { return activeArtifacts; } }
 
 
@@ -117,8 +144,11 @@ public class Player
 
 
     public event VoidFunc OnXPRaise;
+    public event DoubleFunc OnXPDoubleRaise;
     public event VoidFunc OnGoldChange;
+    public event DoubleFunc OnGoldDoubleChange;
 
+    [SerializeField]
     double gold = 0;
 
     public double Gold
@@ -129,16 +159,16 @@ public class Player
         }
     }
 
-    public double XP { get; set; }
-    public int CoolLevel { get; set; }
+    public double XP;
+    public int CoolLevel;
 
-    public int MaximumHealthPointLevel { get; set; } = 0;
-    public int BaseDamagePerClickLevel { get; set; } = 0;
-    public int BaseDamagePerSecondLevel { get; set; } = 0;
-    public int BaseBlockLevel { get; set; } = 0;
-    public int BaseReflectLevel { get; set; } = 0;
-    public int AdditionalGoldLevel { get; set; } = 0;
-    public int AdditionalXPLevel { get; set; } = 0;
+    public int MaximumHealthPointLevel  = 0;
+    public int BaseDamagePerClickLevel  = 0;
+    public int BaseDamagePerSecondLevel  = 0;
+    public int BaseBlockLevel  = 0;
+    public int BaseReflectLevel  = 0;
+    public int AdditionalGoldLevel  = 0;
+    public int AdditionalXPLevel  = 0;
 
     public int LevelForParameter(HeroParameter parameter)
     {
@@ -216,7 +246,7 @@ public class Player
     public double AdditionalGold { get{ return additionalGold + AdditionalAdditionalGold(); }}
     public double AdditionalXP { get{ return additionalXP + AdditionalAdditionalXP(); } }
 
-    public Inventory Inventory { get; set; } = new Inventory() {
+    public Inventory Inventory = new Inventory(); /*{
         Items = new List<Item>
         {
             new Item("item_id_3", "DAMAGE RING", 1, new List<Modificator>
@@ -252,7 +282,7 @@ public class Player
             Services.GetInstance().GetDataService().GetRecipeForId("epic_resource"),
             Services.GetInstance().GetDataService().GetRecipeForId("legendary_resource"),
             Services.GetInstance().GetDataService().GetRecipeForId("hero_sword"),
-    } };
+    } };*/
 
 
 
@@ -340,6 +370,7 @@ public class Player
         AvailableHeroes.Remove(currentHeroID);
     }
 
+    [SerializeField]
     string currentHeroID = "Squire";
 
     public string CurrentHeroId
@@ -413,6 +444,7 @@ public class Player
         XP += count;
         CheckLevelUp();
         OnXPRaise?.Invoke();
+        OnXPDoubleRaise?.Invoke(count);
     }
 
     public void CheckLevelUp()
@@ -436,6 +468,7 @@ public class Player
     {
         gold += count;
         OnGoldChange?.Invoke();
+        OnGoldDoubleChange?.Invoke(count);
     }
 
     public bool Purchase(double count)

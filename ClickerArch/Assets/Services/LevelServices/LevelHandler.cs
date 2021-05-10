@@ -35,6 +35,9 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     double SECOND = 1.0;
     double secondTick = 0;
 
+    public DamageTextGenerator GoldGenerator;
+    public DamageTextGenerator XPGenerator;
+
     bool gameContinued = true;
 
     List<string> mockLevelIDs = new List<string>()
@@ -204,7 +207,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         Debug.Log("Get Drop");
         var drop = CurrentEnemy.GetEnemyModel().drop;
 
-        var xp = 100.0 * (10.0 + drop.xp - Services.GetInstance().GetPlayer().CoolLevel) / (10.0 + Services.GetInstance().GetPlayer().CoolLevel);
+        var xp = 100.0 * (10.0 + drop.xpBaseLevel - Services.GetInstance().GetPlayer().CoolLevel) / (10.0 + Services.GetInstance().GetPlayer().CoolLevel);
         xp = Mathf.Max(1, (float)xp);
 
         
@@ -321,6 +324,18 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         AssignedHero.handler = this;
 
         AssignedPlayer.OnXPRaise += AssignedPlayer_OnXPRaise;
+        AssignedPlayer.OnXPDoubleRaise += AssignedPlayer_OnXPDoubleRaise;
+        AssignedPlayer.OnGoldDoubleChange += AssignedPlayer_OnGoldDoubleChange;
+    }
+
+    private void AssignedPlayer_OnXPDoubleRaise(double value)
+    {
+        XPGenerator.Generate(Helper.BlueText(string.Format("{0: 0.###}", value)));
+    }
+
+    private void AssignedPlayer_OnGoldDoubleChange(double value)
+    {
+        GoldGenerator.Generate(Helper.YellowText(string.Format("{0: 0.###}", value)));
     }
 
     void SetCoolLevelUI()
@@ -344,6 +359,8 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         AssignedHero.AdditionalCoefAttack -= OnHeroCoefAdditionalCoefAttack;
 
         AssignedPlayer.OnXPRaise -= AssignedPlayer_OnXPRaise;
+        AssignedPlayer.OnXPDoubleRaise -= AssignedPlayer_OnXPDoubleRaise;
+        AssignedPlayer.OnGoldDoubleChange -= AssignedPlayer_OnGoldDoubleChange;
     }
 
     private void OnDestroy()

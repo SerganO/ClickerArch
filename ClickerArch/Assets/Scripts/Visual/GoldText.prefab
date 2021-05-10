@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1662512092869484041}
   - component: {fileID: 1662512092869484046}
   m_Layer: 5
-  m_Name: DamageText
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 84f97aa575ca0ce4a80b6cf2b949aa59, type: 3}
-    m_FontSize: 65
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

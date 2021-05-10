@@ -9,10 +9,10 @@ using static System.Enum;
 
 // CurrentDPC|OnAttack|NONE+Const+10+1+3+2|Time+10+1|Remove
 
-
+[System.Serializable]
 public class Modificator
 {
-
+    [System.Serializable]
     public enum Parameter
     {
         NONE,
@@ -40,6 +40,7 @@ public class Modificator
 
     }
 
+    [System.Serializable]
     public enum ActivationType
     {
         Immediately,
@@ -116,7 +117,7 @@ public class Modificator
         finalizator = new Finalizator(parts[4], replacePart);
     }
 
-
+    [System.Serializable]
     public class ChangeValue
     {
         public enum ValueChangeType
@@ -172,8 +173,10 @@ public class Modificator
         }
     }
 
+    [System.Serializable]
     public class CheckObject
     {
+        [System.Serializable]
         public enum EndCheckType
         {
             Permanent,
@@ -217,8 +220,10 @@ public class Modificator
         }
     }
 
+    [System.Serializable]
     public class Finalizator
     {
+        [System.Serializable]
         public enum EndType
         {
             Remove,

@@ -66,7 +66,11 @@ public class CraftItem : MonoBehaviour
         goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForParameterForLevel(parameter, newLevel));
 
         Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Modificators/" + parameter);
-        
-        Text.text = parameter.ToString() + " " + newLevel;
+        var player = Services.GetInstance().GetPlayer();
+        var level = player.LevelForParameter(parameter);
+        var dataService = Services.GetInstance().GetDataService();
+        string description = "+" + string.Format("{0:0.###}", dataService.ValueForParameterForLevel(parameter, level + 1) - dataService.ValueForParameterForLevel(parameter, level));
+
+        Text.text = parameter.ToString() + " " + newLevel + ": " + description;
     }
 }

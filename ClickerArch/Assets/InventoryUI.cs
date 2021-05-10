@@ -112,7 +112,7 @@ public class InventoryUI : MonoBehaviour
                 SwitchToClothes();
                 return;
             case ItemCategory.Weapon:
-                if (player.activeWeapon != null)
+                if (player.ActiveTransport != null)
                 {
                     InventoryItemScript activeWeapon = Instantiate(InventoryItem, ListContent);
                     activeWeapon.GetComponent<Image>().color = Color.green;
@@ -159,7 +159,7 @@ public class InventoryUI : MonoBehaviour
                 break;
             case ItemCategory.Transport:
 
-                if (player.activeTransport != null)
+                if (player.ActiveTransport != null)
                 {
                     InventoryItemScript activeTransport = Instantiate(InventoryItem, ListContent);
                     activeTransport.GetComponent<Image>().color = Color.green;

@@ -65,7 +65,7 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
     {
         if (showDamage)
         {
-            DamageObject.Generate((int)damage);
+            DamageObject.Generate(Helper.RedText(string.Format("{0:0.###}", damage)));
         }
         UpdateRatio(ratio);
     }
