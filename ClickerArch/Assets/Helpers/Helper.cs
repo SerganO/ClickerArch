@@ -10,6 +10,7 @@ public delegate void StringFunc(string value);
 public delegate void AttackFunc(double value, bool mustBeShown);
 
 public delegate void RecipeList(List<Recipe> list);
+public delegate void StringList(List<string> list);
 
 public static class Helper
 {

@@ -52,6 +52,34 @@ public class StoreHandler : MonoBehaviour
         Unbind();
     }
 
+
+    void SetupForClothes()
+    {
+        if (CurrentCategory != ItemCategory.Clothes)
+        {
+            CurrentCategory = ItemCategory.Clothes;
+
+        }
+        Helper.ClearTransform(GoodsListTransform);
+
+        Services.GetInstance().GetDataService().GetHeroList((list) =>
+        {
+            list.ForEach(cloth =>
+            {
+
+                var item = Instantiate(Item, GoodsListTransform);
+                item.SetupAsClothes(cloth, () => { DetailElement_OnCraft(); });
+                item.InfoButton.onClick.AddListener(() => {
+                    DetailElement.ShowStoreDetailForHero(cloth, ()=> { DetailElement_OnCraft(); });
+                    DetailElement.gameObject.SetActive(true);
+                });
+                item.ActionButton.interactable = Services.GetInstance().GetPlayer().Gold >= Services.GetInstance().GetDataService().CostForClothes(cloth);
+            });
+
+       });
+   }
+
+
     public void UpdateGoodsList()
     {
         if(CurrentCategory == ItemCategory.Skill)
@@ -59,6 +87,14 @@ public class StoreHandler : MonoBehaviour
             UpdateForSkills();
             return;
         }
+
+        if (CurrentCategory == ItemCategory.Clothes)
+        {
+            SetupForClothes();
+            return;
+        }
+
+
         Helper.ClearTransform(GoodsListTransform);
 
         Services.GetInstance().GetDataService().GetGoodsList(CurrentCategory, (list) =>
@@ -124,6 +160,14 @@ public class StoreHandler : MonoBehaviour
     public void AcceptPurchase(Recipe recipe)
     {
         CraftMaster.Craft(recipe);
+        DetailElement_OnCraft();
+    }
+
+    public void AcceptPurchase(string heroId)
+    {
+        var cost = Services.GetInstance().GetDataService().CostForClothes(heroId);
+        Services.GetInstance().GetPlayer().Purchase(cost);
+        Services.GetInstance().GetPlayer().availableHeroes.Add(heroId);
         DetailElement_OnCraft();
     }
 

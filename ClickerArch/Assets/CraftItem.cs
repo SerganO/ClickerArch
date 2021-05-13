@@ -73,4 +73,28 @@ public class CraftItem : MonoBehaviour
 
         Text.text = parameter.ToString() + " " + newLevel + ": " + description;
     }
+
+
+    public void SetupAsClothes(string heroId, VoidFunc completion)
+    {
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
+        var name = heroId;
+        var goldEl = Instantiate(Element, ResourcesTransform);
+        goldEl.SetupForGold(Services.GetInstance().GetDataService().CostForClothes(heroId));
+        Setup(sprite, name);
+
+        ActionButton.onClick.RemoveAllListeners();
+        ActionButton.onClick.AddListener(() =>
+        {
+            Services.GetInstance().GetPlayer().availableHeroes.Add(heroId);
+            completion();
+        });
+
+    }
+
+    public void Setup(Sprite sprite, string text)
+    {
+        Icon.sprite = sprite;
+        Text.text = text;
+    }
 }

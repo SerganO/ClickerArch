@@ -397,20 +397,7 @@ public class Player
 
 
     public List<string> availableHeroes = new List<string>() {
-        //COMMON
-        "Adventurer",
-        "ArenaWarrior",
-        "ArmorWarrior",
-        "Assassin",
-        "CityBouncer",
-        "Cyberclockwerk",
-        "Gunslinger",
-        "Hastat",
-        "LightBandit",
-        "MedievalKing",
-        "Ninja",
         
-
         //RARE
 
         //"Archer",

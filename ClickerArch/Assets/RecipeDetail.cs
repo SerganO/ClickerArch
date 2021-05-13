@@ -172,6 +172,29 @@ public class RecipeDetail : MonoBehaviour
 
     }
 
+    public void ShowStoreDetailForHero(string heroId, VoidFunc completion)
+    {
+        AcceptButton.onClick.RemoveAllListeners();
+        var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
+        var name = heroId;
+
+        Setup(sprite, name);
+
+        Helper.ClearTransform(Modificators);
+        Helper.ClearTransform(Resources);
+
+        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
+        BackgroundPanel.SetLayoutVertical();
+
+        AcceptButton.interactable = Services.GetInstance().GetPlayer().Gold >= Services.GetInstance().GetDataService().CostForClothes(heroId);
+        AcceptButton.onClick.RemoveAllListeners();
+        AcceptButton.onClick.AddListener(() => {
+            var cost = Services.GetInstance().GetDataService().CostForClothes(heroId);
+            Services.GetInstance().GetPlayer().Purchase(cost); Services.GetInstance().GetPlayer().availableHeroes.Add(heroId); Hide(); completion();
+        });
+
+    }
+
     public void ShowDetailForItem(Item item, VoidFunc completion)
     {
         AcceptButton.onClick.RemoveAllListeners();

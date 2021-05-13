@@ -876,4 +876,38 @@ id: 10.
         }
         return 0;
     }
+
+    public int CostForClothes(string heroID)
+    {
+
+        return 5000;
+
+
+    }
+
+    public void GetHeroList(StringList completion)
+    {
+        List<string> heroes = new List<string> { 
+        //COMMON
+        "Adventurer",
+        "ArenaWarrior",
+        "ArmorWarrior",
+        "Assassin",
+        "CityBouncer",
+        "Cyberclockwerk",
+        "Gunslinger",
+        "Hastat",
+        "LightBandit",
+        "MedievalKing",
+        "Ninja",
+         };
+
+        heroes.RemoveAll((id) => {
+            return Services.GetInstance().GetPlayer().availableHeroes.Contains(id);
+        });
+
+        completion(heroes);
+
+
+    }
 }
