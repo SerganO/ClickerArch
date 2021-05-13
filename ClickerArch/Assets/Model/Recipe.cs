@@ -6,6 +6,7 @@ using UnityEngine;
 public class Recipe: System.ICloneable
 {
     public ItemCategory Category = ItemCategory.Thing;
+    public Resource.Rarity rarity = Resource.Rarity.Common;
     public string id = "";
     public string name = "";
 

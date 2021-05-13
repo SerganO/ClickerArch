@@ -22,7 +22,7 @@ public class Item
 
     public List<Modificator> modificators;// = new List<Modificator>();
     public ItemCategory Category;// = ItemCategory.Thing;
-
+    public Resource.Rarity rarity = Resource.Rarity.Common;
     public Item()
     {
         id = "";

@@ -201,7 +201,7 @@ id: 10.
     };
 
 
-    List <Recipe> AllRecipes = new List<Recipe>
+    List<Recipe> AllRecipes = new List<Recipe>
     {
 
         new Recipe {
@@ -228,7 +228,90 @@ id: 10.
                     ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
                 }
             }
-        }
+        },
+        // ПРИМЕР ОРУЖИЯ
+        /*
+         
+         id: 1011.
+Название: "Меч героев".
+Описание: "Такой острый, что можно порезаться, едва взглянув на него… Ой!!"
+Характеристики: "+17 DPS"
+Качество: Обычный
+Слот: Оружие
+Материалы: 10 обычных материалов
+Комплект: -
+         */
+        new Recipe
+        {
+            id = "1011",
+            name = "Меч героев",
+            Category = ItemCategory.Weapon,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+            RequiredResources = new List<Resource>
+            {
+                 new Resource { rarity = Resource.Rarity.Common, count = 10 },
+            },
+
+            ResultItem = new Item
+            {
+                id = "1011",
+                Category = ItemCategory.Weapon,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+                name = "Меч героев",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+17+1|Permanent|Remove"),
+
+                },
+
+            }
+        },
+
+        //ПРИМЕР АРТЕФАКТА
+        /*
+         
+         id: 21.
+Название: "Серебрянный витой перстень".
+Описание: "Напоминает кольца бамбукового питона"
+Характеристики: "+10 DPS, -5 HP"
+Качество: Обычный
+Слот: Артефакт
+Материалы: 9 обычных материалов, 1 редкий материал
+Комплект: "HP"
+         
+         */
+        new Recipe
+        {
+            id = "21",
+            name = "Серебрянный витой перстень",
+            Category = ItemCategory.Thing,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+            RequiredResources = new List<Resource>
+            {
+                 new Resource { rarity = Resource.Rarity.Common, count = 9 },
+                 new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+            },
+
+            ResultItem = new Item
+            {
+                id = "21",
+                Category = ItemCategory.Thing,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+                name = "Серебрянный витой перстень",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+10+1|Permanent|Remove"),
+                    ModificatorFactory.ModificatorForString("HP|OnStart|NONE+Const+-5+1|Permanent|Remove"),
+
+                },
+
+            }
+        },
+
     };
 
     public AudioClip GetAudioClipForID(string id)

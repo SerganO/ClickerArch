@@ -64,7 +64,7 @@ public class Player
         if (activeWeapon != null)
         {
             Inventory.AddItem(activeWeapon);
-           
+
         }
         activeWeapon = null;
     }
@@ -74,7 +74,7 @@ public class Player
         if (activeTransport != null)
         {
             Inventory.AddItem(activeTransport);
-            
+
         }
         activeTransport = null;
     }
@@ -83,7 +83,7 @@ public class Player
     {
         Inventory.AddItem(item);
         activeArtifacts.Remove(item);
-        
+
     }
 
     public void SetWeapon(Item item)
@@ -106,12 +106,12 @@ public class Player
             Inventory.AddItem(activeTransport);
         }
         activeTransport = item;
-        
+
     }
 
     public void AddArtifacts(Item item)
     {
-        if(activeArtifacts.Count >= MaxArtifactsCount)
+        if (activeArtifacts.Count >= MaxArtifactsCount)
         {
             UnsetArtifacts(activeArtifacts[0]);
         }
@@ -125,7 +125,7 @@ public class Player
         get
         {
             var result = new List<Item>();
-            if(ActiveWeapon != null)
+            if (ActiveWeapon != null)
             {
                 result.Add(ActiveWeapon);
             }
@@ -162,13 +162,13 @@ public class Player
     public double XP;
     public int CoolLevel;
 
-    public int MaximumHealthPointLevel  = 0;
-    public int BaseDamagePerClickLevel  = 0;
-    public int BaseDamagePerSecondLevel  = 0;
-    public int BaseBlockLevel  = 0;
-    public int BaseReflectLevel  = 0;
-    public int AdditionalGoldLevel  = 0;
-    public int AdditionalXPLevel  = 0;
+    public int MaximumHealthPointLevel = 0;
+    public int BaseDamagePerClickLevel = 0;
+    public int BaseDamagePerSecondLevel = 0;
+    public int BaseBlockLevel = 0;
+    public int BaseReflectLevel = 0;
+    public int AdditionalGoldLevel = 0;
+    public int AdditionalXPLevel = 0;
 
     public int LevelForParameter(HeroParameter parameter)
     {
@@ -238,13 +238,13 @@ public class Player
     double additionalXP { get { return dataService.AdditionalXPForLevel(AdditionalXPLevel); } }
 
 
-    public double MaximumHealthPoint { get{ return maximumHealthPoint + AdditionalMaximumHealthPoint(); }}
-    public double BaseDamagePerClick { get{ return baseDamagePerClick + AdditionalBaseDamagePerClick(); } }
-    public double BaseDamagePerSecond { get{ return baseDamagePerSecond + AdditionalBaseDamagePerSecond(); }}
-    public double BaseBlock { get{ return baseBlock + AdditionalBaseBlock(); }}
-    public double BaseReflect { get{ return baseReflect + AdditionalBaseReflect(); }}
-    public double AdditionalGold { get{ return additionalGold + AdditionalAdditionalGold(); }}
-    public double AdditionalXP { get{ return additionalXP + AdditionalAdditionalXP(); } }
+    public double MaximumHealthPoint { get { return maximumHealthPoint + AdditionalMaximumHealthPoint(); } }
+    public double BaseDamagePerClick { get { return baseDamagePerClick + AdditionalBaseDamagePerClick(); } }
+    public double BaseDamagePerSecond { get { return baseDamagePerSecond + AdditionalBaseDamagePerSecond(); } }
+    public double BaseBlock { get { return baseBlock + AdditionalBaseBlock(); } }
+    public double BaseReflect { get { return baseReflect + AdditionalBaseReflect(); } }
+    public double AdditionalGold { get { return additionalGold + AdditionalAdditionalGold(); } }
+    public double AdditionalXP { get { return additionalXP + AdditionalAdditionalXP(); } }
 
     public Inventory Inventory = new Inventory(); /*{
         Items = new List<Item>
