@@ -902,9 +902,12 @@ id: 10.
         "Ninja",
          };
 
+        var player = Services.GetInstance().GetPlayer();
         heroes.RemoveAll((id) => {
-            return Services.GetInstance().GetPlayer().availableHeroes.Contains(id);
+            return player.availableHeroes.Contains(id) || player.CurrentHeroId == id ;
         });
+
+
 
         completion(heroes);
 
