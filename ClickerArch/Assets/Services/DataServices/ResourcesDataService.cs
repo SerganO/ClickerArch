@@ -6,147 +6,16 @@ using UnityEngine;
 
 public class ResourcesDataService : IDataService
 {
-    /*
-     
-         
-         
-         Материалы
-
-3 обычных - 1 редкий
-5 редких - 1 эпический
-7 эпических - 1 легендарный
---------------------------------------------------------------------------------------------------
-Предметы
-
-id: 1.
-Название: "Меч героев".
-Описание: "Такой острый, что можно порезаться, едва взглянув на него… Ой!!"
-Характеристики: "+300 DPS"
-Качество: Легендарный
-Слот: Оружие
-Материалы: 5 легендарных материалов
-Комплект: -
-
-{
-id: 2.
-Название: "Меч Храброго сердца".
-Описание: "Только истинный король может достать этот меч из ножен"
-Характеристики: "+35 DPС"
-Качество: Редкий
-Слот: Оружие
-Материалы: 7 редких материалов
-Комплект: "HP"
-
-id: 3.
-Название: "Серебрянный витой перстень".
-Описание: "Напоминает кольца бамбукового питона"
-Характеристики: "+10 DPS, -5 HP"
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "HP"
-
-id: 4.
-Название: "Тиара сизого сокола".
-Описание: "Миниатюрная корона, предназначеная для юных принцесс"
-Характеристики: "+10 DPS, -5 HP"
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "HP"
-
-id: 5.
-Название: "Кубок барского плеча".
-Описание: "Он всегда наполовину пуст или наполовину полон ?"
-Характеристики: "+20 HP, -5 DPC"
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "HP"
-}
-Комплект "HP" - "ЗДОРОВЬЕ УДВОЕНО"
-
-{
-id: 6.
-Название: "Парные катаны".
-Описание: "Их носитель часто слышыт: на кой те 2 меча"
-Характеристики: "+45 DPС, -10 HP"
-Качество: Редкий
-Слот: Оружие
-Материалы: 7 редких материалов
-Комплект: "TMNT"
-
-id: 7.
-Название: "Странная вилка".
-Описание: "Странно, но эта вилка имеет только 3 зубца"
-Характеристики: "+5 DPS" 
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "TMNT"
-
-id: 8.
-Название: "Палка о двух концах".
-Описание: "Палица с перебинтованной серединой для удобного хвата"
-Характеристики: "+5 DPS" 
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "TMNT"
-
-id: 9.
-Название: "Китайские палочки"
-Описание: "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой ?"
-Характеристики: "+15 DPС, -5 DPS"
-Качество: Обычный
-Слот: Артефакт
-Материалы: 10 обычных материалов
-Комплект: "TMNT"
-}
-Комплект: "TMNT" - "DPS+100, DPC+100"
-
-id: 10.
-Название: "Царский волкобой".
-Описание: "Про это оружие ходит множество мифов, но никто не уверен насколько они правдивы"
-Характеристики: "+150 DPC -30 HP"
-Качество: Эпический
-Слот: Оружие
-Материалы: 5 эпических материалов
-Комплект: -
-         
-         
-         
-         
-         */
-
 
     static List<Recipe> TMNTRecipes = new List<Recipe>
     {
-        new Recipe {
-            id = "hero_sword",
-            name = "HERO SWORD",
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
-            },
-
-            RequiredGold = 500,
-
-            ResultItem = new Item() {id = "hero_sword", name = "HERO SWORD", count = 1, modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("DPS|OnAttack|DPS+Coef+2+1|Permanent|Remove"),
-               }, Category = ItemCategory.Weapon
-                }
-        }
 
 
     };
 
 
 
-    static List<Recipe> ResourceRecipes = new List<Recipe>
+    static public List<Recipe> ResourceRecipes = new List<Recipe>
     {
         new Recipe {
             id = "rare_resource",
@@ -201,34 +70,8 @@ id: 10.
     };
 
 
-    List<Recipe> AllRecipes = new List<Recipe>
+    static List<Recipe> AllRecipes = new List<Recipe>
     {
-
-        new Recipe {
-            id = "mock_sword",
-            name = "SWORD",
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                id = "mock_sword",
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        },
         // ПРИМЕР ОРУЖИЯ
         /*
          
@@ -245,6 +88,7 @@ id: 10.
         {
             id = "1011",
             name = "Меч героев",
+            
             Category = ItemCategory.Weapon,
             RequiredGold = 0,
             rarity = Resource.Rarity.Common,
@@ -263,6 +107,96 @@ id: 10.
                 modificators = new List<Modificator>
                 {
                     ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+17+1|Permanent|Remove"),
+
+                },
+
+            }
+        },
+
+         new Recipe
+        {
+            id = "1012",
+            name = "Меч героев",
+            Category = ItemCategory.Weapon,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Rare,
+            RequiredResources = new List<Resource>
+            {
+                 new Resource { rarity = Resource.Rarity.Common, count = 3 },
+                 new Resource { rarity = Resource.Rarity.Rare, count = 7 },
+            },
+
+            ResultItem = new Item
+            {
+                id = "1012",
+                Category = ItemCategory.Weapon,
+                count = 1,
+                rarity = Resource.Rarity.Rare,
+                name = "Меч героев",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+35+1|Permanent|Remove"),
+
+                },
+
+            }
+        },
+
+         new Recipe
+        {
+            id = "1013",
+            name = "Меч героев",
+            Category = ItemCategory.Weapon,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Epic,
+            RequiredResources = new List<Resource>
+            {
+                 new Resource { rarity = Resource.Rarity.Common, count = 2 },
+                 new Resource { rarity = Resource.Rarity.Rare, count = 3 },
+                 new Resource { rarity = Resource.Rarity.Epic, count = 5 },
+            },
+
+            ResultItem = new Item
+            {
+                id = "1013",
+                Category = ItemCategory.Weapon,
+                count = 1,
+                rarity = Resource.Rarity.Epic,
+                name = "Меч героев",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+80+1|Permanent|Remove"),
+
+                },
+
+            }
+        },
+
+         new Recipe
+        {
+            id = "1014",
+            name = "Меч героев",
+            Category = ItemCategory.Weapon,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Legendary,
+            RequiredResources = new List<Resource>
+            {
+                 new Resource { rarity = Resource.Rarity.Common, count = 1 },
+                 new Resource { rarity = Resource.Rarity.Rare, count = 1 },
+                 new Resource { rarity = Resource.Rarity.Epic, count = 3 },
+                 new Resource { rarity = Resource.Rarity.Legendary, count = 5 },
+            },
+
+            ResultItem = new Item
+            {
+                id = "1014",
+                Category = ItemCategory.Weapon,
+                count = 1,
+                rarity = Resource.Rarity.Legendary,
+                name = "Меч героев",
+                modificators = new List<Modificator>
+                {
+                    ModificatorFactory.ModificatorForString("DPS|OnAttack|NONE+Const+300+1|Permanent|Remove"),
 
                 },
 
@@ -321,7 +255,7 @@ id: 10.
 
     public ResourcesDataService()
     {
-        AllRecipes.AddRange(ResourceRecipes);
+        //AllRecipes.AddRange(ResourceRecipes);
         AllRecipes.AddRange(TMNTRecipes);
     }
 
@@ -538,13 +472,18 @@ id: 10.
                 result.Add("darkDoctor");
                 break;
         }
-
+        Shuffle(result);
         return result;
     }
 
     public EnemyData GetEnemyDataForIdAndLevel(string id, int level)
     {
         double base_hp = 10;
+
+        ////TRUCK//
+        //base_hp = 0;
+        ///
+
         double base_dmg = 1;
 
         double actual_hp = 10;
@@ -570,106 +509,23 @@ id: 10.
         } );
     }
 
-    List<Recipe> CommonRecipes = new List<Recipe> {new Recipe {
-            id = "mock_sword",
-            name = "SWORD",
+    public void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
 
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                id = "mock_sword",
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        } };
-    List<Recipe> RareRecipes = new List<Recipe> { new Recipe {
-            id = "mock_sword",
-            name = "SWORD",
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                id = "mock_sword",
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        }};
-    List<Recipe> EpicRecipes = new List<Recipe> {new Recipe {
-            id = "mock_sword",
-            name = "SWORD",
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                id = "mock_sword",
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        } };
-    List<Recipe> LegendaryRecipes = new List<Recipe> {new Recipe {
-            id = "mock_sword",
-            name = "SWORD",
-
-            Category = ItemCategory.Weapon,
-            RequiredResources = new List<Resource>
-            {
-                new Resource { rarity = Resource.Rarity.Common, count = 4 },
-                new Resource { rarity = Resource.Rarity.Rare, count = 1 },
-            },
-
-            RequiredGold = 678,
-
-            ResultItem = new Item
-            {
-                id = "mock_sword",
-                Category = ItemCategory.Weapon,
-                name = "Sword",
-                modificators = new List<Modificator>
-                {
-                    ModificatorFactory.ModificatorForString("CurrentDPC|OnAttack|DPC+Coef+1+1|Permanent|Remove"),
-                    ModificatorFactory.ModificatorForString("CurrentDPS|OnAttack|DPC+Const+-2+1|Permanent|Remove"),
-                }
-            }
-        } };
+    List<Recipe> CommonRecipes { get { return AllRecipes.FindAll(rec => rec.rarity == Resource.Rarity.Common); } }
+    List<Recipe> RareRecipes { get { return AllRecipes.FindAll(rec => rec.rarity == Resource.Rarity.Rare); } }
+    List<Recipe> EpicRecipes { get { return AllRecipes.FindAll(rec => rec.rarity == Resource.Rarity.Epic); } }
+    List<Recipe> LegendaryRecipes { get { return AllRecipes.FindAll(rec => rec.rarity == Resource.Rarity.Legendary); } }
 
     public T RandomElement<T>(List<T> list)
     {
@@ -685,10 +541,10 @@ id: 10.
     public List<DropRecipe> RecipesForLevel(int level)
     {
         var res = new List<DropRecipe> {
-            new DropRecipe { Recipe = (Recipe)RandomElement(CommonRecipes).Clone(),     probability = level <= 25 ? 17 / 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 3/ 2.0 : 2/ 2.0)) },
-            new DropRecipe { Recipe = (Recipe)RandomElement(RareRecipes).Clone(),       probability = level <= 25 ? 7/ 2.0 : (level <= 50 ? 14/ 2.0 : ( level <= 75 ? 6/ 2.0 : 4/ 2.0)) },
-            new DropRecipe { Recipe = (Recipe)RandomElement(EpicRecipes).Clone(),       probability = level <= 25 ? 4/ 2.0 : (level <= 50 ? 8/ 2.0 : ( level <= 75 ? 17/ 2.0 : 7/ 2.0)) },
-            new DropRecipe { Recipe = (Recipe)RandomElement(LegendaryRecipes).Clone(),  probability = level <= 25 ? 2/ 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 4/ 2.0 : 17/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(CommonRecipes).Clone(),    /* probability = 100 },*/ probability = level <= 25 ? 17 / 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 3/ 2.0 : 2/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(RareRecipes).Clone(),      /* probability = 0 },*/ probability = level <= 25 ? 7/ 2.0 : (level <= 50 ? 14/ 2.0 : ( level <= 75 ? 6/ 2.0 : 4/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(EpicRecipes).Clone(),      /* probability = 0 },*/ probability = level <= 25 ? 4/ 2.0 : (level <= 50 ? 8/ 2.0 : ( level <= 75 ? 17/ 2.0 : 7/ 2.0)) },
+            new DropRecipe { Recipe = (Recipe)RandomElement(LegendaryRecipes).Clone(), /* probability = 0 },*/ probability = level <= 25 ? 2/ 2.0 : (level <= 50 ? 4/ 2.0 : ( level <= 75 ? 4/ 2.0 : 17/ 2.0)) },
         };
 
 
@@ -792,8 +648,20 @@ id: 10.
     public Sprite GetSpriteForID(string id)
     {
         //var  a = Resources.Load<Sprite>("Sprites/" + id);
-        Debug.Log(id);
-        return Resources.Load<Sprite>("Sprites/" + id);
+        var valideID = id;
+        switch(id)
+        {
+            case "Items/1011":
+            case "Items/1012":
+            case "Items/1013":
+            case "Items/1014":
+                valideID = "Items/hero_sword";
+                break;
+            default:
+                Debug.Log(id);
+                break;
+        }
+        return Resources.Load<Sprite>("Sprites/" + valideID);
     }
 
     public double GetXpForNextLevel(int currentLevel)
@@ -935,7 +803,7 @@ id: 10.
 
         bool bigParameter = parameter == HeroParameter.HP || parameter == HeroParameter.DPC || parameter == HeroParameter.DPS;
 
-        return player.Gold >= CostForParameterForLevel(parameter, level + 1) && level + 1 < (bigParameter ? 100: 10);
+        return player.Gold >= CostForParameterForLevel(parameter, level + 1) && level + 1 < (bigParameter ? 100 : 10);// && level + 1 < (player.CoolLevel + 1) * 5;
     }
 
     public double ValueForParameterForLevel(HeroParameter parameter, int level)
@@ -989,9 +857,7 @@ id: 10.
         heroes.RemoveAll((id) => {
             return player.availableHeroes.Contains(id) || player.CurrentHeroId == id ;
         });
-
-
-
+        
         completion(heroes);
 
 

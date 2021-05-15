@@ -7,6 +7,12 @@ public static class LocalizationManager
 {
     public static event VoidFunc languageChanged;
 
+    public class ItemData
+    {
+        public string name = "";
+        public string description = "";
+    }
+
     public static Sprite flagImage(string id)
     {
         return Resources.Load<Sprite>("Sprites/Flags/" + id);
@@ -227,11 +233,11 @@ public static class LocalizationManager
     }
 
 
-    public static string GetDescriptionForHeroId(string heroId)
+    public static ItemData GetDescriptionForHeroId(string heroId)
     {
-        var description = "";
+        var data = new ItemData();
 
-        switch(currentLanguageId)
+    switch (currentLanguageId)
         {
             case "ru":
                 switch (heroId)
@@ -239,7 +245,7 @@ public static class LocalizationManager
                     //COMMON
                     //Helper.ColorText("", "")
                     case "Adventurer":
-                        return Helper.ColorText("blue", "Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "В своих странствиях Путешественник научился набираться опыта быстрее своих товарищей." + "\n" +
                         "Количество получаемого " + Helper.BlueText("EXP") + " при убийстве противника " + Helper.BlueText(" + 10 %") + "." + "\n" +
 
@@ -248,10 +254,10 @@ public static class LocalizationManager
                         "Удары становатся сильнее и размашистее, но снижается защита." + "\n" +
                         Helper.RedText("DPC + 100 % ") + "," + Helper.BlueText("входящий урон увеличивается на 30 %.") + "\n" +
                         Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n"; break;
 
                     case "ArenaWarrior":
-                        return Helper.ColorText("blue", "Охлаждающий пыл") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Охлаждающий пыл") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "На арене приходится заботиться не только об атаке, но и о защите." + "\n" +
                         "Воин Арены становится в стойку, в которой " + Helper.BlueText("входящий урон") + " уменьшается на " + Helper.BlueText(" 75 %") + "\n" +
                         "но вместе с тем и уменьшается на " + Helper.BlueText("25 %") + " его" + Helper.RedText(" DPC") + "." + "\n" +
@@ -263,10 +269,10 @@ public static class LocalizationManager
                         "нанося противнику разовый урон, равный " + Helper.BlueText("30 %") + "\n" +
                         " от максимального запаса здоровья врага." + "\n" +
                         Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n"; break;
 
                     case "ArmorWarrior":
-                        return Helper.ColorText("blue", "Лучшее нападение - защита") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Лучшее нападение - защита") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "У Бронированого Рыцаря своеобразная броня. Окованная мелкими шипами по всей площади," + "\n" +
                         "Атакуя Бронированого рыцаря враги получают " + Helper.BlueText("50 %") + "\n" +
                         "от нанесённого урона." + "\n" +
@@ -275,10 +281,10 @@ public static class LocalizationManager
                         "Бронированый рыцарь наносит мощный вертикальный удар своим длинным мечём," + "\n" +
                         "нанося противнику" + "\n" + Helper.RedText("1000 %") + " урона от " + Helper.RedText("DPC") + ".\n" +
                         Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n"; break;
 
                     case "Assassin":
-                        return Helper.ColorText("blue", "Брат Акры") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Брат Акры") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "Проходя обучение в братстве Акры, ассасин научился быть неуловимым даже в пылу сражения." + "\n" +
                         "Каждая  " + Helper.BlueText("3") + "-я атака по ассасину " + Helper.BlueText(" промахивается") + ", не нанося ему повреждений." + "\n" +
 
@@ -286,10 +292,10 @@ public static class LocalizationManager
                         "Ассасин смазывет ядом свой клинок, отравляя противников." + "\n" +
                         "Противники получают повышенный переодический урон в размере " + Helper.RedText("300% DPS") + "\n" +
                         Helper.YellowText("Время действия:") + " 30 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n"; break;
 
                     case "CityBouncer":
-                        return Helper.ColorText("blue", "Наболдашник") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Наболдашник") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Городской Вышибала бьёт противника навершием своего меча по голове, " + Helper.BlueText("оглушая") + " его." + "\n" +
                         Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + " 40 секунд." + "\n" +
@@ -298,10 +304,10 @@ public static class LocalizationManager
                         "Городской Вышибала наносит глубокий рубящий удар, заставляя противника истекать кровью." + "\n" +
                         "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
                         Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n"; break;
 
                     case "Cyberclockwerk":
-                        return Helper.ColorText("blue", "Киберимплант") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Киберимплант") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Киберчасовой активирует свой киберимплант, увеличивая рефлексы," + "\n" +
                         "что позволяет ему эффективнее действовать в форс - мажорных ситуациях." + "\n" +
                         "Каждая атака становится критической, нанося " + Helper.RedText("200 % урона от DPC") + ".\n" +
@@ -311,10 +317,10 @@ public static class LocalizationManager
                         Helper.BlueText("Аккомулятор") + "(passive)" + "\n" +
                         "Киберчасовой получает модификацию, которая позволяет ему добывать энергию поверженых врагов." + "\n" +
                         "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
-                        "Каждый побеждённый противник" + Helper.BlueText("уменьшает время перезарядки умения \"Киберимплант\" на 1 секунду.") + "\n";
+                        "Каждый побеждённый противник" + Helper.BlueText("уменьшает время перезарядки умения \"Киберимплант\" на 1 секунду.") + "\n"; break;
 
                     case "Gunslinger":
-                        return Helper.ColorText("blue", "Ложись!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Ложись!") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Стрелок бросает под ноги врагу свето-шумовую гранату, которая " + Helper.BlueText("оглушает") + " его." + "\n" +
                         Helper.YellowText("Время действия:") + " 7 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n" +
@@ -323,10 +329,10 @@ public static class LocalizationManager
                         "Стрелок заряжает свою винтовку особыми разрывными снарядами, увеличивая пассивный урон" + "\n" +
                         "в размере " + Helper.RedText("(DPC+DPS)*1.2") + ".\n" +
                         Helper.YellowText("Время действия:") + " 15 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n"; break;
 
                     case "Hastat":
-                        return Helper.ColorText("blue", "Выпад") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Выпад") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Гастат совершает мощный колющий удар своим гладиусом, нанося огромный урон защите противника." + "\n" +
                         "Противник получает разовый урон в размере " + Helper.BlueText("30%") + " от своего " + Helper.BlueText("максимального здоровья.") + "\n" +
                         "Если во время применения" + Helper.BlueText("здоровье") + "противника меньше или равно " + Helper.BlueText("30 %") + "-убивает его" + ".\n" +
@@ -335,10 +341,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Строевая подготовка") + "(passive)" + "\n" +
                         "Научившись работать в плотном строю, Гастат в совершенстве овладел атакой-выпадом." + "\n" +
-                        "Каждый раз, когда " + Helper.BlueText("\"Выпад\" добивает противника") + " - умение" + Helper.BlueText("не уходит на перезарядку") + ".\n";
+                        "Каждый раз, когда " + Helper.BlueText("\"Выпад\" добивает противника") + " - умение" + Helper.BlueText("не уходит на перезарядку") + ".\n"; break;
 
                     case "LightBandit":
-                        return Helper.ColorText("blue", "Навались!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Навались!") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Бандит свистом призывает свою банду из 5ти негодяев, и вместе с ней избивает недругов." + "\n" +
                         Helper.RedText("DPS") + " увеличивается в размере " + Helper.RedText("DPS+(DPC*5)") + "\n" +
                         Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
@@ -346,10 +352,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Карманник") + "(passive)" + "\n" +
                         "Убивая врага Бандит тщательнее осматривает жертву, вдруг что-то завалялось в паре сапог." + "\n" +
-                        "Количество получаемого " + Helper.BlueText("GOLD") + " при убийстве противника увеличиваестя на " + Helper.BlueText("10%") + ".\n";
+                        "Количество получаемого " + Helper.BlueText("GOLD") + " при убийстве противника увеличиваестя на " + Helper.BlueText("10%") + ".\n"; break;
 
                     case "MedievalKing":
-                        return Helper.ColorText("blue", "Королевский удар") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Королевский удар") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Меч Короля всегда должен соответствовать статусу, но его реставрация - дело не из дешёвых." + "\n" +
                         "Средневековый Король совершает удар с размахом, который наносит противнику " + Helper.RedText("50 % урона от максимального здоровья") + "," + "\n" +
                         "однако Средневековый Король теряет " + Helper.BlueText("GOLD") + " в размере 5 % от " + Helper.BlueText("максимального здоровья жертвы.") + "\n" +
@@ -358,10 +364,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Агрессивные переговоры") + "(passive)" + "\n" +
                         "Хороший Король всегда должен уметь решить спор не только силой, но и словом." + "\n" +
-                        "Получаемое с противников " + Helper.BlueText("EXP и GOLD") + " увеличивается на " + Helper.BlueText("7%,") + " но " + Helper.RedText("DPC") + " уменьшается на " + Helper.BlueText("13%") + ".\n";
+                        "Получаемое с противников " + Helper.BlueText("EXP и GOLD") + " увеличивается на " + Helper.BlueText("7%,") + " но " + Helper.RedText("DPC") + " уменьшается на " + Helper.BlueText("13%") + ".\n"; break;
 
                     case "Ninja":
-                        return Helper.ColorText("blue", "Маска бога смерти") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Маска бога смерти") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Надевая маску, Ниндзя повергает врагов в ужас, а в его движениях чувствуется уверенность." + "\n" +
                         "Враги " + Helper.BlueText("оглушаются") + ", а " + Helper.RedText("DPC") + " Ниндзи увеличивается в размере " + Helper.RedText("DPC * 1.5") + ".\n" +
                         Helper.YellowText("Время действия:") + " 5 секунд." + "\n" +
@@ -369,17 +375,17 @@ public static class LocalizationManager
 
                         Helper.BlueText("Мастерство У-Тан Шань") + "(passive)" + "\n" +
                         "Обучаясь боевому искусству в школе даосов, Ниндзя научился контролировать своё тело и душу." + "\n" +
-                        Helper.RedText("DPC") + " и " + Helper.RedText("DPS") + " уравниваются по большему показателю" + ".\n";
+                        Helper.RedText("DPC") + " и " + Helper.RedText("DPS") + " уравниваются по большему показателю" + ".\n"; break;
 
 
                     case "Squire":
-                        return "Базовый персонаж с умениями, которые есть у всех" + "\n" + Helper.ColorText("blue", "Лечение") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = "Базовый персонаж с умениями, которые есть у всех" + "\n" + Helper.ColorText("blue", "Лечение") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Востанавливает половину HP" + "\n" +
                         Helper.YellowText("Перезарядка:") + " 120 секунд." + "\n" +
 
                         Helper.BlueText("Фатальный удар") + "(active)" + "\n" +
                         "Наноситу урон равный половине HP врага" + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 80 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 80 секунд." + "\n"; break;
 
                     //RARE
 
@@ -417,7 +423,7 @@ public static class LocalizationManager
                     // COMMON
                     //Helper.ColorText ( "", "")
                     case "Adventurer":
-                        return Helper.ColorText("blue", "Пріключенец") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Пріключенец") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "У своїх мандрах Мандрівник навчився набиратися досвіду швидше своїх товаришів." + "\n" +
                         "Кількість одержуваного" + Helper.BlueText("EXP") + "при вбивстві супротивника" + Helper.BlueText("+ 10%") + "." + "\n" +
 
@@ -426,10 +432,10 @@ public static class LocalizationManager
                         "Удари становатся сильніше і розмашисто, але знижується захист." + "\n" +
                         Helper.RedText("DPC + 100%") + "," + Helper.BlueText("вхідний шкоди збільшується на 30%.") + "\n" +
                         Helper.YellowText("Час дії:") + "10 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "70 секунд." + "\n"; break;
 
                     case "ArenaWarrior":
-                        return Helper.ColorText("blue", "охолоджуючий запал") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "охолоджуючий запал") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "На арені доводиться дбати не тільки про атаку, але і про захист." + "\n" +
                         "Воїн Арени стає в стійку, в якій" + Helper.BlueText("вхідний шкоди") + "зменшується на" + Helper.BlueText("75%") + "\n" +
                         "Але в той же час і зменшується на" + Helper.BlueText("25%") + "його" + Helper.RedText("DPC") + "." + "\n" +
@@ -441,10 +447,10 @@ public static class LocalizationManager
                         "Завдаючи противнику разовий шкоди, рівний" + Helper.BlueText("30%") + "\n" +
                         "Від максимального запасу здоров'я ворога." + "\n" +
                         Helper.YellowText("Час дії:") + "миттєво." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "25 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "25 секунд." + "\n"; break;
 
                     case "ArmorWarrior":
-                        return Helper.ColorText("blue", "Краще напад - захист") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Краще напад - захист") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "У бронювання Лицаря своєрідна броня. Окутої дрібними шипами по всій площі," + "\n" +
                         "Атакуючи бронювання лицаря вороги отримують" + Helper.BlueText("50%") + "\n" +
                         "Від нанесеного шкоди." + "\n" +
@@ -453,10 +459,10 @@ public static class LocalizationManager
                         "Бронювання лицар завдає потужного вертикальний удар своїм довгим мечем," + "\n" +
                         "Завдаючи противнику" + "\n" + Helper.RedText("1000%") + "утрати від" + Helper.RedText("DPC") + ".\n" +
                         Helper.YellowText("Час дії:") + "миттєво." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "35 секунд." + "\n"; break;
 
                     case "Assassin":
-                        return Helper.ColorText("blue", "Брат Акри") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Брат Акри") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "Проходячи навчання в братстві Акри, ассасін навчився бути невловимим навіть в запалі бою." + "\n" +
                         "Кожна" + Helper.BlueText("3") + "-я атака по ассасина" + Helper.BlueText("промахується") + ", не завдаючи йому ушкоджень." + "\n" +
 
@@ -464,10 +470,10 @@ public static class LocalizationManager
                         "Ассасин смазивет отрутою свій клинок, отруюючи супротивників." + "\n" +
                         "Противники отримують підвищений переодичними шкоди в розмірі" + Helper.RedText("300% DPS") + "\n" +
                         Helper.YellowText("Час дії:") + "30 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "45 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "45 секунд." + "\n"; break;
 
                     case "CityBouncer":
-                        return Helper.ColorText("blue", "наболдашником") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "наболдашником") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Міський Вишибала б'є противника навершием свого меча по голові," + Helper.BlueText("приголомшуючи") + "його." + "\n" +
                         Helper.YellowText("Час дії:") + "10 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + "40 секунд." + "\n" +
@@ -476,10 +482,10 @@ public static class LocalizationManager
                         "Міський Вишибала завдає глибокий рубає удар, змушуючи супротивника стікати кров'ю." + "\n" +
                         "Противник отримує підвищений в" + Helper.RedText("2.5") + "рази" + Helper.RedText("DPS") + ".\n" +
                         Helper.YellowText("Час дії:") + "20 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "35 секунд." + "\n"; break;
 
                     case "Cyberclockwerk":
-                        return Helper.ColorText("blue", "Кіберімплант") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Кіберімплант") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Кіберчасовой активує свій кіберімплант, збільшуючи рефлекси," + "\n" +
                 "Що дозволяє йому ефективніше діяти у форс - мажорних ситуаціях." + "\n" +
                 "Кожна атака стає критичною, завдаючи" + Helper.RedText("200% утрати від DPC") + ".\n" +
@@ -489,10 +495,10 @@ public static class LocalizationManager
                 Helper.BlueText("акумулятор") + "(passive)" + "\n" +
                 "Кіберчасовой отримує модифікацію, яка дозволяє йому добувати енергію переможених ворогів." + "\n" +
                 "Противник отримує підвищений в" + Helper.RedText("2.5") + "рази" + Helper.RedText("DPS") + ".\n" +
-                "Кожен переможений противник" + Helper.BlueText("зменшує час перезарядки вміння \" Кіберімплант \"на 1 секунду.") + "\n";
+                "Кожен переможений противник" + Helper.BlueText("зменшує час перезарядки вміння \" Кіберімплант \"на 1 секунду.") + "\n"; break;
 
-            case "Gunslinger":
-                        return Helper.ColorText("blue", "Лягай!") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                    case "Gunslinger":
+                        data.description = Helper.ColorText("blue", "Лягай!") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Стрілець кидає під ноги ворогу світло-шумову гранату, яка" + Helper.BlueText("глушить") + "його." + "\n" +
                         Helper.YellowText("Час дії:") + "7 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + "35 секунд." + "\n" +
@@ -501,10 +507,10 @@ public static class LocalizationManager
                         "Стрілець заряджає свою гвинтівку особливими розривними снарядами, збільшуючи пасивний шкоди" + "\n" +
                         "В розмірі" + Helper.RedText("(DPC + DPS) * 1.2") + ".\n" +
                         Helper.YellowText("Час дії:") + "15 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + "70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "70 секунд." + "\n"; break;
 
                     case "Hastat":
-                        return Helper.ColorText("blue", "Випад") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Випад") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Гастатов робить потужний удар, що коле своїм Гладіус, завдаючи величезної шкоди захисту супротивника." + "\n" +
                         "Противник отримує разовий шкоди в розмірі" + Helper.BlueText("30%") + "від свого" + Helper.BlueText("максимального здоров'я.") + "\n" +
                         "Якщо під час застосування" + Helper.BlueText("здоров'я") + "противника менше або дорівнює" + Helper.BlueText("30%") + "-вбивати його" + ".\n" +
@@ -513,10 +519,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Стройова підготовка") + "(passive)" + "\n" +
                         "Навчившись працювати в щільному строю, гастатов досконало опанував атакою-випадом." + "\n" +
-                        "Кожен раз, коли" + Helper.BlueText("\" Випад \"добиває противника") + " - вміння" + Helper.BlueText ( "не йде на перезарядку") + ".\n";
+                        "Кожен раз, коли" + Helper.BlueText("\" Випад \"добиває противника") + " - вміння" + Helper.BlueText("не йде на перезарядку") + ".\n"; break;
 
-            case "LightBandit":
-                        return Helper.ColorText("blue", "навал!") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                    case "LightBandit":
+                        data.description = Helper.ColorText("blue", "навал!") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Бандит свистом закликає свою банду з 5ти нагадав, і разом з нею б'є недругів." + "\n" +
                         Helper.RedText("DPS") + "збільшується в розмірі" + Helper.RedText("DPS + (DPC * 5)") + "\n" +
                         Helper.YellowText("Час дії:") + "20 секунд." + "\n" +
@@ -524,10 +530,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Кишеньковий злодій") + "(passive)" + "\n" +
                         "Вбиваючи ворога Бандит ретельніше оглядає жертву, раптом щось завалялося в парі чобіт." + "\n" +
-                        "Кількість одержуваного" + Helper.BlueText("GOLD") + "при вбивстві супротивника увелічіваестя на" + Helper.BlueText("10%") + ".\n";
+                        "Кількість одержуваного" + Helper.BlueText("GOLD") + "при вбивстві супротивника увелічіваестя на" + Helper.BlueText("10%") + ".\n"; break;
 
                     case "MedievalKing":
-                        return Helper.ColorText("blue", "Королівський удар") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Королівський удар") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Меч Короля завжди повинен відповідати статусу, але його реставрація - справа не з дешевих." + "\n" +
                         "Середньовічний Король робить удар з розмахом, який завдає противнику" + Helper.RedText("50% втрати від максимального здоров'я") + "," + "\n" +
                         "Однак Середньовічний Король втрачає" + Helper.BlueText("GOLD") + "в розмірі 5% від" + Helper.BlueText("максимального здоров'я жертви.") + "\n" +
@@ -536,10 +542,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Агресивні переговори") + "(passive)" + "\n" +
                         "Хороший Король завжди повинен вміти вирішити спір не тільки силою, але і словом." + "\n" +
-                        "Отримуване з супротивників" + Helper.BlueText("EXP і GOLD") + "збільшується на" + Helper.BlueText("7%,") + "але" + Helper.RedText("DPC") + "зменшується на" + Helper.BlueText("13%") + ".\n";
+                        "Отримуване з супротивників" + Helper.BlueText("EXP і GOLD") + "збільшується на" + Helper.BlueText("7%,") + "але" + Helper.RedText("DPC") + "зменшується на" + Helper.BlueText("13%") + ".\n"; break;
 
                     case "Ninja":
-                        return Helper.ColorText("blue", "Маска бога смерті") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Маска бога смерті") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Одягаючи маску, Ніндзя валить ворогів в жах, а в його рухах відчувається впевненість." + "\n" +
                 "Вороги" + Helper.BlueText("оглушаются") + ", а" + Helper.RedText("DPC") + "Ніндзі збільшується в розмірі" + Helper.RedText("DPC * 1.5") + ".\n" +
                 Helper.YellowText("Час дії:") + "5 секунд." + "\n" +
@@ -547,17 +553,17 @@ public static class LocalizationManager
 
                 Helper.BlueText("Майстерність У-Тан Шань") + "(passive)" + "\n" +
                 "Навчаючись бойовому мистецтву в школі даосів, Ніндзя навчився контролювати своє тіло і душу." + "\n" +
-                Helper.RedText("DPC") + "і" + Helper.RedText("DPS") + "зрівнюються по більшій показником" + ".\n";
+                Helper.RedText("DPC") + "і" + Helper.RedText("DPS") + "зрівнюються по більшій показником" + ".\n"; break;
 
 
                     case "Squire":
-                        return "Базовий персонаж з вміннями, які є у всіх" + "\n" + Helper.ColorText("blue", "Лікування") + Helper.ColorText("# 999999", "(active)") + "\n " +
+                        data.description = "Базовий персонаж з вміннями, які є у всіх" + "\n" + Helper.ColorText("blue", "Лікування") + Helper.ColorText("# 999999", "(active)") + "\n " +
                         "Відновлює половину HP" + "\n" +
                         Helper.YellowText("Перезарядка:") + "120 секунд." + "\n" +
 
                         Helper.BlueText("Фатальний удар") + "(active)" + "\n" +
                         "Наносіту пошкодження, що дорівнює половині HP ворога" + "\n" +
-                        Helper.YellowText("Перезарядка:") + "80 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + "80 секунд." + "\n"; break;
 
                     // RARE
 
@@ -595,7 +601,7 @@ public static class LocalizationManager
                     // COMMON
                     //Helper.ColorText ("", "")
                     case "Adventurer":
-                        return Helper.ColorText("blue", "Adventurer") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Adventurer") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "In his travels, the Traveler has learned to gain experience faster than his companions." + "\n" +
                         "Amount received" + Helper.BlueText("EXP") + "when killing an enemy" + Helper.BlueText("+ 10%") + "." + "\n" +
 
@@ -604,10 +610,10 @@ public static class LocalizationManager
                         "The blows get stronger and wider, but the defense decreases." + "\n" +
                         Helper.RedText("DPC + 100%") + "," + Helper.BlueText("incoming damage is increased by 30%.") + "\n" +
                         Helper.YellowText("Action time:") + "10 seconds." + "\n" +
-                        Helper.YellowText("Reload:") + "70 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "70 seconds." + "\n"; break;
 
                     case "ArenaWarrior":
-                        return Helper.ColorText("blue", "Chilling Dust") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Chilling Dust") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "In the arena, you have to take care not only of the attack, but also of the defense." + "\n" +
                         "The Arena warrior gets into a stance in which" + Helper.BlueText("incoming damage") + "is reduced by" + Helper.BlueText("75%") + "\n" +
                         "but at the same time it is reduced by" + Helper.BlueText("25%") + "his" + Helper.RedText("DPC") + "." + "\n" +
@@ -619,10 +625,10 @@ public static class LocalizationManager
                         "inflicting one-time damage to the enemy equal to" + Helper.BlueText("30%") + "\n" +
                         "from the enemy's maximum health." + "\n" +
                         Helper.YellowText("Action time:") + "instantly." + "\n" +
-                        Helper.YellowText("Cooldown:") + "25 seconds." + "\n";
+                        Helper.YellowText("Cooldown:") + "25 seconds." + "\n"; break;
 
                     case "ArmorWarrior":
-                        return Helper.ColorText("blue", "Best offense is defense") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Best offense is defense") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "The Armored Knight has a kind of armor. Formed with small spikes throughout the entire area," + "\n" +
                         "When attacking the Armored Knight, enemies receive" + Helper.BlueText("50%") + "\n" +
                         "from the damage done." + "\n" +
@@ -631,10 +637,10 @@ public static class LocalizationManager
                         "The Armored Knight delivers a powerful vertical strike with his longsword," + "\n" +
                         "inflicting on the enemy" + "\n" + Helper.RedText("1000%") + "damage from" + Helper.RedText("DPC") + ".\n" +
                         Helper.YellowText("Action time:") + "instantly." + "\n" +
-                        Helper.YellowText("Reload:") + "35 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "35 seconds." + "\n"; break;
 
                     case "Assassin":
-                        return Helper.ColorText("blue", "Brother Acre") + Helper.ColorText("# 999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Brother Acre") + Helper.ColorText("# 999999", "(passive)") + "\n" +
                         "Through training in the brotherhood of Acre, the Assassin learned to be elusive, even in the heat of battle." + "\n" +
                         "Every" + Helper.BlueText("3") + "th attack on the assassin" + Helper.BlueText("misses") + "without damaging him." + "\n" +
 
@@ -642,10 +648,10 @@ public static class LocalizationManager
                         "The assassin smears poison on his blade, poisoning opponents." + "\n" +
                         "Opponents receive increased periodic damage in the amount of" + Helper.RedText("300% DPS") + "\n" +
                         Helper.YellowText("Action time:") + "30 seconds." + "\n" +
-                        Helper.YellowText("Reload:") + "45 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "45 seconds." + "\n"; break;
 
                     case "CityBouncer":
-                        return Helper.ColorText("blue", "Naboldashnik") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Naboldashnik") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "The City Bouncer hits the opponent over the head with the pommel of his sword," + Helper.BlueText("stunning") + "him." + "\n" +
                         Helper.YellowText("Action time:") + "10 seconds." + "\n" +
                         Helper.YellowText("Reload:") + "40 seconds." + "\n" +
@@ -654,10 +660,10 @@ public static class LocalizationManager
                         "The City Bouncer delivers a deep slash, causing the opponent to bleed out." + "\n" +
                         "The enemy gets promoted by" + Helper.RedText("2.5") + "times" + Helper.RedText("DPS") + ".\n" +
                         Helper.YellowText("Action time:") + "20 seconds." + "\n" +
-                        Helper.YellowText("Reload:") + "35 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "35 seconds." + "\n"; break;
 
                     case "Cyberclockwerk":
-                        return Helper.ColorText("blue", "Cyberimplant") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Cyberimplant") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "The cyber-watch activates his cyber-implant, increasing reflexes," + "\n" +
                 "which allows him to act more effectively in force majeure situations." + "\n" +
                 "Each attack becomes critical, dealing" + Helper.RedText("200% DPC damage") + ".\n" +
@@ -667,10 +673,10 @@ public static class LocalizationManager
                 Helper.BlueText("Accumulator") + "(passive)" + "\n" +
                 "The Cyber-Sentry receives an enchantment that allows him to harvest the energy of defeated enemies." + "\n" +
                 "The enemy gets promoted by" + Helper.RedText("2.5") + "times" + Helper.RedText("DPS") + ".\n" +
-                "Each defeated enemy" + Helper.BlueText("reduces the cooldown of the \" Cyberimplant \"skill by 1 second.") + "\n";
+                "Each defeated enemy" + Helper.BlueText("reduces the cooldown of the \" Cyberimplant \"skill by 1 second.") + "\n"; break;
 
-            case "Gunslinger":
-                        return Helper.ColorText("blue", "Get down!") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                    case "Gunslinger":
+                        data.description = Helper.ColorText("blue", "Get down!") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "The shooter throws a flash and noise grenade at the enemy's feet, which" + Helper.BlueText("stuns") + "him." + "\n" +
                         Helper.YellowText("Action time:") + "7 seconds." + "\n" +
                         Helper.YellowText("Reload:") + "35 seconds." + "\n" +
@@ -679,10 +685,10 @@ public static class LocalizationManager
                         "The shooter charges his rifle with special explosive projectiles, increasing passive damage" + "\n" +
                         "in size" + Helper.RedText("(DPC + DPS) * 1.2") + ".\n" +
                         Helper.YellowText("Action time:") + "15 seconds." + "\n" +
-                        Helper.YellowText("Reload:") + "70 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "70 seconds." + "\n"; break;
 
                     case "Hastat":
-                        return Helper.ColorText("blue", "Lunge") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Lunge") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "Ghastat unleashes a powerful thrusting blow with his gladius, dealing massive damage to enemy defenses." + "\n" +
                         "The enemy takes one-time damage in the amount of" + Helper.BlueText("30%") + "from his" + Helper.BlueText("maximum health.") + "\n" +
                         "If during the use of" + Helper.BlueText("health") + "enemy is less than or equal to" + Helper.BlueText("30%") + "-kills him" + ".\n" +
@@ -691,10 +697,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Training") + "(passive)" + "\n" +
                         "Having learned to work in tight formation, Gastat has mastered the attack-lunge to perfection." + "\n" +
-                        "Every time" + Helper.BlueText("\" Lunge \"finishes off the enemy") + " - skill" + Helper.BlueText ("does not go to recharge") + ".\n";
+                        "Every time" + Helper.BlueText("\" Lunge \"finishes off the enemy") + " - skill" + Helper.BlueText("does not go to recharge") + ".\n"; break;
 
-            case "LightBandit":
-                        return Helper.ColorText("blue", "They're in!") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                    case "LightBandit":
+                        data.description = Helper.ColorText("blue", "They're in!") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "The bandit whistles to call his gang of 5 villains, and together with it he beats up the enemies." + "\n" +
                         Helper.RedText("DPS") + "increases in size" + Helper.RedText("DPS + (DPC * 5)") + "\n" +
                         Helper.YellowText("Action time:") + "20 seconds." + "\n" +
@@ -702,10 +708,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Pickpocket") + "(passive)" + "\n" +
                         "Killing the enemy, the Bandit examines the victim more carefully, suddenly something is lying around in a pair of boots." + "\n" +
-                        "The amount received" + Helper.BlueText("GOLD") + "when killing an enemy increases by" + Helper.BlueText("10%") + ".\n";
+                        "The amount received" + Helper.BlueText("GOLD") + "when killing an enemy increases by" + Helper.BlueText("10%") + ".\n"; break;
 
                     case "MedievalKing":
-                        return Helper.ColorText("blue", "Royal Strike") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Royal Strike") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "The King's sword should always match the status, but its restoration is not cheap." + "\n" +
                         "The Medieval King makes a swing that inflicts on the enemy" + Helper.RedText("50% damage from maximum health") + "," + "\n" +
                         "however, the Medieval King loses" + Helper.BlueText("GOLD") + "at the rate of 5% of" + Helper.BlueText("the victim's maximum health.") + "\n" +
@@ -714,10 +720,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Aggressive negotiations") + "(passive)" + "\n" +
                         "A good King should always be able to resolve a dispute not only by force, but also by word." + "\n" +
-                        "Received from opponents" + Helper.BlueText("EXP and GOLD") + "increases by" + Helper.BlueText("7%,") + "but" + Helper.RedText("DPC") + "decreases by" + Helper.BlueText("13%") + ".\n";
+                        "Received from opponents" + Helper.BlueText("EXP and GOLD") + "increases by" + Helper.BlueText("7%,") + "but" + Helper.RedText("DPC") + "decreases by" + Helper.BlueText("13%") + ".\n"; break;
 
                     case "Ninja":
-                        return Helper.ColorText("blue", "Death God Mask") + Helper.ColorText("# 999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Death God Mask") + Helper.ColorText("# 999999", "(active)") + "\n" +
                         "By donning the mask, the Ninja will terrify enemies and have confidence in his movements." + "\n" +
                 "Enemies" + Helper.BlueText("stunned") + ", and" + Helper.RedText("DPC") + "Ninja increases in size" + Helper.RedText("DPC * 1.5") + ".\n" +
                 Helper.YellowText("Action time:") + "5 seconds." + "\n" +
@@ -725,17 +731,17 @@ public static class LocalizationManager
 
                 Helper.BlueText("Mastery of Wu-Tang Shan") + "(passive)" + "\n" +
                 "By studying martial arts at the Taoist school, the Ninja learned to control his body and soul." + "\n" +
-                Helper.RedText("DPC") + "and" + Helper.RedText("DPS") + "are equalized by the higher" + ".\n";
+                Helper.RedText("DPC") + "and" + Helper.RedText("DPS") + "are equalized by the higher" + ".\n"; break;
 
 
                     case "Squire":
-                        return "Base character with skills that everyone has" + "\n" + Helper.ColorText("blue", "Heal") + Helper.ColorText("# 999999", "(active)") + "\n " +
+                        data.description = "Base character with skills that everyone has" + "\n" + Helper.ColorText("blue", "Heal") + Helper.ColorText("# 999999", "(active)") + "\n " +
                         "Restores half HP" + "\n" +
                         Helper.YellowText("Cooldown:") + "120 seconds." + "\n" +
 
                         Helper.BlueText("Fatal blow") + "(active)" + "\n" +
                         "Deals damage equal to half the enemy's HP" + "\n" +
-                        Helper.YellowText("Reload:") + "80 seconds." + "\n";
+                        Helper.YellowText("Reload:") + "80 seconds." + "\n"; break;
 
                     // RARE
 
@@ -773,7 +779,7 @@ public static class LocalizationManager
                     //COMMON
                     //Helper.ColorText("", "")
                     case "Adventurer":
-                        return Helper.ColorText("blue", "Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Приключенец") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "В своих странствиях Путешественник научился набираться опыта быстрее своих товарищей." + "\n" +
                         "Количество получаемого " + Helper.BlueText("EXP") + " при убийстве противника " + Helper.BlueText(" + 10 %") + "." + "\n" +
 
@@ -782,10 +788,10 @@ public static class LocalizationManager
                         "Удары становатся сильнее и размашистее, но снижается защита." + "\n" +
                         Helper.RedText("DPC + 100 % ") + "," + Helper.BlueText("входящий урон увеличивается на 30 %.") + "\n" +
                         Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n"; break;
 
                     case "ArenaWarrior":
-                        return Helper.ColorText("blue", "Охлаждающий пыл") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Охлаждающий пыл") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "На арене приходится заботиться не только об атаке, но и о защите." + "\n" +
                         "Воин Арены становится в стойку, в которой " + Helper.BlueText("входящий урон") + " уменьшается на " + Helper.BlueText(" 75 %") + "\n" +
                         "но вместе с тем и уменьшается на " + Helper.BlueText("25 %") + " его" + Helper.RedText(" DPC") + "." + "\n" +
@@ -797,10 +803,10 @@ public static class LocalizationManager
                         "нанося противнику разовый урон, равный " + Helper.BlueText("30 %") + "\n" +
                         " от максимального запаса здоровья врага." + "\n" +
                         Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 25 секунд." + "\n"; break;
 
                     case "ArmorWarrior":
-                        return Helper.ColorText("blue", "Лучшее нападение - защита") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Лучшее нападение - защита") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "У Бронированого Рыцаря своеобразная броня. Окованная мелкими шипами по всей площади," + "\n" +
                         "Атакуя Бронированого рыцаря враги получают " + Helper.BlueText("50 %") + "\n" +
                         "от нанесённого урона." + "\n" +
@@ -809,10 +815,10 @@ public static class LocalizationManager
                         "Бронированый рыцарь наносит мощный вертикальный удар своим длинным мечём," + "\n" +
                         "нанося противнику" + "\n" + Helper.RedText("1000 %") + " урона от " + Helper.RedText("DPC") + ".\n" +
                         Helper.YellowText("Время действия:") + " мгновенно." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n"; break;
 
                     case "Assassin":
-                        return Helper.ColorText("blue", "Брат Акры") + Helper.ColorText("#999999", "(passive)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Брат Акры") + Helper.ColorText("#999999", "(passive)") + "\n" +
                         "Проходя обучение в братстве Акры, ассасин научился быть неуловимым даже в пылу сражения." + "\n" +
                         "Каждая  " + Helper.BlueText("3") + "-я атака по ассасину " + Helper.BlueText(" промахивается") + ", не нанося ему повреждений." + "\n" +
 
@@ -820,10 +826,10 @@ public static class LocalizationManager
                         "Ассасин смазывет ядом свой клинок, отравляя противников." + "\n" +
                         "Противники получают повышенный переодический урон в размере " + Helper.RedText("300% DPS") + "\n" +
                         Helper.YellowText("Время действия:") + " 30 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 45 секунд." + "\n"; break;
 
                     case "CityBouncer":
-                        return Helper.ColorText("blue", "Наболдашник") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Наболдашник") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Городской Вышибала бьёт противника навершием своего меча по голове, " + Helper.BlueText("оглушая") + " его." + "\n" +
                         Helper.YellowText("Время действия:") + " 10 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + " 40 секунд." + "\n" +
@@ -832,10 +838,10 @@ public static class LocalizationManager
                         "Городской Вышибала наносит глубокий рубящий удар, заставляя противника истекать кровью." + "\n" +
                         "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
                         Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n"; break;
 
                     case "Cyberclockwerk":
-                        return Helper.ColorText("blue", "Киберимплант") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Киберимплант") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Киберчасовой активирует свой киберимплант, увеличивая рефлексы," + "\n" +
                         "что позволяет ему эффективнее действовать в форс - мажорных ситуациях." + "\n" +
                         "Каждая атака становится критической, нанося " + Helper.RedText("200 % урона от DPC") + ".\n" +
@@ -845,10 +851,10 @@ public static class LocalizationManager
                         Helper.BlueText("Аккомулятор") + "(passive)" + "\n" +
                         "Киберчасовой получает модификацию, которая позволяет ему добывать энергию поверженых врагов." + "\n" +
                         "Противник получает повышеный в " + Helper.RedText("2.5") + " раза " + Helper.RedText(" DPS") + ".\n" +
-                        "Каждый побеждённый противник" + Helper.BlueText("уменьшает время перезарядки умения \"Киберимплант\" на 1 секунду.") + "\n";
+                        "Каждый побеждённый противник" + Helper.BlueText("уменьшает время перезарядки умения \"Киберимплант\" на 1 секунду.") + "\n"; break;
 
                     case "Gunslinger":
-                        return Helper.ColorText("blue", "Ложись!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Ложись!") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Стрелок бросает под ноги врагу свето-шумовую гранату, которая " + Helper.BlueText("оглушает") + " его." + "\n" +
                         Helper.YellowText("Время действия:") + " 7 секунд." + "\n" +
                         Helper.YellowText("Перезарядка:") + " 35 секунд." + "\n" +
@@ -857,10 +863,10 @@ public static class LocalizationManager
                         "Стрелок заряжает свою винтовку особыми разрывными снарядами, увеличивая пассивный урон" + "\n" +
                         "в размере " + Helper.RedText("(DPC+DPS)*1.2") + ".\n" +
                         Helper.YellowText("Время действия:") + " 15 секунд." + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 70 секунд." + "\n"; break;
 
                     case "Hastat":
-                        return Helper.ColorText("blue", "Выпад") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Выпад") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Гастат совершает мощный колющий удар своим гладиусом, нанося огромный урон защите противника." + "\n" +
                         "Противник получает разовый урон в размере " + Helper.BlueText("30%") + " от своего " + Helper.BlueText("максимального здоровья.") + "\n" +
                         "Если во время применения" + Helper.BlueText("здоровье") + "противника меньше или равно " + Helper.BlueText("30 %") + "-убивает его" + ".\n" +
@@ -869,10 +875,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Строевая подготовка") + "(passive)" + "\n" +
                         "Научившись работать в плотном строю, Гастат в совершенстве овладел атакой-выпадом." + "\n" +
-                        "Каждый раз, когда " + Helper.BlueText("\"Выпад\" добивает противника") + " - умение" + Helper.BlueText("не уходит на перезарядку") + ".\n";
+                        "Каждый раз, когда " + Helper.BlueText("\"Выпад\" добивает противника") + " - умение" + Helper.BlueText("не уходит на перезарядку") + ".\n"; break;
 
                     case "LightBandit":
-                        return Helper.ColorText("blue", "Навались!") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Навались!") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Бандит свистом призывает свою банду из 5ти негодяев, и вместе с ней избивает недругов." + "\n" +
                         Helper.RedText("DPS") + " увеличивается в размере " + Helper.RedText("DPS+(DPC*5)") + "\n" +
                         Helper.YellowText("Время действия:") + " 20 секунд." + "\n" +
@@ -880,10 +886,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Карманник") + "(passive)" + "\n" +
                         "Убивая врага Бандит тщательнее осматривает жертву, вдруг что-то завалялось в паре сапог." + "\n" +
-                        "Количество получаемого " + Helper.BlueText("GOLD") + " при убийстве противника увеличиваестя на " + Helper.BlueText("10%") + ".\n";
+                        "Количество получаемого " + Helper.BlueText("GOLD") + " при убийстве противника увеличиваестя на " + Helper.BlueText("10%") + ".\n"; break;
 
                     case "MedievalKing":
-                        return Helper.ColorText("blue", "Королевский удар") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Королевский удар") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Меч Короля всегда должен соответствовать статусу, но его реставрация - дело не из дешёвых." + "\n" +
                         "Средневековый Король совершает удар с размахом, который наносит противнику " + Helper.RedText("50 % урона от максимального здоровья") + "," + "\n" +
                         "однако Средневековый Король теряет " + Helper.BlueText("GOLD") + " в размере 5 % от " + Helper.BlueText("максимального здоровья жертвы.") + "\n" +
@@ -892,10 +898,10 @@ public static class LocalizationManager
 
                         Helper.BlueText("Агрессивные переговоры") + "(passive)" + "\n" +
                         "Хороший Король всегда должен уметь решить спор не только силой, но и словом." + "\n" +
-                        "Получаемое с противников " + Helper.BlueText("EXP и GOLD") + " увеличивается на " + Helper.BlueText("7%,") + " но " + Helper.RedText("DPC") + " уменьшается на " + Helper.BlueText("13%") + ".\n";
+                        "Получаемое с противников " + Helper.BlueText("EXP и GOLD") + " увеличивается на " + Helper.BlueText("7%,") + " но " + Helper.RedText("DPC") + " уменьшается на " + Helper.BlueText("13%") + ".\n"; break;
 
                     case "Ninja":
-                        return Helper.ColorText("blue", "Маска бога смерти") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = Helper.ColorText("blue", "Маска бога смерти") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Надевая маску, Ниндзя повергает врагов в ужас, а в его движениях чувствуется уверенность." + "\n" +
                         "Враги " + Helper.BlueText("оглушаются") + ", а " + Helper.RedText("DPC") + " Ниндзи увеличивается в размере " + Helper.RedText("DPC * 1.5") + ".\n" +
                         Helper.YellowText("Время действия:") + " 5 секунд." + "\n" +
@@ -903,17 +909,17 @@ public static class LocalizationManager
 
                         Helper.BlueText("Мастерство У-Тан Шань") + "(passive)" + "\n" +
                         "Обучаясь боевому искусству в школе даосов, Ниндзя научился контролировать своё тело и душу." + "\n" +
-                        Helper.RedText("DPC") + " и " + Helper.RedText("DPS") + " уравниваются по большему показателю" + ".\n";
+                        Helper.RedText("DPC") + " и " + Helper.RedText("DPS") + " уравниваются по большему показателю" + ".\n"; break;
 
 
                     case "Squire":
-                        return "Базовый персонаж с умениями, которые есть у всех" + "\n" + Helper.ColorText("blue", "Лечение") + Helper.ColorText("#999999", "(active)") + "\n" +
+                        data.description = "Базовый персонаж с умениями, которые есть у всех" + "\n" + Helper.ColorText("blue", "Лечение") + Helper.ColorText("#999999", "(active)") + "\n" +
                         "Востанавливает половину HP" + "\n" +
                         Helper.YellowText("Перезарядка:") + " 120 секунд." + "\n" +
 
                         Helper.BlueText("Фатальный удар") + "(active)" + "\n" +
                         "Наноситу урон равный половине HP врага" + "\n" +
-                        Helper.YellowText("Перезарядка:") + " 80 секунд." + "\n";
+                        Helper.YellowText("Перезарядка:") + " 80 секунд." + "\n"; break;
 
                     //RARE
 
@@ -947,29 +953,49 @@ public static class LocalizationManager
                 break;
         }
 
-        return description;
+        return data;
     }
 
 
-    public static string GetDescriptionForItemId(string itemId)
+    public static ItemData GetDataForItemId(string itemId)
     {
-        var description = "";
+        var data = new ItemData();
         switch (currentLanguageId)
         {
             case "ru":
                 switch (itemId)
                 {
                     case "recipe_common_resource":
-                        return "Материалы обычного качества";
+                    case "common_resource":
+                        data.name = "Обычные материалы";
+                        data.description = "Материалы обычного качества";
+                        break;
                     case "recipe_rare_resource":
-                        return "Материалы редкого качества";
+                    case "rare_resource":
+                        data.name = "Редкие материалы";
+                        data.description = "Материалы редкого качества";
+                        break;
                     case "recipe_epic_resource":
-                        return "Материалы епического качества";
+                    case "epic_resource":
+                        data.name = "Епические материалы";
+                        data.description = "Материалы епического качества";
+                        break;
                     case "recipe_legendary_resource":
-                        return "Материалы легендарного качества";
-
+                    case "legendary_resource":
+                        data.name = "Легендарные материалы";
+                        data.description = "Материалы легендарного качества";
+                        break;
+                    case "1011":
+                    case "1012":
+                    case "1013":
+                    case "1014":
                     case "recipe_hero_sword":
-                        return "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
+                        data.name = "Меч героев";
+                        data.description = "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
+                        break;
+                    default:
+                        Debug.Log(itemId);
+                        break;
 
                 }
                 break;
@@ -977,16 +1003,33 @@ public static class LocalizationManager
                 switch (itemId)
                 {
                     case "recipe_common_resource":
-                        return "Матеріали звичайної якості";
+                    case "common_resource":
+                        data.name = "Звичайні матеріали";
+                        data.description = "Матеріали звичайної якості";
+                        break;
                     case "recipe_rare_resource":
-                        return "Матеріали рідкісної якості";
+                    case "rare_resource":
+                        data.name = "Рідкісні матеріали";
+                        data.description = "Матеріали рідкісної якості";
+                        break;
                     case "recipe_epic_resource":
-                        return "Матеріали епічної якості";
+                    case "epic_resource":
+                        data.name = "Епічні матеріали";
+                        data.description = "Матеріали епічної якості";
+                        break;
                     case "recipe_legendary_resource":
-                        return "Матеріали легендарної якості";
-
+                    case "legendary_resource":
+                        data.name = "Легендарної матеріали";
+                        data.description = "Матеріали легендарної якості";
+                        break;
+                    case "1011":
+                    case "1012":
+                    case "1013":
+                    case "1014":
                     case "recipe_hero_sword":
-                        return "Такий гострий, що можна порізатися, тільки-но глянувши на нього ... Ой !!";
+                        data.name = "Меч героїв";
+                        data.description = "Такий гострий, що можна порізатися, тільки-но глянувши на нього ... Ой !!";
+                        break;
 
                 }
                 break;
@@ -994,22 +1037,39 @@ public static class LocalizationManager
                 switch (itemId)
                 {
                     case "recipe_common_resource":
-                        return "Сommon quality materials";
+                    case "common_resource":
+                        data.name = "Сommon materials";
+                        data.description = "Сommon quality materials";
+                        break;
                     case "recipe_rare_resource":
-                        return "Rare quality materials";
+                    case "rare_resource":
+                        data.name = "Rare materials";
+                        data.description = "Rare quality materials";
+                        break;
                     case "recipe_epic_resource":
-                        return "Epic quality materials";
+                    case "epic_resource":
+                        data.name = "Epic materials";
+                        data.description = "Epic quality materials";
+                        break;
                     case "recipe_legendary_resource":
-                        return "Legendary quality materials";
-
+                    case "legendary_resource":
+                        data.name = "Legendary materials";
+                        data.description = "Legendary quality materials";
+                        break;
+                    case "1011":
+                    case "1012":
+                    case "1013":
+                    case "1014":
                     case "recipe_hero_sword":
-                        return "So sharp that you can cut yourself by barely looking at it ... Oops !!";
+                        data.name = "Sword of heroes ";
+                        data.description = "So sharp that you can cut yourself by barely looking at it ... Oops !!";
+                        break;
 
                 }
                 break;
         }
 
-        return description;
+        return data;
     }
 
     public static string GetDescriptionForRecipeId(string recipeId)
@@ -1021,12 +1081,16 @@ public static class LocalizationManager
                 switch (recipeId)
                 {
                     case "recipe_common_resource":
+                    case "common_resource":
                         return "Материалы обычного качества";
                     case "recipe_rare_resource":
+                    case "rare_resource":
                         return "Материалы редкого качества";
                     case "recipe_epic_resource":
+                    case "epic_resource":
                         return "Материалы епического качества";
                     case "recipe_legendary_resource":
+                    case "legendary_resource":
                         return "Материалы легендарного качества";
 
                     case "recipe_hero_sword":
@@ -1038,12 +1102,16 @@ public static class LocalizationManager
                 switch (recipeId)
                 {
                     case "recipe_common_resource":
+                    case "common_resource":
                         return "Матеріали звичайної якості";
                     case "recipe_rare_resource":
+                    case "rare_resource":
                         return "Матеріали рідкісної якості";
                     case "recipe_epic_resource":
+                    case "epic_resource":
                         return "Матеріали епічної якості";
                     case "recipe_legendary_resource":
+                    case "legendary_resource":
                         return "Матеріали легендарної якості";
 
                     case "recipe_hero_sword":
@@ -1055,12 +1123,16 @@ public static class LocalizationManager
                 switch (recipeId)
                 {
                     case "recipe_common_resource":
+                    case "common_resource":
                         return "Сommon quality materials";
                     case "recipe_rare_resource":
+                    case "rare_resource":
                         return "Rare quality materials";
                     case "recipe_epic_resource":
+                    case "epic_resource":
                         return "Epic quality materials";
                     case "recipe_legendary_resource":
+                    case "legendary_resource":
                         return "Legendary quality materials";
 
                     case "recipe_hero_sword":

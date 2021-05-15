@@ -32,6 +32,17 @@ public class Drop
 
         return items;
     }
+
+    public List<Recipe> GetRecipesAfterProbability()
+    {
+        var recipes = new List<Recipe>();
+
+        Recipes.ForEach(recipe => {
+            if (ProbabilityMaster.Test(recipe.probability)) recipes.Add(recipe.Recipe);
+        });
+
+        return recipes;
+    }
 }
 
 public class DropResource

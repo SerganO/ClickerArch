@@ -76,7 +76,8 @@ public class InventoryUI : MonoBehaviour
                         player.UnsetArtifacts(item);
                         UpdateListWithoutMove();
                     });
-                    activeArtifactsItem.Setup(arcSprite, item.name);
+                    var data = LocalizationManager.GetDataForItemId(item.id);
+                    activeArtifactsItem.Setup(arcSprite, data.name);
                     activeArtifactsItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.UnsetArtifacts(item);
@@ -96,7 +97,8 @@ public class InventoryUI : MonoBehaviour
                         UpdateListWithoutMove();
                     });
                     var _arcSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
-                    uiItem.Setup(_arcSprite, item.name);
+                    var data = LocalizationManager.GetDataForItemId(item.id);
+                    uiItem.Setup(_arcSprite, data.name);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.AddArtifacts(item);
@@ -112,7 +114,7 @@ public class InventoryUI : MonoBehaviour
                 SwitchToClothes();
                 return;
             case ItemCategory.Weapon:
-                if (player.ActiveTransport != null)
+                if (player.activeWeapon != null)
                 {
                     InventoryItemScript activeWeapon = Instantiate(InventoryItem, ListContent);
                     activeWeapon.GetComponent<Image>().color = Color.green;
@@ -123,7 +125,8 @@ public class InventoryUI : MonoBehaviour
                         player.UnsetWeapon();
                         UpdateListWithoutMove();
                     });
-                    activeWeapon.Setup(weaponSprite, player.activeWeapon.name);
+                    var data = LocalizationManager.GetDataForItemId(player.activeWeapon.id);
+                    activeWeapon.Setup(weaponSprite, data.name);
                     activeWeapon.InfoButton.onClick.AddListener(() =>
                     {
                         DetailElement.ShowDetailForItem(player.activeWeapon, () =>
@@ -144,7 +147,8 @@ public class InventoryUI : MonoBehaviour
                         UpdateListWithoutMove();
                     });
                     var _weaponSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
-                    uiItem.Setup(_weaponSprite, item.name);
+                    var data = LocalizationManager.GetDataForItemId(item.id);
+                    uiItem.Setup(_weaponSprite, data.name);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.SetWeapon(item);
@@ -170,7 +174,8 @@ public class InventoryUI : MonoBehaviour
                         player.UnsetTransport();
                         UpdateListWithoutMove();
                     });
-                    activeTransport.Setup(transportSprite, player.activeTransport.name);
+                    var data = LocalizationManager.GetDataForItemId(player.activeTransport.id);
+                    activeTransport.Setup(transportSprite, data.name);
                     activeTransport.InfoButton.onClick.AddListener(() =>
                     {
                         DetailElement.ShowDetailForItem(player.activeTransport, () =>
@@ -191,7 +196,8 @@ public class InventoryUI : MonoBehaviour
                         UpdateListWithoutMove();
                     });
                     var _transportSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
-                    uiItem.Setup(_transportSprite, item.name);
+                    var data = LocalizationManager.GetDataForItemId(item.id);
+                    uiItem.Setup(_transportSprite, data.name);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.SetTransport(item);

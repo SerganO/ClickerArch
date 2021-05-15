@@ -36,13 +36,13 @@ public class CraftItem : MonoBehaviour
             goldEl.SetupForGold(recipe.RequiredGold);
         }
 
-        if (recipe.ResultItem != null)
+        if (recipe.ResultItem != null && !recipe.ResultItem.IsEmpty())
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + recipe.ResultItem.id);
             //Text.text = recipe.ResultItem.name;
 
         }
-        else if (recipe.ResultResource != null)
+        else if (recipe.ResultResource != null && recipe.ResultResource.count > 0)
         {
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("Resource/" + recipe.ResultResource.rarity);
             //Text.text = recipe.ResultResource.rarity.ToString();
@@ -52,8 +52,9 @@ public class CraftItem : MonoBehaviour
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
             //Text.text = ((int)recipe.ResultGold).ToString();
         }
+        var data = LocalizationManager.GetDataForItemId(recipe.id);
+        Text.text = data.name;
 
-        Text.text = recipe.name;
     }
 
     public void SetupForSkill(HeroParameter parameter)

@@ -225,6 +225,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
 
         Services.GetInstance().GetPlayer().Inventory.AddResources(res);
         Services.GetInstance().GetPlayer().Inventory.AddItems(drop.GetItemsAfterProbability());
+        Services.GetInstance().GetPlayer().Inventory.Recipes.AddRange(drop.GetRecipesAfterProbability());
 
 
     }

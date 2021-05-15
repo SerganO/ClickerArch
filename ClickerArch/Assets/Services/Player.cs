@@ -10,13 +10,14 @@ public class Player
 
     public Player()
     {
-
+        Inventory.Recipes.AddRange(ResourcesDataService.ResourceRecipes);
     }
 
     public Player(string username)
     {
         PlayerId = System.Guid.NewGuid().ToString();
         Username = username;
+        Inventory.Recipes.AddRange(ResourcesDataService.ResourceRecipes);
     }
 
     public int MaxArtifactsCount = 3;
@@ -88,14 +89,13 @@ public class Player
 
     public void SetWeapon(Item item)
     {
-        Inventory.RemoveItem(item);
         if (activeWeapon != null)
         {
             Inventory.AddItem(activeWeapon);
 
         }
         activeWeapon = item;
-
+        Inventory.RemoveItem(item);
     }
 
     public void SetTransport(Item item)

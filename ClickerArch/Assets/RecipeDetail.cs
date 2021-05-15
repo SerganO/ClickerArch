@@ -157,14 +157,15 @@ public class RecipeDetail : MonoBehaviour
     {
         AcceptButton.onClick.RemoveAllListeners();
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
-        var name = heroId;
+        var data = LocalizationManager.GetDescriptionForHeroId(heroId);
+        var name = data.name == "" ? heroId : data.name;
 
         Setup(sprite, name);
 
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
-        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
+        DescriptionText.text = data.description;
         BackgroundPanel.SetLayoutVertical();
 
         AcceptButton.onClick.RemoveAllListeners();
@@ -176,14 +177,15 @@ public class RecipeDetail : MonoBehaviour
     {
         AcceptButton.onClick.RemoveAllListeners();
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Heroes/" + heroId + "/Preview");
-        var name = heroId;
+        var data = LocalizationManager.GetDescriptionForHeroId(heroId);
+        var name = data.name == "" ? heroId : data.name;
 
         Setup(sprite, name);
 
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
-        DescriptionText.text = LocalizationManager.GetDescriptionForHeroId(heroId);
+        DescriptionText.text = data.description;
         BackgroundPanel.SetLayoutVertical();
 
         AcceptButton.interactable = Services.GetInstance().GetPlayer().Gold >= Services.GetInstance().GetDataService().CostForClothes(heroId);
@@ -197,16 +199,20 @@ public class RecipeDetail : MonoBehaviour
 
     public void ShowDetailForItem(Item item, VoidFunc completion)
     {
+
+        var data = LocalizationManager.GetDataForItemId(item.id);
+
         AcceptButton.onClick.RemoveAllListeners();
         var sprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
-        var name = item.name;
-
+        Debug.Log(data.name);
+        var name = data.name;
+        DescriptionText.text = data.description;
         Setup(sprite, name);
 
         Helper.ClearTransform(Modificators);
         Helper.ClearTransform(Resources);
 
-        DescriptionText.text = LocalizationManager.GetDescriptionForItemId(item.id);
+       
 
         item.modificators.ForEach(mod =>
         {
