@@ -246,7 +246,7 @@ public class Player
     public double AdditionalGold { get { return additionalGold + AdditionalAdditionalGold(); } }
     public double AdditionalXP { get { return additionalXP + AdditionalAdditionalXP(); } }
 
-    public Inventory Inventory = new Inventory(); /*{
+    public Inventory Inventory = new Inventory();/* {
         Items = new List<Item>
         {
             new Item("item_id_3", "DAMAGE RING", 1, new List<Modificator>
@@ -277,12 +277,7 @@ public class Player
 
         },
 
-        Recipes = new List<Recipe> {
-            Services.GetInstance().GetDataService().GetRecipeForId("rare_resource"),
-            Services.GetInstance().GetDataService().GetRecipeForId("epic_resource"),
-            Services.GetInstance().GetDataService().GetRecipeForId("legendary_resource"),
-            Services.GetInstance().GetDataService().GetRecipeForId("hero_sword"),
-    } };*/
+        };*/
 
 
 

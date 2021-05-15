@@ -498,7 +498,11 @@ public class ResourcesDataService : IDataService
 
         var hp = (int)actual_hp;// (int)(50 * Mathf.Pow((float)1.07, level));
         var dmg = (int)actual_dmg;//(1 + 1 * Mathf.Pow((float)1.1, level));
-        return new EnemyData(hp, 1.0, dmg, new Drop { xpBaseLevel = level, gold = 10 * level * Mathf.Pow((float)1.1, level - 1),
+
+        var delay = level == 1 ? 2 : 1;
+
+        
+        return new EnemyData(hp, delay, dmg, new Drop { xpBaseLevel = level, gold = 10 * level * Mathf.Pow((float)1.1, level - 1),
             Resources = new List<DropResource> {
             new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Common },      probability = level <= 25 ? 17 : (level <= 50 ? 4 : ( level <= 75 ? 3 : 2)) },
             new DropResource { Resource = new Resource { count = 1, rarity = Resource.Rarity.Rare },        probability = level <= 25 ? 7 : (level <= 50 ? 14 : ( level <= 75 ? 6 : 4)) },

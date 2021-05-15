@@ -77,16 +77,19 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
         }
     }
 
+    
+
     private void Start()
     {
+
         AssignedHero = Services.GetInstance().GetHeroService().Hero;
         AssignedHero.StartSetup();
         AssignedPlayer = Services.GetInstance().GetPlayer();
         Bind();
-        Restart();
-
         SetupSkillPanel();
-        LocalizateSet.SaveTemplate();
+        Restart();
+       
+       
     }
 
     private void OnHeroCoefAdditionalCoefAttack(double value, bool mustBeShown)

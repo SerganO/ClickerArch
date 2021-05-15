@@ -166,9 +166,9 @@ public class SceneLoader : MonoBehaviour
     {
         Debug.Log(SceneId);
         PrevSceneId = SceneManager.GetActiveScene().name;
-        LoadBackImage.gameObject.SetActive(true);
-        LoadImage.gameObject.SetActive(true);
-        LoadText.gameObject.SetActive(true);
+        //LoadBackImage.gameObject.SetActive(true);
+        //LoadImage.gameObject.SetActive(true);
+        //LoadText.gameObject.SetActive(true);
         yield return new WaitForEndOfFrame();
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneId);
 

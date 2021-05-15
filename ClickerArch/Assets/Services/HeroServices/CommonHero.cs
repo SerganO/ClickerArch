@@ -390,6 +390,7 @@ public class CommonHero : IHero
 
     public void PassiveAttack(IEnemy enemy)
     {
+        if (enemy == null) return;
         enemy.Hurt(GetDPSDamage(BaseDamagePerSecond, dpsMods), false);
         dpsMods.ForEach(mod => mod.OnUseChange());
     }

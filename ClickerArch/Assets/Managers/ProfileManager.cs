@@ -270,7 +270,7 @@ public class ProfileManager : MonoBehaviour
     {
         /////
         ///
-        //PlayerPrefs.DeleteAll();
+//PlayerPrefs.DeleteAll();
 
 
         /////

@@ -17,6 +17,8 @@ public class MainScreenHandler : MonoBehaviour
     public string BackgroundClipName;
     AudioClip BackgroundClip;
 
+    public GameObject portal;
+
     private void Start()
     {
         BackgroundClip = Services.GetInstance().GetDataService().GetAudioClipForID(BackgroundClipName);
@@ -75,8 +77,13 @@ public class MainScreenHandler : MonoBehaviour
 
     public void LoadLevel()
     {
-        Services.GetInstance().GetHeroService().ConfigureForHeroId(Services.GetInstance().GetPlayer().CurrentHeroId);
-        Loader.Load(SceneLoader.Scene.Level);
+        StartCoroutine(PortalChange(()=> {
+
+            Services.GetInstance().GetHeroService().ConfigureForHeroId(Services.GetInstance().GetPlayer().CurrentHeroId);
+            Loader.Load(SceneLoader.Scene.Level);
+
+        }));
+        
     }
 
     public void LoadStore()
@@ -94,5 +101,25 @@ public class MainScreenHandler : MonoBehaviour
         Loader.Load(SceneLoader.Scene.Craft);
     }
 
+
+    void LoadLevelPortalChange()
+    {
+        
+    }
+
+    public IEnumerator PortalChange(VoidFunc completion)
+    {
+        for(int i=0;i< 75;i++)
+        {
+            if (portal.transform.localPosition.x > 0) portal.transform.localPosition -= new Vector3(0.1f, 0, 0);
+            if (portal.transform.localPosition.x < 0) portal.transform.localPosition += new Vector3(0.1f, 0, 0);
+
+            portal.transform.localScale += new Vector3(0.1f, 0.1f, 0);
+
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(0.5f);
+        completion();
+    }
 
 }

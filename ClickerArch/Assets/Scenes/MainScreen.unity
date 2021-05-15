@@ -452,6 +452,7 @@ MonoBehaviour:
   HeroAnimator: {fileID: 1404199145}
   TransportAnimator: {fileID: 1551929026}
   BackgroundClipName: cyberpunk-street
+  portal: {fileID: 2077460800}
 --- !u!4 &496745522
 Transform:
   m_ObjectHideFlags: 0
@@ -3594,7 +3595,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_Sprite: {fileID: -5816642994671486895, guid: 70ffd089560a57946b737ffcf8ef31c7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
