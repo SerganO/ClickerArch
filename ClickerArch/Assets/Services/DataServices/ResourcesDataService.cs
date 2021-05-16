@@ -7,13 +7,170 @@ using UnityEngine;
 public class ResourcesDataService : IDataService
 {
 
-    static List<Recipe> TMNTRecipes = new List<Recipe>
+    static public List<Recipe> TransportGood = new List<Recipe>
     {
+         new Recipe
+        { count = 1,
+            id = "horse",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+            RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "horse",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
 
+            ResultXP = 0
+        },
 
+         new Recipe
+        { count = 1,
+            id = "Car1",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car1",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car2",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car2",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car3",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car3",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car4",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car4",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car5",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car5",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car6",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car6",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car7",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car7",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
+
+         new Recipe
+        { count = 1,
+            id = "Car8",
+            Category = ItemCategory.Transport,
+            RequiredGold = 0,
+            rarity = Resource.Rarity.Common,
+             RequiredLevel = 0,
+            ResultItem = new Item
+            {
+                id = "Car8",
+                Category = ItemCategory.Transport,
+                count = 1,
+                rarity = Resource.Rarity.Common,
+            },
+
+            ResultXP = 0
+        },
     };
-
-
 
     static public List<Recipe> ResourceRecipes = new List<Recipe>
     {
@@ -2105,7 +2262,7 @@ public class ResourcesDataService : IDataService
     public ResourcesDataService()
     {
         //AllRecipes.AddRange(ResourceRecipes);
-        AllRecipes.AddRange(TMNTRecipes);
+        //AllRecipes.AddRange(TMNTRecipes);
     }
 
     public List<string> GetEnemiesIdsForLevelId(string levelId)
@@ -2406,7 +2563,8 @@ public class ResourcesDataService : IDataService
     public void GetGoodsList(ItemCategory Category, RecipeList completion)
     {
         var Recipes = new List<Recipe>();
-        var level = Services.GetInstance().GetPlayer().CoolLevel;
+        var player = Services.GetInstance().GetPlayer();
+        var level = player.CoolLevel;
 
 
         switch (Category)
@@ -2493,6 +2651,11 @@ public class ResourcesDataService : IDataService
                 }));
                 break;
             case ItemCategory.Transport:
+                var transports = player.Inventory.Items.FindAll(item => item.Category == ItemCategory.Transport);
+                Recipes.AddRange(TransportGood.FindAll(transport=>transport.RequiredLevel <=level &&
+                                                        transport.id != (player.ActiveTransport == null ? "" : player.ActiveTransport.id) &&
+                                                        transports.Find(tr => tr.id == transport.id) == null)
+                );
                 break;
             case ItemCategory.Skill:
                 break;

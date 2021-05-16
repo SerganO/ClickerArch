@@ -7,6 +7,7 @@ public class Inventory
 {
     public List<Resource> Resources = new List<Resource>() { };
 
+    [SerializeField]
     List<Item> items = new List<Item>();
     
     public List<Item> Items

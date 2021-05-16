@@ -1058,6 +1058,42 @@ public static class LocalizationManager
                         data.name = "Китайские палочки";
                         data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
                         break;
+                    case "horse":
+                        data.name = "Конь";
+                        data.description = "";
+                        break;
+                    case "Car1":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car2":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car3":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car4":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car5":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car6":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car7":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car8":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
                     default:
                         Debug.Log(itemId);
                         break;
@@ -1158,6 +1194,42 @@ public static class LocalizationManager
                         data.name = "Китайські палички";
                         data.description = "Є цим складно, але в око тицьнути можна. Але чому вони пов'язані ниткою?";
                         break;
+                    case "horse":
+                        data.name = "Конь";
+                        data.description = "";
+                        break;
+                    case "Car1":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car2":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car3":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car4":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car5":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car6":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car7":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car8":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
                     default:
                         Debug.Log(itemId);
                         break;
@@ -1256,6 +1328,42 @@ public static class LocalizationManager
                     case "84":
                         data.name = "Chinese sticks";
                         data.description = "It is difficult to eat with this, but you can poke your eye. But why are they tied with a thread?";
+                        break;
+                    case "horse":
+                        data.name = "Конь";
+                        data.description = "";
+                        break;
+                    case "Car1":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car2":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car3":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car4":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car5":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car6":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car7":
+                        data.name = "Car";
+                        data.description = "";
+                        break;
+                    case "Car8":
+                        data.name = "Car";
+                        data.description = "";
                         break;
                     default:
                         Debug.Log(itemId);

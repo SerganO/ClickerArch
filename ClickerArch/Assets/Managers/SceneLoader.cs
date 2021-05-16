@@ -10,13 +10,14 @@ public class SceneLoader : MonoBehaviour
     public static readonly string MainScreenId = "MainScreen";
     public static readonly string LevelScreenId = "LevelScreen";
     public static readonly string StoreScreenId = "GameStoreScreen";
+    public static readonly string DonateStoreScreenId = "DonateStore";
     public static readonly string InventoryScreenId = "InventoryScreen";
     public static readonly string CraftScreenId = "CraftScreen";
 
     [System.Serializable]
     public enum Scene
     {
-        Home, Main, Level, Store, Inventory, Craft
+        Home, Main, Level, Store, Inventory, Craft, Donate
     }
 
     [System.Serializable]
@@ -140,6 +141,9 @@ public class SceneLoader : MonoBehaviour
             case Scene.Craft:
                 SceneId = CraftScreenId;
                 break;
+            case Scene.Donate:
+                SceneId = DonateStoreScreenId;
+                break;
         }
 
         switch (blockPanelType)
@@ -179,5 +183,10 @@ public class SceneLoader : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void LoadPrev()
+    {
+        LoadWithTransparent(PrevSceneId);
     }
 }

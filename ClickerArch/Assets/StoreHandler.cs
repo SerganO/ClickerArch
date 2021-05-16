@@ -24,6 +24,13 @@ public class StoreHandler : MonoBehaviour
         Loader.Load(SceneLoader.Scene.Main);
     }
 
+    public void LoadDonate()
+    {
+        Loader.Load(SceneLoader.Scene.Donate);
+    }
+
+
+
 
     void Bind()
     {

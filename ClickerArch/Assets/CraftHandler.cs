@@ -126,6 +126,11 @@ public class CraftHandler : MonoBehaviour
 
     }
 
+    public void LoadDonate()
+    {
+        Loader.Load(SceneLoader.Scene.Donate);
+    }
+
 
 
 }

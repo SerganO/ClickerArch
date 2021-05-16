@@ -3,11 +3,11 @@
     "Username": "",
     "MaxArtifactsCount": 3,
     "activeTransport": {
-        "id": "",
+        "id": "Car1",
         "name": "",
-        "count": 0,
+        "count": 1,
         "modificators": [],
-        "Category": 0,
+        "Category": 3,
         "rarity": 0
     },
     "activeWeapon": {
@@ -46,6 +46,40 @@
             {
                 "rarity": 3,
                 "count": 0
+            }
+        ],
+        "items": [
+            {
+                "id": "horse",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
+            },
+            {
+                "id": "Car3",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
+            },
+            {
+                "id": "Car5",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
+            },
+            {
+                "id": "Car6",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
             }
         ],
         "Recipes": [

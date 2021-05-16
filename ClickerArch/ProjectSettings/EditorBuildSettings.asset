@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CraftScreen.unity
     guid: b6a2370924a5fb84eafaca316d91b610
+  - enabled: 1
+    path: Assets/Scenes/DonateStore.unity
+    guid: 7d2acf971c4657a4290c33291ca148b4
   m_configObjects: {}

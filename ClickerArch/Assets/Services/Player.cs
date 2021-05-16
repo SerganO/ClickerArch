@@ -99,12 +99,11 @@ public class Player
 
     public void SetTransport(Item item)
     {
-        Inventory.RemoveItem(item);
-        if (activeTransport != null)
-        {
-            Inventory.AddItem(activeTransport);
-        }
-        activeTransport = item;
+        var clone = (Item)item.Clone();
+        clone.count = 1;
+        Inventory.RemoveItem(clone);
+        UnsetTransport();
+        activeTransport = clone;
 
     }
 

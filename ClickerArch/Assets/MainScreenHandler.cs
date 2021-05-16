@@ -101,6 +101,11 @@ public class MainScreenHandler : MonoBehaviour
         Loader.Load(SceneLoader.Scene.Craft);
     }
 
+    public void LoadDonate()
+    {
+        Loader.Load(SceneLoader.Scene.Donate);
+    }
+
 
     void LoadLevelPortalChange()
     {

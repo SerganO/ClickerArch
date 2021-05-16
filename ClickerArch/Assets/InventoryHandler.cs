@@ -45,4 +45,9 @@ public class InventoryHandler : MonoBehaviour
 
     }
 
+    public void LoadDonate()
+    {
+        Loader.Load(SceneLoader.Scene.Donate);
+    }
+
 }
