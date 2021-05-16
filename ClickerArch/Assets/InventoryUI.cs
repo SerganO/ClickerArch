@@ -67,24 +67,31 @@ public class InventoryUI : MonoBehaviour
             case ItemCategory.Thing:
                 player.ActiveArtifacts.ForEach(item =>
                 {
-                    InventoryItemScript activeArtifactsItem = Instantiate(InventoryItem, ListContent);
-                    activeArtifactsItem.GetComponent<Image>().color = Color.green;
-                    var arcSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
-                    activeArtifactsItem.ActionButton.onClick.RemoveAllListeners();
-                    activeArtifactsItem.ActionButton.onClick.AddListener(() =>
+                    if (item != null && !item.IsEmpty())
                     {
-                        player.UnsetArtifacts(item);
-                        UpdateListWithoutMove();
-                    });
-                    var data = LocalizationManager.GetDataForItemId(item.id);
-                    activeArtifactsItem.Setup(arcSprite, data.name);
-                    activeArtifactsItem.InfoButton.onClick.AddListener(() => {
-                        DetailElement.ShowDetailForItem(item, () => {
+                        InventoryItemScript activeArtifactsItem = Instantiate(InventoryItem, ListContent);
+                        activeArtifactsItem.GetComponent<Image>().color = Color.green;
+                        var arcSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
+                        activeArtifactsItem.ActionButton.onClick.RemoveAllListeners();
+                        activeArtifactsItem.ActionButton.onClick.AddListener(() =>
+                        {
                             player.UnsetArtifacts(item);
                             UpdateListWithoutMove();
                         });
-                        DetailElement.gameObject.SetActive(true);
-                    });
+                        var data = LocalizationManager.GetDataForItemId(item.id);
+                        var countText = "";
+                        if (item.count > 1) countText = " x" + item.count;
+                        activeArtifactsItem.Setup(arcSprite, data.name + countText);
+                        activeArtifactsItem.InfoButton.onClick.AddListener(() =>
+                        {
+                            DetailElement.ShowDetailForItem(item, () =>
+                            {
+                                player.UnsetArtifacts(item);
+                                UpdateListWithoutMove();
+                            });
+                            DetailElement.gameObject.SetActive(true);
+                        });
+                    }
                 });
 
                 inventory.Items.FindAll(item => item.Category == CurrentCategory).ForEach(item => {
@@ -98,7 +105,9 @@ public class InventoryUI : MonoBehaviour
                     });
                     var _arcSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
                     var data = LocalizationManager.GetDataForItemId(item.id);
-                    uiItem.Setup(_arcSprite, data.name);
+                    var countText = "";
+                    if (item.count > 1) countText = " x" + item.count;
+                    uiItem.Setup(_arcSprite, data.name + countText);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.AddArtifacts(item);
@@ -114,7 +123,7 @@ public class InventoryUI : MonoBehaviour
                 SwitchToClothes();
                 return;
             case ItemCategory.Weapon:
-                if (player.activeWeapon != null)
+                if (player.ActiveWeapon != null)
                 {
                     InventoryItemScript activeWeapon = Instantiate(InventoryItem, ListContent);
                     activeWeapon.GetComponent<Image>().color = Color.green;
@@ -148,7 +157,9 @@ public class InventoryUI : MonoBehaviour
                     });
                     var _weaponSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
                     var data = LocalizationManager.GetDataForItemId(item.id);
-                    uiItem.Setup(_weaponSprite, data.name);
+                    var countText = "";
+                    if (item.count > 1) countText = " x" + item.count;
+                    uiItem.Setup(_weaponSprite, data.name + countText);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.SetWeapon(item);
@@ -197,7 +208,9 @@ public class InventoryUI : MonoBehaviour
                     });
                     var _transportSprite = Services.GetInstance().GetDataService().GetSpriteForID("Items/" + item.id);
                     var data = LocalizationManager.GetDataForItemId(item.id);
-                    uiItem.Setup(_transportSprite, data.name);
+                    var countText = "";
+                    if (item.count > 1) countText = " x" + item.count;
+                    uiItem.Setup(_transportSprite, data.name + countText);
                     uiItem.InfoButton.onClick.AddListener(() => {
                         DetailElement.ShowDetailForItem(item, () => {
                             player.SetTransport(item);

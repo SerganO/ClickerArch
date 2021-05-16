@@ -182,6 +182,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     private void OnHeroDie()
     {
         Debug.Log("YouDie");
+        ProfileManager.ForceSaveData();
         gameContinued = false;
         if (CurrentEnemy != null)
         {
@@ -228,7 +229,7 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
 
         Services.GetInstance().GetPlayer().Inventory.AddResources(res);
         Services.GetInstance().GetPlayer().Inventory.AddItems(drop.GetItemsAfterProbability());
-        Services.GetInstance().GetPlayer().Inventory.Recipes.AddRange(drop.GetRecipesAfterProbability());
+        Services.GetInstance().GetPlayer().Inventory.AddRecipes(drop.GetRecipesAfterProbability());//Inventory.Recipes.AddRange(drop.GetRecipesAfterProbability());
 
 
     }

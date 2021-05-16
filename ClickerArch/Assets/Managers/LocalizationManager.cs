@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ItemData
+{
+    public string name = "";
+    public string description = "";
+}
+
 public static class LocalizationManager
 {
     public static event VoidFunc languageChanged;
 
-    public class ItemData
-    {
-        public string name = "";
-        public string description = "";
-    }
+   
 
     public static Sprite flagImage(string id)
     {
@@ -993,6 +995,69 @@ public static class LocalizationManager
                         data.name = "Меч героев";
                         data.description = "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
                         break;
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "1024":
+                        data.name = "Царский волкобой";
+                        data.description = "Про это оружие ходит множество мифов, но никто не уверен насколько они правдивы";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Меч Храброго сердца";
+                        data.description = "Только истинный король может достать этот меч из ножен";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Серебрянный витой перстень";
+                        data.description = "Напоминает кольца бамбукового питона";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Тиара сизого сокола";
+                        data.description = "Миниатюрная корона, предназначеная для юных принцесс";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Кубок барского плеча";
+                        data.description = "Он всегда наполовину пуст или наполовину полон?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Парные катаны";
+                        data.description = "Их носитель часто слышыт: на кой те 2 меча";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Странная вилка";
+                        data.description = "Странно, но эта вилка имеет только 3 зубца";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "Палка о двух концах";
+                        data.description = "Палица с перебинтованной серединой для удобного хвата";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Китайские палочки";
+                        data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
+                        break;
                     default:
                         Debug.Log(itemId);
                         break;
@@ -1004,8 +1069,8 @@ public static class LocalizationManager
                 {
                     case "recipe_common_resource":
                     case "common_resource":
-                        data.name = "Звичайні матеріали";
-                        data.description = "Матеріали звичайної якості";
+                        data.name = "Звічайні матеріали";
+                        data.description = "Матеріали звічайної якості";
                         break;
                     case "recipe_rare_resource":
                     case "rare_resource":
@@ -1028,9 +1093,74 @@ public static class LocalizationManager
                     case "1014":
                     case "recipe_hero_sword":
                         data.name = "Меч героїв";
-                        data.description = "Такий гострий, що можна порізатися, тільки-но глянувши на нього ... Ой !!";
+                        data.description = "Такий Гостра, что можна порізатіся, только-но глянули на него ... Ой !!";
                         break;
-
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "тисяча двадцять чотири":
+                        data.name = "Царський Волкобой";
+                        data.description = "Про це зброя ходить безліч міфів, але ніхто не впевнений наскільки вони правдиві";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Меч Хороброго серця";
+                        data.description = "Тільки істинний король може дістати цей меч з піхов";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Срібний кручений перстень";
+                        data.description = "Нагадує кільця бамбукового пітона";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Тіара сизого сокола";
+                        data.description = "Мініатюрна корона, призначена для юних принцес";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Кубок панського плеча";
+                        data.description = "Він завжди наполовину порожній або наполовину повний?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Парні катани";
+                        data.description = "Їх носій часто чуємо: на кой ті 2 меча";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Дивна вилка";
+                        data.description = "Дивно, але ця вилка має тільки 3 зубці";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "Палка з двома кінцями";
+                        data.description = "Палиця з перебинтованою серединою для зручного хвата";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Китайські палички";
+                        data.description = "Є цим складно, але в око тицьнути можна. Але чому вони пов'язані ниткою?";
+                        break;
+                    default:
+                        Debug.Log(itemId);
+                        break;
                 }
                 break;
             case "en":
@@ -1038,8 +1168,8 @@ public static class LocalizationManager
                 {
                     case "recipe_common_resource":
                     case "common_resource":
-                        data.name = "Сommon materials";
-                        data.description = "Сommon quality materials";
+                        data.name = "Common materials";
+                        data.description = "Common quality materials";
                         break;
                     case "recipe_rare_resource":
                     case "rare_resource":
@@ -1061,10 +1191,75 @@ public static class LocalizationManager
                     case "1013":
                     case "1014":
                     case "recipe_hero_sword":
-                        data.name = "Sword of heroes ";
+                        data.name = "Sword of heroes";
                         data.description = "So sharp that you can cut yourself by barely looking at it ... Oops !!";
                         break;
-
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "1024":
+                        data.name = "Tsar's wolf-killer";
+                        data.description = "There are many myths about this weapon, but no one is sure how true they are";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Sword of the Braveheart";
+                        data.description = "Only a true king can draw this sword from its scabbard";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Twisted Silver Ring";
+                        data.description = "Resembles bamboo python rings";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Gray Falcon Tiara";
+                        data.description = "Miniature crown designed for young princesses";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Lord's Shoulder Cup";
+                        data.description = "Is it always half empty or half full?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Paired Katanas";
+                        data.description = "Their bearer is often heard: why are those 2 swords";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Strange Fork";
+                        data.description = "Strange, this fork only has 3 prongs";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "A double-edged club";
+                        data.description = "Club with bandaged middle for a comfortable grip";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Chinese sticks";
+                        data.description = "It is difficult to eat with this, but you can poke your eye. But why are they tied with a thread?";
+                        break;
+                    default:
+                        Debug.Log(itemId);
+                        break;
                 }
                 break;
         }
@@ -1072,78 +1267,7 @@ public static class LocalizationManager
         return data;
     }
 
-    public static string GetDescriptionForRecipeId(string recipeId)
-    {
-        var description = "";
-        switch(currentLanguageId)
-        {
-            case "ru":
-                switch (recipeId)
-                {
-                    case "recipe_common_resource":
-                    case "common_resource":
-                        return "Материалы обычного качества";
-                    case "recipe_rare_resource":
-                    case "rare_resource":
-                        return "Материалы редкого качества";
-                    case "recipe_epic_resource":
-                    case "epic_resource":
-                        return "Материалы епического качества";
-                    case "recipe_legendary_resource":
-                    case "legendary_resource":
-                        return "Материалы легендарного качества";
 
-                    case "recipe_hero_sword":
-                        return "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
-
-                }
-                break;
-            case "ua":
-                switch (recipeId)
-                {
-                    case "recipe_common_resource":
-                    case "common_resource":
-                        return "Матеріали звичайної якості";
-                    case "recipe_rare_resource":
-                    case "rare_resource":
-                        return "Матеріали рідкісної якості";
-                    case "recipe_epic_resource":
-                    case "epic_resource":
-                        return "Матеріали епічної якості";
-                    case "recipe_legendary_resource":
-                    case "legendary_resource":
-                        return "Матеріали легендарної якості";
-
-                    case "recipe_hero_sword":
-                        return "Такий гострий, що можна порізатися, тільки-но глянувши на нього ... Ой !!";
-
-                }
-                break;
-            case "en":
-                switch (recipeId)
-                {
-                    case "recipe_common_resource":
-                    case "common_resource":
-                        return "Сommon quality materials";
-                    case "recipe_rare_resource":
-                    case "rare_resource":
-                        return "Rare quality materials";
-                    case "recipe_epic_resource":
-                    case "epic_resource":
-                        return "Epic quality materials";
-                    case "recipe_legendary_resource":
-                    case "legendary_resource":
-                        return "Legendary quality materials";
-
-                    case "recipe_hero_sword":
-                        return "So sharp that you can cut yourself by barely looking at it ... Oops !!";
-
-                }
-                break;
-        }
-       
-        return description;
-    }
 
 
 

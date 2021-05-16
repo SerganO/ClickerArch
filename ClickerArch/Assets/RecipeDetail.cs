@@ -141,7 +141,7 @@ public class RecipeDetail : MonoBehaviour
             //Text.text = ((int)recipe.ResultGold).ToString();
         }
 
-        Text.text = recipe.name;
+        Text.text = recipe.Name;
 
         BackgroundPanel.SetLayoutVertical();
 

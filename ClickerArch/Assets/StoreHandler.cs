@@ -165,9 +165,10 @@ public class StoreHandler : MonoBehaviour
 
     public void AcceptPurchase(string heroId)
     {
+        var player = Services.GetInstance().GetPlayer();
         var cost = Services.GetInstance().GetDataService().CostForClothes(heroId);
-        Services.GetInstance().GetPlayer().Purchase(cost);
-        Services.GetInstance().GetPlayer().availableHeroes.Add(heroId);
+        player.Purchase(cost);
+        player.availableHeroes.Add(heroId);
         DetailElement_OnCraft();
     }
 

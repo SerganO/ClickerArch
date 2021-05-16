@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Recipe: System.ICloneable
 {
+    public int count = 0;
     public ItemCategory Category = ItemCategory.Thing;
     public Resource.Rarity rarity = Resource.Rarity.Common;
     public string id = "";
@@ -22,11 +23,11 @@ public class Recipe: System.ICloneable
 
     public bool IsPermanent = false;
 
-    public string descriptionId
+    ItemData itemData
     {
         get
         {
-            return "recipe_" + id;
+            return LocalizationManager.GetDataForItemId(id);
         }
     }
 
@@ -34,9 +35,18 @@ public class Recipe: System.ICloneable
     {
         get
         {
-            return LocalizationManager.GetDescriptionForRecipeId(descriptionId);
+            return itemData.description;
         }
     }
+
+    public string Name
+    {
+        get
+        {
+            return itemData.name;
+        }
+    }
+
 
     public object Clone()
     {

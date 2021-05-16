@@ -6,7 +6,17 @@ using UnityEngine;
 public class Inventory
 {
     public List<Resource> Resources = new List<Resource>() { };
-    public List<Item> Items = new List<Item>();
+
+    List<Item> items = new List<Item>();
+    
+    public List<Item> Items
+    {
+        get
+        {
+            items.RemoveAll(item => item.id == "" || item.count == 0);
+            return items;
+        }
+    }
 
     public List<Recipe> Recipes = new List<Recipe>();
 
@@ -25,6 +35,11 @@ public class Inventory
     public Item FindItemForID(string ID)
     {
         return Items.Find(item=> item.id == ID);
+    }
+
+    public Recipe FindRecipeForID(string ID)
+    {
+        return Recipes.Find(recipe => recipe.id == ID);
     }
 
     public int ResourcesCountForRarity(Resource.Rarity rarity)
@@ -70,22 +85,40 @@ public class Inventory
         return false;
     }
 
-    public void AddItem(Item Item)
+    public void AddItem(Item newItem)
     {
-        var item = FindItemForID(Item.id);
+        var item = FindItemForID(newItem.id);
         if (item != null)
         {
-            item.count += Item.count;
+            item.count += newItem.count;
         }
         else
         {
-            Items.Add(Item);
+            items.Add((Item)newItem.Clone());
         }
     }
 
     public void AddItems(List<Item> Items)
     {
         Items.ForEach(r => AddItem(r));
+    }
+
+    public void AddRecipe(Recipe recipe)
+    {
+        var item = FindRecipeForID(recipe.id);
+        if (item != null)
+        {
+            item.count += recipe.count;
+        }
+        else
+        {
+            Recipes.Add(recipe);
+        }
+    }
+
+    public void AddRecipes(List<Recipe> recipes)
+    {
+        recipes.ForEach(r => AddRecipe(r));
     }
 
     public bool CanRemoveItem(Item Item)

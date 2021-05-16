@@ -58,4 +58,10 @@ public class Item
         modificators.Count + " " +
         Category + " " + IsEmpty();
     }
+
+    public object Clone()
+    {
+        var value = JsonUtility.ToJson(this);
+        return (Item)JsonUtility.FromJson(value, typeof(Item));
+    }
 }

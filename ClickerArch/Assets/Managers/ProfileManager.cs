@@ -245,7 +245,7 @@ public class ProfileManager : MonoBehaviour
                 DirectoryInfo di = Directory.CreateDirectory(EnvDirectory);
             }
 
-            File.WriteAllText(pathToSave, JsonUtility.ToJson(player));
+            File.WriteAllText(pathToSave, JsonUtility.ToJson(player, true));
         }
         catch (Exception e)
         {
@@ -270,8 +270,8 @@ public class ProfileManager : MonoBehaviour
     {
         /////
         ///
-//PlayerPrefs.DeleteAll();
-
+        //PlayerPrefs.DeleteAll();
+        // PlayerPrefs.SetString("PlayerID", "ef364230-c879-4e80-98be-2478047b9134");
 
         /////
         var playerID = PlayerPrefs.GetString("PlayerID");

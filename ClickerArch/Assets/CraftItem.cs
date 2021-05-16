@@ -52,9 +52,9 @@ public class CraftItem : MonoBehaviour
             Icon.sprite = Services.GetInstance().GetDataService().GetSpriteForID("UI/Coin/Coin");
             //Text.text = ((int)recipe.ResultGold).ToString();
         }
-        var data = LocalizationManager.GetDataForItemId(recipe.id);
-        Text.text = data.name;
-
+        
+        Text.text = recipe.Name;
+        if (recipe.count > 1) Text.text += " x" + recipe.count;
     }
 
     public void SetupForSkill(HeroParameter parameter)
@@ -87,6 +87,8 @@ public class CraftItem : MonoBehaviour
         ActionButton.onClick.RemoveAllListeners();
         ActionButton.onClick.AddListener(() =>
         {
+            var cost = Services.GetInstance().GetDataService().CostForClothes(heroId);
+            Services.GetInstance().GetPlayer().Purchase(cost);
             Services.GetInstance().GetPlayer().availableHeroes.Add(heroId);
             completion();
         });

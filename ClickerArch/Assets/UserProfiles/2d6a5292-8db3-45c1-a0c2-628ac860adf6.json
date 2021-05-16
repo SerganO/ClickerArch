@@ -1,0 +1,232 @@
+{
+    "PlayerId": "2d6a5292-8db3-45c1-a0c2-628ac860adf6",
+    "Username": "",
+    "MaxArtifactsCount": 3,
+    "activeTransport": {
+        "id": "",
+        "name": "",
+        "count": 0,
+        "modificators": [],
+        "Category": 0,
+        "rarity": 0
+    },
+    "activeWeapon": {
+        "id": "1012",
+        "name": "Меч героев",
+        "count": 1,
+        "modificators": [
+            {
+                "parameter": 3,
+                "activationType": 3,
+                "values": [
+                    {
+                        "baseParameter": 0,
+                        "changeType": 0,
+                        "value": 35.0,
+                        "onUseValueChange": 0.0
+                    }
+                ],
+                "checker": {
+                    "endCheckType": 0,
+                    "time": 0.0
+                },
+                "finalizator": {
+                    "endType": 0,
+                    "replaceString": ""
+                }
+            }
+        ],
+        "Category": 2,
+        "rarity": 1
+    },
+    "activeArtifacts": [],
+    "gold": 84.00000095367432,
+    "XP": 1271.9696578979494,
+    "CoolLevel": 2,
+    "MaximumHealthPointLevel": 0,
+    "BaseDamagePerClickLevel": 0,
+    "BaseDamagePerSecondLevel": 0,
+    "BaseBlockLevel": 0,
+    "BaseReflectLevel": 0,
+    "AdditionalGoldLevel": 0,
+    "AdditionalXPLevel": 0,
+    "Inventory": {
+        "Resources": [
+            {
+                "rarity": 0,
+                "count": 29
+            },
+            {
+                "rarity": 1,
+                "count": 0
+            },
+            {
+                "rarity": 2,
+                "count": 1
+            },
+            {
+                "rarity": 3,
+                "count": 0
+            }
+        ],
+        "Items": [
+            {
+                "id": "",
+                "name": "",
+                "count": 3,
+                "modificators": [],
+                "Category": 0,
+                "rarity": 0
+            }
+        ],
+        "Recipes": [
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "rare_resource",
+                "name": "RARE RESOURCE",
+                "RequiredGold": 10.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 3
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 1,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "epic_resource",
+                "name": "EPIC RESOURCE",
+                "RequiredGold": 100.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 1,
+                        "count": 5
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 2,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "legendary_resource",
+                "name": "LEGENDARY RESOURCE",
+                "RequiredGold": 1000.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 2,
+                        "count": 7
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 3,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 1,
+                "Category": 2,
+                "rarity": 0,
+                "id": "1011",
+                "name": "Меч героев",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 10
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "1011",
+                    "name": "Меч героев",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 17.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 2,
+                    "rarity": 0
+                },
+                "IsPermanent": false
+            }
+        ]
+    },
+    "currentHeroID": "Squire",
+    "availableHeroes": []
+}

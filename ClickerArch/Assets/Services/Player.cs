@@ -89,13 +89,12 @@ public class Player
 
     public void SetWeapon(Item item)
     {
-        if (activeWeapon != null)
-        {
-            Inventory.AddItem(activeWeapon);
-
-        }
-        activeWeapon = item;
-        Inventory.RemoveItem(item);
+        var clone = (Item)item.Clone();
+        clone.count = 1;
+        Inventory.RemoveItem(clone);
+        UnsetWeapon();
+        activeWeapon = clone;
+        
     }
 
     public void SetTransport(Item item)
@@ -115,8 +114,10 @@ public class Player
         {
             UnsetArtifacts(activeArtifacts[0]);
         }
-        activeArtifacts.Add(item);
-        Inventory.RemoveItem(item);
+        var clone = (Item)item.Clone();
+        clone.count = 1;
+        activeArtifacts.Add(clone);
+        Inventory.RemoveItem(clone);
     }
 
 

@@ -18,7 +18,10 @@ public class CraftMaster
         player.AddGold(recipe.ResultGold);
         player.AddXP(recipe.ResultXP);
 
-        if (!recipe.IsPermanent) player.Inventory.Recipes.Remove(recipe);
+        if (!recipe.IsPermanent) {
+            if(recipe.count <= 1) player.Inventory.Recipes.Remove(recipe);
+            else recipe.count--;
+        }
     }
 
     static public bool CanCraft(Recipe recipe)
