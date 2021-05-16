@@ -72,6 +72,7 @@ public class CommonEnemyView : MonoBehaviour, IEnemyView
 
     public void UpdateRatio(float ratio)
     {
+        if (spriteRenderer == null) return;
         spriteRenderer.color = Color.Lerp(StartColor, CurrentEndColor, 1 - ratio);
 
         spriteRenderer.transform.localScale = baseTr * coef;

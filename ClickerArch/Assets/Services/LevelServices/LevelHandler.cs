@@ -29,6 +29,8 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     public Image XPImage;
     public Text CoolLevelText;
 
+    public GameObject portal;
+
     string CurrentID;
     int CurrentLevel;
 
@@ -237,6 +239,15 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
     public void NextEnemy()
     {
         currentIndex++;
+        if (currentIndex >= enemiesIDs.Count - 1)
+        {
+            portal.SetActive(true);
+        } else
+        {
+            portal.SetActive(false);
+        }
+
+
         if (currentIndex >= enemiesIDs.Count)
         {
             NextLevel();
@@ -375,7 +386,27 @@ public class LevelHandler : MonoBehaviour, ILevelHandler
 
     public void LoadMenu()
     {
-        Loader.LoadWithTransparent(SceneLoader.Scene.Main);
+        gameContinued = false;
+        if(CurrentEnemy != null) Destroy(CurrentEnemy);
+        portal.SetActive(true);
+        portal.GetComponent<SpriteRenderer>().sortingOrder = 20;
+
+        StartCoroutine(PortalChange(()=> { Loader.LoadWithTransparent(SceneLoader.Scene.Main); }));
+       
+    }
+
+    public IEnumerator PortalChange(VoidFunc completion)
+    {
+        for (int i = 0; i < 75; i++)
+        {
+            if (portal.transform.localPosition.x > 0) portal.transform.localPosition -= new Vector3(0.1f, 0, 0);
+            if (portal.transform.localPosition.x < 0) portal.transform.localPosition += new Vector3(0.1f, 0, 0);
+
+            portal.transform.localScale += new Vector3(0.1f, 0.1f, 0);
+
+            yield return new WaitForEndOfFrame();
+        }
+        completion();
     }
 
     public double GetCommonParameters(Modificator.Parameter parameter)

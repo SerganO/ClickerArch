@@ -19,9 +19,9 @@
         "rarity": 0
     },
     "activeArtifacts": [],
-    "gold": 170.0,
-    "XP": 736.3636169433594,
-    "CoolLevel": 1,
+    "gold": 1410.0,
+    "XP": 841.9079704284668,
+    "CoolLevel": 5,
     "MaximumHealthPointLevel": 0,
     "BaseDamagePerClickLevel": 0,
     "BaseDamagePerSecondLevel": 0,
@@ -33,15 +33,15 @@
         "Resources": [
             {
                 "rarity": 0,
-                "count": 3
+                "count": 22
             },
             {
                 "rarity": 1,
-                "count": 1
+                "count": 3
             },
             {
                 "rarity": 2,
-                "count": 1
+                "count": 2
             },
             {
                 "rarity": 3,
@@ -343,7 +343,7 @@
                 "IsPermanent": false
             },
             {
-                "count": 1,
+                "count": 2,
                 "Category": 0,
                 "rarity": 1,
                 "id": "82",
@@ -411,6 +411,58 @@
                     ],
                     "Category": 0,
                     "rarity": 1
+                },
+                "IsPermanent": false
+            },
+            {
+                "count": 16,
+                "Category": 2,
+                "rarity": 0,
+                "id": "1011",
+                "name": "Меч героев",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 10
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "1011",
+                    "name": "Меч героев",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 17.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 2,
+                    "rarity": 0
                 },
                 "IsPermanent": false
             }
