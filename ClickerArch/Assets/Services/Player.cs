@@ -305,6 +305,27 @@ public class Player
 
             });
         });
+        if(ItemSetManager.CurrentSet != null)
+        {
+                ItemSetManager.CurrentSet.Modificators.FindAll(mod => mod.parameter == parameter).ForEach(modificator =>
+                {
+
+                    modificator.values.ForEach(value =>
+                    {
+                        switch (value.changeType)
+                        {
+                            case Modificator.ChangeValue.ValueChangeType.Const:
+                                result += value.value;
+                                break;
+                            case Modificator.ChangeValue.ValueChangeType.Coef:
+                                result += GetValue(value.baseParameter) * value.value;
+                                break;
+                        }
+                    });
+
+                });
+        }
+        
         return result;
     }
 

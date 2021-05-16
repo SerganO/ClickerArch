@@ -11,8 +11,8 @@
         "rarity": 0
     },
     "activeWeapon": {
-        "id": "11",
-        "name": "Меч Храброго сердца",
+        "id": "52",
+        "name": "Парные катаны",
         "count": 1,
         "modificators": [
             {
@@ -22,7 +22,27 @@
                     {
                         "baseParameter": 0,
                         "changeType": 0,
-                        "value": 10.0,
+                        "value": 45.0,
+                        "onUseValueChange": 0.0
+                    }
+                ],
+                "checker": {
+                    "endCheckType": 0,
+                    "time": 0.0
+                },
+                "finalizator": {
+                    "endType": 0,
+                    "replaceString": ""
+                }
+            },
+            {
+                "parameter": 1,
+                "activationType": 2,
+                "values": [
+                    {
+                        "baseParameter": 0,
+                        "changeType": 0,
+                        "value": -10.0,
                         "onUseValueChange": 0.0
                     }
                 ],
@@ -37,12 +57,12 @@
             }
         ],
         "Category": 2,
-        "rarity": 0
+        "rarity": 1
     },
     "activeArtifacts": [
         {
-            "id": "31",
-            "name": "Тиара сизого сокола",
+            "id": "61",
+            "name": "Странная вилка",
             "count": 1,
             "modificators": [
                 {
@@ -52,27 +72,7 @@
                         {
                             "baseParameter": 0,
                             "changeType": 0,
-                            "value": 10.0,
-                            "onUseValueChange": 0.0
-                        }
-                    ],
-                    "checker": {
-                        "endCheckType": 0,
-                        "time": 0.0
-                    },
-                    "finalizator": {
-                        "endType": 0,
-                        "replaceString": ""
-                    }
-                },
-                {
-                    "parameter": 1,
-                    "activationType": 2,
-                    "values": [
-                        {
-                            "baseParameter": 0,
-                            "changeType": 0,
-                            "value": -5.0,
+                            "value": 5.0,
                             "onUseValueChange": 0.0
                         }
                     ],
@@ -90,18 +90,18 @@
             "rarity": 0
         },
         {
-            "id": "41",
-            "name": "Кубок барского плеча",
+            "id": "71",
+            "name": "Палка о двух концах",
             "count": 1,
             "modificators": [
                 {
-                    "parameter": 1,
-                    "activationType": 2,
+                    "parameter": 3,
+                    "activationType": 3,
                     "values": [
                         {
                             "baseParameter": 0,
                             "changeType": 0,
-                            "value": 20.0,
+                            "value": 5.0,
                             "onUseValueChange": 0.0
                         }
                     ],
@@ -113,7 +113,16 @@
                         "endType": 0,
                         "replaceString": ""
                     }
-                },
+                }
+            ],
+            "Category": 0,
+            "rarity": 0
+        },
+        {
+            "id": "81",
+            "name": "Китайские палочки",
+            "count": 1,
+            "modificators": [
                 {
                     "parameter": 2,
                     "activationType": 3,
@@ -121,36 +130,7 @@
                         {
                             "baseParameter": 0,
                             "changeType": 0,
-                            "value": -5.0,
-                            "onUseValueChange": 0.0
-                        }
-                    ],
-                    "checker": {
-                        "endCheckType": 0,
-                        "time": 0.0
-                    },
-                    "finalizator": {
-                        "endType": 0,
-                        "replaceString": ""
-                    }
-                }
-            ],
-            "Category": 0,
-            "rarity": 0
-        },
-        {
-            "id": "21",
-            "name": "Серебрянный витой перстень",
-            "count": 1,
-            "modificators": [
-                {
-                    "parameter": 3,
-                    "activationType": 3,
-                    "values": [
-                        {
-                            "baseParameter": 0,
-                            "changeType": 0,
-                            "value": 10.0,
+                            "value": 15.0,
                             "onUseValueChange": 0.0
                         }
                     ],
@@ -164,8 +144,8 @@
                     }
                 },
                 {
-                    "parameter": 1,
-                    "activationType": 2,
+                    "parameter": 3,
+                    "activationType": 3,
                     "values": [
                         {
                             "baseParameter": 0,
@@ -188,8 +168,8 @@
             "rarity": 0
         }
     ],
-    "gold": 14088000.0,
-    "XP": 841.9079704284668,
+    "gold": 14088030.0,
+    "XP": 844.9079704284668,
     "CoolLevel": 100,
     "MaximumHealthPointLevel": 0,
     "BaseDamagePerClickLevel": 0,
@@ -202,7 +182,7 @@
         "Resources": [
             {
                 "rarity": 0,
-                "count": 22
+                "count": 23
             },
             {
                 "rarity": 1,
@@ -251,8 +231,8 @@
                 "rarity": 0
             },
             {
-                "id": "61",
-                "name": "Странная вилка",
+                "id": "31",
+                "name": "Тиара сизого сокола",
                 "count": 1,
                 "modificators": [
                     {
@@ -262,65 +242,7 @@
                             {
                                 "baseParameter": 0,
                                 "changeType": 0,
-                                "value": 5.0,
-                                "onUseValueChange": 0.0
-                            }
-                        ],
-                        "checker": {
-                            "endCheckType": 0,
-                            "time": 0.0
-                        },
-                        "finalizator": {
-                            "endType": 0,
-                            "replaceString": ""
-                        }
-                    }
-                ],
-                "Category": 0,
-                "rarity": 0
-            },
-            {
-                "id": "71",
-                "name": "Палка о двух концах",
-                "count": 1,
-                "modificators": [
-                    {
-                        "parameter": 3,
-                        "activationType": 3,
-                        "values": [
-                            {
-                                "baseParameter": 0,
-                                "changeType": 0,
-                                "value": 5.0,
-                                "onUseValueChange": 0.0
-                            }
-                        ],
-                        "checker": {
-                            "endCheckType": 0,
-                            "time": 0.0
-                        },
-                        "finalizator": {
-                            "endType": 0,
-                            "replaceString": ""
-                        }
-                    }
-                ],
-                "Category": 0,
-                "rarity": 0
-            },
-            {
-                "id": "81",
-                "name": "Китайские палочки",
-                "count": 1,
-                "modificators": [
-                    {
-                        "parameter": 2,
-                        "activationType": 3,
-                        "values": [
-                            {
-                                "baseParameter": 0,
-                                "changeType": 0,
-                                "value": 15.0,
+                                "value": 10.0,
                                 "onUseValueChange": 0.0
                             }
                         ],
@@ -334,7 +256,105 @@
                         }
                     },
                     {
+                        "parameter": 1,
+                        "activationType": 2,
+                        "values": [
+                            {
+                                "baseParameter": 0,
+                                "changeType": 0,
+                                "value": -5.0,
+                                "onUseValueChange": 0.0
+                            }
+                        ],
+                        "checker": {
+                            "endCheckType": 0,
+                            "time": 0.0
+                        },
+                        "finalizator": {
+                            "endType": 0,
+                            "replaceString": ""
+                        }
+                    }
+                ],
+                "Category": 0,
+                "rarity": 0
+            },
+            {
+                "id": "21",
+                "name": "Серебрянный витой перстень",
+                "count": 1,
+                "modificators": [
+                    {
                         "parameter": 3,
+                        "activationType": 3,
+                        "values": [
+                            {
+                                "baseParameter": 0,
+                                "changeType": 0,
+                                "value": 10.0,
+                                "onUseValueChange": 0.0
+                            }
+                        ],
+                        "checker": {
+                            "endCheckType": 0,
+                            "time": 0.0
+                        },
+                        "finalizator": {
+                            "endType": 0,
+                            "replaceString": ""
+                        }
+                    },
+                    {
+                        "parameter": 1,
+                        "activationType": 2,
+                        "values": [
+                            {
+                                "baseParameter": 0,
+                                "changeType": 0,
+                                "value": -5.0,
+                                "onUseValueChange": 0.0
+                            }
+                        ],
+                        "checker": {
+                            "endCheckType": 0,
+                            "time": 0.0
+                        },
+                        "finalizator": {
+                            "endType": 0,
+                            "replaceString": ""
+                        }
+                    }
+                ],
+                "Category": 0,
+                "rarity": 0
+            },
+            {
+                "id": "41",
+                "name": "Кубок барского плеча",
+                "count": 1,
+                "modificators": [
+                    {
+                        "parameter": 1,
+                        "activationType": 2,
+                        "values": [
+                            {
+                                "baseParameter": 0,
+                                "changeType": 0,
+                                "value": 20.0,
+                                "onUseValueChange": 0.0
+                            }
+                        ],
+                        "checker": {
+                            "endCheckType": 0,
+                            "time": 0.0
+                        },
+                        "finalizator": {
+                            "endType": 0,
+                            "replaceString": ""
+                        }
+                    },
+                    {
+                        "parameter": 2,
                         "activationType": 3,
                         "values": [
                             {
@@ -358,8 +378,8 @@
                 "rarity": 0
             },
             {
-                "id": "52",
-                "name": "Парные катаны",
+                "id": "11",
+                "name": "Меч Храброго сердца",
                 "count": 1,
                 "modificators": [
                     {
@@ -369,27 +389,7 @@
                             {
                                 "baseParameter": 0,
                                 "changeType": 0,
-                                "value": 45.0,
-                                "onUseValueChange": 0.0
-                            }
-                        ],
-                        "checker": {
-                            "endCheckType": 0,
-                            "time": 0.0
-                        },
-                        "finalizator": {
-                            "endType": 0,
-                            "replaceString": ""
-                        }
-                    },
-                    {
-                        "parameter": 1,
-                        "activationType": 2,
-                        "values": [
-                            {
-                                "baseParameter": 0,
-                                "changeType": 0,
-                                "value": -10.0,
+                                "value": 10.0,
                                 "onUseValueChange": 0.0
                             }
                         ],
@@ -404,7 +404,7 @@
                     }
                 ],
                 "Category": 2,
-                "rarity": 1
+                "rarity": 0
             }
         ],
         "Recipes": [
@@ -774,7 +774,7 @@
                 "IsPermanent": false
             },
             {
-                "count": 16,
+                "count": 17,
                 "Category": 2,
                 "rarity": 0,
                 "id": "1011",
