@@ -18,12 +18,14 @@ public class MainScreenHandler : MonoBehaviour
     AudioClip BackgroundClip;
 
     public GameObject portal;
+    public SetPanel SetObject;
 
     private void Start()
     {
         BackgroundClip = Services.GetInstance().GetDataService().GetAudioClipForID(BackgroundClipName);
         MusicManager.instance.Play(BackgroundClipName, BackgroundClip);
 
+        SetupSetInfo();
 
 
         AssignedPlayer = Services.GetInstance().GetPlayer();
@@ -73,6 +75,20 @@ public class MainScreenHandler : MonoBehaviour
     private void OnDestroy()
     {
         Unbind();
+    }
+
+    public void SetupSetInfo()
+    {
+        if(ItemSetManager.CurrentSet != null)
+        {
+            SetObject.Setup();
+            SetObject.gameObject.SetActive(true);
+
+
+        } else
+        {
+            SetObject.gameObject.SetActive(false);
+        }
     }
 
     public void LoadLevel()

@@ -120,7 +120,7 @@ public class Player
     }
 
 
-    List<Item> AllActiveItems
+    public List<Item> AllActiveItems
     {
         get
         {

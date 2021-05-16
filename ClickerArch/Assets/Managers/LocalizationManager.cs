@@ -959,6 +959,65 @@ public static class LocalizationManager
     }
 
 
+    public static ItemData DataForSetId(string id)
+    {
+        var data = new ItemData();
+
+        switch (currentLanguageId)
+        {
+            case "ru":
+                switch(id)
+                {
+                    case "HP":
+                        data.name = "HP";
+                        data.description = "HP";
+                        break;
+                    case "TMNT":
+                        data.name = "TMNT";
+                        data.description = "TMNT";
+                        break;
+                }
+
+                break;
+            case "ua":
+                switch (id)
+                {
+                    case "HP":
+                        data.name = "HP";
+                        data.description = "HP";
+                        break;
+                    case "TMNT":
+                        data.name = "TMNT";
+                        data.description = "TMNT";
+                        break;
+                }
+
+                break;
+            case "en":
+                switch (id)
+                {
+                    case "HP":
+                        data.name = "HP";
+                        data.description = "HP";
+                        break;
+                    case "TMNT":
+                        data.name = "TMNT";
+                        data.description = "TMNT";
+                        break;
+                }
+
+                break;
+
+        }
+
+
+
+        return data;
+    }
+
+
+
+
     public static ItemData GetDataForItemId(string itemId)
     {
         var data = new ItemData();
@@ -1414,6 +1473,7 @@ public static class LocalizationManager
         Upgrade = "Улучшить",
 
         CreateProfile = "Создайте профиль",
+        ItemSet = "Набор: ",
 
         EndGameMessage = "Поздравляю!\nВы прошли игру. Можете дальше проходить миссии в своё удовольствие",
         DeleteConfirmation = "Вы уверены, что хотите удалить профиль: ",
@@ -1457,6 +1517,7 @@ public static class LocalizationManager
         Upgrade = "Вдосконалити",
 
         CreateProfile = "Створіть профіль",
+        ItemSet = "Набір: ",
         //////
 EndGameMessage = "Вітаю!\nВи пройшли гру. Можете далі проходити місії в своє задоволення.",
 DeleteConfirmation = "Ви впевнені, що хочете видалити профіль:",
@@ -1499,6 +1560,7 @@ CreateError = "Помилка створення профілю! Ім'я пов�
         Level = "LEVEL",
         Upgrade = "Upgrade",
         CreateProfile = "Create profile",
+        ItemSet = "Set of: ",
 
 EndGameMessage = "Congratulations!\nYou passed the game. You can continue to pass missions at your own pleasure",
 DeleteConfirmation = "Are you sure you want to delete the profile:",
@@ -1561,6 +1623,7 @@ public class LocalizateSet
     public string BuyAccept = "";
     public string QuitAccept = "";
     public string CreateProfile = "";
+    public string ItemSet = "";
 
 
     public Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
@@ -1601,6 +1664,8 @@ public class LocalizateSet
         keyValuePairs["BuyAccept"] = BuyAccept;
         keyValuePairs["QuitAccept"] = QuitAccept;
         keyValuePairs["CreateProfile"] = CreateProfile;
+        
+        keyValuePairs["ItemSet"] = ItemSet;
 
         isBinded = true;
     }
@@ -1616,7 +1681,5 @@ public class LocalizateSet
         var empty = new LocalizateSet();
         ReadWriteManager.Save("Localized", "template", empty);
     }
-
-
 
 }
