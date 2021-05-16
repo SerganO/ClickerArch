@@ -993,6 +993,69 @@ public static class LocalizationManager
                         data.name = "Меч героев";
                         data.description = "Такой острый, что можно порезаться, едва взглянув на него… Ой!!";
                         break;
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "1024":
+                        data.name = "Царский волкобой";
+                        data.description = "Про это оружие ходит множество мифов, но никто не уверен насколько они правдивы";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Меч Храброго сердца";
+                        data.description = "Только истинный король может достать этот меч из ножен";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Серебрянный витой перстень";
+                        data.description = "Напоминает кольца бамбукового питона";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Тиара сизого сокола";
+                        data.description = "Миниатюрная корона, предназначеная для юных принцесс";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Кубок барского плеча";
+                        data.description = "Он всегда наполовину пуст или наполовину полон?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Парные катаны";
+                        data.description = "Их носитель часто слышыт: на кой те 2 меча";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Странная вилка";
+                        data.description = "Странно, но эта вилка имеет только 3 зубца";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "Палка о двух концах";
+                        data.description = "Палица с перебинтованной серединой для удобного хвата";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Китайские палочки";
+                        data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
+                        break;
                     default:
                         Debug.Log(itemId);
                         break;
@@ -1030,7 +1093,72 @@ public static class LocalizationManager
                         data.name = "Меч героїв";
                         data.description = "Такий гострий, що можна порізатися, тільки-но глянувши на нього ... Ой !!";
                         break;
-
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "1024":
+                        data.name = "Царский волкобой";
+                        data.description = "Про это оружие ходит множество мифов, но никто не уверен насколько они правдивы";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Меч Храброго сердца";
+                        data.description = "Только истинный король может достать этот меч из ножен";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Серебрянный витой перстень";
+                        data.description = "Напоминает кольца бамбукового питона";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Тиара сизого сокола";
+                        data.description = "Миниатюрная корона, предназначеная для юных принцесс";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Кубок барского плеча";
+                        data.description = "Он всегда наполовину пуст или наполовину полон?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Парные катаны";
+                        data.description = "Их носитель часто слышыт: на кой те 2 меча";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Странная вилка";
+                        data.description = "Странно, но эта вилка имеет только 3 зубца";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "Палка о двух концах";
+                        data.description = "Палица с перебинтованной серединой для удобного хвата";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Китайские палочки";
+                        data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
+                        break;
+                    default:
+                        Debug.Log(itemId);
+                        break;
                 }
                 break;
             case "en":
@@ -1064,7 +1192,72 @@ public static class LocalizationManager
                         data.name = "Sword of heroes ";
                         data.description = "So sharp that you can cut yourself by barely looking at it ... Oops !!";
                         break;
-
+                    case "1021":
+                    case "1022":
+                    case "1023":
+                    case "1024":
+                        data.name = "Царский волкобой";
+                        data.description = "Про это оружие ходит множество мифов, но никто не уверен насколько они правдивы";
+                        break;
+                    case "11":
+                    case "12":
+                    case "13":
+                    case "14":
+                        data.name = "Меч Храброго сердца";
+                        data.description = "Только истинный король может достать этот меч из ножен";
+                        break;
+                    case "21":
+                    case "22":
+                    case "23":
+                    case "24":
+                        data.name = "Серебрянный витой перстень";
+                        data.description = "Напоминает кольца бамбукового питона";
+                        break;
+                    case "31":
+                    case "32":
+                    case "33":
+                    case "34":
+                        data.name = "Тиара сизого сокола";
+                        data.description = "Миниатюрная корона, предназначеная для юных принцесс";
+                        break;
+                    case "41":
+                    case "42":
+                    case "43":
+                    case "44":
+                        data.name = "Кубок барского плеча";
+                        data.description = "Он всегда наполовину пуст или наполовину полон?";
+                        break;
+                    case "51":
+                    case "52":
+                    case "53":
+                    case "54":
+                        data.name = "Парные катаны";
+                        data.description = "Их носитель часто слышыт: на кой те 2 меча";
+                        break;
+                    case "61":
+                    case "62":
+                    case "63":
+                    case "64":
+                        data.name = "Странная вилка";
+                        data.description = "Странно, но эта вилка имеет только 3 зубца";
+                        break;
+                    case "71":
+                    case "72":
+                    case "73":
+                    case "74":
+                        data.name = "Палка о двух концах";
+                        data.description = "Палица с перебинтованной серединой для удобного хвата";
+                        break;
+                    case "81":
+                    case "82":
+                    case "83":
+                    case "84":
+                        data.name = "Китайские палочки";
+                        data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
+                        break;
+                    default:
+                        Debug.Log(itemId);
+                        break;
                 }
                 break;
         }
