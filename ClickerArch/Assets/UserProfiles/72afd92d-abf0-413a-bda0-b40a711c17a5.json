@@ -168,8 +168,8 @@
             "rarity": 0
         }
     ],
-    "gold": 14088030.0,
-    "XP": 844.9079704284668,
+    "gold": 14073030.0,
+    "XP": 15844.907970428469,
     "CoolLevel": 100,
     "MaximumHealthPointLevel": 0,
     "BaseDamagePerClickLevel": 0,
@@ -404,6 +404,30 @@
                     }
                 ],
                 "Category": 2,
+                "rarity": 0
+            },
+            {
+                "id": "Car4",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
+            },
+            {
+                "id": "Car7",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
+                "rarity": 0
+            },
+            {
+                "id": "Car8",
+                "name": "",
+                "count": 1,
+                "modificators": [],
+                "Category": 3,
                 "rarity": 0
             }
         ],
