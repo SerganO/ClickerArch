@@ -1059,39 +1059,39 @@ public static class LocalizationManager
                         data.description = "Есть этим сложно, но в глаз тыкнуть можно. Но почему они связаны ниткой?";
                         break;
                     case "horse":
-                        data.name = "Конь";
+                        data.name = "Буцефал";
                         data.description = "";
                         break;
                     case "Car1":
-                        data.name = "Car";
+                        data.name = "Херби";
                         data.description = "";
                         break;
                     case "Car2":
-                        data.name = "Car";
+                        data.name = "Бэтмобиль";
                         data.description = "";
                         break;
                     case "Car3":
-                        data.name = "Car";
+                        data.name = "Автомобиль охотников за демонами";
                         data.description = "";
                         break;
                     case "Car4":
-                        data.name = "Car";
+                        data.name = "Buick";
                         data.description = "";
                         break;
                     case "Car5":
-                        data.name = "Car";
+                        data.name = "Полицейский автомобиль";
                         data.description = "";
                         break;
                     case "Car6":
-                        data.name = "Car";
+                        data.name = "Спорткар";
                         data.description = "";
                         break;
                     case "Car7":
-                        data.name = "Car";
+                        data.name = "Сломанная машина";
                         data.description = "";
                         break;
                     case "Car8":
-                        data.name = "Car";
+                        data.name = "Бабушкомобиль";
                         data.description = "";
                         break;
                     default:
@@ -1195,39 +1195,39 @@ public static class LocalizationManager
                         data.description = "Є цим складно, але в око тицьнути можна. Але чому вони пов'язані ниткою?";
                         break;
                     case "horse":
-                        data.name = "Конь";
+                        data.name = "Буцефал";
                         data.description = "";
                         break;
                     case "Car1":
-                        data.name = "Car";
+                        data.name = "Хербі";
                         data.description = "";
                         break;
                     case "Car2":
-                        data.name = "Car";
+                        data.name = "Бетмобіль";
                         data.description = "";
                         break;
                     case "Car3":
-                        data.name = "Car";
+                        data.name = "Автомобіль мисливців за демонами";
                         data.description = "";
                         break;
                     case "Car4":
-                        data.name = "Car";
+                        data.name = "Buick";
                         data.description = "";
                         break;
                     case "Car5":
-                        data.name = "Car";
+                        data.name = "Поліцейський автомобіль";
                         data.description = "";
                         break;
                     case "Car6":
-                        data.name = "Car";
+                        data.name = "Спорткар";
                         data.description = "";
                         break;
                     case "Car7":
-                        data.name = "Car";
+                        data.name = "Зламана машина";
                         data.description = "";
                         break;
                     case "Car8":
-                        data.name = "Car";
+                        data.name = "Бабушкомобіль";
                         data.description = "";
                         break;
                     default:
@@ -1330,39 +1330,39 @@ public static class LocalizationManager
                         data.description = "It is difficult to eat with this, but you can poke your eye. But why are they tied with a thread?";
                         break;
                     case "horse":
-                        data.name = "Конь";
+                        data.name = "Bucephalus";
                         data.description = "";
                         break;
                     case "Car1":
-                        data.name = "Car";
+                        data.name = "Herbie";
                         data.description = "";
                         break;
                     case "Car2":
-                        data.name = "Car";
+                        data.name = "Batmobile";
                         data.description = "";
                         break;
                     case "Car3":
-                        data.name = "Car";
+                        data.name = "Demon Hunter Vehicle";
                         data.description = "";
                         break;
                     case "Car4":
-                        data.name = "Car";
+                        data.name = "Buick";
                         data.description = "";
                         break;
                     case "Car5":
-                        data.name = "Car";
+                        data.name = "Police car";
                         data.description = "";
                         break;
                     case "Car6":
-                        data.name = "Car";
+                        data.name = "Sports car";
                         data.description = "";
                         break;
                     case "Car7":
-                        data.name = "Car";
+                        data.name = "Broken car";
                         data.description = "";
                         break;
                     case "Car8":
-                        data.name = "Car";
+                        data.name = "Granny's car";
                         data.description = "";
                         break;
                     default:

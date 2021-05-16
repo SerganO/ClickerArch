@@ -7,87 +7,93 @@ using UnityEngine;
 public class ResourcesDataService : IDataService
 {
 
+    /*
+
+       Обычный транспорт:   car7(Название- Сломанная машина(Broken car, Зламана машина), XP - 5000, Unlock 5 level, 1000), car 8(Название- Бабушкомобиль (Granny's car, Бабусемобіль), XP - 5000, Unlock 8 level, 1000)
+
+       */
+
     static public List<Recipe> TransportGood = new List<Recipe>
     {
          new Recipe
         { count = 1,
             id = "horse",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-            RequiredLevel = 0,
+            RequiredGold = 50000,
+            rarity = Resource.Rarity.Legendary,
+            RequiredLevel = 30,
             ResultItem = new Item
             {
                 id = "horse",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Legendary,
             },
 
-            ResultXP = 0
+            ResultXP = 50000
         },
 
          new Recipe
         { count = 1,
             id = "Car1",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+            RequiredGold = 10000,
+            rarity = Resource.Rarity.Rare,
+             RequiredLevel = 10,
             ResultItem = new Item
             {
                 id = "Car1",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Rare,
             },
 
-            ResultXP = 0
+            ResultXP = 10000
         },
 
          new Recipe
         { count = 1,
             id = "Car2",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+            RequiredGold = 20,
+            rarity = Resource.Rarity.Epic,
+             RequiredLevel = 20000,
             ResultItem = new Item
             {
                 id = "Car2",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Epic,
             },
 
-            ResultXP = 0
+            ResultXP = 20000
         },
 
          new Recipe
         { count = 1,
             id = "Car3",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+            RequiredGold = 20000,
+            rarity = Resource.Rarity.Epic,
+             RequiredLevel = 25,
             ResultItem = new Item
             {
                 id = "Car3",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Epic,
             },
 
-            ResultXP = 0
+            ResultXP = 20000
         },
 
          new Recipe
         { count = 1,
             id = "Car4",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
+            RequiredGold = 5000,
             rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+             RequiredLevel = 1,
             ResultItem = new Item
             {
                 id = "Car4",
@@ -96,52 +102,52 @@ public class ResourcesDataService : IDataService
                 rarity = Resource.Rarity.Common,
             },
 
-            ResultXP = 0
+            ResultXP = 5000
         },
 
          new Recipe
         { count = 1,
             id = "Car5",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+            RequiredGold = 10000,
+            rarity = Resource.Rarity.Rare,
+             RequiredLevel = 15,
             ResultItem = new Item
             {
                 id = "Car5",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Rare,
             },
 
-            ResultXP = 0
+            ResultXP = 10000
         },
 
          new Recipe
         { count = 1,
             id = "Car6",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
-            rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+            RequiredGold = 10000,
+            rarity = Resource.Rarity.Rare,
+             RequiredLevel = 18,
             ResultItem = new Item
             {
                 id = "Car6",
                 Category = ItemCategory.Transport,
                 count = 1,
-                rarity = Resource.Rarity.Common,
+                rarity = Resource.Rarity.Rare,
             },
 
-            ResultXP = 0
+            ResultXP = 10000
         },
 
          new Recipe
         { count = 1,
             id = "Car7",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
+            RequiredGold = 5000,
             rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+             RequiredLevel = 5,
             ResultItem = new Item
             {
                 id = "Car7",
@@ -150,16 +156,16 @@ public class ResourcesDataService : IDataService
                 rarity = Resource.Rarity.Common,
             },
 
-            ResultXP = 0
+            ResultXP = 5000
         },
 
          new Recipe
         { count = 1,
             id = "Car8",
             Category = ItemCategory.Transport,
-            RequiredGold = 0,
+            RequiredGold = 5000,
             rarity = Resource.Rarity.Common,
-             RequiredLevel = 0,
+             RequiredLevel = 8,
             ResultItem = new Item
             {
                 id = "Car8",
@@ -168,7 +174,7 @@ public class ResourcesDataService : IDataService
                 rarity = Resource.Rarity.Common,
             },
 
-            ResultXP = 0
+            ResultXP = 5000
         },
     };
 
