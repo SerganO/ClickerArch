@@ -1,0 +1,466 @@
+{
+    "PlayerId": "58c641d7-4bb7-4f8c-8e91-7fb0e21a792e",
+    "Username": "",
+    "MaxArtifactsCount": 3,
+    "activeTransport": {
+        "id": "",
+        "name": "",
+        "count": 0,
+        "modificators": [],
+        "Category": 0,
+        "rarity": 0
+    },
+    "activeWeapon": {
+        "id": "",
+        "name": "",
+        "count": 0,
+        "modificators": [],
+        "Category": 0,
+        "rarity": 0
+    },
+    "activeArtifacts": [],
+    "gold": 885.0,
+    "XP": 779.8201217651367,
+    "CoolLevel": 4,
+    "MaximumHealthPointLevel": 0,
+    "BaseDamagePerClickLevel": 2,
+    "BaseDamagePerSecondLevel": 4,
+    "BaseBlockLevel": 0,
+    "BaseReflectLevel": 0,
+    "AdditionalGoldLevel": 0,
+    "AdditionalXPLevel": 0,
+    "Inventory": {
+        "Resources": [
+            {
+                "rarity": 0,
+                "count": 13
+            },
+            {
+                "rarity": 1,
+                "count": 4
+            },
+            {
+                "rarity": 2,
+                "count": 4
+            },
+            {
+                "rarity": 3,
+                "count": 1
+            }
+        ],
+        "items": [],
+        "Recipes": [
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "rare_resource",
+                "name": "RARE RESOURCE",
+                "RequiredGold": 10.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 3
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 1,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "epic_resource",
+                "name": "EPIC RESOURCE",
+                "RequiredGold": 100.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 1,
+                        "count": 5
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 2,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 0,
+                "id": "legendary_resource",
+                "name": "LEGENDARY RESOURCE",
+                "RequiredGold": 1000.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 2,
+                        "count": 7
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 3,
+                    "count": 1
+                },
+                "ResultItem": {
+                    "id": "",
+                    "name": "",
+                    "count": 0,
+                    "modificators": [],
+                    "Category": 0,
+                    "rarity": 0
+                },
+                "IsPermanent": true
+            },
+            {
+                "count": 10,
+                "Category": 2,
+                "rarity": 0,
+                "id": "1011",
+                "name": "Меч героев",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 10
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "1011",
+                    "name": "Меч героев",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 17.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 2,
+                    "rarity": 0
+                },
+                "IsPermanent": false
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 1,
+                "id": "72",
+                "name": "Палка о двух концах",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 1,
+                        "count": 10
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "72",
+                    "name": "Палка о двух концах",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 20.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 0,
+                    "rarity": 1
+                },
+                "IsPermanent": false
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 2,
+                "id": "33",
+                "name": "Тиара сизого сокола",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 3
+                    },
+                    {
+                        "rarity": 1,
+                        "count": 4
+                    },
+                    {
+                        "rarity": 2,
+                        "count": 3
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "33",
+                    "name": "Тиара сизого сокола",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 90.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        },
+                        {
+                            "parameter": 1,
+                            "activationType": 2,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": -25.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 0,
+                    "rarity": 2
+                },
+                "IsPermanent": false
+            },
+            {
+                "count": 1,
+                "Category": 0,
+                "rarity": 1,
+                "id": "22",
+                "name": "Серебрянный витой перстень",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 5
+                    },
+                    {
+                        "rarity": 1,
+                        "count": 5
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "22",
+                    "name": "Серебрянный витой перстень",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 20.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        },
+                        {
+                            "parameter": 1,
+                            "activationType": 2,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": -7.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 0,
+                    "rarity": 1
+                },
+                "IsPermanent": false
+            },
+            {
+                "count": 1,
+                "Category": 2,
+                "rarity": 1,
+                "id": "1012",
+                "name": "Меч героев",
+                "RequiredGold": 0.0,
+                "RequiredLevel": 0,
+                "RequiredResources": [
+                    {
+                        "rarity": 0,
+                        "count": 3
+                    },
+                    {
+                        "rarity": 1,
+                        "count": 7
+                    }
+                ],
+                "RequiredItems": [],
+                "ResultGold": 0.0,
+                "ResultXP": 0.0,
+                "ResultResource": {
+                    "rarity": 0,
+                    "count": 0
+                },
+                "ResultItem": {
+                    "id": "1012",
+                    "name": "Меч героев",
+                    "count": 1,
+                    "modificators": [
+                        {
+                            "parameter": 3,
+                            "activationType": 3,
+                            "values": [
+                                {
+                                    "baseParameter": 0,
+                                    "changeType": 0,
+                                    "value": 35.0,
+                                    "onUseValueChange": 0.0
+                                }
+                            ],
+                            "checker": {
+                                "endCheckType": 0,
+                                "time": 0.0
+                            },
+                            "finalizator": {
+                                "endType": 0,
+                                "replaceString": ""
+                            }
+                        }
+                    ],
+                    "Category": 2,
+                    "rarity": 1
+                },
+                "IsPermanent": false
+            }
+        ]
+    },
+    "currentHeroID": "Squire",
+    "availableHeroes": []
+}

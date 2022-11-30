@@ -117,7 +117,7 @@ TextureImporter:
       213: 677716437003060802
     second: HeartRealease2_37
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -137,6 +137,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -146,8 +148,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -168,10 +170,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -223,6 +229,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1044,6 +1062,45 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      HeartRealease2_22: -3918733728551635614
+      HeartRealease2_28: -1903492343431821444
+      HeartRealease2_25: 4956954335303765599
+      HeartRealease2_5: -762037114833461219
+      HeartRealease2_12: -904927304385988564
+      HeartRealease2_9: 6026438936893595587
+      HeartRealease2_32: 7133623279066433150
+      HeartRealease2_7: 5854343019552560390
+      HeartRealease2_8: 1280646162640644804
+      HeartRealease2_13: 7424301984900472845
+      HeartRealease2_19: -2504279987145434253
+      HeartRealease2_1: -2439886902624281842
+      HeartRealease2_26: 429345579413023226
+      HeartRealease2_35: -3688736099162300559
+      HeartRealease2_33: -6299972598344799137
+      HeartRealease2_21: 2596934588160861150
+      HeartRealease2_30: -126937266477269114
+      HeartRealease2_37: 677716437003060802
+      HeartRealease2_2: 1290389727868976825
+      HeartRealease2_10: -5360806941346107343
+      HeartRealease2_27: 3353410705746160434
+      HeartRealease2_4: 5719996779870129135
+      HeartRealease2_29: -5096732460804740072
+      HeartRealease2_31: -3956136554985751434
+      HeartRealease2_15: -7152870548861507765
+      HeartRealease2_18: 7819662508122769000
+      HeartRealease2_16: -4454294829826519322
+      HeartRealease2_34: 1264314883739456187
+      HeartRealease2_3: -7540024943416935494
+      HeartRealease2_6: -7285995773724118233
+      HeartRealease2_14: 2599235138070581280
+      HeartRealease2_24: 9091899620748393693
+      HeartRealease2_11: 8791255164840561369
+      HeartRealease2_17: 6929936289350899159
+      HeartRealease2_23: -7855120828192819513
+      HeartRealease2_20: 7463013442065458472
+      HeartRealease2_0: -2943269463312863983
+      HeartRealease2_36: 2159353241969630065
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

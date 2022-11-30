@@ -60,10 +60,12 @@ public class AudioSourceMuteChecker : MonoBehaviour
         switch (category)
         {
             case Category.music:
-                SettingManager.instance.MusicEnableChange -= muteSound;
+                if(SettingManager.instance != null)
+                    SettingManager.instance.MusicEnableChange -= muteSound;
                 break;
             case Category.sound:
-                SettingManager.instance.SoundEnableChange -= muteSound;
+                if(SettingManager.instance != null)
+                    SettingManager.instance.SoundEnableChange -= muteSound;
                 break;
         }
     }
